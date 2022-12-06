@@ -1,7 +1,12 @@
+using FBO.Dapper;
+using FBO.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<Dapperr, Dapperr>();
+builder.Services.AddScoped<UtilitiesService, UtilitiesService>();
 
 var app = builder.Build();
 

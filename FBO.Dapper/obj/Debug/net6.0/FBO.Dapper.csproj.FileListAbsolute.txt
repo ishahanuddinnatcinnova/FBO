@@ -1,0 +1,12 @@
+D:\FBO\FBO.Dapper\bin\Debug\net6.0\FBO.Dapper.deps.json
+D:\FBO\FBO.Dapper\bin\Debug\net6.0\FBO.Dapper.dll
+D:\FBO\FBO.Dapper\bin\Debug\net6.0\FBO.Dapper.pdb
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.csproj.AssemblyReference.cache
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.GeneratedMSBuildEditorConfig.editorconfig
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.AssemblyInfoInputs.cache
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.AssemblyInfo.cs
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.csproj.CoreCompileInputs.cache
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.dll
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\refint\FBO.Dapper.dll
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\FBO.Dapper.pdb
+D:\FBO\FBO.Dapper\obj\Debug\net6.0\ref\FBO.Dapper.dll

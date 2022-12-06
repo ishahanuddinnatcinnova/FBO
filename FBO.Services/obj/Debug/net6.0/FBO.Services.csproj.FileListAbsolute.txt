@@ -1,0 +1,12 @@
+D:\FBO\FBO.Services\bin\Debug\net6.0\FBO.Services.deps.json
+D:\FBO\FBO.Services\bin\Debug\net6.0\FBO.Services.dll
+D:\FBO\FBO.Services\bin\Debug\net6.0\FBO.Services.pdb
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.csproj.AssemblyReference.cache
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.AssemblyInfoInputs.cache
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.AssemblyInfo.cs
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.csproj.CoreCompileInputs.cache
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.dll
+D:\FBO\FBO.Services\obj\Debug\net6.0\refint\FBO.Services.dll
+D:\FBO\FBO.Services\obj\Debug\net6.0\FBO.Services.pdb
+D:\FBO\FBO.Services\obj\Debug\net6.0\ref\FBO.Services.dll
