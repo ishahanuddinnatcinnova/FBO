@@ -24,3 +24,15 @@ D:\FBO\FBO\obj\Debug\net6.0\refint\FBO.dll
 D:\FBO\FBO\obj\Debug\net6.0\FBO.pdb
 D:\FBO\FBO\obj\Debug\net6.0\FBO.genruntimeconfig.cache
 D:\FBO\FBO\obj\Debug\net6.0\ref\FBO.dll
+D:\FBO\FBO\bin\Debug\net6.0\Dapper.dll
+D:\FBO\FBO\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\FBO\FBO\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\FBO\FBO\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\FBO\FBO\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\FBO\FBO\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\FBO\FBO\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\FBO\FBO\bin\Debug\net6.0\FBO.Dapper.dll
+D:\FBO\FBO\bin\Debug\net6.0\FBO.Services.dll
+D:\FBO\FBO\bin\Debug\net6.0\FBO.Dapper.pdb
+D:\FBO\FBO\bin\Debug\net6.0\FBO.Services.pdb
+D:\FBO\FBO\obj\Debug\net6.0\FBO.csproj.CopyComplete
