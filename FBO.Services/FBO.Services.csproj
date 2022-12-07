@@ -6,4 +6,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FBO.Dapper\FBO.Dapper.csproj" />
+    <ProjectReference Include="..\FBO.ViewModels\FBO.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GlobalAir.Data">
+      <HintPath>..\..\Shahan\GlobalAir\Global_Air\Main\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

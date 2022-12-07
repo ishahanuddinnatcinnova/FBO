@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FBO.Dapper\FBO.Dapper.csproj" />
     <ProjectReference Include="..\FBO.Services\FBO.Services.csproj" />
+    <ProjectReference Include="..\FBO.ViewModels\FBO.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
