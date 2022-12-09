@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<Dapperr, Dapperr>();
 builder.Services.AddScoped<UtilitiesService, UtilitiesService>();
-
+builder.Services.AddScoped<FboMainService, FboMainService>();
+builder.Services.AddScoped<GeneralService, GeneralService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

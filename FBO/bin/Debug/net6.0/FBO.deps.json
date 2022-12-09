@@ -10,7 +10,8 @@
         "dependencies": {
           "FBO.Dapper": "1.0.0",
           "FBO.Services": "1.0.0",
-          "FBO.ViewModels": "1.0.0"
+          "FBO.ViewModels": "1.0.0",
+          "GlobalAir.Data": "1.0.0.0"
         },
         "runtime": {
           "FBO.dll": {}

@@ -12,4 +12,10 @@
     <ProjectReference Include="..\FBO.ViewModels\FBO.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="GlobalAir.Data">
+      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

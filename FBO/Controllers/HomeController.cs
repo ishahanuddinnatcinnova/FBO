@@ -10,11 +10,13 @@ namespace FBO.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UtilitiesService _utility;
+        private readonly FboMainService _fboMainService;
 
-        public HomeController(ILogger<HomeController> logger, UtilitiesService utility)
+        public HomeController(ILogger<HomeController> logger, UtilitiesService utility, FboMainService fboMainService)
         {
             _logger = logger;
             _utility = utility;
+            _fboMainService = fboMainService;
         }
 
         public IActionResult Index()
@@ -27,11 +29,15 @@ namespace FBO.Controllers
             return View();
         }
 
-        public IActionResult CompanyManage()
+        public async Task<IActionResult> CompanyManage(int companyID, string fuel)
         {
+            
             LoginViewModel vm = _utility.CheckLogin(this.Request);
+
+            var fbo = await _fboMainService.CheckQuery(companyID,vm.userID,fuel);
             if(vm.isUser)
             {
+
                 return View(vm);
             }
             else
