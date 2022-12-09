@@ -7,14 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FBO.Dapper\FBO.Dapper.csproj" />
+    <None Include="wwwroot\images\fish.svg" />
+    <None Include="wwwroot\images\jklatt_vid.swf" />
+    <None Include="wwwroot\images\jklatt_vid2.swf" />
+    <None Include="wwwroot\images\jkvideo.flv" />
+    <None Include="wwwroot\images\player\expressInstall.swf" />
+    <None Include="wwwroot\images\player\player-viral.swf" />
+    <None Include="wwwroot\images\player\player.swf" />
+    <None Include="wwwroot\images\player\swfobject.js" />
+    <None Include="wwwroot\images\player\video.flv" />
+    <None Include="wwwroot\images\player\yt.swf" />
+    <None Include="wwwroot\images\region\faaregions.psd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FBO.Services\FBO.Services.csproj" />
-    <ProjectReference Include="..\FBO.ViewModels\FBO.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="GlobalAir.Data">
-      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+      <HintPath>..\..\Shahan\GlobalAir\Global_Air\Main\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 

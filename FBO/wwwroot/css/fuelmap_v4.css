@@ -1,0 +1,295 @@
+﻿#search {
+	/*position: absolute;*/
+	/*border: 1px solid #000;*/
+	border-radius: 20px;
+	/*font: 8pt arial;*/
+	width: 325px;
+	/*height: 400px;*/
+	/*z-index: 150;*/
+	/*top: 30px;
+	right: 7px;*/
+	background-color: #ececec;
+	margin-bottom:20px;
+}
+#search2 {
+	padding:8px;
+	margin-top:15px;
+	margin-bottom:10px;
+	border: 1px solid #eeeeee;
+	border-radius: 20px;
+	/*width: 325px;*/
+	/*height: 400px;*/
+}
+#search .header {
+	/* background: #000 url(../../images/map/bg.gif); */
+	/* background-repeat: repeat-y; */
+	/* color: #FFF; */
+	font-weight: bold;
+	padding: 10px;
+	/* z-index: 101; */
+	/* margin-bottom: 3px; */
+	text-align: center;
+}
+#search .seperator{
+	background: #000 url("../../images/map/bg.gif");
+	height: 10px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+#search #progress{
+	margin: 3px;
+	display: none;
+}
+#search #progress .bar{
+	background: url("../../images/map/progress.gif");
+	height: 15px;
+	border: 1px solid #1C5A99;
+}
+#search-results-container{
+	margin: 3px;
+	overflow: auto;
+	height: 329px;
+}
+#search-results{
+	margin-bottom: 10px;
+}
+#searchproxy{
+	position: absolute;
+	border: 1px solid #000;
+	background: #FFF;
+	-moz-opacity: 0.7;
+	opacity:.70;
+	filter: alpha(opacity=70);
+	z-index: 150;
+	top:30px;
+	right:7px;
+	width:325px;
+	height: 850px;
+}
+#legend{
+	position: absolute;
+	border: 1px solid #000;
+	z-index: 100;
+	top: 9px;
+	left: 53px;
+}
+#legendproxy{
+	position: absolute;
+	border: 1px solid #000;
+	background: #FFF;
+	-moz-opacity: 0.7;
+	opacity:.70;
+	filter: alpha(opacity=70);
+	z-index: 100;
+	top: 9px;
+	left: 53px;
+}
+#FuelMapControl{
+	position: absolute;
+	top: 50px;
+	right: 5px;
+	background: #fff;
+	z-index:100;
+	width:300px;
+}
+#FuelAptList {
+	height: 500px;
+	margin-left: 3px;
+	overflow:auto;
+	
+}
+.ero{
+	display: none !important;
+}
+.ero-body{
+	width: 315px !important;
+}
+.titlestyle{
+	display: none;
+}
+.detailsStyle
+{
+	font-family:Verdana;
+	font-size:10pt;
+	font-weight:normal;
+	text-align:left;
+	width: 305px;
+}
+.PopupMaster{
+	position: absolute;
+	z-index: 1000 !important;
+}
+.PopupContent{
+	padding: 5px;
+	background: #FFF;
+	border: 1px solid #000;
+}
+.PopupContent td{
+	font-size: 8pt;
+}
+.PopupPointer{
+	position: absolute;
+}
+.PopupPointer{
+	background:transparent url("../../images/map/marker.gif") repeat scroll 0%;
+	height:20px;
+	position:absolute;
+	left: 137px;
+	width:30px;
+	z-index:100;
+	display: none;
+}
+.PopupTitle{
+	padding: 2px;
+	background: #1C5A99;
+	text-align: center;
+	color: #FFF;
+	border: 1px solid #000;
+	border-bottom: 0;
+	font: bold 8pt arial;
+}
+.iconstyle{
+	width: 16px;
+	height: 15px;
+	background-image: url("../../images/map/fuelicon.gif");
+}
+#progress{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 228px;
+}
+#progress-proxy{
+	padding: 5px;
+	background: #FFF;
+	border: 1px solid #000;
+	width: 367px;
+	-moz-opacity: 0.7;
+	opacity:.70;
+	filter: alpha(opacity=70);
+	position: absolute;
+	left: 29%;
+}
+#progress-real{
+	padding: 5px;
+	border: 1px solid #000;
+	width: 367px;
+	position: absolute;
+	left: 29%;
+}
+#progress-container{
+	position: absolute;
+	height: 600px;
+	z-index: 3000;
+	display: none;
+	top: 0px;
+}
+#map{
+	border-radius:20px;
+	position: relative;
+	height: 900px !important;
+	width: 100% !important;
+}
+th div{
+	font-size: 7pt;
+}
+
+.bubbleLogo {
+	width:100px;
+	border:0px;
+}
+
+#fuelContainer {
+	width: 300px; 
+	font-family: Arial; 
+	font-size: 10pt; 
+}
+
+#fuelAptIdentContainer {
+	/*background-color: #555555; 
+	color: White; */
+	padding-bottom: 3px; 
+	padding-left: 5px;
+}
+
+#fuelLinksContainer {
+	/*border-top: 1px #555555 solid;*/ 
+	font-size: 8pt; 
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	/*border-left: 1px #555555 solid;
+	border-right: 1px #555555 solid;*/
+}
+
+#fuelLinksLeft {
+	width: 145px; 
+	float: left; 
+  
+}
+
+#fuelLinksRight {
+	float: right; 
+	width: 140px;
+}
+
+#fuelFBOInfo {
+	float: right; 
+	width: 180px;
+	margin-bottom: 5px;
+}
+
+#fuelTypeContainer {
+	float: left;
+	padding-right: 5px;
+}
+
+#fuelType {
+	background: transparent url(../../images/fuelmap/transparent.png) no-repeat scroll 0 0;
+	color: White;
+	font-weight: bold; 
+	font-size: 8pt; 
+	height: 14px; 
+	width: 62px;
+}
+
+#fuelPrice {
+	height: 13px;
+	width: 60px;
+}
+/*#fuelTop {
+	height: 5px;
+	width: 100%;
+	background: url(../../images/fuelmap/bubble-top.jpg) no-repeat scroll 0 0;
+}
+#fuelBottom {
+	height: 5px;
+	width: 100%;
+	background: url(../../images/fuelmap/bubble-bottom.jpg) no-repeat scroll 0 0;
+}*/
+
+#loadingContainer {
+	width:300px;
+	height:150px;
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	margin-left:-150px;
+	z-index: 150;
+	/*border: 1px solid #000;
+	background: #FFF;*/
+}
+#loadingContainer .header{
+	background: #000 url("../../images/map/bg.gif");
+	color: #FFF;
+	font-weight: bold;
+	padding: 2px;
+	z-index: 101;
+	margin-bottom: 3px;
+}
+.fields {
+	margin-left: 5px;
+	padding:0px;
+	margin-bottom: -10px;
+}

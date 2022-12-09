@@ -1,0 +1,409 @@
+.ssk:before {
+    display: inline-block;
+    font-family: "fas" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.ssk-facebook:before {
+    content: "\f09a";
+    text-indent: 6.5px;
+    margin-right: 6px
+}
+
+.ssk-twitter:before {
+    content: "\f099";
+    text-indent: 1px;
+    margin-right: 2px
+}
+
+.ssk-email:before {
+    content: "\f0e0";
+    top: -1px;
+    position: relative;
+    margin-right: 1px
+}
+
+.ssk-pinterest:before {
+    content: "\f0d2";
+    text-indent: 2px;
+    margin-right: 3px
+}
+
+.ssk-linkedin:before {
+    content: "\f0e1";
+    text-indent: 3px;
+    margin-right: 2px
+}
+
+.ssk {
+    background-color: #757575;
+    color: white;
+    display: inline-block;
+    font-size: 22px;
+    line-height: 1px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .1s;
+    -webkit-transition: background-color .1s;
+    -moz-transition: background-color .1s;
+    -ms-transition: background-color .1s;
+    -o-transition: background-color .1s
+}
+
+    .ssk:before, .ssk .glyphicon, .ssk .fa {
+        position: relative;
+        font-size: 22px;
+        top: 0;
+        vertical-align: middle
+    }
+
+    .ssk.ssk-xs, .ssk-xs > .ssk {
+        padding: 4px
+    }
+
+        .ssk.ssk-xs:before, .ssk-xs > .ssk:before, .ssk.ssk-xs .glyphicon, .ssk-xs > .ssk .glyphicon, .ssk.ssk-xs .fa, .ssk-xs > .ssk .fa {
+            font-size: 15px
+        }
+
+    .ssk.ssk-sm, .ssk-sm > .ssk {
+        padding: 5px
+    }
+
+        .ssk.ssk-sm:before, .ssk-sm > .ssk:before, .ssk.ssk-sm .glyphicon, .ssk-sm > .ssk .glyphicon, .ssk.ssk-sm .fa, .ssk-sm > .ssk .fa {
+            font-size: 20px
+        }
+
+    .ssk.ssk-lg, .ssk-lg > .ssk {
+        padding: 9px
+    }
+
+        .ssk.ssk-lg:before, .ssk-lg > .ssk:before, .ssk.ssk-lg .glyphicon, .ssk-lg > .ssk .glyphicon, .ssk.ssk-lg .fa, .ssk-lg > .ssk .fa {
+            font-size: 28px
+        }
+
+    .ssk:last-child {
+        margin-right: 0
+    }
+
+    .ssk:hover {
+        background-color: #424242
+    }
+
+    .ssk:hover, .ssk:focus {
+        color: #fff;
+        text-decoration: none
+    }
+
+    .ssk.ssk-round, .ssk-round .ssk {
+        border-radius: 50%
+    }
+
+        .ssk.ssk-round:before, .ssk-round .ssk:before {
+            text-indent: 0;
+            margin-right: 0
+        }
+
+    .ssk.ssk-rounded, .ssk-rounded .ssk {
+        border-radius: 15%
+    }
+
+    .ssk.ssk-icon {
+        color: #757575;
+        padding: 2px;
+        font-size: 24px
+    }
+
+        .ssk.ssk-icon, .ssk.ssk-icon:hover {
+            background-color: transparent
+        }
+
+            .ssk.ssk-icon:hover {
+                color: #424242
+            }
+
+            .ssk.ssk-icon.ssk-xs, .ssk-xs > .ssk.ssk-icon {
+                font-size: 16px
+            }
+
+            .ssk.ssk-icon.ssk-sm, .ssk-sm > .ssk.ssk-icon {
+                font-size: 20px
+            }
+
+            .ssk.ssk-icon.ssk-lg, .ssk-lg > .ssk.ssk-icon {
+                font-size: 28px
+            }
+
+    .ssk.ssk-text {
+        overflow: hidden;
+        font-size: 17px;
+        line-height: normal;
+        padding-right: 10px
+    }
+
+        .ssk.ssk-text:before, .ssk.ssk-text .glyphicon, .ssk.ssk-text .fa {
+            margin: -7px 10px -7px -7px;
+            padding: 7px;
+            background-color: rgba(0,0,0,0.15);
+            vertical-align: bottom;
+            text-indent: 0
+        }
+
+.ssk-block .ssk.ssk-text {
+    display: block;
+    margin-right: 0;
+    text-align: left
+}
+
+.ssk.ssk-text.ssk-xs, .ssk-xs > .ssk.ssk-text {
+    font-size: 12px;
+    padding-right: 6px
+}
+
+    .ssk.ssk-text.ssk-xs:before, .ssk-xs > .ssk.ssk-text:before, .ssk.ssk-text.ssk-xs .glyphicon, .ssk-xs > .ssk.ssk-text .glyphicon, .ssk.ssk-text.ssk-xs .fa, .ssk-xs > .ssk.ssk-text .fa {
+        margin: -4px 6px -4px -4px;
+        padding: 4px
+    }
+
+.ssk.ssk-text.ssk-sm, .ssk-sm > .ssk.ssk-text {
+    font-size: 16px;
+    padding-right: 7px
+}
+
+    .ssk.ssk-text.ssk-sm:before, .ssk-sm > .ssk.ssk-text:before, .ssk.ssk-text.ssk-sm .glyphicon, .ssk-sm > .ssk.ssk-text .glyphicon, .ssk.ssk-text.ssk-sm .fa, .ssk-sm > .ssk.ssk-text .fa {
+        margin: -5px 7px -5px -5px;
+        padding: 5px
+    }
+
+.ssk.ssk-text.ssk-lg, .ssk-lg > .ssk.ssk-text {
+    font-size: 22px;
+    padding-right: 13px
+}
+
+    .ssk.ssk-text.ssk-lg:before, .ssk-lg > .ssk.ssk-text:before, .ssk.ssk-text.ssk-lg .glyphicon, .ssk-lg > .ssk.ssk-text .glyphicon, .ssk.ssk-text.ssk-lg .fa, .ssk-lg > .ssk.ssk-text .fa {
+        margin: -9px 13px -9px -9px;
+        padding: 9px
+    }
+
+.ssk-group, .ssk-sticky {
+    font-size: 0
+}
+
+.ssk-sticky {
+    top: 0;
+    position: fixed;
+    z-index: 2000
+}
+
+    .ssk-sticky .ssk {
+        transition: padding .1s ease-out;
+        -webkit-transition: padding .1s ease-out;
+        -moz-transition: padding .1s ease-out;
+        -ms-transition: padding .1s ease-out;
+        -o-transition: padding .1s ease-out;
+        margin: 0
+    }
+
+@media (min-width:768px) {
+    .ssk-sticky.ssk-left .ssk, .ssk-sticky.ssk-right .ssk {
+        display: block;
+        clear: both
+    }
+
+    .ssk-sticky.ssk-left.ssk-center, .ssk-sticky.ssk-right.ssk-center {
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%)
+    }
+
+    .ssk-sticky.ssk-left {
+        left: 0
+    }
+
+        .ssk-sticky.ssk-left .ssk {
+            float: left
+        }
+
+            .ssk-sticky.ssk-left .ssk:hover {
+                padding-left: 15px
+            }
+
+    .ssk-sticky.ssk-right {
+        right: 0
+    }
+
+        .ssk-sticky.ssk-right .ssk {
+            float: right
+        }
+
+            .ssk-sticky.ssk-right .ssk:hover {
+                padding-right: 15px
+            }
+}
+
+.ssk-sticky.ssk-bottom {
+    font-size: 0;
+    top: auto;
+    bottom: 0
+}
+
+    .ssk-sticky.ssk-bottom.ssk-center {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%)
+    }
+
+    .ssk-sticky.ssk-bottom .ssk {
+        vertical-align: bottom
+    }
+
+        .ssk-sticky.ssk-bottom .ssk:hover {
+            padding-bottom: 15px
+        }
+
+.ssk-sticky.ssk-round.ssk-xs .ssk:hover {
+    padding: 8px
+}
+
+.ssk-sticky.ssk-round.ssk-sm .ssk:hover {
+    padding: 9px
+}
+
+.ssk-sticky.ssk-round .ssk:hover {
+    padding: 11px
+}
+
+.ssk-sticky.ssk-round.ssk-lg .ssk:hover {
+    padding: 13px
+}
+
+@media (max-width:767px) {
+    .ssk-sticky {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: nowrap
+    }
+
+        .ssk-sticky.ssk-sticky-hide-xs {
+            display: none !important
+        }
+
+        .ssk-sticky .ssk {
+            flex: 1;
+            width: auto
+        }
+
+            .ssk-sticky .ssk .ssk-num {
+                display: none
+            }
+}
+
+.ssk-facebook {
+    background-color: #3B5998
+}
+
+.ssk-facebook:hover {
+    background-color: #2d4373
+}
+
+.ssk-facebook.ssk-icon {
+    color: #3B5998
+}
+
+    .ssk-facebook.ssk-icon:hover {
+        color: #2d4373
+    }
+
+    .ssk-facebook.ssk-icon:before {
+        text-indent: 0;
+        margin-right: 0
+    }
+
+.ssk-twitter {
+    background-color: #1DA1F2
+}
+
+.ssk-twitter:hover {
+    background-color: #0c85d0
+}
+
+.ssk-twitter.ssk-icon {
+    color: #1DA1F2
+}
+
+    .ssk-twitter.ssk-icon:hover {
+        color: #0c85d0
+    }
+
+.ssk-pinterest {
+    background-color: #BD081C
+}
+
+.ssk-pinterest:hover {
+    background-color: #8c0615
+}
+
+.ssk-pinterest.ssk-icon {
+    color: #BD081C
+}
+
+    .ssk-pinterest.ssk-icon:hover {
+        color: #8c0615
+    }
+
+.ssk-email {
+    background-color: #757575
+}
+
+.ssk-email:hover {
+    background-color: #5b5b5b
+}
+
+.ssk-email:hover {
+    background-color: #5b5b5b
+}
+
+.ssk-email.ssk-icon {
+    color: #757575
+}
+
+    .ssk-email.ssk-icon:hover {
+        color: #5b5b5b
+    }
+
+.ssk-linkedin {
+    background-color: #1c87bd
+}
+
+.ssk-linkedin:hover {
+    background-color: #156791
+}
+
+.ssk-linkedin.ssk-icon {
+    color: #1c87bd
+}
+
+    .ssk-linkedin.ssk-icon:hover {
+        color: #156791
+    }

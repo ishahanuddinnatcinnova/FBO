@@ -1,49 +1,834 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FBO</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/FBO.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/_includes/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/_includes/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/_includes/assets/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/_includes/assets/icons/safari-pinned-tab.svg" color="#76B530">
+    <link rel="shortcut icon" href="/_includes/assets/icons/favicon.ico">
+    <link rel="shortlink" href="https://www.globalair.com" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/_includes/assets/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-itunes-app" content="app-id=1165831804">
+
+    @*<title>@(ViewBag.Title != null ? @ViewBag.Title : "Airport Resource Center | GlobalAir.com")</title>*@
+    @if (ViewBag.canonical != null)
+    {
+        <link href="@ViewBag.canonical.ToLower()" rel="canonical">
+    }
+    @RenderSection("Meta", required: false)
+
+    <link rel="dns-prefetch" href="https://stats.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://www.google.com">
+
+    <!--Putting below script at the end of body it will load after page window.load to improve Core Web Vitals-->
+    @*    <script defer>
+    var qcObj = [];
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
+    ga('send', 'pageview');
+
+    window.uetq = window.uetq || [];
+    window.uetq.push('event', 'INQUIRY', {});
+    </script>*@
+    @*DT-240*@
+    @*<script defer>!function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');</script>*@
+
+    @*<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "17467723" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>*@
+    <script defer type="application/ld+json">
+         { "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "GlobalAir.com",
+        "legalName": "Global Aviation Navigator, Inc",
+        "foundingDate": "1995",
+        "url": "https://www.globalair.com",
+        "logo": "https://www.globalair.com/images/galogo1.png",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "2700 Moran Ave.",
+        "addressLocality": "Bowman Field Airport",
+        "addressRegion": "Louisville",
+        "postalCode": "KY 40205",
+        "addressCountry": "USA"
+        },
+        "contactPoint": {
+        "@@type": "ContactPoint",
+        "contactType": "Technical Support",
+        "telephone": "[502-456-3934]",
+        "email": "webmaster@globalair.com"
+        },
+        "sameAs": [
+        "https://www.facebook.com/GlobalAir",
+        "https://twitter.com/globalair",
+        "https://www.linkedin.com/company/globalair.com",
+        "https://www.pinterest.com/Globalair",
+        "http://aircraft-listings.com/aircraftseller",
+        "https://twitter.com/aircraftseller",
+        "https://twitter.com/FBOfuel",
+        "https://www.instagram.com/globalaircom/",
+        "https://www.youtube.com/user/Airplanesforsale"
+         ]}
+    </script>
+    @*<script type="application/ld+json">
+    {
+    "@@context": "https://schema.org",
+    "@@type": "WebPage",
+    "name": "@ViewBag.Title",
+    "url": "https://www.globalair.com",
+    "description": "@ViewBag.Title"
+    }
+    </script>*@
+    <script async defer type="application/ld+json">
+                {
+            "@@context": "http://schema.org",
+            "@@graph": [
+                {
+                    "@@type": "WPHeader",
+                    "potentialAction": [
+                        {
+                            "@@type": "Action",
+                            "name": "POST YOUR ARTICLE",
+                            "target": "https://www.globalair.com/articles/edit"
+                        },
+                        {
+                            "@@type": "Action",
+                            "name": "Register",
+                            "target": "https://www.globalair.com/register"
+                        }
+                    ]
+                },
+                {
+                    "@@type": "WPFooter",
+                    "copyrightYear": "2022",
+                    "description": "GlobalAir.com. All rights reserved.",
+                    "copyrightHolder": {
+                        "@@type": "Organization",
+                        "name": "GlobalAir.com"
+                    }
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Home",
+                    "url": "https://www.globalair.com",
+                    "description": "Home",
+                    "position": 1
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Aircraft For Sale",
+                    "url": "https://www.globalair.com/aircraft-for-sale",
+                    "description": "Aircraft For Sale",
+                    "position": 2
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Aviation Directory",
+                    "url": "https://www.globalair.com/directories/",
+                    "description": "Aviation Directory",
+                    "position": 3
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Airport Search",
+                    "url": "https://www.globalair.com/airport/default.aspx",
+                    "description": "Airport Search",
+                    "position": 4
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Aviation News",
+                    "url": "https://www.globalair.com/articles",
+                    "description": "General and Corporate Aviation Headline News, Press and Insights",
+                    "position": 6
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Amphibian",
+                    "url": "https://www.globalair.com/aircraft-for-sale/amphibian",
+                    "description": "Amphibian For Sale",
+                    "position": 6
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Commercial",
+                    "url": "https://www.globalair.com/aircraft-for-sale/commercial",
+                    "description": "Commercial For Sale",
+                    "position": 7
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Experimental/Kits",
+                    "url": "https://www.globalair.com/aircraft-for-sale/experimental-kit",
+                    "description": "Experimental/Kits For Sale",
+                    "position": 8
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Helicopter",
+                    "url": "https://www.globalair.com/aircraft-for-sale/helicopters",
+                    "description": "Helicopter For Sale",
+                    "position": 9
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Jets",
+                    "url": "https://www.globalair.com/aircraft-for-sale/private-jet",
+                    "description": "Jets For Sale",
+                    "position": 10
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Single Engine Turbine",
+                    "url": "https://www.globalair.com/aircraft-for-sale/single-engine-turbine",
+                    "description": "Single Engine Turbine For Sale",
+                    "position": 11
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Singles",
+                    "url": "https://www.globalair.com/aircraft-for-sale/single-engine-piston",
+                    "description": "Singles For Sale",
+                    "position": 12
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Twin Pistons",
+                    "url": "https://www.globalair.com/aircraft-for-sale/twin-engine-piston",
+                    "description": "Twin Pistons For Sale",
+                    "position": 13
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Twin Turbines",
+                    "url": "https://www.globalair.com/aircraft-for-sale/twin-engine-turbine",
+                    "description": "Twin Turbines For Sale",
+                    "position": 14
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Vintage",
+                    "url": "https://www.globalair.com/aircraft-for-sale/vintage",
+                    "description": "Vintage For Sale",
+                    "position": 15
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Warbirds",
+                    "url": "https://www.globalair.com/aircraft-for-sale/warbird",
+                    "description": "Warbirds For Sale",
+                    "position": 16
+                },
+                {
+                    "@@type": "SiteNavigationElement",
+                    "name": "Light Sport",
+                    "url": "https://www.globalair.com/aircraft-for-sale/light-sport",
+                    "description": "Light Sport For Sale",
+                    "position": 17
+                }
+            ]
+        }
+    </script>
+    @*@Styles.RenderFormat(@"<link rel=""stylesheet"" rel=""preload"" as=""style"" href=""{0}"" />", "~/styles/pages")*@
+    @RenderSection("Styles", required: false)
+    @*<link href="~/css/all.min.css" rel="stylesheet" />*@
+    <link href="~/css/bootstrap.custom.css" rel="stylesheet" media="all" />
+    @*<link href="~/css/css-loader.css" rel="stylesheet" />*@
+    @*<link href="~/css/fas.css" rel="stylesheet" />*@
+    @*<link href="~/css/social-share-kit.css" rel="stylesheet" />*@
+    <link href="~/css/style.css" rel="stylesheet" media="all" />
+    <style>
+        .footer a {
+            text-decoration: none
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #212121;
+            position: absolute;
+            z-index: 1000;
+            display: none;
+            float: left;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #f1f2f2;
+            text-align: left;
+            list-style: none;
+            border-radius: 2px;
+        }
+
+            .dropdown-content a {
+                color: rgba(255,255,255,.6);
+            }
+
+                .dropdown-content a:hover {
+                    color: #007bff;
+                    background-color: #212121;
+                }
+
+        .show1 {
+            display: block;
+        }
+
+        #airportTable_filter {
+            margin-bottom: 5px
+        }
+    </style>
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FBO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+<body vocab="https://schema.org/" typeof="WebPage">
+    <div style="border-bottom: 1px solid #ccc;">
+        <div class="top-bar light container">
+            <div class="row align-items-center">
+                <div class="col d-flex p-2" style="height:45px;">
+                    <ul class="list-inline links toplinks d-lg-inline mb-0 mt-auto mb-auto">
+                        <li class="d-none d-lg-inline pr-2">Welcome to GlobalAir.com</li>
+                        <li style="display:none" class="text-success nav-item dropdown logged-in-user-context" id="logged-in">
+                            @*<ul id="d1" class="dropdown-menu dropdown-menu-left collapse">
+                            <li><a id="dboard-link" href="/myaircraft/dashboard.aspx" class="dropdown-item">Dashboard</a></li>
+                            <li id="fbo-link" style="display:none"><a href="/fbo/companymanage.aspx" class="dropdown-item">FBO Dashboard</a></li>
+                            <li><a href="/Articles/Edit" class="dropdown-item">Post New Article</a></li>
+                            <li><a href="javascript:void(0)" onclick="logoutActionGA(); event.preventDefault();" class="dropdown-item">Logout</a></li>
+                            </ul>*@
+                            <div class="dropdown">
+                                <div onclick="header_menuFunction()" class="nav-link dropbtn" style="cursor:pointer; font-size: 13px;color:#76B530;">
+                                    Hello, <span id="first-name" class="dropbtn"></span> <img width="18" height="18" style="vertical-align:sub" src="/images/angle-down.png">
+                                </div>
+                                <ul id="headerDropdown" class="dropdown-content dropdown-menu-left">
+                                    <li><a id="dboard-link" href="/myaircraft/dashboard.aspx" class="dropdown-item">Dashboard</a></li>
+                                    <li id="fbo-link" style="display:none"><a href="/fbo/companymanage.aspx" class="dropdown-item">FBO Dashboard</a></li>
+                                    <li><a href="/articles/edit" class="dropdown-item">Post New Article</a></li>
+                                    <li><a href="#" onclick="logoutActionGA(); event.preventDefault();" class="dropdown-item">Logout</a></li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li style="display:none" class="logged-out-user-context" id="logged-out">
+                            <div class="btn-group mr-2" role="group" aria-label="Login group">
+                                <button data-toggler="modal" data-target="#loginModal" type="button" class="btn btn-sm btn-success btn-success-custom btn-rounded" id="btnLogin">Login</button>
+                                <button type="button" class="btn btn-sm btn-dark btn-rounded" id="btnReg">Register</button>
+                            </div>
                         </li>
                     </ul>
                 </div>
+                <div class="col" style="display:contents">
+                    @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
+                    {
+                        <a href="/Articles/Edit" class="btn btn-sm mt-1 mr-3 float-left btn-success btn-success-custom text-white pulse-success">Post Your Article</a>
+                    }
+                    @*                    <a href="https://www.facebook.com/GlobalAir/" aria-label="Facebook" target="_blank" alt="FaceBook" class="social-icon-sm si-gray si-gray-round si-facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/globalair" aria-label="Twitter" target="_blank" alt="Twitter" class="social-icon-sm si-gray si-gray-round si-twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.pinterest.com/Globalair/" aria-label="Pinterest" target="_blank" alt="Pinterest" class="social-icon-sm si-gray si-gray-round si-pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="https://www.linkedin.com/company/globalair.com" aria-label="LinkedIn" target="_blank" alt="LinkedIn" class="social-icon-sm si-gray si-gray-round si-linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/globalaircom/" aria-label="Instagram" target="_blank" alt="Instagram" class="social-icon-sm si-gray si-gray-round si-instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/user/Airplanesforsale" aria-label="Youtube" target="_blank" alt="Youtube" class="social-icon-sm si-gray si-gray-round si-youtube"><i class="fab fa-youtube"></i></a>
+                    *@
+                </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
+    @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
+    {
+        <div class="top-bar topbarbck d-none d-lg-block">
+            <div class="container">
+                <div class="row p-2" style="height:107px">
+                    <div class="col" style="flex:0 0 0px">
+                        <a href="/"><img data-src="/images/galogo1.png?123" class="lazyload" width="250" height="74" alt="Global aviation news, information and market intelligence"></a>
+                    </div>
+                    <div class="col text-right">
+                        <div id='div-gpt-ad-1621626637196-0' style='min-width: 970px; min-height: 90px;'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <nav class="navbar pb-0 pt-0 pl-2 navbar-expand-lg navbar-light" style="background: #97cb00; min-height: 40px; width:100%">
+        <div class="d-lg-none" style="color:rgba(0, 0, 0, 0.7);font-size:1.2em;font-weight:700;">GlobalAir.com</div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggler="show"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @{
+            await Html.RenderPartialAsync("_MenuItems");
+        }
+    </nav>
+    @if (IsSectionDefined("BreadCrumb"))
+    {
+        <div class="row ms-2 mt-2" style="width: 99%">
+            <div class="col-md-9">
+                @Html.Raw(@ViewBag.BreadCrumb)
+                @RenderSection("Breadcrumb", required: false)
+            </div>
+            @if (TempData["page"] != null && TempData["page"].ToString() != "fboratings")
+            {
+                <div class="col-md-3">
+                    <div class="col-md-12 text-center text-md-end" style="height: 45px">
+                        <a href="javascript:socialIconClick('facebook')" title="FaceBook"><img src="~/icons/facebook.png" alt="FaceBook" width="64" height="64" style="width: 32px; height: 32px;" /></a>
+                        <a href="javascript:socialIconClick('twitter')" title="Twitter"><img src="~/icons/twitter.png" alt="Twitter" width="64" height="64" style="width: 32px; height: 32px;" /></a>
+                        <a href="javascript:socialIconClick('pinterest')" title="Pinterest"><img src="~/icons/pinterest.png" alt="Pinterest" width="32" height="32" style="width: 32px; height: 32px;" /></a>
+                        <a href="javascript:socialIconClick('linkedin')" title="Linkedin"><img src="~/icons/linkedin.png" alt="Linkedin" width="32" height="32" style="width: 32px; height: 32px;" /></a>
+                        @*<a href="#" title="Email"><img src="~/icons/email.png" alt="" width="48" height="48" /></a>*@
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+    {
+        <div class="col mb-4" style="height: 60px; text-align: center">
+            <div id='div-gpt-ad-1639782560527-0' style='min-width: 320px; min-height: 50px;'>
+            </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - FBO - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    }
+
+    <div class="">
+        @if (IsSectionDefined("PageTitle"))
+        {
+            <div class="page-titles title-light">
+                @RenderSection("PageTitle", required: false)
+            </div>
+        }
+        else
+        {
+            <div class=""></div>
+        }
+        <div class="row mr-2" style="width: 100%">
+            <div class="col">
+                @RenderBody()
+            </div>
+            @if (ViewBag.HideAds != true)
+            {
+                @if (TempData["sidebar"] == null || (TempData["sidebar"] != null && TempData["sidebar"] != "Nosidebar"))
+                {
+                    <div class="col mb-4 ml-4 pr-0 pl-0 d-none d-xl-block" style="flex: 0 0 300px; width: 300px">
+                        @RenderSection("SideBar", required: false)
+                        <div class="mb-4"></div>
+                        @{
+                            //<div id='div-gpt-ad-1639786075089-0' style='min-width: 300px; min-height: 250px; margin-top: 20px'>
+                            //    <script>
+                            //        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1639786075089-0'); });
+                            //    </script>
+                            //</div>
+
+                            //<div style="min-width: 300px; min-height: 250px; margin-bottom: 20px; margin-top: 20px">
+                            //    <a href="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Click&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1" aria-label="GlobalAir Articles" target="_blank" rel="noreferrer">
+                            //        <img src="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Get&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1" width="300" height="250" border="0" style="max-width:100%; height:auto;" alt="" />
+                            //    </a>
+                            //</div>
+                            var keywords = "";
+                            if (TempData["banmanKeywords"] != null && TempData["banmanKeywords"].ToString() != "")
+                            {
+                                keywords = "&keywords=" + TempData["banmanKeywords"];
+
+                                <div style="min-width: 300px; height: 300px; margin-bottom: 20px; margin-top: 20px">
+                                    <a href="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Click&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1@(keywords)" aria-label="GlobalAir Airport Resources" target="_blank" rel="noreferrer">
+                                        <img src="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Get&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1@(keywords)" width="300" height="300" border="0" style="max-width:100%;" alt="" />
+                                    </a>
+                                </div>
+                            }
+                            <!-- /13428562/**2022-300x600-Ad-Airport -->
+                            <div id='div-gpt-ad-1639784881215-0' style='min-width: 300px; height: 600px;'>
+                            </div>
+
+                            <!-- /13428562/**2022-300x250-Ad-1-Airport -->
+                            <div id='div-gpt-ad-1639785013347-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
+                            </div>
+
+                            <!-- /13428562/**2022-300x250-Ad-2-Airport -->
+                            <div id='div-gpt-ad-1639785057183-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
+                            </div>
+                        }
+                        <div class="mb-4"></div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+    {
+        <div id="mobileBanner" class="fixed-bottom">
+            <div id="closebtnAd" class="text-center pr-2 pl-2 pb-1" data-toggler="show" onclick="closeGoogleAd();" data-target=".fixed-bottom" aria-label="Close" style="background-color:silver; width:80px; display:none; cursor:pointer;">CLOSE</div>
+            <div class="row w-100 p-1">
+                <div class="col-md-12">
+                    <div id="top-ad">
+                        @*<script async defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->*@
+                        <!-- Adsense April 2021 Responsive Ad Test -->
+                        <!--<ins class="adsbygoogle"
+                        style="display:block"
+                        data-ad-client="ca-pub-3886098321648948"
+                        data-ad-slot="3784789388"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>-->
+                        <!-- /13428562/2022-300x250-Mobile-Floating-Ad-Unit -->
+                        <div id='div-gpt-ad-1641850667091-0' style='min-width: 300px; min-height: 250px; display:none'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <footer class="footer footer-dark pt30 pb-2">
+        <div class="p-4">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <h3>About Us</h3>
+                    <p>
+                        It is our mission to be the go to leaders in the aviation industry. GlobalAir.com is your partner in connecting you with relevant information and resources.
+                    </p>
+                    @*<a href="#" class="btn btn-sm btn-white-outline">Learn More</a>*@
+                </div>
+                <div class="col-lg-6 col-md-6 mb-4">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="footer-list-item">Quick links</h3>
+                            <ul class="list-unstyled footer-list-item">
+                                <li><a href="/aircraft-for-sale">Aircraft For Sale</a></li>
+                                <li><a href="/airport">Airport Weather & FBO Fuel Prices</a></li>
+                                <li><a href="/articles">Aviation News</a></li>
+                                <li><a href="/calendar/aviation-events.aspx">Aviation Events</a></li>
+                                <li><a href="/directories/">Aviation Business Directory</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h3>&nbsp;</h3>
+                            <ul class="list-unstyled footer-list-item">
+                                <li><a href="/advertising/advertisewithus">Advertising</a></li>
+                                <li><a href="https://hosting.globalair.com">Hosting</a></li>
+                                <li><a href="/contact/contact.aspx">Contact Us</a></li>
+                                <li><a href="/employment/">Job Opportunities</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h3>&nbsp;</h3>
+                            <ul class="list-unstyled footer-list-item">
+                                <li><a href="/press/press.aspx">Press</a></li>
+                                <li><a href="/press/legal.aspx">Legal</a></li>
+                                <li><a href="/scholarships/">Scholarships</a></li>
+                                <li><a href="/press/testimonials.aspx">Testimonials</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <h3 style="padding-left: 40px;">Contact Us</h3>
+                    <ul class="list-unstyled contact-list-item">
+                        <li>
+                            <i class="ti-home"></i>
+                            2700 Moran Ave.,Bowman Field Airport, Louisville, KY 40205
+                        </li>
+                        <li>
+                            <i class="ti-mobile"></i>
+                            888-236-4309 / 502-456-3934
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://connect.nbaa.org/246883/GlobalAircom" title="NBAA GlobalAir" aria-label="NBAA GlobalAir"><img src="https://resources.globalair.com/images/nbaa/logo.png?w=200&mode=crop" width="200" height="83" alt="NBAA" title="NBAA" class="lazyload" /></a>
+                            <a href="https://greaterlouisvillekycoc.weblinkconnect.com/TransportationWarehousing/GlobalAircom-29301" aria-label="GlobalAir"></a><img src="https://resources.globalair.com/images/1x1Black.png" alt="1x1" width="1" height="1" /></a>
+                        </li>
+                        <li>
+                            <a style="background-size: 67%; background-position: center; background-repeat: no-repeat; background-image: url(/images/facebook.png)" target="_blank" href="https://www.facebook.com/GlobalAir/" alt="FaceBook" aria-label="FaceBook" class="social-icon-sm si-gray si-gray-round"></a>
+                            <a style="background-size: 67%; background-position: center; background-repeat: no-repeat; background-image: url(/images/twitter.png)" target="_blank" href="https://twitter.com/globalair" alt="Twitter" aria-label="Twitter" class="social-icon-sm si-gray si-gray-round"></a>
+                            <a style="background-size: 67%; background-position: center; background-repeat: no-repeat; background-image: url(/images/pinterest.png)" target="_blank" href="https://www.pinterest.com/Globalair/" alt="Pinterest" aria-label="Pinterest" class="social-icon-sm si-gray si-gray-round"></a>
+                            <a style="background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url(/images/linkedin.png)" target="_blank" href="https://www.linkedin.com/company/globalair.com" alt="LinkedIn" aria-label="LinkedIn" class="social-icon-sm si-gray si-gray-round"></a>
+                            <a style="background-size: 67%; background-position: center; background-repeat: no-repeat; background-image: url(/images/instagram.png)" target="_blank" href="https://www.instagram.com/globalaircom/" alt="Instagram" aria-label="Instagram" class="social-icon-sm si-gray si-gray-round"></a>
+                            <a style="background-size: 81%; background-position: center; background-repeat: no-repeat; background-image: url(/images/youtube.png)" target="_blank" href="https://www.youtube.com/user/Airplanesforsale" alt="Youtube" aria-label="Youtube" class="social-icon-sm si-gray si-gray-round"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div><hr class="mb-3">
+            <div class="row">
+                <div class="col-lg-6  ml-auto mr-auto text-center">
+                    <p><img class="lazyload" data-src="/images/fish.svg" alt="Jesus Fish" width="50" height="20" align="middle">&nbsp;&nbsp;&nbsp;&copy;@DateTime.Now.Year GlobalAir.com. All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalCenterTitle">GlobalAir Login</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div id="SigninError"></div>
+                            <form id="frmSignIn" name="frmSignIn" method="post">
+                                <input type="hidden" id="logonaction" name="logonaction" value="in">
+                                <div class="mb-3">
+                                    <a href="/forgot.aspx" class="float-end text-info text-decoration-none">Forgot?</a>
+                                    <label class="form-label" for="email">Username</label>
+                                    <input type="text" class="form-control ele150" name="tbUsername" id="tbUsername" placeholder="Username" maxlength="50">
+                                </div>
+                                <div class="mb-3">
+                                    <a href="/forgot.aspx" class="float-end text-info text-decoration-none">Reset</a>
+                                    <label class="form-label" for="pass">Password</label>
+                                    <input type="password" name="tbPassword" id="tbPassword" placeholder="Password" class="form-control ele150" maxlength="50">
+                                    <input type="hidden" id="hiddenURL" value="/Articles">
+                                </div>
+                                <div class="clearfix">
+                                    <button type="submit" class="btn btn-primary btn-primary-custom float-right" name="IB_MyFlightDepartmentSubmit" id="IB_MyFlightDepartmentSubmit">Sign In</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--/col-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*    <div class="ssk-sticky ssk-left ssk-center ssk-lg">
+    <a href="javascript:socialIconClick('facebook')" title="FaceBook" class="ssk ssk-facebook"></a>
+    <a href="javascript:socialIconClick('twitter')" title="Twitter" class="ssk ssk-twitter"></a>
+    <a href="javascript:socialIconClick('pinterest')" title="Pinterest" class="ssk ssk-pinterest"></a>
+    <a href="javascript:socialIconClick('linkedin')" title="LinkedIn" class="ssk ssk-linkedin"></a>
+    <a href="" title="Email" class="ssk ssk-email"></a>
+    </div>*@
+    <div class="modal fade" id="spinner" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="spinnerTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body justify-content-center align-items-center text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <h5 class="modal-title mt-2" id="spinnerTitle">Loading...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade collapse" data-dismiss="modal"></div>
+    <div class="contact-seller modal fade QuickContact" id="QuickContact" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#97cb00">
+                    <h4 class="modal-title" id="ModalTitle"></h4>
+                    <button onclick="CloseQuickContact();" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="divQc" class="text-center" style="border: 1px solid rgb(169, 169, 169);">
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<script type="text/javascript" async defer src="~/js/all.min.js"></script>*@
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" async defer src="~/js/appUi-custom.js"></script>
+    <script type="text/javascript" async defer src="~/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" async defer src="~/js/lazysizes.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
+
+    <img height="1" width="1" alt="FaceBook Tracking" src="https://www.facebook.com/tr?id=128491507700639&ev=PageView&noscript=1" />
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="text/javascript">
+        var jCookies = null;
+        $(function () {
+            if (jCookies == null) {
+                jCookies = Cookies.noConflict();
+            }
+        });
+        function eraseCookieFromDomainFrame(name) {
+            if (jCookies != undefined) {
+                jCookies.set(name, null);;
+                jCookies.remove(name, { path: '/' });
+            }
+        }
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');
+                var qcObj = [];
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
+                ga('send', 'pageview');
+
+                window.uetq = window.uetq || [];
+                window.uetq.push('event', 'INQUIRY', {});
+                var tag = document.createElement("script");
+                tag.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+                document.getElementsByTagName("head")[0].appendChild(tag);
+        @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
+        {
+            <text>
+                        window.googletag = window.googletag || { cmd: [] };
+                    googletag.cmd.push(function () {
+                        googletag.defineSlot('/13428562/2022-Aircraft-for-Sale-Ad-Units', [970, 90], 'div-gpt-ad-1621626637196-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x600-Ad-Airport', [300, 600], 'div-gpt-ad-1639784881215-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-1-Airport', [300, 250], 'div-gpt-ad-1639785013347-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-2-Airport', [300, 250], 'div-gpt-ad-1639785057183-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-3-Airport', [300, 250], 'div-gpt-ad-1639785148825-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-4-Airport', [300, 250], 'div-gpt-ad-1639785198561-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-5-Airport', [300, 250], 'div-gpt-ad-1639785235266-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-728x90-Ad-1-Airport', [728, 90], 'div-gpt-ad-1639785542086-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-728x90-Ad-2-Airport', [728, 90], 'div-gpt-ad-1639785578939-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-728x90-Ad-3-Airport', [728, 90], 'div-gpt-ad-1639785622033-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-728x90-Ad-4-Airport', [728, 90], 'div-gpt-ad-1639785686682-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-728x90-Ad-5-Airport', [728, 90], 'div-gpt-ad-1639785720818-0').addService(googletag.pubads());
+                        googletag.pubads().enableSingleRequest();
+                        googletag.pubads().collapseEmptyDivs(true);
+                        googletag.enableServices();
+                    });
+
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639784881215-0'); });
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639785013347-0'); });
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639785057183-0'); });
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1621626637196-0'); });
+            </text>
+        }
+        else
+        {
+            <text>
+                        window.googletag = window.googletag || { cmd: [] };
+                    googletag.cmd.push(function () {
+                        googletag.defineSlot('/13428562/**2022-320x50-Mobile-Ad-1', [320, 50], 'div-gpt-ad-1639782560527-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/2022-300x250-Ad-1', [300, 250], 'div-gpt-ad-1639781263825-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-2', [300, 250], 'div-gpt-ad-1639781353563-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/2022-300x250-Ad-3', [300, 250], 'div-gpt-ad-1639781431621-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/**2022-300x250-Ad-4', [300, 250], 'div-gpt-ad-1639781510957-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/2022-300x250-Ad-5', [300, 250], 'div-gpt-ad-1639781626633-0').addService(googletag.pubads());
+                        googletag.defineSlot('/13428562/2022-300x250-Mobile-Floating-Ad-Unit', [300, 250], 'div-gpt-ad-1641850667091-0').addService(googletag.pubads());
+                        googletag.pubads().enableSingleRequest();
+                        googletag.pubads().collapseEmptyDivs(true);
+                        googletag.enableServices();
+
+                        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1641850667091-0'); });
+                        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639782560527-0'); });
+
+                        setTimeout(function () {
+                            var mobileBannerDiv = document.getElementById("mobileBanner");
+                            var frame = mobileBannerDiv.getElementsByTagName("iframe");
+                            if (frame[0]) {
+                                $("#closebtnAd").show();
+                            }
+                        }, 2000);
+                    });
+            </text>
+        }
+                    }, 3000);
+        });
+
+    </script>
+    <script async defer type="text/javascript">
+
+        function QuickContact(button) {
+
+            $(".modal-title").html($(button).data("title"));
+            var btnData = $(button).data("adid") + "|" + $(button).data("brokerid") + "|" + $(button).data("businessphone") + "|" + $(button).data("cellphone") + "|";
+            btnData += $(button).data("contactname") + "|" + $(button).data("rn") + "|" + $(button).data("sn") + "|" + $(button).data("title") + "|";
+            btnData += $(button).data("receivetextmessages") + "|True|" + $(button).data("inquirysrc") + "|" + $(button).data("yrmoddes") + "|" + $(button).data("ismobile") + "|" + $(button).data("country") + "|" + $(button).data("debug");
+            $("#divQc").load("/aircraft-for-sale/quick-contact-iframe?addetail=" + encodeURIComponent(btnData)
+            );
+        }
+
+        function CloseQuickContact() {
+            if ($('#QuickContact').hasClass('show')) {
+                $("#QuickContact").removeClass("show");
+                var iframes = document.querySelectorAll('iframe');
+                for (var i = 0; i < iframes.length; i++) {
+                    iframes[i].parentNode.removeChild(iframes[i]);
+                }
+            }
+        }
+    </script>
+    <script async defer type="text/javascript">
+        //(function () {
+        //    var css = document.createElement('link');
+        //    css.href = 'https://use.fontawesome.com/releases/v5.7.2/css/all.css';
+        //    css.rel = 'stylesheet';
+        //    css.type = 'text/css';
+        //    document.getElementsByTagName('head')[0].appendChild(css);
+        //})();
+
+        function showGoogleAds() {
+
+        }
+        function closeGoogleAd() {
+            $("#mobileBanner").hide();
+        }
+
+        window.onclick = function (e) {
+            document.querySelectorAll('.dropdown-menu.show').forEach((item) => {
+                if (event.target.nextElementSibling !== item)
+                    item.classList.remove('show');
+            });
+
+            if (!event.target.matches('.dropbtn')) {
+                //alert();
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show1')) {
+                        openDropdown.classList.remove('show1');
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+
+        function header_menuFunction() {
+            document.getElementById("headerDropdown").classList.toggle("show1");
+        }
+    </script>
+    <script>
+        window.addEventListener('load', function () {
+            jQuery('input[type=radio][name=searchType]').change(function () {
+                if (this.value == 'airport') {
+                    $('#search-input').attr("placeholder", "Enter Airport ID, Name, City, State or Zip Code");
+                }
+                else if (this.value == 'fuel') {
+                    $('#search-input').attr("placeholder", "Enter Airport ID");
+                }
+            });
+
+            jQuery("#submitForm").click(function () {
+                if ($('#search-input').val() == "") {
+                    $('#queryCheck').show();
+                    setTimeout(function () {
+                        $('#queryCheck').hide()
+                    }, 3000);
+                }
+                else {
+                    $('#searchForm').submit();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
