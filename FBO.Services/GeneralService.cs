@@ -5,6 +5,7 @@ using GlobalAir.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -27,8 +28,9 @@ namespace FBO.Services
             //Fbo Result
             fboResultMainModel.FBO = await FboResult(companyID);
             //Fbo Result formatting
-            fboResultMainModel.FBO.Email = "<a href=\"mailto:" + fboResultMainModel.FBO.Email + "\">" + fboResultMainModel.FBO.Email + "</a>";
-            fboResultMainModel.FBO.FAARepairCode = "<a href=\"/airport/apt.airport.aspx?aptcode=" + fboResultMainModel.FBO.FAARepairCode + "\" target=\"_blank\" rel=\"noreferrer\">" + fboResultMainModel.FBO.FAARepairCode + "</a>";
+            String companyLogoURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+            fboResultMainModel.FBO.logo = companyLogoURL + fboResultMainModel.FBO.logo;
+            //fboResultMainModel.FBO.FAARepairCode = "<a href=\"/airport/apt.airport.aspx?aptcode=" + fboResultMainModel.FBO.FAARepairCode + "\" target=\"_blank\" rel=\"noreferrer\">" + fboResultMainModel.FBO.FAARepairCode + "</a>";
             if (fboResultMainModel.FBO.IsApproved == true)
             {
                 fboResultMainModel.fboIsApproved = "Yes";
@@ -37,7 +39,7 @@ namespace FBO.Services
             {
                 fboResultMainModel.fboIsApproved = "No";
             }
-            fboResultMainModel.companyName = fboResultMainModel.FBO.Company + " " + "(" + fboResultMainModel.FBO.FAARepairCode + ")";
+            fboResultMainModel.companyName = fboResultMainModel.FBO.Company;
 
             fboResultMainModel.companyfullAddress = fboResultMainModel.FBO.Company + "<br />" + fboResultMainModel.FBO.City + ", " + fboResultMainModel.FBO.State + " " + fboResultMainModel.FBO.Zip;
             //Check Expiry
@@ -50,11 +52,11 @@ namespace FBO.Services
             fboResultMainModel.averageFuelPrice = Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_JETA), 2) + Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_100LL), 2);
             // Get FBO Count
             fboResultMainModel.fbo_count = await CountFbo(userID);
+
             return fboResultMainModel;
         }
         public async Task<FBOManagement_GetFBO_Result> FboResult(int companyID)
         {
-            FBOManagement_GetFBO_Result fboResult = new FBOManagement_GetFBO_Result();
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -62,40 +64,10 @@ namespace FBO.Services
                 var fbo = _dapper.Get<FBOManagement_GetFBO_Result>("FBOManagement_GetFBO", dynamicParameters, commandType: CommandType.StoredProcedure);
                 if (fbo.CompanyID != 0)
                 {
-                    fboResult.Company = fbo.Company;
-                    fboResult.Phone = fbo.Phone;
-                    fboResult.Email = fbo.Email;
-                    fboResult.FBOLevel = fbo.FBOLevel;
-                    fboResult.FAARepairCode = fbo.FAARepairCode;
-                    fboResult.Address1 = fbo.Address1;
-                    fboResult.City = fbo.City;
-                    fboResult.State = fbo.State;
-                    fboResult.Zip = fbo.Zip;
-                    fboResult.Country = fbo.Country;
-                    fboResult.IsApproved = fbo.IsApproved;
-                    fboResult.LastUpdated = fbo.LastUpdated;
-                    fboResult.FuelJETA = fbo.FuelJETA;
-                    fboResult.FuelJETAPRIST = fbo.FuelJETAPRIST;
-                    fboResult.Fuel100LL = fbo.Fuel100LL;
-                    fboResult.FuelUL94 = fbo.FuelUL94;
-                    fboResult.FuelMOGAS = fbo.FuelMOGAS;
-                    fboResult.FuelSAF = fbo.FuelSAF;
-                    fboResult.FuelSAFPRIST = fbo.FuelSAFPRIST;
-                    fboResult.FuelSSJETA = fbo.FuelSSJETA;
-                    fboResult.FuelSSJETAPRIST = fbo.FuelSSJETAPRIST;
-                    fboResult.FuelSS100LL = fbo.FuelSS100LL;
-                    fboResult.FuelSSUL94 = fbo.FuelSSUL94;
-                    fboResult.FuelSSMOGAS = fbo.FuelSSMOGAS;
-                    fboResult.FuelSSSAF = fbo.FuelSSSAF;
-                    fboResult.FuelSSSAFPRIST = fbo.FuelSSSAFPRIST;
+                    return fbo;
 
                 }
-
-
-
-
-
-                return fboResult;
+                return fbo;
             }
             catch (Exception ex)
             {

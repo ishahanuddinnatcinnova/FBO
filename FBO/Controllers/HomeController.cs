@@ -39,7 +39,7 @@ namespace FBO.Controllers
             if(vm.isUser)
             {
 
-                return View(vm);
+                return View(fbo);
             }
             else
             {
