@@ -365,7 +365,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         @{
-            await Html.RenderPartialAsync("_MenuItems");
+            <partial name="_MenuItems" />
         }
     </nav>
     @if (IsSectionDefined("BreadCrumb"))
