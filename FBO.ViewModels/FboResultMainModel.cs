@@ -17,10 +17,12 @@ namespace FBO.ViewModels
         public string fboIsApproved { get; set; }   
         public bool fboIsExpired { get; set; }  
         public FBOManagement_GetRegionAverages_Result averageprices { get; set; }
-        public DateTime lastUpdated { get; set; }
+        public string companyLogo;
         public int reviews_of_ratings { get; set; }
         public int fbo_count { get; set; }
         public decimal? averageFuelPrice { get; set; }
- 
+        public string startDate { get; set; }
+        public string endDate { get; set; }
+        public FBOManagement_Stats_Result fboStats { get; set; }
     }
 }

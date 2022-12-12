@@ -5,6 +5,7 @@ using GlobalAir.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,9 +22,41 @@ namespace FBO.Services
         {
             _dapper = dapper;
         }
+        public async Task<FboResultMainModel> GetFBO(int companyID, string userID, FboResultMainModel fboResultMainModel)
+        {
+       
+            //Fbo Result
+            fboResultMainModel.FBO = await FboResult(companyID);
+            //Fbo Result formatting
+            String companyLogoURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+            fboResultMainModel.FBO.logo = companyLogoURL + fboResultMainModel.FBO.logo;
+            //fboResultMainModel.FBO.FAARepairCode = "<a href=\"/airport/apt.airport.aspx?aptcode=" + fboResultMainModel.FBO.FAARepairCode + "\" target=\"_blank\" rel=\"noreferrer\">" + fboResultMainModel.FBO.FAARepairCode + "</a>";
+            if (fboResultMainModel.FBO.IsApproved == true)
+            {
+                fboResultMainModel.fboIsApproved = "Yes";
+            }
+            else if (fboResultMainModel.FBO.IsApproved == false)
+            {
+                fboResultMainModel.fboIsApproved = "No";
+            }
+            fboResultMainModel.companyName = fboResultMainModel.FBO.Company;
+
+            fboResultMainModel.companyfullAddress = fboResultMainModel.FBO.Company + "<br />" + fboResultMainModel.FBO.City + ", " + fboResultMainModel.FBO.State + " " + fboResultMainModel.FBO.Zip;
+            //Check Expiry
+            fboResultMainModel.fboIsExpired = CheckFboExpired(fboResultMainModel);
+            //Check Review Count
+            fboResultMainModel.reviews_of_ratings = await CheckReviewsCount(companyID);
+            //Get Fuel Averages
+            fboResultMainModel.averageprices = await GetFuelAverages(companyID);
+            //Get Average Fuel Price
+            fboResultMainModel.averageFuelPrice = Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_JETA), 2) + Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_100LL), 2);
+            // Get FBO Count
+            fboResultMainModel.fbo_count = await CountFbo(userID);
+
+            return fboResultMainModel;
+        }
         public async Task<FBOManagement_GetFBO_Result> FboResult(int companyID)
         {
-            FBOManagement_GetFBO_Result fboResult = new FBOManagement_GetFBO_Result();
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -31,40 +64,10 @@ namespace FBO.Services
                 var fbo = _dapper.Get<FBOManagement_GetFBO_Result>("FBOManagement_GetFBO", dynamicParameters, commandType: CommandType.StoredProcedure);
                 if (fbo.CompanyID != 0)
                 {
-                    fboResult.Company = fbo.Company;
-                    fboResult.Phone = fbo.Phone;
-                    fboResult.Email = fbo.Email;
-                    fboResult.FBOLevel = fbo.FBOLevel;
-                    fboResult.FAARepairCode = fbo.FAARepairCode;
-                    fboResult.Address1 = fbo.Address1;
-                    fboResult.City = fbo.City;
-                    fboResult.State = fbo.State;
-                    fboResult.Zip = fbo.Zip;
-                    fboResult.Country = fbo.Country;
-                    fboResult.IsApproved = fbo.IsApproved;
-                    fboResult.LastUpdated = fbo.LastUpdated;
-                    fboResult.FuelJETA = fbo.FuelJETA;
-                    fboResult.FuelJETAPRIST = fbo.FuelJETAPRIST;
-                    fboResult.Fuel100LL = fbo.Fuel100LL;
-                    fboResult.FuelUL94 = fbo.FuelUL94;
-                    fboResult.FuelMOGAS = fbo.FuelMOGAS;
-                    fboResult.FuelSAF = fbo.FuelSAF;
-                    fboResult.FuelSAFPRIST = fbo.FuelSAFPRIST;
-                    fboResult.FuelSSJETA = fbo.FuelSSJETA;
-                    fboResult.FuelSSJETAPRIST = fbo.FuelSSJETAPRIST;
-                    fboResult.FuelSS100LL = fbo.FuelSS100LL;
-                    fboResult.FuelSSUL94 = fbo.FuelSSUL94;
-                    fboResult.FuelSSMOGAS = fbo.FuelSSMOGAS;
-                    fboResult.FuelSSSAF = fbo.FuelSSSAF;
-                    fboResult.FuelSSSAFPRIST = fbo.FuelSSSAFPRIST;
+                    return fbo;
 
                 }
-
-
-
-
-
-                return fboResult;
+                return fbo;
             }
             catch (Exception ex)
             {
@@ -115,14 +118,14 @@ namespace FBO.Services
         }
         public async Task<int> CountFbo(string userID)
         {
-           
-        
+
+
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add("userID", userID);
                 var fboCount = await Task.FromResult(_dapper.GetAll<List<FBOManagement_GetFBO_Result>>("FBOManagement_GetFBOs", dynamicParameters, commandType: CommandType.StoredProcedure));
- 
+
                 return fboCount.Count;
 
             }
@@ -156,13 +159,13 @@ namespace FBO.Services
                 return null;
             }
         }
-        public async Task<List<FBOManagement_GetFBOs_Result>> GetFbos(string userID)
+        public async Task<List<FBOManagement_GetFBOs_Result>> GetFBOs(string userID)
         {
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add("userID", userID);
-                var fbos = await Task.FromResult(_dapper.GetAll <FBOManagement_GetFBOs_Result>("FBOManagement_GetFBOs", dynamicParameters, commandType: CommandType.StoredProcedure));
+                var fbos = await Task.FromResult(_dapper.GetAll<FBOManagement_GetFBOs_Result>("FBOManagement_GetFBOs", dynamicParameters, commandType: CommandType.StoredProcedure));
 
                 return fbos;
             }
@@ -171,6 +174,56 @@ namespace FBO.Services
                 return null;
             }
         }
+        public async Task<FboResultMainModel> GetDates(FboResultMainModel fbo)
+        {
 
+            DateTime dateDefault = System.DateTime.Now;
+            DateTime dateToday = System.DateTime.Now;
+
+            dateDefault = dateToday.AddMonths(-6); //Subtract 6 months from today's date
+
+            if (fbo.startDate == null)
+            {
+                fbo.startDate = dateDefault.ToString("MM/dd/yyyy");
+            }
+            if (fbo.endDate == null)
+            {
+                fbo.endDate = dateToday.ToString("MM/dd/yyyy");
+            }
+            return fbo;
+
+           
+
+        }
+        public async Task<FBOManagement_Stats_Result> GetFBOs_Totals(int CompanyID, String date_start, String date_end)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", CompanyID);
+                dynamicParameters.Add("startdate", date_start);
+                dynamicParameters.Add("enddate", date_end);
+                var fbos = await Task.FromResult(_dapper.Get<FBOManagement_Stats_Result>("FBOManagement_Stats", dynamicParameters, commandType: CommandType.StoredProcedure));
+
+                return fbos;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public  void UpdateLastUpdated(int CompanyID,string fuel)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", CompanyID);
+                _dapper.Execute("FBOManagement_LastUpdated", dynamicParameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ using FBO.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace FBO.Services
     {
         private static Dapperr _dapper;
         private static GeneralService _generalService;
+        public String fuel_status = "";
         public FboMainService(Dapperr dapper, GeneralService generalService)
         {
             _dapper = dapper;
@@ -21,52 +24,34 @@ namespace FBO.Services
         public async Task<FboResultMainModel> CheckQuery(int companyID, string userID, string fuel)
         {
             FboResultMainModel fboResultMainModel = new FboResultMainModel();
+            fboResultMainModel= await _generalService.GetDates(fboResultMainModel);
+            fboResultMainModel.fboStats = await _generalService.GetFBOs_Totals(companyID, fboResultMainModel.startDate, fboResultMainModel.endDate);
+            if (fuel != null && fuel.ToString() != "")
+            {
+                fuel_status = fuel.ToString();
+            fuel_status = fuel_status.ToLower().Trim();
+            if (fuel_status == "current")
+            {
+                _generalService.UpdateLastUpdated(companyID, fuel);
+            }
+            }
             if (companyID != 0 && companyID.ToString() != "")
             {
 
-                fboResultMainModel = await getFBO(companyID, userID);
+                fboResultMainModel = await _generalService.GetFBO(companyID, userID,fboResultMainModel);
                 return fboResultMainModel;
             }
             else
             {
-                fboResultMainModel.FBOs = await _generalService.GetFbos(userID);
+                fboResultMainModel.FBOs = await _generalService.GetFBOs(userID);
                 return fboResultMainModel;
             }
 
 
         }
 
-            //}
-            public async Task<FboResultMainModel> getFBO(int companyID,string userID)
-        {
-            FboResultMainModel fboResultMainModel = new FboResultMainModel();
-            //Fbo Result
-            fboResultMainModel.FBO = await _generalService.FboResult(companyID);
-            //Fbo Result formatting
-            fboResultMainModel.FBO.Email = "<a href=\"mailto:" + fboResultMainModel.FBO.Email + "\">" + fboResultMainModel.FBO.Email + "</a>";
-            fboResultMainModel.FBO.FAARepairCode = "<a href=\"/airport/apt.airport.aspx?aptcode=" + fboResultMainModel.FBO.FAARepairCode + "\" target=\"_blank\" rel=\"noreferrer\">" + fboResultMainModel.FBO.FAARepairCode + "</a>";
-            if (fboResultMainModel.FBO.IsApproved == true)
-            {
-                fboResultMainModel.fboIsApproved = "Yes";
-            }
-            else if (fboResultMainModel.FBO.IsApproved == false)
-            {
-                fboResultMainModel.fboIsApproved = "No";
-            }
-            fboResultMainModel.companyName = fboResultMainModel.FBO.Company + " " + "(" + fboResultMainModel.FBO.FAARepairCode + ")";
 
-            fboResultMainModel.companyfullAddress = fboResultMainModel.FBO.Company + "<br />" + fboResultMainModel.FBO.City + ", " + fboResultMainModel.FBO.State + " " + fboResultMainModel.FBO.Zip;
-            //Check Expiry
-            fboResultMainModel.fboIsExpired = _generalService.CheckFboExpired(fboResultMainModel);
-            //Check Review Count
-            fboResultMainModel.reviews_of_ratings =await _generalService.CheckReviewsCount(companyID);
-            //Get Fuel Averages
-            fboResultMainModel.averageprices = await _generalService.GetFuelAverages(companyID);
-            //Get Average Fuel Price
-            fboResultMainModel.averageFuelPrice = Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_JETA), 2) + Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_100LL), 2);
-            // Get FBO Count
-            fboResultMainModel.fbo_count = await _generalService.CountFbo(userID);
-            return fboResultMainModel;
-        }
+
+
     }
 }

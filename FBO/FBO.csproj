@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <Reference Include="GlobalAir.Data">
-      <HintPath>..\..\Shahan\GlobalAir\Global_Air\Main\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 

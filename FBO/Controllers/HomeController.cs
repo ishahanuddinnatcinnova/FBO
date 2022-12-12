@@ -35,10 +35,11 @@ namespace FBO.Controllers
             LoginViewModel vm = _utility.CheckLogin(this.Request);
 
             var fbo = await _fboMainService.CheckQuery(companyID,vm.userID,fuel);
+
             if(vm.isUser)
             {
 
-                return View(vm);
+                return View(fbo);
             }
             else
             {
