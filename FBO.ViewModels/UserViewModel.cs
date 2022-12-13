@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FBO.ViewModels
 {
-    public class LoginViewModel
+    public class UserViewModel
     {
         public string userID { get; set; }
         public string userFirstname { get; set; }

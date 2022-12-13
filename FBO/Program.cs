@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<Dapperr, Dapperr>();
 builder.Services.AddScoped<UtilitiesService, UtilitiesService>();
-builder.Services.AddScoped<FboMainService, FboMainService>();
+builder.Services.AddScoped<FBOMainService, FBOMainService>();
 builder.Services.AddScoped<GeneralService, GeneralService>();
 var app = builder.Build();
 

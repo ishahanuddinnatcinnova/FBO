@@ -22,9 +22,9 @@ namespace FBO.Services
             _dapper = dapper;
         }
         
-        public LoginViewModel CheckLogin(HttpRequest Request)
+        public UserViewModel CheckLogin(HttpRequest Request)
         {
-            LoginViewModel loginViewModel = new LoginViewModel();
+            UserViewModel loginViewModel = new UserViewModel();
 
             loginViewModel.isUser = false;
             loginViewModel.userID = "";
@@ -47,7 +47,7 @@ namespace FBO.Services
                         DynamicParameters dynamicParameters = new DynamicParameters();
                         dynamicParameters.Add("userID", loginViewModel.userID);
                         var user = _dapper.Get<FBOManagement_GetUser_Result>("FBOManagement_GetUser", dynamicParameters, commandType: CommandType.StoredProcedure);
-                        if ((user.Username != "") && (user.Password != ""))
+                        if ((user != null) && (user.Username != "") && (user.Password != ""))
                         {
                             loginViewModel.isUser = true;
                             loginViewModel.companyID = user.CompanyID;

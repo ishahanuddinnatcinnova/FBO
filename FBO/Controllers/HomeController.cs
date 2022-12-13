@@ -10,9 +10,9 @@ namespace FBO.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UtilitiesService _utility;
-        private readonly FboMainService _fboMainService;
+        private readonly FBOMainService _fboMainService;
 
-        public HomeController(ILogger<HomeController> logger, UtilitiesService utility, FboMainService fboMainService)
+        public HomeController(ILogger<HomeController> logger, UtilitiesService utility, FBOMainService fboMainService)
         {
             _logger = logger;
             _utility = utility;
@@ -29,21 +29,16 @@ namespace FBO.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CompanyManage(int companyID, string fuel)
+        public async Task<IActionResult> CompanyManage(string companyID, string fuel)
         {
-            
-            LoginViewModel vm = _utility.CheckLogin(this.Request);
-
-            var fbo = await _fboMainService.CheckQuery(companyID,vm.userID,fuel);
-
-            if(vm.isUser)
+            ServiceResponseViewModel response = await _fboMainService.GetResponse(this.Request, companyID, fuel);
+            if(response.isRedirect)
             {
-
-                return View(fbo);
+                return Redirect(response.redirectURL);
             }
             else
             {
-                return Redirect("/myflightdept/account.aspx");
+                return View(response.data);
             }
         }
 

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\images\fish.svg" />
     <None Include="wwwroot\images\jklatt_vid.swf" />
     <None Include="wwwroot\images\jklatt_vid2.swf" />
@@ -30,7 +31,7 @@
 
   <ItemGroup>
     <Reference Include="GlobalAir.Data">
-      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+      <HintPath>..\..\Shahan\GlobalAir\Global_Air\Main\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 
