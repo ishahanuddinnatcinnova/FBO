@@ -84,38 +84,156 @@ namespace FBO.Services
                 return response;
             }
         }
+        public async Task<ServiceResponseViewModel> GetResponseForServices(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                FBOManagement_UpdateBasicServices_Result basic = new FBOManagement_UpdateBasicServices_Result();
+                FBOManagement_UpdateExtendedServices_Result extended = new FBOManagement_UpdateExtendedServices_Result();
 
-        //public async Task<FBOResult> CheckQuery(int companyID, string userID, string fuel)
-        //{
-        //    FBOResult fboResultMainModel = new FBOResult();
-        //    fboResultMainModel= await _generalService.GetDates(fboResultMainModel);
-        //    fboResultMainModel.fboStats = await _generalService.GetFBOs_Totals(companyID, fboResultMainModel.startDate, fboResultMainModel.endDate);
-        //    if (fuel != null && fuel.ToString() != "")
-        //    {
-        //        fuel_status = fuel.ToString();
-        //    fuel_status = fuel_status.ToLower().Trim();
-        //    if (fuel_status == "current")
-        //    {
-        //        _generalService.UpdateLastUpdated(companyID, fuel);
-        //    }
-        //    }
-        //    if (companyID != 0 && companyID.ToString() != "")
-        //    {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
 
-        //        fboResultMainModel = await _generalService.GetFBO(companyID, userID,fboResultMainModel);
-        //        return fboResultMainModel;
-        //    }
-        //    else
-        //    {
-        //        //fboResultMainModel.FBOs = await _generalService.GetFBOs(userID);
-        //        return fboResultMainModel;
-        //    }
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+                        FBOResult res = await _generalService.GetFBO(companyID);
+
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
+        public async Task<ServiceResponseViewModel> GetResponseForFuelCardsSelected(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
+
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+                        FBOResult res = await _generalService.GetFBO(companyID);
+                        FuelCardDiscountsModel fuelcards = await _generalService.GetFuelCards(companyID);
+
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                            response.data.fuelcards = fuelcards;
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
+        public async Task<string> PostBasicServicesUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
+        {
+            string response = "";
+            try
+            {
+                if (updatebasic.companyID != null && updatebasic.companyID != "")
+                {
+                    response = await _generalService.SaveButtonBasicService(updatebasic);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
 
 
-        //}
+        }
+        public async Task<string> PostExtendedServicesUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
+        {
+            string response = "";
+            try
+            {
+                if (updateextended.companyID != null && updateextended.companyID != "")
+                {
+                    response = await _generalService.SaveButtonExtendedService(updateextended);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
 
 
+        }
+        public async Task<string> PostFuelCardUpdate(FuelCardDiscountsModel fuel)
+        {
+            string response = "";
+            try
+            {
+                if (fuel.companyID != null && fuel.companyID != "")
+                {
+                    response = await _generalService.BtnFuelCardSaveClick(fuel);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
 
 
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using FBO.Models;
 using FBO.Services;
 using FBO.ViewModels;
+using GlobalAir.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 
 namespace FBO.Controllers
@@ -41,8 +43,78 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
+        public async Task<IActionResult> BasicAndExtended(string companyID, string fuel)
+        {
+            
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForServices(this.Request, companyID, fuel);
+            if (response.isRedirect)
+            {
+                return Redirect(response.redirectURL);
+            }
+            else
+            {
+                return View(response.data);
+            }
+        }
+        public async Task<IActionResult> fuelcards(string companyID, string fuel)
+        {
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelCardsSelected(this.Request, companyID, fuel);
+            if (response.isRedirect)
+            {
+                return Redirect(response.redirectURL);
+            }
+            else
+            {
+                return View(response.data);
+            }
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
+        {
 
+            string response = await _fboMainService.PostBasicServicesUpdate(updatebasic);
+            if(response== "Success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("BasicAndExtended", new {companyID = updatebasic.companyID });
+        }     
+        public async Task<IActionResult> ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
+        {
+
+            string response = await _fboMainService.PostExtendedServicesUpdate(updateextended);
+            if(response== "Success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            
+            return RedirectToAction("BasicAndExtended", new {companyID = updateextended.companyID });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FuelCardUpdate(FuelCardDiscountsModel fuel)
+        {
+
+            string response = await _fboMainService.PostFuelCardUpdate(fuel);
+            if (response == "success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("fuelcards", new { companyID = fuel.companyID });
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

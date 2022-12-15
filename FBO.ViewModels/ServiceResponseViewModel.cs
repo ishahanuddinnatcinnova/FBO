@@ -13,6 +13,8 @@ namespace FBO.ViewModels
         public string redirectURL { get; set; }
 
         public ResponseDataViewModel data = new ResponseDataViewModel();
+        
+
 
     }
 
@@ -20,5 +22,8 @@ namespace FBO.ViewModels
     {
         public List<FBOManagement_GetFBOs_Result> FBOs { get; set; }
         public FBOResult FBO { get; set; }
+        public FuelCardDiscountsModel fuelcards { get; set; }
+
+        public FBOManagement_UpdateBasicServices_Result basic = new FBOManagement_UpdateBasicServices_Result();
     }
 }

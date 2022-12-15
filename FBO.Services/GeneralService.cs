@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
 namespace FBO.Services
 {
@@ -44,7 +45,6 @@ namespace FBO.Services
             //Fbo Result
             fboResultMainModel.FBO = await FboResult(Convert.ToInt16(companyID));
             //Fbo Result formatting
-            //fboResultMainModel.FBO.FAARepairCode = "<a href=\"/airport/apt.airport.aspx?aptcode=" + fboResultMainModel.FBO.FAARepairCode + "\" target=\"_blank\" rel=\"noreferrer\">" + fboResultMainModel.FBO.FAARepairCode + "</a>";
             if (fboResultMainModel.FBO.IsApproved == true)
             {
                 fboResultMainModel.fboIsApproved = "Yes";
@@ -69,6 +69,7 @@ namespace FBO.Services
 
             return fboResultMainModel;
         }
+
         public async Task<FBOManagement_GetFBO_Result> FboResult(int companyID)
         {
             try
@@ -94,7 +95,7 @@ namespace FBO.Services
         }
         public bool CheckFboExpired(FBOResult fbo)
         {
-            //  FboResultMainModel fbo = new FboResultMainModel();
+            // FboResultMainModel fbo = new FboResultMainModel();
             DateTime lastUpdated;
 
             lastUpdated = Convert.ToDateTime(fbo.FBO.LastUpdated);
@@ -127,7 +128,7 @@ namespace FBO.Services
                 return 0;
             }
         }
-   
+
 
         public async Task<FBOManagement_GetRegionAverages_Result> GetFuelAverages(int companyID)
         {
@@ -188,7 +189,7 @@ namespace FBO.Services
                 return null;
             }
         }
-        public  void UpdateLastUpdated(int CompanyID,string fuel)
+        public void UpdateLastUpdated(int CompanyID, string fuel)
         {
             try
             {
@@ -201,5 +202,237 @@ namespace FBO.Services
 
             }
         }
+        public async Task<string> SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
+        {
+            int companyID = 0;
+            companyID = Convert.ToInt32(basic.companyID);
+
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", basic.companyID);
+                dynamicParameters.Add("IsCatering", basic.checkboxCatering ? 1 : 0);
+                dynamicParameters.Add("IsHotel", basic.checkboxHotel ? 1 : 0);
+                dynamicParameters.Add("IsCourtesy", basic.checkboxCourtesy ? 1 : 0);
+                dynamicParameters.Add("Isweather", basic.checkboxWeather ? 1 : 0);
+                dynamicParameters.Add("IsRepairs", basic.checkboxRepairs ? 1 : 0);
+                dynamicParameters.Add("IsRentalCars", basic.checkboxRentalCars ? 1 : 0);
+                _dapper.Execute("FBOManagement_UpdateBasicServices", dynamicParameters, commandType: CommandType.StoredProcedure);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+
+        }
+        public async Task<string> SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
+        {
+            int companyID = 0;
+            companyID = Convert.ToInt32(extended.companyID);
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("IsPilotLounge", extended.checkboxPilotLounge ? 1 : 0);
+                dynamicParameters.Add("IsBroadBand", extended.checkboxBroadBand);
+                dynamicParameters.Add("IsParking", extended.checkboxParking ? 1 : 0);
+                dynamicParameters.Add("IsRestaurant", extended.checkboxRestaurant ? 1 : 0);
+                dynamicParameters.Add("IsInternetAccess", extended.checkboxInternetAccess ? 1 : 0);
+                dynamicParameters.Add("IsRestrooms", extended.checkboxRestrooms ? 1 : 0);
+                dynamicParameters.Add("IsShowers", extended.checkboxShowers ? 1 : 0);
+                dynamicParameters.Add("IsCrewCars", extended.checkboxCrewCars ? 1 : 0);
+                dynamicParameters.Add("IsPublicTelephone", extended.checkboxPublicTelephone ? 1 : 0);
+                dynamicParameters.Add("IsAircraftDetailing", extended.checkboxAircraftDetailing ? 1 : 0);
+                dynamicParameters.Add("IsAircraftParts", extended.checkboxAircraftParts ? 1 : 0);
+                dynamicParameters.Add("IsFlyingClub", extended.checkboxFlyingClub ? 1 : 0);
+                dynamicParameters.Add("IsAircraftMods", extended.checkboxAircraftMods ? 1 : 0);
+                dynamicParameters.Add("IsAircraftPainting", extended.checkboxAircraftPainting ? 1 : 0);
+                dynamicParameters.Add("IsAircraftInterior", extended.checkboxAircraftInterior ? 1 : 0);
+                dynamicParameters.Add("IsAirframeMain", extended.checkboxAirMaintenance ? 1 : 0);
+                dynamicParameters.Add("IsPowerplantMain", extended.checkboxPowMaintenance ? 1 : 0);
+                dynamicParameters.Add("IsAvionics", extended.checkboxAvionicsService ? 1 : 0);
+                dynamicParameters.Add("IsPassTerminal", extended.checkboxPassengerTerminal ? 1 : 0);
+                dynamicParameters.Add("IsAircraftRental", extended.checkboxAircraftRental ? 1 : 0);
+                dynamicParameters.Add("IsCharters", extended.checkboxCharters ? 1 : 0);
+                dynamicParameters.Add("IsOxygen", extended.checkboxOxygen ? 1 : 0);
+                dynamicParameters.Add("IsHangars", extended.checkboxHangars ? 1 : 0);
+                dynamicParameters.Add("IsTiedown", extended.checkboxTieDowns ? 1 : 0);
+                dynamicParameters.Add("IsFlightInstr", extended.checkboxFlightInstruction ? 1 : 0);
+                dynamicParameters.Add("IsLavService", extended.checkboxLavService ? 1 : 0);
+                dynamicParameters.Add("IsQuickTurn", extended.checkboxQuickTurn ? 1 : 0);
+                dynamicParameters.Add("IsDeicing", extended.checkboxDeIcing ? 1 : 0);
+                dynamicParameters.Add("IsSnoozeRoom", extended.checkboxSnoozeRoom ? 1 : 0);
+                dynamicParameters.Add("IsTelevision", extended.checkboxTelevision ? 1 : 0);
+                dynamicParameters.Add("IsConferenceRoom", extended.checkboxConference ? 1 : 0);
+                dynamicParameters.Add("IsVending", extended.checkboxVending ? 1 : 0);
+                dynamicParameters.Add("IsFlightPlanning", extended.checkboxFlightPlanning ? 1 : 0);
+                dynamicParameters.Add("IsBusinessCenter", extended.checkboxBusinessCenter ? 1 : 0);
+                dynamicParameters.Add("IsFitnessCenter", extended.checkboxFitnessCenter ? 1 : 0);
+                _dapper.Execute("FBOManagement_UpdateExtServices", dynamicParameters, commandType: CommandType.StoredProcedure);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+
+            }
+        }
+
+        public async Task<FuelCardDiscountsModel> GetFuelCards(string companyID)
+        {
+            FuelCardDiscountsModel fueldis = new FuelCardDiscountsModel();
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                var discountId = await Task.FromResult(_dapper.GetAll<string>("services_FuelDiscountServices_GetServices", dynamicParameters, commandType: CommandType.StoredProcedure));
+                foreach (String logoID in discountId)
+                {
+
+                    if (logoID == "12")
+                        fueldis.chkFuelCard12 = true;
+
+                    else if (logoID == "44")
+                        fueldis.chkFuelCard44 = true;
+
+                    else if (logoID == "57")
+                        fueldis.chkFuelCard57 = true;
+
+                    else if (logoID == "61")
+                        fueldis.chkFuelCard61 = true;
+
+                    else if (logoID == "62")
+                        fueldis.chkFuelCard62 = true;
+
+                    else if (logoID == "63")
+                        fueldis.chkFuelCard63 = true;
+
+                    else if (logoID == "64")
+                        fueldis.chkFuelCard64 = true;
+
+                    else if (logoID == "65")
+                        fueldis.chkFuelCard65 = true;
+
+                    else if (logoID == "66")
+                        fueldis.chkFuelCard66 = true;
+                    else if (logoID == "68")
+                        fueldis.chkFuelCard68 = true;
+
+                    else if (logoID == "69")
+                        fueldis.chkFuelCard69 = true;
+
+                    else if (logoID == "70")
+                        fueldis.chkFuelCard70 = true;
+
+                    else if (logoID == "71")
+                        fueldis.chkFuelCard71 = true;
+                }
+                return fueldis;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<string> BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
+        {
+            var response=new List<string>();
+            try
+            {
+
+                response.Add(await ClearFuelCards(fueldis.companyID));
+            if (fueldis.chkFuelCard12 == true)
+                    response.Add(await  AddFuelCard(fueldis.companyID, 12));
+
+            if (fueldis.chkFuelCard44 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 44));
+
+            if (fueldis.chkFuelCard57 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 57));
+
+            if (fueldis.chkFuelCard61 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 61));
+
+            if (fueldis.chkFuelCard62 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 62));
+
+            if (fueldis.chkFuelCard63 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 63));
+
+            if (fueldis.chkFuelCard64 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 64));
+
+            if (fueldis.chkFuelCard65 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 65));
+
+            if (fueldis.chkFuelCard66 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 66));
+
+            if (fueldis.chkFuelCard68 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 68));
+
+            if (fueldis.chkFuelCard69 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 69));
+
+            if (fueldis.chkFuelCard70 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 70));
+
+            if (fueldis.chkFuelCard71 == true)
+                    response.Add(await AddFuelCard(fueldis.companyID, 71));
+
+            foreach(string res in response)
+                {
+                    if(res== "success")
+                    {
+                        return ("success");
+                    }
+                    else
+                    {
+                        return ("failed");
+                    }
+                }
+                return ("success");
+            }
+          catch
+            {
+                return "failed";
+            }
+        }
+        public async Task<string> ClearFuelCards(string companyID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                _dapper.Execute("services_FuelCards_Clear", dynamicParameters, commandType: CommandType.StoredProcedure);
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+        }
+        public async Task<string> AddFuelCard(string companyID, int discountid)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("DiscountID", discountid);
+                dynamicParameters.Add("CompanyID", companyID);
+                _dapper.Execute("services_FuelCards_Add", dynamicParameters, commandType: CommandType.StoredProcedure);
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+        }
+
+
     }
 }
