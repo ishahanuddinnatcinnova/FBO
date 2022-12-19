@@ -72,7 +72,7 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        [Route("fuelprices.aspx")]
+        [Route("fuel.aspx")]
         public async Task<IActionResult> Fuel (string companyID, string fuel)
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelPrice(this.Request, companyID, fuel);
@@ -85,7 +85,7 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-
+     
         [HttpPost]
         public async Task<IActionResult> BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
