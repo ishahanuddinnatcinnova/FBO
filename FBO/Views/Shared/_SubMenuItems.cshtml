@@ -1,0 +1,57 @@
+﻿@model FBO.ViewModels.FBOResult
+
+<div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
+    <div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
+        <span class="text-center mt-3" style="font-size: 1.1rem; color: white">
+            <b>
+                Add or Edit Services
+            </b>
+        </span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
+            @if(Model.isUpgradeEligible)
+            {
+                <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
+            }
+            <a href="/register" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                Edit Account Information
+            </a> 
+            <a href="/myflightdept/account.aspx" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                My Flight Department Services
+            </a>
+            <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                FBO Information
+            </a>
+            @if (Model.FBO.FBOLevel == "Platinum" || Model.FBO.FBOLevel == "Gold")
+            {
+                <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    FBO Photos
+                </a>
+            }
+            <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                Update Fuel Prices
+            </a> 
+            <a href="/airport/fboratings.aspx?companyid=156" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                Ratings and Reviews
+            </a> 
+            @if (Model.FBO.FBOLevel != "Basic")
+            {
+                <a href="/fbo/extended.aspx?companyID=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    Extended & Basic Services
+                </a>
+                <a href="/fbo/fuelcards.aspx?companyID=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    Fuel Cards
+                </a> 
+                <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    Logo Services
+                </a> 
+            }
+            @if (Model.FBO.FBOLevel == "Platinum")
+            {
+                <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    Custom Services
+                </a>
+            }
+        </div>
+    </div>
+</div>

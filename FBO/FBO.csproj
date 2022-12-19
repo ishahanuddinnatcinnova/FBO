@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GlobalAir.Data" Version="2022.12.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.11" />
   </ItemGroup>
 
@@ -30,9 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="GlobalAir.Data">
-      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
-    </Reference>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

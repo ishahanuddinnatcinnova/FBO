@@ -363,16 +363,16 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Folders
-ARC/bin/
-ARC/obj/
-ARC.Services/bin/
-ARC.Services/obj/
-ARC.Dapper/bin/
-ARC.Dapper/obj/
-ARC.ViewModels/bin/
-ARC.ViewModels/obj/
-ARC.Services/obj/Debug/net5.0/ARC.Services.assets.cache
-ARC/ARC.csproj.user
-ARC/Properties/PublishProfiles/FolderProfile.pubxml.user
-ARC/Properties/PublishProfiles/FolderProfile.pubxml.user
-ARC/Properties/PublishProfiles/FolderProfile.pubxml.user
+FBO/bin/
+FBO/obj/
+FBO.Services/bin/
+FBO.Services/obj/
+FBO.Dapper/bin/
+FBO.Dapper/obj/
+FBO.ViewModels/bin/
+FBO.ViewModels/obj/
+FBO.Services/obj/Debug/net5.0/FBO.Services.assets.cache
+FBO/FBO.csproj.user
+FBO/Properties/PublishProfiles/FolderProfile.pubxml.user
+FBO/Properties/PublishProfiles/FolderProfile.pubxml.user
+FBO/Properties/PublishProfiles/FolderProfile.pubxml.user

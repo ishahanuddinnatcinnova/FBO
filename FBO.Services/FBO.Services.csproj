@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="GlobalAir.Data" Version="2022.12.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
@@ -15,12 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FBO.Dapper\FBO.Dapper.csproj" />
     <ProjectReference Include="..\FBO.ViewModels\FBO.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="GlobalAir.Data">
-      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

@@ -72,6 +72,7 @@
         #region a {
             color: rgb(71, 130, 211);
         }
+
     .card {
         background-color: #fff;
         border-radius: 10px;
@@ -168,48 +169,19 @@
         <div class="row ms-2 mt-4">
             <hr>
             <div class="row">
-                <div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
-                    <div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
-                        <span class="text-center mt-3" style="font-size: 1.1rem; color: white">
-                            <b>
-                                Add or Edit Services
-                            </b>
-                        </span>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-                        <div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
-                            <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Edit Account Information
-                            </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                My Flight Department Services
-                            </a> <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                FBO Information
-                            </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                FBO Photos
-                            </a> <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Update Fuel Prices
-                            </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Ratings and Reviews
-                            </a> <a href="extented.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Extended & Basic Services
-                            </a> <a href="fuelcards.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Fuel Cards
-                            </a> <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Logo Services
-                            </a> <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                                Custom Services
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <partial name="_SubMenuItems" model="@Model.FBO" />
                 <div class="col-md-9 col-12">
                     <div class="row ms-1">
                         <div class="card float-right">
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt=" " style=" display: block;
-                        margin-left: auto;
-                        margin-right: auto;">
-                                    <div class="card card-animation l-bg-green-dark">
+                                    @if (Model.FBO.FBO.FBOLevel != "Basic")
+                                    {
+                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company" style="display: block;
+                                                                                                                                                                        margin-left: auto;
+                                                                                                                                                                        margin-right: auto;">
+                                    }
+                                    <div class="card card-animation l-bg-green-dark mt-4">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"></div>
                                             <div class="mb-4">
@@ -255,7 +227,14 @@
                             </div>
                         </div>
                     </div>
-
+                    @if (Model.FBO.isUpgradeEligible)
+                    {
+                        <div class="row text-center mb-3">
+                            <div class="col">
+                                <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="/images/FBOupgradeAd.gif" title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px;" /></a>
+                            </div>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-12">
                             <div class="card p-4">
@@ -270,7 +249,7 @@
                                         <div class="card-block">
                                             @if (!Model.FBO.fboIsExpired)
                                             {
-                                                <a class="btn btn-lg btn-success btn-success-custom" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>>Review your fuel prices here</a>
+                                                <a class="btn btn-lg btn-success btn-success-custom" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>Review your fuel prices here</a>
                                             }
                                             else
                                             {
@@ -287,8 +266,8 @@
                             <h3>Your Statistics:</h3>
                         </div>
                         <div class="col-9 text-end">
-                            <b>Start Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value=@Model.FBO.startDate>
-                            <b>End Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value=@Model.FBO.endDate>
+                            <b>Start Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
+                            <b>End Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
                             <a href="#" class="btn btn-success btn-success-custom">Search Stats</a>
                         </div>
                     </div>
@@ -296,7 +275,7 @@
                         <div class="col-xl-4 col-lg-4">
                             <div class="card card-animation l-bg-light">
                                 <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="click.png" /></div>
+                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
                                     <div class="mb-4">
                                         <h5 class="card-title mb-0">Airport Page <br>Views</h5>
                                     </div>
@@ -313,7 +292,7 @@
                         <div class="col-xl-4 col-lg-4">
                             <div class="card card-animation l-bg-light">
                                 <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="click.png" /></div>
+                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
                                     <div class="mb-4">
                                         <h5 class="card-title mb-0">FBO Page <br>Views</h5>
                                     </div>
@@ -330,7 +309,7 @@
                         <div class="col-xl-4 col-lg-4">
                             <div class="card card-animation l-bg-light">
                                 <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="click.png" /></div>
+                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
                                     <div class="mb-4">
                                         <h5 class="card-title mb-0">Contact Now <br>Clickthroughs</h5>
                                     </div>
@@ -357,38 +336,59 @@
                                     <div class="row">
                                         <h4>
                                             <a href="#" class="text-decoration-none">
-                                                Central Region
+                                                @Model.FBO.averageprices.RegionName
                                                 Average Fuel Prices:
                                             </a>
                                         </h4>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="card card-animation l-bg-light">
                                                 <div class="card-statistic-3 p-4">
-                                                    <div class="card-icon card-icon-large"><img src="dollar.png" /></div>
                                                     <div class="mb-4">
                                                         <h5 class="card-title mb-0">JetA</h5>
                                                     </div>
                                                     <div class="row align-items-center mb-2 d-flex">
                                                         <div class="col-8">
                                                             <h2 class="d-flex align-items-center mb-0">
-                                                                $@Model.FBO.averageprices.Average_JETA
+                                                                $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_JETA), 2)
                                                             </h2>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="card card-animation l-bg-light">
                                                 <div class="card-statistic-3 p-4">
-                                                    <div class="card-icon card-icon-large"><img src="dollar.png" /></div>
                                                     <div class="mb-4">
                                                         <h5 class="card-title mb-0">100LL</h5>
                                                     </div>
                                                     <div class="row align-items-center mb-2 d-flex">
                                                         <div class="col-8">
                                                             <h2 class="d-flex align-items-center mb-0">
-                                                                $@Model.FBO.averageprices.Average_100LL
+                                                                $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_100LL), 2)
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card card-animation l-bg-light">
+                                                <div class="card-statistic-3 p-4">
+                                                    <div class="mb-4">
+                                                        <h5 class="card-title mb-0">SAF</h5>
+                                                    </div>
+                                                    <div class="row align-items-center mb-2 d-flex">
+                                                        <div class="col-8">
+                                                            <h2 class="d-flex align-items-center mb-0">
+                                                                @if (Model.FBO.averageprices.Average_SAF > 0)
+                                                                {
+                                                                    <span>$@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_SAF), 2)</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span>N/A</span>
+                                                                }
                                                             </h2>
                                                         </div>
                                                     </div>
@@ -412,7 +412,7 @@
                                             <a href="#" class="text-decoration-none text-black">
                                                 <div class="card card-animation l-bg-light">
                                                     <div class="card-statistic-3 p-4">
-                                                        <div class="card-icon card-icon-large"><img src="star.png" /></div>
+                                                        <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
                                                         <div class="mb-4">
                                                             <h5 class="card-title mb-0">Ratings</h5>
                                                         </div>
@@ -432,7 +432,7 @@
 
                                                 <div class="card card-animation l-bg-light">
                                                     <div class="card-statistic-3 p-4">
-                                                        <div class="card-icon card-icon-large"><img src="star.png" /></div>
+                                                        <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
                                                         <div class="mb-4">
                                                             <h5 class="card-title mb-0">Reviews</h5>
                                                         </div>
@@ -470,13 +470,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="alert alert-primary">
-                        <p>Your account has @Model.FBOs.Count FBO locations on GlobalAir.com. Select one of your FBOs from the list below to update the fuel prices or other information at that location.</p>
+                        <p class="lead">Your account has <b>@Model.FBOs.Count</b> FBO locations on GlobalAir.com. Select one of your FBOs from the list below to update the fuel prices or other information at that location.</p>
                     </div>
                     <div class="list-group">
-                        @foreach(var item in Model.FBOs)
-                        {
-                            <a href="/fbo/companymanage.aspx?companyid=@item.CompanyID" class="list-group-item list-group-item-action">@item.CompanyName (@item.APTCode)</a>
-                        }
+                        <div class="row">
+                            @foreach (var item in Model.FBOs)
+                            {
+                                <div class="col-4 p-1">
+                                    <a href="/fbo/companymanage.aspx?companyid=@item.CompanyID" class="card-animation list-group-item list-group-item-action list-group-item-secondary lead"><b>@item.CompanyName (@item.APTCode)</b></a>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

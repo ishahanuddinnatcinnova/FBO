@@ -1,7 +1,6 @@
 ﻿using FBO.Models;
 using FBO.Services;
 using FBO.ViewModels;
-using GlobalAir.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -31,6 +30,7 @@ namespace FBO.Controllers
             return View();
         }
 
+        [Route("companymanage.aspx")]
         public async Task<IActionResult> CompanyManage(string companyID, string fuel)
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponse(this.Request, companyID, fuel);
@@ -43,6 +43,8 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
+
+        [Route("extended.aspx")]
         public async Task<IActionResult> BasicAndExtended(string companyID, string fuel)
         {
             
@@ -56,7 +58,9 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        public async Task<IActionResult> fuelcards(string companyID, string fuel)
+        
+        [Route("fuelcards.aspx")]
+        public async Task<IActionResult> FuelCards(string companyID, string fuel)
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelCardsSelected(this.Request, companyID, fuel);
             if (response.isRedirect)

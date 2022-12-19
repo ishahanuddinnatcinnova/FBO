@@ -67,6 +67,7 @@ namespace FBO.Services
             await GetDates(fboResultMainModel);
             fboResultMainModel.fboStats = await GetFBOs_Totals(Convert.ToInt16(companyID), fboResultMainModel.startDate, fboResultMainModel.endDate);
 
+            fboResultMainModel.isUpgradeEligible = await CheckUpgradeEligibleAsync(companyID);
             return fboResultMainModel;
         }
 
@@ -130,14 +131,14 @@ namespace FBO.Services
         }
 
 
-        public async Task<FBOManagement_GetRegionAverages_Result> GetFuelAverages(int companyID)
+        public async Task<FBOAverageFuelPrices> GetFuelAverages(int companyID)
         {
-            FBOManagement_GetRegionAverages_Result fuelaverages = new FBOManagement_GetRegionAverages_Result();
+            FBOAverageFuelPrices fuelaverages = new FBOAverageFuelPrices();
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add("companyID", companyID);
-                var fuelavg = await Task.FromResult(_dapper.Get<FBOManagement_GetRegionAverages_Result>("FBOManagement_GetRegionAverages", dynamicParameters, commandType: CommandType.StoredProcedure));
+                var fuelavg = await Task.FromResult(_dapper.Get<FBOAverageFuelPrices>("FBOManagement_GetRegionAverages", dynamicParameters, commandType: CommandType.StoredProcedure));
                 if (fuelavg.CompanyID != 0)
                 {
                     fuelaverages.Average_JETA = fuelavg.Average_JETA;
@@ -339,53 +340,53 @@ namespace FBO.Services
 
         public async Task<string> BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
         {
-            var response=new List<string>();
+            var response = new List<string>();
             try
             {
 
-                response.Add(await ClearFuelCards(fueldis.companyID));
-            if (fueldis.chkFuelCard12 == true)
-                    response.Add(await  AddFuelCard(fueldis.companyID, 12));
+                response.Add(ClearFuelCards(fueldis.companyID));
+                if (fueldis.chkFuelCard12 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 12));
 
-            if (fueldis.chkFuelCard44 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 44));
+                if (fueldis.chkFuelCard44 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 44));
 
-            if (fueldis.chkFuelCard57 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 57));
+                if (fueldis.chkFuelCard57 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 57));
 
-            if (fueldis.chkFuelCard61 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 61));
+                if (fueldis.chkFuelCard61 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 61));
 
-            if (fueldis.chkFuelCard62 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 62));
+                if (fueldis.chkFuelCard62 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 62));
 
-            if (fueldis.chkFuelCard63 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 63));
+                if (fueldis.chkFuelCard63 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 63));
 
-            if (fueldis.chkFuelCard64 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 64));
+                if (fueldis.chkFuelCard64 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 64));
 
-            if (fueldis.chkFuelCard65 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 65));
+                if (fueldis.chkFuelCard65 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 65));
 
-            if (fueldis.chkFuelCard66 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 66));
+                if (fueldis.chkFuelCard66 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 66));
 
-            if (fueldis.chkFuelCard68 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 68));
+                if (fueldis.chkFuelCard68 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 68));
 
-            if (fueldis.chkFuelCard69 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 69));
+                if (fueldis.chkFuelCard69 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 69));
 
-            if (fueldis.chkFuelCard70 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 70));
+                if (fueldis.chkFuelCard70 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 70));
 
-            if (fueldis.chkFuelCard71 == true)
-                    response.Add(await AddFuelCard(fueldis.companyID, 71));
+                if (fueldis.chkFuelCard71 == true)
+                    response.Add(AddFuelCard(fueldis.companyID, 71));
 
-            foreach(string res in response)
+                foreach (string res in response)
                 {
-                    if(res== "success")
+                    if (res == "success")
                     {
                         return ("success");
                     }
@@ -396,12 +397,12 @@ namespace FBO.Services
                 }
                 return ("success");
             }
-          catch
+            catch
             {
                 return "failed";
             }
         }
-        public async Task<string> ClearFuelCards(string companyID)
+        public string ClearFuelCards(string companyID)
         {
             try
             {
@@ -416,7 +417,7 @@ namespace FBO.Services
             }
 
         }
-        public async Task<string> AddFuelCard(string companyID, int discountid)
+        public string AddFuelCard(string companyID, int discountid)
         {
             try
             {
@@ -431,10 +432,11 @@ namespace FBO.Services
                 return "failed";
             }
         }
+
         public async Task<string> BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
         {
             string respose = "";
-           
+
             try
             {
                 String FsJETA = fueldis.Content_tbJETTA.Trim();
@@ -453,103 +455,103 @@ namespace FBO.Services
                 String SsSAF = fueldis.Content_tbSSSAFPRIST.Trim();
                 String SsSAFPRIST = fueldis.Content_tbSSSAFPRIST.Trim();
 
-                   if (FsJETA == "")
-                    {
-                        FsJETA = "0";
-                    }
-                    if (FsJETAPRIST == "")
-                    {
-                        FsJETAPRIST = "0";
-                    }
-                    if (Fs100LL == "")
-                    {
-                        Fs100LL = "0";
-                    }
-                    if (FsUL94 == "")
-                    {
-                        FsUL94 = "0";
-                    }
-                    if (FsMOGAS == "")
-                    {
-                        FsMOGAS = "0";
-                    }
-                    if (FsSAF == "")
-                    {
-                        FsSAF = "0";
-                    }
+                if (FsJETA == "")
+                {
+                    FsJETA = "0";
+                }
+                if (FsJETAPRIST == "")
+                {
+                    FsJETAPRIST = "0";
+                }
+                if (Fs100LL == "")
+                {
+                    Fs100LL = "0";
+                }
+                if (FsUL94 == "")
+                {
+                    FsUL94 = "0";
+                }
+                if (FsMOGAS == "")
+                {
+                    FsMOGAS = "0";
+                }
+                if (FsSAF == "")
+                {
+                    FsSAF = "0";
+                }
+                if (FsSAFPRIST == "")
+                {
+                    FsSAFPRIST = "0";
+                }
 
-                    if (FsSAFPRIST == "")
-                    {
-                        FsSAFPRIST = "0";
-                    }
+                if (SsJETA == "")
+                {
+                    SsJETA = "0";
+                }
+                if (SsJETAPRIST == "")
+                {
+                    SsJETAPRIST = "0";
+                }
+                if (Ss100LL == "")
+                {
+                    Ss100LL = "0";
+                }
+                if (SsUL94 == "")
+                {
+                    SsUL94 = "0";
+                }
+                if (SsMOGAS == "")
+                {
+                    SsMOGAS = "0";
+                }
+                if (SsSAF == "")
+                {
+                    SsSAF = "0";
+                }
+                if (SsSAFPRIST == "")
+                {
+                    SsSAFPRIST = "0";
+                }
 
-                    if (SsJETA == "")
-                    {
-                        SsJETA = "0";
-                    }
-                    if (SsJETAPRIST == "")
-                    {
-                        SsJETAPRIST = "0";
-                    }
-                    if (Ss100LL == "")
-                    {
-                        Ss100LL = "0";
-                    }
-                    if (SsUL94 == "")
-                    {
-                        SsUL94 = "0";
-                    }
-                    if (SsMOGAS == "")
-                    {
-                        SsMOGAS = "0";
-                    }
-                    if (SsSAF == "")
-                    {
-                        SsSAF = "0";
-                    }
-                    if (SsSAFPRIST == "")
-                    {
-                        SsSAFPRIST = "0";
-                    }
-
-                    Decimal decFsJETA = Convert.ToDecimal(FsJETA);
-                    Decimal decFsJETAPRIST = Convert.ToDecimal(FsJETAPRIST);
-                    Decimal decFs100LL = Convert.ToDecimal(Fs100LL);
-                    Decimal decFsUL94 = Convert.ToDecimal(FsUL94);
-                    Decimal decFsMOGAS = Convert.ToDecimal(FsMOGAS);
-                    Decimal decFsSAF = Convert.ToDecimal(FsSAF);
-                    Decimal decFsSAFPRIST = Convert.ToDecimal(FsSAFPRIST);
-                    Decimal decSsJETA = Convert.ToDecimal(SsJETA);
-                    Decimal decSsJETAPRIST = Convert.ToDecimal(SsJETAPRIST);
-                    Decimal decSs100LL = Convert.ToDecimal(Ss100LL);
-                    Decimal decSsUL94 = Convert.ToDecimal(SsUL94);
-                    Decimal decSsMOGAS = Convert.ToDecimal(SsMOGAS);
-                    Decimal decSsSAF = Convert.ToDecimal(SsSAF);
-                    Decimal decSsSAFPRIST = Convert.ToDecimal(SsSAFPRIST);
-                    int FuelBrandID = 0;
-                    int companyID = Convert.ToInt32(fueldis.companyID);
+                Decimal decFsJETA = Convert.ToDecimal(FsJETA);
+                Decimal decFsJETAPRIST = Convert.ToDecimal(FsJETAPRIST);
+                Decimal decFs100LL = Convert.ToDecimal(Fs100LL);
+                Decimal decFsUL94 = Convert.ToDecimal(FsUL94);
+                Decimal decFsMOGAS = Convert.ToDecimal(FsMOGAS);
+                Decimal decFsSAF = Convert.ToDecimal(FsSAF);
+                Decimal decFsSAFPRIST = Convert.ToDecimal(FsSAFPRIST);
+                Decimal decSsJETA = Convert.ToDecimal(SsJETA);
+                Decimal decSsJETAPRIST = Convert.ToDecimal(SsJETAPRIST);
+                Decimal decSs100LL = Convert.ToDecimal(Ss100LL);
+                Decimal decSsUL94 = Convert.ToDecimal(SsUL94);
+                Decimal decSsMOGAS = Convert.ToDecimal(SsMOGAS);
+                Decimal decSsSAF = Convert.ToDecimal(SsSAF);
+                Decimal decSsSAFPRIST = Convert.ToDecimal(SsSAFPRIST);
+                int FuelBrandID = 0;
+                int companyID = Convert.ToInt32(fueldis.companyID);
                 FuelBrandID = Convert.ToInt32(fueldis.logoSelected);
-                    DynamicParameters dynamicParameters = new DynamicParameters();
-                    dynamicParameters.Add("CompanyID", companyID);
-                    dynamicParameters.Add("CompanyID", companyID);
-                    dynamicParameters.Add("JETA", decFsJETA);
-                    dynamicParameters.Add("JETAPRIST", decFsJETAPRIST);
-                    dynamicParameters.Add("100LL", decFs100LL);
-                    dynamicParameters.Add("UL94", decFsUL94);
-                    dynamicParameters.Add("MOGAS", decFsMOGAS);
-                    dynamicParameters.Add("SSJETA", decSsJETA);
-                    dynamicParameters.Add("SSJETAPRIST", decSsJETAPRIST);
-                    dynamicParameters.Add("SS100LL", decSs100LL);
-                    dynamicParameters.Add("SSUL94", decSsUL94);
-                    dynamicParameters.Add("SSMOGAS", decSsMOGAS);
-                    dynamicParameters.Add("SAF", decFsSAF);
-                    dynamicParameters.Add("SSSAF", decSsSAF);
-                    dynamicParameters.Add("SAFPRIST", decFsSAFPRIST);
-                    dynamicParameters.Add("SSSAFPRIST", decSsSAFPRIST);
-                    dynamicParameters.Add("FuelBrandID_FK", FuelBrandID);
-                    _dapper.Execute("FBOManagement_UpdateFuelPrices", dynamicParameters, commandType: CommandType.StoredProcedure);
-                    
-                    return "success";
+
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("JETA", decFsJETA);
+                dynamicParameters.Add("JETAPRIST", decFsJETAPRIST);
+                dynamicParameters.Add("100LL", decFs100LL);
+                dynamicParameters.Add("UL94", decFsUL94);
+                dynamicParameters.Add("MOGAS", decFsMOGAS);
+                dynamicParameters.Add("SSJETA", decSsJETA);
+                dynamicParameters.Add("SSJETAPRIST", decSsJETAPRIST);
+                dynamicParameters.Add("SS100LL", decSs100LL);
+                dynamicParameters.Add("SSUL94", decSsUL94);
+                dynamicParameters.Add("SSMOGAS", decSsMOGAS);
+                dynamicParameters.Add("SAF", decFsSAF);
+                dynamicParameters.Add("SSSAF", decSsSAF);
+                dynamicParameters.Add("SAFPRIST", decFsSAFPRIST);
+                dynamicParameters.Add("SSSAFPRIST", decSsSAFPRIST);
+                dynamicParameters.Add("FuelBrandID_FK", FuelBrandID);
+                _dapper.Execute("FBOManagement_UpdateFuelPrices", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
 
 
             }
@@ -558,6 +560,29 @@ namespace FBO.Services
                 return "failed";
             }
         }
+
+        protected async Task<bool> CheckUpgradeEligibleAsync(string companyID)
+        {
+            bool isUpgradeEligible = false;
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                string check = await Task.FromResult(_dapper.Get<string>("FBOManagement_CheckUpgradeEligible", dynamicParameters, commandType: CommandType.StoredProcedure));
+
+                if (check.Trim() == "Yes")
+                {
+                    isUpgradeEligible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //lblTest.Text = "Error in FBOManagement_CheckUpgradeEligible: " + ex.Message.ToString();
+            }
+            return isUpgradeEligible;
+
+        }
+
 
     }
 }

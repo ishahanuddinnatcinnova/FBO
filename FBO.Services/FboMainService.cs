@@ -61,7 +61,7 @@ namespace FBO.Services
                         else
                         {
                             response.isRedirect = true;
-                            response.redirectURL = "/home/companymanage?companyid=" + userData.companyID;
+                            response.redirectURL = "/fbo/companymanage.aspx?companyid=" + userData.companyID;
                         }
                     }
 

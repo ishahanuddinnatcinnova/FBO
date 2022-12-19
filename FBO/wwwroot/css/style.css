@@ -703,3 +703,8 @@ button, input, optgroup, select, textarea {
 #pnlError p {
     color: red
 }
+
+.card-animation:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 10px #888888;
+}
