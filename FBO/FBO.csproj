@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GlobalAir.Data" Version="2022.12.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.11" />
   </ItemGroup>
 
@@ -34,6 +33,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GlobalAir.Data">
+      <HintPath>..\..\GlobalAir\www.globalair.com\bin\GlobalAir.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -72,9 +72,10 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        public async Task<IActionResult> fuel (string companyID, string fuel)
+        [Route("fuelprices.aspx")]
+        public async Task<IActionResult> Fuel (string companyID, string fuel)
         {
-            ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelCardsSelected(this.Request, companyID, fuel);
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelPrice(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
                 return Redirect(response.redirectURL);

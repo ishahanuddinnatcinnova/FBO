@@ -330,64 +330,64 @@
                                 <div class="col text-right"><b>JETA:</b></div>
                                 <div class="col currency">
                                     <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
-                                    <input name="Content_tbJETTA" type="number" step=".0001" min="0000" max="100.0" id="Content_tbJETTA" class="form-control" value="@Model.FBO.FBO.FuelJETA" />
+                                    <input name="Content_tbJETTA" type="number" step="0.01" min="0" max="100" id="Content_tbJETTA" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelJETA), 2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSJETTA" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSJETTA" class="form-control" value="@Model.FBO.FBO.FuelSSJETA" />
+                                    <input name="Content_tbSSJETTA" type="number" step="0.01" min="0" max="100" id="Content_tbSSJETTA" class="form-control" value="@Model.FBO.FBO.FuelSSJETA" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>JETA w/Additive:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tbJETAPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbJETAPRIST" class="form-control" value="@Model.FBO.FBO.FuelJETAPRIST" />
+                                    <input name="Content_tbJETAPRIST" type="number" step="0.01" min="0" max="100" id="Content_tbJETAPRIST" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelJETAPRIST),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSJETAPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSJETAPRIST" class="form-control" value="@Model.FBO.FBO.FuelSSJETAPRIST" />
+                                    <input name="Content_tbSSJETAPRIST" type="number" step="0.01" min="0" max="100" id="Content_tbSSJETAPRIST" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSSJETAPRIST),2)" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>UL94:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tbUL94" type="number" step=".0001" min="0000" max="100.0" id="Content_tbUL94" class="form-control" value="@Model.FBO.FBO.FuelUL94" />
+                                    <input name="Content_tbUL94" type="number" step="0.01" min="0" max="100" id="Content_tbUL94" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelUL94),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSUL94" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSUL94" class="form-control" value="@Model.FBO.FBO.FuelSSUL94" />
+                                    <input name="Content_tbSSUL94" type="number" step="0.01" min="0" max="100" id="Content_tbSSUL94" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSSUL94),2)" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>MOGAS:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tbMOGAS" type="number" step=".0001" min="0000" max="100.0" id="Content_tbMOGAS" class="form-control" value="@Model.FBO.FBO.FuelMOGAS" />
+                                    <input name="Content_tbMOGAS" type="number" step="0.01" min="0" max="100" id="Content_tbMOGAS" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelMOGAS),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSMOGAS" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSMOGAS" class="form-control" value="@Model.FBO.FBO.FuelSSMOGAS" />
+                                    <input name="Content_tbSSMOGAS" type="number" step="0.01" min="0" max="100" id="Content_tbSSMOGAS" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSSMOGAS),2)" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>100LL:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tb100LL" type="number" step=".0001" min="0000" max="100.0" id="Content_tb100LL" class="form-control" value="@Model.FBO.FBO.Fuel100LL" />
+                                    <input name="Content_tb100LL" type="number" step="0.01" min="0" max="100" id="Content_tb100LL" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.Fuel100LL),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSS100LL" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSS100LL" class="form-control" value="@Model.FBO.FBO.FuelSS100LL" />
+                                    <input name="Content_tbSS100LL" type="number" step="0.01" min="0" max="100" id="Content_tbSS100LL" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSS100LL),2)" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>SAF:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tbSAF" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSAF" class="form-control" value="@Model.FBO.FBO.FuelSAF" />
+                                    <input name="Content_tbSAF" type="number" step="0.01" min="0" max="100" id="Content_tbSAF" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSAF),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSSAF" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSSAF" class="form-control" value="@Model.FBO.FBO.FuelSSSAF" />
+                                    <input name="Content_tbSSSAF" type="number" step="0.01" min="0" max="100" id="Content_tbSSSAF" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSSSAF),2)" />
                                 </div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col text-right"><b>SAF w/Additive:</b></div>
                                 <div class="col currency">
-                                    <input name="Content_tbSAFPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSAFPRIST" class="form-control" value="@Model.FBO.FBO.FuelSAFPRIST" />
+                                    <input name="Content_tbSAFPRIST" type="number" step="0.01" min="0" max="100" id="Content_tbSAFPRIST" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSAFPRIST),2)" />
                                 </div>
                                 <div class="col currency">
-                                    <input name="Content_tbSSSAFPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSSAFPRIST" class="form-control" value="@Model.FBO.FBO.FuelSSSAFPRIST" />
+                                    <input name="Content_tbSSSAFPRIST" type="number" step="0.01" min="0" max="100" id="Content_tbSSSAFPRIST" class="form-control" value="@Math.Round(Convert.ToDecimal(Model.FBO.FBO.FuelSSSAFPRIST),2)" />
                                 </div>
                             </div>
                             <div class="container card p-4 mt-4">
