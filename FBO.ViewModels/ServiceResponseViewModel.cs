@@ -25,5 +25,6 @@ namespace FBO.ViewModels
         public FuelCardDiscountsModel fuelcards { get; set; }
 
         public FBOManagement_UpdateBasicServices_Result basic = new FBOManagement_UpdateBasicServices_Result();
+        public services_Accepted_GetCreditCards_Result fboCreditCards;
     }
 }

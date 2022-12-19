@@ -68,6 +68,18 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
+        public async Task<IActionResult> fuel (string companyID, string fuel)
+        {
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelCardsSelected(this.Request, companyID, fuel);
+            if (response.isRedirect)
+            {
+                return Redirect(response.redirectURL);
+            }
+            else
+            {
+                return View(response.data);
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
@@ -83,7 +95,8 @@ namespace FBO.Controllers
                 TempData["success"] = "false";
             }
             return RedirectToAction("BasicAndExtended", new {companyID = updatebasic.companyID });
-        }     
+        }
+        [HttpPost]
         public async Task<IActionResult> ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
         {
 
@@ -114,6 +127,21 @@ namespace FBO.Controllers
                 TempData["success"] = "false";
             }
             return RedirectToAction("fuelcards", new { companyID = fuel.companyID });
+        }
+        [HttpPost]
+        public async Task<IActionResult> FuelPriceUpdate(FuelPriceUpdateModel fuel)
+        {
+          
+            string response = await _fboMainService.PostFuelPriceUpdate(fuel);
+            if (response == "success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("fuel", new { companyID = fuel.companyID });
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

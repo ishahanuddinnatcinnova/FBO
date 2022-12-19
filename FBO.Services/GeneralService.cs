@@ -154,6 +154,7 @@ namespace FBO.Services
                 return null;
             }
         }
+
         public Task<FBOResult> GetDates(FBOResult fbo)
         {
             DateTime dateDefault = System.DateTime.Now;
@@ -206,8 +207,6 @@ namespace FBO.Services
         {
             int companyID = 0;
             companyID = Convert.ToInt32(basic.companyID);
-
-
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -432,7 +431,133 @@ namespace FBO.Services
                 return "failed";
             }
         }
+        public async Task<string> BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
+        {
+            string respose = "";
+           
+            try
+            {
+                String FsJETA = fueldis.Content_tbJETTA.Trim();
+                String FsJETAPRIST = fueldis.Content_tbJETAPRIST.Trim();
+                String Fs100LL = fueldis.Content_tb100LL.Trim();
+                String FsUL94 = fueldis.Content_tbUL94.Trim();
+                String FsMOGAS = fueldis.Content_tbMOGAS.Trim();
+                String FsSAF = fueldis.Content_tbSAF.Trim();
+                String FsSAFPRIST = fueldis.Content_tbSAFPRIST.Trim();
 
+                String SsJETA = fueldis.Content_tbSSJETTA.Trim();
+                String SsJETAPRIST = fueldis.Content_tbSSJETAPRIST.Trim();
+                String Ss100LL = fueldis.Content_tbSS100LL.Trim();
+                String SsUL94 = fueldis.Content_tbSSUL94.Trim();
+                String SsMOGAS = fueldis.Content_tbSSMOGAS.Trim();
+                String SsSAF = fueldis.Content_tbSSSAFPRIST.Trim();
+                String SsSAFPRIST = fueldis.Content_tbSSSAFPRIST.Trim();
+
+                   if (FsJETA == "")
+                    {
+                        FsJETA = "0";
+                    }
+                    if (FsJETAPRIST == "")
+                    {
+                        FsJETAPRIST = "0";
+                    }
+                    if (Fs100LL == "")
+                    {
+                        Fs100LL = "0";
+                    }
+                    if (FsUL94 == "")
+                    {
+                        FsUL94 = "0";
+                    }
+                    if (FsMOGAS == "")
+                    {
+                        FsMOGAS = "0";
+                    }
+                    if (FsSAF == "")
+                    {
+                        FsSAF = "0";
+                    }
+
+                    if (FsSAFPRIST == "")
+                    {
+                        FsSAFPRIST = "0";
+                    }
+
+                    if (SsJETA == "")
+                    {
+                        SsJETA = "0";
+                    }
+                    if (SsJETAPRIST == "")
+                    {
+                        SsJETAPRIST = "0";
+                    }
+                    if (Ss100LL == "")
+                    {
+                        Ss100LL = "0";
+                    }
+                    if (SsUL94 == "")
+                    {
+                        SsUL94 = "0";
+                    }
+                    if (SsMOGAS == "")
+                    {
+                        SsMOGAS = "0";
+                    }
+                    if (SsSAF == "")
+                    {
+                        SsSAF = "0";
+                    }
+                    if (SsSAFPRIST == "")
+                    {
+                        SsSAFPRIST = "0";
+                    }
+
+                    Decimal decFsJETA = Convert.ToDecimal(FsJETA);
+                    Decimal decFsJETAPRIST = Convert.ToDecimal(FsJETAPRIST);
+                    Decimal decFs100LL = Convert.ToDecimal(Fs100LL);
+                    Decimal decFsUL94 = Convert.ToDecimal(FsUL94);
+                    Decimal decFsMOGAS = Convert.ToDecimal(FsMOGAS);
+                    Decimal decFsSAF = Convert.ToDecimal(FsSAF);
+                    Decimal decFsSAFPRIST = Convert.ToDecimal(FsSAFPRIST);
+                    Decimal decSsJETA = Convert.ToDecimal(SsJETA);
+                    Decimal decSsJETAPRIST = Convert.ToDecimal(SsJETAPRIST);
+                    Decimal decSs100LL = Convert.ToDecimal(Ss100LL);
+                    Decimal decSsUL94 = Convert.ToDecimal(SsUL94);
+                    Decimal decSsMOGAS = Convert.ToDecimal(SsMOGAS);
+                    Decimal decSsSAF = Convert.ToDecimal(SsSAF);
+                    Decimal decSsSAFPRIST = Convert.ToDecimal(SsSAFPRIST);
+                    int FuelBrandID = 0;
+                    int companyID = Convert.ToInt32(fueldis.companyID);
+                FuelBrandID = Convert.ToInt32(fueldis.logoSelected);
+                    DynamicParameters dynamicParameters = new DynamicParameters();
+                    dynamicParameters.Add("CompanyID", companyID);
+                    dynamicParameters.Add("CompanyID", companyID);
+                    dynamicParameters.Add("JETA", decFsJETA);
+                    dynamicParameters.Add("JETAPRIST", decFsJETAPRIST);
+                    dynamicParameters.Add("100LL", decFs100LL);
+                    dynamicParameters.Add("UL94", decFsUL94);
+                    dynamicParameters.Add("MOGAS", decFsMOGAS);
+                    dynamicParameters.Add("SSJETA", decSsJETA);
+                    dynamicParameters.Add("SSJETAPRIST", decSsJETAPRIST);
+                    dynamicParameters.Add("SS100LL", decSs100LL);
+                    dynamicParameters.Add("SSUL94", decSsUL94);
+                    dynamicParameters.Add("SSMOGAS", decSsMOGAS);
+                    dynamicParameters.Add("SAF", decFsSAF);
+                    dynamicParameters.Add("SSSAF", decSsSAF);
+                    dynamicParameters.Add("SAFPRIST", decFsSAFPRIST);
+                    dynamicParameters.Add("SSSAFPRIST", decSsSAFPRIST);
+                    dynamicParameters.Add("FuelBrandID_FK", FuelBrandID);
+                    _dapper.Execute("FBOManagement_UpdateFuelPrices", dynamicParameters, commandType: CommandType.StoredProcedure);
+                    
+                    return "success";
+
+
+            }
+            catch
+            {
+                return "failed";
+            }
+        }
 
     }
 }

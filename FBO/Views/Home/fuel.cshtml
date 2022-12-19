@@ -1,7 +1,7 @@
 ﻿@model FBO.ViewModels.ResponseDataViewModel
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-
 <style>
+
     #featuredPromo {
         border-radius: 10px;
     }
@@ -190,8 +190,7 @@
         position: relative;
         width: 100%;
         cursor: pointer;
-        border: none 
-        
+        border: none
     }
 
         .inputCheckbox input:after {
@@ -212,7 +211,7 @@
         }
 
     .container2 img {
-        width: 80%;
+        width: 50%;
         position: absolute;
         margin: auto;
         left: 0;
@@ -224,12 +223,12 @@
 
     @@media screen and (min-width: 950px) {
         .wrapper2 {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
 
         .container2 {
-            height: 250px;
+            height: 160px;
             width: 90%;
         }
 
@@ -237,22 +236,6 @@
             font-size: 22px;
         }
     }
-
-    .section-title {
-        position: relative;
-        text-transform: uppercase;
-        margin-bottom: 1.875rem;
-    }
-
-        .section-title::before {
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            content: "";
-            height: 2px;
-            width: 5rem;
-            background-color: #97cb00;
-        }
 
     .container2:hover {
         transform: scale(1.05);
@@ -264,8 +247,8 @@
         <div class="col-md-9">
             <nav aria-label="breadcrumb">
                 <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="airport%20weather%20&%20fbo%20fuel%20prices%20_%20globalair.com.html"><span itemprop="name">FBO Management<meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Fuel Cards<meta itemprop="position" content="3"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="airport%20weather%20&%20fbo%20fuel%20prices%20_%20globalair.com.html"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Fuel Prices</span><meta itemprop="position" content="3"></a></li>
                 </ol>
             </nav>
         </div>
@@ -316,7 +299,7 @@
             {
                 <div class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-success">Your changes have been updated successfully.</p>
+                        <p class="alert alert-success">Your changes have been saved successfully.</p>
                     </div>
                 </div>
             }
@@ -324,136 +307,156 @@
             {
                 <div class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                        <p class="alert alert-danger">Oops, your changes have not been saved successfully, please try again later.</p>
                     </div>
                 </div>
             }
             <div class="row ms-1">
-
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("FuelCardUpdate", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("FuelPriceUpdate", "Home", FormMethod.Post))
                         {
-                            <h2 class="section-title display-6">
-                                Update Your Fuel Cards
-                            </h2>
-                            <p>
-                                SELECT WHICH FUEL CARDS FROM THE LIST BELOW THAT YOUR FBO ACCEPTS. WHEN YOU ARE DONE, CLICK THE SAVE CHANGES BUTTON.
-                            </p>
-                            <div class="container p-4 mt-4">
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    Update your fuel prices
+                                </span>
+                            </div>
+                            <div class="row mt-5 pb-2">
+                                <div class="col"></div>
+                                <div class="col"><b>Full-Serve</b></div>
+                                <div class="col"><b>Self-Serve</b></div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>JETA:</b></div>
+                                <div class="col currency">
+                                    <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
+                                    <input name="Content_tbJETTA" type="number" step=".0001" min="0000" max="100.0" id="Content_tbJETTA" class="form-control" value="@Model.FBO.FBO.FuelJETA" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSJETTA" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSJETTA" class="form-control" value="@Model.FBO.FBO.FuelSSJETA" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>JETA w/Additive:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tbJETAPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbJETAPRIST" class="form-control" value="@Model.FBO.FBO.FuelJETAPRIST" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSJETAPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSJETAPRIST" class="form-control" value="@Model.FBO.FBO.FuelSSJETAPRIST" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>UL94:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tbUL94" type="number" step=".0001" min="0000" max="100.0" id="Content_tbUL94" class="form-control" value="@Model.FBO.FBO.FuelUL94" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSUL94" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSUL94" class="form-control" value="@Model.FBO.FBO.FuelSSUL94" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>MOGAS:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tbMOGAS" type="number" step=".0001" min="0000" max="100.0" id="Content_tbMOGAS" class="form-control" value="@Model.FBO.FBO.FuelMOGAS" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSMOGAS" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSMOGAS" class="form-control" value="@Model.FBO.FBO.FuelSSMOGAS" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>100LL:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tb100LL" type="number" step=".0001" min="0000" max="100.0" id="Content_tb100LL" class="form-control" value="@Model.FBO.FBO.Fuel100LL" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSS100LL" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSS100LL" class="form-control" value="@Model.FBO.FBO.FuelSS100LL" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>SAF:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tbSAF" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSAF" class="form-control" value="@Model.FBO.FBO.FuelSAF" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSSAF" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSSAF" class="form-control" value="@Model.FBO.FBO.FuelSSSAF" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col text-right"><b>SAF w/Additive:</b></div>
+                                <div class="col currency">
+                                    <input name="Content_tbSAFPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSAFPRIST" class="form-control" value="@Model.FBO.FBO.FuelSAFPRIST" />
+                                </div>
+                                <div class="col currency">
+                                    <input name="Content_tbSSSAFPRIST" type="number" step=".0001" min="0000" max="100.0" id="Content_tbSSSAFPRIST" class="form-control" value="@Model.FBO.FBO.FuelSSSAFPRIST" />
+                                </div>
+                            </div>
+                            <div class="container card p-4 mt-4">
                                 <div class="row wrapper2">
                                     <div class="container2">
-                                        <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
+                                        <span class="inputCheckbox">
+                                            @Html.RadioButton("logoSelected","8", Model.FBO.FBO.FuelBrandID == 8 ? true : false )
+                                        </span>
+                                        <label for="8">
+                                            <img src="https://www.globalair.com/airport/images/ascent.gif" title="Ascent" />
+                                        </label>
+                                    </div>
+                                    <div class="container2">
+                                        <span class="inputCheckbox">
+                                            @Html.RadioButton("logoSelected","9", Model.FBO.FBO.FuelBrandID == 9 ? true : false )
+                                        </span>
+                                        <label for="9">
+                                            <img src="https://www.globalair.com/airport/images/epic.gif" title="Epic" style="width: 80%;" />
+                                        </label>
+                                    </div>
+                                    <div class="container2">
 
                                         <span class="inputCheckbox">
-                                            @Html.CheckBox("chkFuelCard65", Model.fuelcards.chkFuelCard65)
+                                            @Html.RadioButton("logoSelected","4", Model.FBO.FBO.FuelBrandID == 4 ? true : false )
+                                        </span>
+                                        <label for="4">
+                                            <img src="https://www.globalair.com/airport/images/phillips66.gif" title="Phillips66" style="width: 80%;" />
+                                        </label>
+                                    </div>
+                                    <div class="container2">
+                                        <span class="inputCheckbox">
+                                            @Html.RadioButton("logoSelected","6", Model.FBO.FBO.FuelBrandID ==6 ? true : false )
                                         </span>
 
-                                        <label for="chkFuelCard65">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/AEGfUEL.png?w=250&h=200&mode=crop" title="AEG FUEL" />
+                                        <label for="6">
+                                            <img src="https://www.globalair.com/airport/images/avfuel.gif" title="Avfuel" />
                                         </label>
                                     </div>
                                     <div class="container2">
                                         <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard57", Model.fuelcards.chkFuelCard57)
+                                            @Html.RadioButton("logoSelected","7", Model.FBO.FBO.FuelBrandID ==7 ? true : false )
                                         </span>
 
-                                        <label for="chkFuelCard57">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/avfuel.png?w=250&h=200&mode=crop" title="AVFUEL PRO" />
+                                        <label for="7">
+                                            <img src="https://www.globalair.com/airport/images/titan.gif" title="Titan" />
                                         </label>
                                     </div>
                                     <div class="container2">
                                         <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard12", Model.fuelcards.chkFuelCard12)
+                                            @Html.RadioButton("logoSelected","10", Model.FBO.FBO.FuelBrandID ==10 ? true : false )
                                         </span>
-                                        <label for="chkFuelCard12">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/avtripcard.png?w=250&h=200&mode=crop" title="AVTRIP" />
+
+                                        <label for="10">
+                                            <img src="https://www.globalair.com/airport/images/independent2.gif" title="Independent2" />
                                         </label>
                                     </div>
                                     <div class="container2">
                                         <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard64", Model.fuelcards.chkFuelCard64)
+                                            @Html.RadioButton("logoSelected","12", Model.FBO.FBO.FuelBrandID ==12 ? true : false )
                                         </span>
-                                        <label for="chkFuelCard64">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/epic.png?w=250&h=200&mode=crop" title="Epic - FuelCard" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard68", Model.fuelcards.chkFuelCard68)
-                                        </span>
-                                        <label for="chkFuelCard68">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/epic-signature-card.png?w=250&h=200&mode=crop" title="Epic Signature Select" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard44", Model.fuelcards.chkFuelCard44)
-                                        </span>
-                                        <label for="chkFuelCard44">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/multiservice.png?w=250&h=200&mode=crop" title="Multi Service Aviation" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard71", Model.fuelcards.chkFuelCard71)
-                                        </span>
-                                        <label for="chkFuelCard71">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/phillips66.png?w=250&h=200&mode=crop" title="Phillips 66" %" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                            <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard70", Model.fuelcards.chkFuelCard70)
-                                        </span>
-                                        <label for="chkFuelCard70">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/phillips-66-wingpoints.png?w=250&h=200&mode=crop" title="Phillips 66 - Wing Points" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard62", Model.fuelcards.chkFuelCard62)
-                                        </span>
-                                        <label for="chkFuelCard62">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/Titan%202.png?w=250&h=200&mode=crop" title="Titan Plus" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard61", Model.fuelcards.chkFuelCard61)
-                                        </span>
-                                        <label for="chkFuelCard61">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/Titan%201.png?w=250&h=200&mode=crop" title="Titan" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard63", Model.fuelcards.chkFuelCard63)
-                                        </span>
-                                        <label for="chkFuelCard63">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/usgovt-aircard.png?w=250&h=200&mode=crop" title="US Government Air Card" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard66", Model.fuelcards.chkFuelCard66)
-                                        </span>
-                                        <label for="chkFuelCard66">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/worldfuel-avcard.png?w=250&h=200&mode=crop" title="World Fuel AVCARD" />
-                                        </label>
-                                    </div>
-                                    <div class="container2">
-                                        <span class="inputCheckbox">
-                                        @Html.CheckBox("chkFuelCard69", Model.fuelcards.chkFuelCard69)
-                                        </span>
-                                        <label for="chkFuelCard69">
-                                            <img src="https://resources.globalair.com/fbo-images/fbo-fuel-cards/worldfuel-uvair-fuel.png?w=250&h=200&mode=crop" title="World Fuel UVA" />
+
+                                        <label for="12">
+                                            <img src="https://www.globalair.com/airport/images/AEGFuels.gif" title="AEGFuels" style="width: 80%;" />
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3 col-12 text-center">
-                                <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         }
                     </div>
