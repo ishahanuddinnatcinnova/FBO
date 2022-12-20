@@ -451,7 +451,7 @@ namespace FBO.Services
                 String Ss100LL = fueldis.Content_tbSS100LL.Trim();
                 String SsUL94 = fueldis.Content_tbSSUL94.Trim();
                 String SsMOGAS = fueldis.Content_tbSSMOGAS.Trim();
-                String SsSAF = fueldis.Content_tbSSSAFPRIST.Trim();
+                String SsSAF = fueldis.Content_tbSSSAF.Trim();
                 String SsSAFPRIST = fueldis.Content_tbSSSAFPRIST.Trim();
 
                 if (FsJETA == "")

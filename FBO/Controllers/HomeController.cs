@@ -85,7 +85,7 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-
+     
         [HttpPost]
         public async Task<IActionResult> BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {

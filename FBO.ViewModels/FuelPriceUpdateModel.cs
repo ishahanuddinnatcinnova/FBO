@@ -10,6 +10,7 @@ namespace FBO.ViewModels
     {
         public string companyID { get; set; }
         public string logoSelected { get; set; }
+        public string Content_tbSSSAF { get; set; }
         public string Content_tbSSSAFPRIST { get; set; }
         public string Content_tbSAFPRIST { get; set; }
         public string Content_tbSSSAFPRISTContent_tbSSSAFPRIST { get; set; }
