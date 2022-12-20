@@ -272,7 +272,7 @@ namespace FBO.Services
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response = await _generalService.BtnFuelCardSaveClick(fuel);
+                    response = _generalService.BtnFuelCardSaveClick(fuel);
                 }
                 return response;
             }
@@ -290,7 +290,7 @@ namespace FBO.Services
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response = await _generalService.BtnFuelPriceSaveClick(fuel);
+                    response = _generalService.BtnFuelPriceSaveClick(fuel);
                 }
                 return response;
             }

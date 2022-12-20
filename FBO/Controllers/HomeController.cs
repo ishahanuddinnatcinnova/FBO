@@ -72,7 +72,7 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        [Route("fuelprices.aspx")]
+        [Route("fuel.aspx")]
         public async Task<IActionResult> Fuel (string companyID, string fuel)
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelPrice(this.Request, companyID, fuel);

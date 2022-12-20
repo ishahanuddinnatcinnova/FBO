@@ -338,7 +338,7 @@ namespace FBO.Services
             }
         }
 
-        public async Task<string> BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
+        public string BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
         {
             var response = new List<string>();
             try
@@ -432,8 +432,7 @@ namespace FBO.Services
                 return "failed";
             }
         }
-
-        public async Task<string> BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
+        public string BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
         {
             string respose = "";
 
@@ -550,17 +549,13 @@ namespace FBO.Services
                 dynamicParameters.Add("SSSAFPRIST", decSsSAFPRIST);
                 dynamicParameters.Add("FuelBrandID_FK", FuelBrandID);
                 _dapper.Execute("FBOManagement_UpdateFuelPrices", dynamicParameters, commandType: CommandType.StoredProcedure);
-
                 return "success";
-
-
             }
             catch
             {
                 return "failed";
             }
         }
-
         protected async Task<bool> CheckUpgradeEligibleAsync(string companyID)
         {
             bool isUpgradeEligible = false;
@@ -582,6 +577,60 @@ namespace FBO.Services
             return isUpgradeEligible;
 
         }
+        //public async Task<RatingStats> getRatingStatsAsync(int fboID)
+        //{
+        //    #region local variables declaration
+        //    int userTotal = 0;
+        //    int total_ratings = 0;
+        //    double avgRating1 = 0.0;
+        //    double avgRating2 = 0.0;
+        //    double avgRating3 = 0.0;
+        //    double avgRating4 = 0.0;
+        //    double avgRating5 = 0.0;
+        //    double totalRating1 = 0.0;
+        //    double totalRating2 = 0.0;
+        //    double totalRating3 = 0.0;
+        //    double totalRating4 = 0.0;
+        //    double totalRating5 = 0.0;
+        //    double avgOverallRating = 0.0;
+        //    RatingStats ratingStats = new RatingStats();
+        //    #endregion local variables declaration
+        //    using (var ctx = new globalairARC())
+        //    {
+        //        DynamicParameters dynamicParameters = new DynamicParameters();
+        //        dynamicParameters.Add("fbo_id", fboID);
+        //        services_Ratings_FBORatingsTotal_Result temp = await Task.FromResult(_dapper.Get<services_Ratings_FBORatingsTotal_Result>("services_Ratings_FBORatingsTotal", dynamicParameters, commandType: CommandType.StoredProcedure));
+        //        userTotal = Convert.ToInt16(temp.TotalUsersRated);
+        //        totalRating1 = Convert.ToInt16(temp.TotalRating1);
+        //        totalRating2 = Convert.ToInt16(temp.TotalRating2);
+        //        totalRating3 = Convert.ToInt16(temp.TotalRating3);
+        //        totalRating4 = Convert.ToInt16(temp.TotalRating4);
+        //        totalRating5 = Convert.ToInt16(temp.TotalRating5);
+        //    }
+
+        //    if (userTotal != 0)
+        //    {
+        //        //Calculate average ratings for each categories and round to first decimal place.
+        //        avgRating1 = (double)Math.Round(totalRating1 / userTotal, 1);
+        //        avgRating2 = (double)Math.Round(totalRating2 / userTotal, 1);
+        //        avgRating3 = (double)Math.Round(totalRating3 / userTotal, 1);
+        //        avgRating4 = (double)Math.Round(totalRating4 / userTotal, 1);
+        //        avgRating5 = (double)Math.Round(totalRating5 / userTotal, 1);
+
+        //        //Calculate overall average ratings
+        //        avgOverallRating = (avgRating1 + avgRating2 + avgRating3 + avgRating4 + avgRating5) / 5;
+
+        //        ratingStats.avgRating1 = avgRating1;
+        //        ratingStats.avgRating2 = avgRating2;
+        //        ratingStats.avgRating3 = avgRating3;
+        //        ratingStats.avgRating4 = avgRating4;
+        //        ratingStats.avgRating5 = avgRating5;
+
+        //        ratingStats.averageRating = (double)Math.Round(avgOverallRating, 1);
+        //        ratingStats.RatedBy = userTotal.ToString();
+        //    }
+        //    return ratingStats;
+        //}
 
 
     }
