@@ -28,18 +28,18 @@
                     FBO Photos
                 </a>
             }
-            <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+            <a href="/fbo/fuel.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                 Update Fuel Prices
             </a> 
-            <a href="/airport/fboratings.aspx?companyid=156" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+            <a href="/airport/fboratings.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                 Ratings and Reviews
             </a> 
             @if (Model.FBO.FBOLevel != "Basic")
             {
-                <a href="/fbo/extended.aspx?companyID=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Extended & Basic Services
                 </a>
-                <a href="/fbo/fuelcards.aspx?companyID=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                <a href="/fbo/fuelcards.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Fuel Cards
                 </a> 
                 <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
