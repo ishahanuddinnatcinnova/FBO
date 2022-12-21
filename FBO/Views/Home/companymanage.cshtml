@@ -177,9 +177,7 @@
                                 <div class="col-sm-5">
                                     @if (Model.FBO.FBO.FBOLevel != "Basic")
                                     {
-                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company" style="display: block;
-                                                                                                                                                                        margin-left: auto;
-                                                                                                                                                                        margin-right: auto;">
+                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company" style="display: block; margin-left: auto; margin-right: auto;">
                                     }
                                     <div class="card card-animation l-bg-green-dark mt-4">
                                         <div class="card-statistic-3 p-4">
@@ -419,7 +417,7 @@
                                                         <div class="row align-items-center mb-2 d-flex">
                                                             <div class="col-8">
                                                                 <h2 class="d-flex align-items-center mb-0">
-                                                                    4.8/5
+                                                                    @Model.FBO.ratingStats.averageRating/5
                                                                 </h2>
                                                             </div>
                                                         </div>
@@ -439,7 +437,7 @@
                                                         <div class="row align-items-center mb-2 d-flex">
                                                             <div class="col-8">
                                                                 <h2 class="d-flex align-items-center mb-0">
-                                                                    @Model.FBO.reviews_of_ratings
+                                                                    @Model.FBO.ratingStats.TotalReviews
                                                                 </h2>
                                                             </div>
                                                         </div>

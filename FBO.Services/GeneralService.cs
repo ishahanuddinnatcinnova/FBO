@@ -42,9 +42,8 @@ namespace FBO.Services
         public async Task<FBOResult> GetFBO(string companyID)
         {
             FBOResult fboResultMainModel = new FBOResult();
-            //Fbo Result
             fboResultMainModel.FBO = await FboResult(Convert.ToInt16(companyID));
-            //Fbo Result formatting
+
             if (fboResultMainModel.FBO.IsApproved == true)
             {
                 fboResultMainModel.fboIsApproved = "Yes";
@@ -53,21 +52,18 @@ namespace FBO.Services
             {
                 fboResultMainModel.fboIsApproved = "No";
             }
-            fboResultMainModel.companyName = fboResultMainModel.FBO.Company;
 
+            fboResultMainModel.companyName = fboResultMainModel.FBO.Company;
             fboResultMainModel.companyfullAddress = fboResultMainModel.FBO.Company + "<br />" + fboResultMainModel.FBO.City + ", " + fboResultMainModel.FBO.State + " " + fboResultMainModel.FBO.Zip;
-            //Check Expiry
             fboResultMainModel.fboIsExpired = CheckFboExpired(fboResultMainModel);
-            //Check Review Count
-            fboResultMainModel.reviews_of_ratings = await CheckReviewsCount(Convert.ToInt16(companyID));
-            //Get Fuel Averages
+            fboResultMainModel.newReviews = await CheckNewReviewsCount(Convert.ToInt16(companyID));
             fboResultMainModel.averageprices = await GetFuelAverages(Convert.ToInt16(companyID));
-            //Get Average Fuel Price
             fboResultMainModel.averageFuelPrice = Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_JETA), 2) + Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_100LL), 2);
             await GetDates(fboResultMainModel);
             fboResultMainModel.fboStats = await GetFBOs_Totals(Convert.ToInt16(companyID), fboResultMainModel.startDate, fboResultMainModel.endDate);
-
             fboResultMainModel.isUpgradeEligible = await CheckUpgradeEligibleAsync(companyID);
+            fboResultMainModel.ratingStats = await getRatingStatsAsync(Convert.ToInt16(companyID));
+
             return fboResultMainModel;
         }
 
@@ -89,10 +85,6 @@ namespace FBO.Services
             {
                 return null;
             }
-
-
-
-
         }
         public bool CheckFboExpired(FBOResult fbo)
         {
@@ -110,10 +102,8 @@ namespace FBO.Services
                 return false;
             }
         }
-        public async Task<int> CheckReviewsCount(int companyID)
-
+        public async Task<int> CheckNewReviewsCount(int companyID)
         {
-
             FBOResult fbo = new FBOResult();
             FBOManagement_GetFBO_Result fboResult = new FBOManagement_GetFBO_Result();
             try
@@ -172,7 +162,6 @@ namespace FBO.Services
                 fbo.endDate = dateToday.ToString("MM/dd/yyyy");
             }
             return Task.FromResult(fbo);
-
         }
         public async Task<FBOManagement_Stats_Result> GetFBOs_Totals(int CompanyID, String date_start, String date_end)
         {
@@ -225,8 +214,6 @@ namespace FBO.Services
             {
                 return "failed";
             }
-
-
         }
         public async Task<string> SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
         {
@@ -277,7 +264,6 @@ namespace FBO.Services
             catch (Exception ex)
             {
                 return "failed";
-
             }
         }
 
@@ -577,61 +563,61 @@ namespace FBO.Services
             return isUpgradeEligible;
 
         }
-        //public async Task<RatingStats> getRatingStatsAsync(int fboID)
-        //{
-        //    #region local variables declaration
-        //    int userTotal = 0;
-        //    int total_ratings = 0;
-        //    double avgRating1 = 0.0;
-        //    double avgRating2 = 0.0;
-        //    double avgRating3 = 0.0;
-        //    double avgRating4 = 0.0;
-        //    double avgRating5 = 0.0;
-        //    double totalRating1 = 0.0;
-        //    double totalRating2 = 0.0;
-        //    double totalRating3 = 0.0;
-        //    double totalRating4 = 0.0;
-        //    double totalRating5 = 0.0;
-        //    double avgOverallRating = 0.0;
-        //    RatingStats ratingStats = new RatingStats();
-        //    #endregion local variables declaration
-        //    using (var ctx = new globalairARC())
-        //    {
-        //        DynamicParameters dynamicParameters = new DynamicParameters();
-        //        dynamicParameters.Add("fbo_id", fboID);
-        //        services_Ratings_FBORatingsTotal_Result temp = await Task.FromResult(_dapper.Get<services_Ratings_FBORatingsTotal_Result>("services_Ratings_FBORatingsTotal", dynamicParameters, commandType: CommandType.StoredProcedure));
-        //        userTotal = Convert.ToInt16(temp.TotalUsersRated);
-        //        totalRating1 = Convert.ToInt16(temp.TotalRating1);
-        //        totalRating2 = Convert.ToInt16(temp.TotalRating2);
-        //        totalRating3 = Convert.ToInt16(temp.TotalRating3);
-        //        totalRating4 = Convert.ToInt16(temp.TotalRating4);
-        //        totalRating5 = Convert.ToInt16(temp.TotalRating5);
-        //    }
+        public async Task<RatingStats> getRatingStatsAsync(int fboID)
+        {
+            #region local variables declaration
+            int userTotal = 0;
+            int total_ratings = 0;
+            double avgRating1 = 0.0;
+            double avgRating2 = 0.0;
+            double avgRating3 = 0.0;
+            double avgRating4 = 0.0;
+            double avgRating5 = 0.0;
+            double totalRating1 = 0.0;
+            double totalRating2 = 0.0;
+            double totalRating3 = 0.0;
+            double totalRating4 = 0.0;
+            double totalRating5 = 0.0;
+            double avgOverallRating = 0.0;
+            RatingStats ratingStats = new RatingStats();
+            #endregion local variables declaration
 
-        //    if (userTotal != 0)
-        //    {
-        //        //Calculate average ratings for each categories and round to first decimal place.
-        //        avgRating1 = (double)Math.Round(totalRating1 / userTotal, 1);
-        //        avgRating2 = (double)Math.Round(totalRating2 / userTotal, 1);
-        //        avgRating3 = (double)Math.Round(totalRating3 / userTotal, 1);
-        //        avgRating4 = (double)Math.Round(totalRating4 / userTotal, 1);
-        //        avgRating5 = (double)Math.Round(totalRating5 / userTotal, 1);
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("fbo_id", fboID);
+            services_Ratings_FBORatingsTotal_Result temp = await Task.FromResult(_dapper.Get<services_Ratings_FBORatingsTotal_Result>("services_Ratings_FBORatingsTotal", dynamicParameters, commandType: CommandType.StoredProcedure));
+            userTotal = Convert.ToInt16(temp.TotalUsersRated);
+            totalRating1 = Convert.ToInt16(temp.TotalRating1);
+            totalRating2 = Convert.ToInt16(temp.TotalRating2);
+            totalRating3 = Convert.ToInt16(temp.TotalRating3);
+            totalRating4 = Convert.ToInt16(temp.TotalRating4);
+            totalRating5 = Convert.ToInt16(temp.TotalRating5);
 
-        //        //Calculate overall average ratings
-        //        avgOverallRating = (avgRating1 + avgRating2 + avgRating3 + avgRating4 + avgRating5) / 5;
+            if (userTotal != 0)
+            {
+                //Calculate average ratings for each categories and round to first decimal place.
+                avgRating1 = (double)Math.Round(totalRating1 / userTotal, 1);
+                avgRating2 = (double)Math.Round(totalRating2 / userTotal, 1);
+                avgRating3 = (double)Math.Round(totalRating3 / userTotal, 1);
+                avgRating4 = (double)Math.Round(totalRating4 / userTotal, 1);
+                avgRating5 = (double)Math.Round(totalRating5 / userTotal, 1);
 
-        //        ratingStats.avgRating1 = avgRating1;
-        //        ratingStats.avgRating2 = avgRating2;
-        //        ratingStats.avgRating3 = avgRating3;
-        //        ratingStats.avgRating4 = avgRating4;
-        //        ratingStats.avgRating5 = avgRating5;
+                //Calculate overall average ratings
+                avgOverallRating = (avgRating1 + avgRating2 + avgRating3 + avgRating4 + avgRating5) / 5;
 
-        //        ratingStats.averageRating = (double)Math.Round(avgOverallRating, 1);
-        //        ratingStats.RatedBy = userTotal.ToString();
-        //    }
-        //    return ratingStats;
-        //}
+                ratingStats.avgRating1 = avgRating1;
+                ratingStats.avgRating2 = avgRating2;
+                ratingStats.avgRating3 = avgRating3;
+                ratingStats.avgRating4 = avgRating4;
+                ratingStats.avgRating5 = avgRating5;
 
+                ratingStats.averageRating = (double)Math.Round(avgOverallRating, 1);
+                ratingStats.RatedBy = userTotal.ToString();
+            }
 
+            int reviewcount = await Task.FromResult(_dapper.Get<int>("select count(*) from reviews_of_ratings r inner join services_ratings s on r.ratingID = s.ratingsID where s.FBOID_FK = " + fboID, dynamicParameters, commandType: CommandType.Text));
+            ratingStats.TotalReviews = reviewcount;
+
+            return ratingStats;
+        }
     }
 }

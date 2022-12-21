@@ -117,7 +117,6 @@ namespace FBO.Controllers
             
             return RedirectToAction("BasicAndExtended", new {companyID = updateextended.companyID });
         }
-
         [HttpPost]
         public async Task<IActionResult> FuelCardUpdate(FuelCardDiscountsModel fuel)
         {
@@ -147,6 +146,11 @@ namespace FBO.Controllers
                 TempData["success"] = "false";
             }
             return RedirectToAction("fuel", new { companyID = fuel.companyID });
+        }
+        public async Task<RatingStats> GetFBOStats (int companyID)
+        {
+            RatingStats stats = new RatingStats();
+            return stats;
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
