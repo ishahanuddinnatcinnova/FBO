@@ -229,14 +229,61 @@ namespace FBO.Services
                 return response;
             }
         }
-        public async Task<string> PostBasicServicesUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
+        public async Task<ServiceResponseViewModel> GetResponseForLogoService(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
+
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+                        FBOResult res = await _generalService.GetFBO(companyID);
+                        FBOLogoServiceModel logo = await _generalService.GetLogoService(companyID);
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                            response.data.fbologoser = logo;
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
+        public string PostBasicServicesUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
             string response = "";
             try
             {
                 if (updatebasic.companyID != null && updatebasic.companyID != "")
                 {
-                    response = await _generalService.SaveButtonBasicService(updatebasic);
+                    response =  _generalService.SaveButtonBasicService(updatebasic);
                 }
                 return response;
             }
@@ -247,14 +294,14 @@ namespace FBO.Services
 
 
         }
-        public async Task<string> PostExtendedServicesUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
+        public string PostExtendedServicesUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
         {
             string response = "";
             try
             {
                 if (updateextended.companyID != null && updateextended.companyID != "")
                 {
-                    response = await _generalService.SaveButtonExtendedService(updateextended);
+                    response =  _generalService.SaveButtonExtendedService(updateextended);
                 }
                 return response;
             }
@@ -265,14 +312,14 @@ namespace FBO.Services
 
 
         }
-        public async Task<string> PostFuelCardUpdate(FuelCardDiscountsModel fuel)
+        public  string PostFuelCardUpdate(FuelCardDiscountsModel fuel)
         {
             string response = "";
             try
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response = await _generalService.BtnFuelCardSaveClick(fuel);
+                    response =  _generalService.BtnFuelCardSaveClick(fuel);
                 }
                 return response;
             }
@@ -283,14 +330,32 @@ namespace FBO.Services
 
 
         }
-        public async Task<string> PostFuelPriceUpdate(FuelPriceUpdateModel fuel)
+        public string PostFuelPriceUpdate(FuelPriceUpdateModel fuel)
         {
             string response ="" ;
             try
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response = await _generalService.BtnFuelPriceSaveClick(fuel);
+                    response =  _generalService.BtnFuelPriceSaveClick(fuel);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
+        public string PostLogoServicesUpdate(FBOLogoServiceModel logo)
+        {
+            string response = "";
+            try
+            {
+                if (logo.companyID != null && logo.companyID != "")
+                {
+                    response =  _generalService.BtnLogoServicesSaveClick(logo);
                 }
                 return response;
             }

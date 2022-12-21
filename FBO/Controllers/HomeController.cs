@@ -85,12 +85,25 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-     
+        [Route("logoservices.aspx")]
+        public async Task<IActionResult> LogoServices(string companyID, string fuel)
+        {
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForLogoService(this.Request, companyID, fuel);
+            if (response.isRedirect)
+            {
+                return Redirect(response.redirectURL);
+            }
+            else
+            {
+                return View(response.data);
+            }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
+        public  IActionResult BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
 
-            string response = await _fboMainService.PostBasicServicesUpdate(updatebasic);
+            string response =  _fboMainService.PostBasicServicesUpdate(updatebasic);
             if(response== "Success")
             {
                 TempData["success"] = "true";
@@ -102,10 +115,10 @@ namespace FBO.Controllers
             return RedirectToAction("BasicAndExtended", new {companyID = updatebasic.companyID });
         }
         [HttpPost]
-        public async Task<IActionResult> ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
+        public  IActionResult ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
         {
 
-            string response = await _fboMainService.PostExtendedServicesUpdate(updateextended);
+            string response =  _fboMainService.PostExtendedServicesUpdate(updateextended);
             if(response== "Success")
             {
                 TempData["success"] = "true";
@@ -119,10 +132,10 @@ namespace FBO.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FuelCardUpdate(FuelCardDiscountsModel fuel)
+        public  IActionResult FuelCardUpdate(FuelCardDiscountsModel fuel)
         {
 
-            string response = await _fboMainService.PostFuelCardUpdate(fuel);
+            string response =  _fboMainService.PostFuelCardUpdate(fuel);
             if (response == "success")
             {
                 TempData["success"] = "true";
@@ -131,13 +144,13 @@ namespace FBO.Controllers
             {
                 TempData["success"] = "false";
             }
-            return RedirectToAction("fuelcards", new { companyID = fuel.companyID });
+            return RedirectToAction("FuelCards", new { companyID = fuel.companyID });
         }
         [HttpPost]
-        public async Task<IActionResult> FuelPriceUpdate(FuelPriceUpdateModel fuel)
+        public  IActionResult FuelPriceUpdate(FuelPriceUpdateModel fuel)
         {
           
-            string response = await _fboMainService.PostFuelPriceUpdate(fuel);
+            string response =  _fboMainService.PostFuelPriceUpdate(fuel);
             if (response == "success")
             {
                 TempData["success"] = "true";
@@ -146,7 +159,22 @@ namespace FBO.Controllers
             {
                 TempData["success"] = "false";
             }
-            return RedirectToAction("fuel", new { companyID = fuel.companyID });
+            return RedirectToAction("Fuel", new { companyID = fuel.companyID });
+        }
+        [HttpPost]
+        public  IActionResult LogoServiceUpdate(FBOLogoServiceModel logo)
+        {
+
+            string response =  _fboMainService.PostLogoServicesUpdate(logo);
+            if (response == "success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("LogoServices", new { companyID = logo.companyID });
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

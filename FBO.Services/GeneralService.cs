@@ -89,11 +89,249 @@ namespace FBO.Services
             {
                 return null;
             }
-
-
-
-
         }
+
+        public async Task<FBOLogoServiceModel> GetLogoService(string companyID)
+        {
+            FBOLogoServiceModel logo = new FBOLogoServiceModel();
+            String fbo_LogoServices = "";
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                var fbo = await Task.FromResult(_dapper.Get<FBOManagement_GetFBO_Result>("FBOManagement_GetFBO", dynamicParameters, commandType: CommandType.StoredProcedure));
+                fbo_LogoServices = fbo.logoservices;
+                String l = "logos," + fbo_LogoServices + ",";
+
+          var logos = Logo(logo, l);
+                return logos;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public FBOLogoServiceModel Logo(FBOLogoServiceModel logo, string l)
+        {
+            if (l.IndexOf(",1,") > 0)
+            {
+                logo.chkLogoService01 = true;
+            }
+            if (l.IndexOf(",2,") > 0)
+            {
+                logo.chkLogoService02 = true;
+            }
+            if (l.IndexOf(",3,") > 0)
+            {
+                logo.chkLogoService03 = true;
+            }
+            if (l.IndexOf(",4,") > 0)
+            {
+                logo.chkLogoService04 = true;
+            }
+            if (l.IndexOf(",5,") > 0)
+            {
+                logo.chkLogoService05 = true;
+            }
+            if (l.IndexOf(",6,") > 0)
+            {
+                logo.chkLogoService06 = true;
+            }
+            if (l.IndexOf(",11,") > 0)
+            {
+                logo.chkLogoService11 = true;
+            }
+            if (l.IndexOf(",13,") > 0)
+            {
+                logo.chkLogoService13 = true;
+            }
+            if (l.IndexOf(",14,") > 0)
+            {
+                logo.chkLogoService14 = true;
+            }
+            if (l.IndexOf(",15,") > 0)
+            {
+                logo.chkLogoService15 = true;
+            }
+            if (l.IndexOf(",16,") > 0)
+            {
+                logo.chkLogoService16 = true;
+            }
+            if (l.IndexOf(",17,") > 0)
+            {
+                logo.chkLogoService17 = true;
+            }
+            if (l.IndexOf(",18,") > 0)
+            {
+                logo.chkLogoService18 = true;
+            }
+            if (l.IndexOf(",19,") > 0)
+            {
+                logo.chkLogoService19 = true;
+            }
+            if (l.IndexOf(",20,") > 0)
+            {
+                logo.chkLogoService20 = true;
+            }
+            if (l.IndexOf(",21,") > 0)
+            {
+                logo.chkLogoService21 = true;
+            }
+            if (l.IndexOf(",22,") > 0)
+            {
+                logo.chkLogoService22 = true;
+            }
+
+            if (l.IndexOf(",26,") > 0)
+            {
+                logo.chkLogoService26 = true;
+            }
+
+            if (l.IndexOf(",30,") > 0)
+            {
+                logo.chkLogoService30 = true;
+            }
+            if (l.IndexOf(",31,") > 0)
+            {
+                logo.chkLogoService31 = true;
+            }
+            if (l.IndexOf(",32,") > 0)
+            {
+                logo.chkLogoService32 = true;
+            }
+            if (l.IndexOf(",33,") > 0)
+            {
+                logo.chkLogoService33 = true;
+            }
+            if (l.IndexOf(",34,") > 0)
+            {
+                logo.chkLogoService34 = true;
+            }
+            if (l.IndexOf(",35,") > 0)
+            {
+                logo.chkLogoService35 = true;
+            }
+            if (l.IndexOf(",36,") > 0)
+            {
+                logo.chkLogoService36 = true;
+            }
+            if (l.IndexOf(",37,") > 0)
+            {
+                logo.chkLogoService37 = true;
+            }
+            if (l.IndexOf(",38,") > 0)
+            {
+                logo.chkLogoService38 = true;
+            }
+            if (l.IndexOf(",39,") > 0)
+            {
+                logo.chkLogoService39 = true;
+            }
+            if (l.IndexOf(",40,") > 0)
+            {
+                logo.chkLogoService40 = true;
+            }
+
+            if (l.IndexOf(",42,") > 0)
+            {
+                logo.chkLogoService42 = true;
+            }
+            if (l.IndexOf(",45,") > 0)
+            {
+                logo.chkLogoService45 = true;
+            }
+            if (l.IndexOf(",46,") > 0)
+            {
+                logo.chkLogoService46 = true;
+            }
+            if (l.IndexOf(",47,") > 0)
+            {
+                logo.chkLogoService47 = true;
+            }
+
+            if (l.IndexOf(",54,") > 0)
+            {
+                logo.chkLogoService54 = true;
+            }
+            if (l.IndexOf(",56,") > 0)
+            {
+                logo.chkLogoService56 = true;
+            }
+
+            if (l.IndexOf(",60,") > 0)
+            {
+                logo.chkLogoService60 = true;
+            }
+
+            if (l.IndexOf(",63,") > 0)
+            {
+                logo.chkLogoService63 = true;
+            }
+
+            if (l.IndexOf(",72,") > 0)
+            {
+                logo.chkLogoService72 = true;
+            }
+
+            if (l.IndexOf(",73,") > 0)
+            {
+                logo.chkLogoService73 = true;
+            }
+
+            if (l.IndexOf(",74,") > 0)
+            {
+                logo.chkLogoService74 = true;
+            }
+
+            if (l.IndexOf(",75,") > 0)
+            {
+                logo.chkLogoService75 = true;
+            }
+
+            if (l.IndexOf(",76,") > 0)
+            {
+                logo.chkLogoService76 = true;
+            }
+
+            if (l.IndexOf(",77,") > 0)
+            {
+                logo.chkLogoService77 = true;
+            }
+
+            if (l.IndexOf(",78,") > 0)
+            {
+                logo.chkLogoService78 = true;
+            }
+
+            if (l.IndexOf(",79,") > 0)
+            {
+                logo.chkLogoService79 = true;
+            }
+
+            if (l.IndexOf(",80,") > 0)
+            {
+                logo.chkLogoService80 = true;
+            }
+
+            if (l.IndexOf(",81,") > 0)
+            {
+                logo.chkLogoService81 = true;
+            }
+
+            if (l.IndexOf(",82,") > 0)
+            {
+                logo.chkLogoService82 = true;
+            }
+
+            if (l.IndexOf(",83,") > 0)
+            {
+                logo.chkLogoService83 = true;
+            }
+            return logo;
+        }
+
+
         public bool CheckFboExpired(FBOResult fbo)
         {
             // FboResultMainModel fbo = new FboResultMainModel();
@@ -204,7 +442,7 @@ namespace FBO.Services
 
             }
         }
-        public async Task<string> SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
+        public  string SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
         {
             int companyID = 0;
             companyID = Convert.ToInt32(basic.companyID);
@@ -228,7 +466,7 @@ namespace FBO.Services
 
 
         }
-        public async Task<string> SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
+        public  string SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
         {
             int companyID = 0;
             companyID = Convert.ToInt32(extended.companyID);
@@ -338,7 +576,7 @@ namespace FBO.Services
             }
         }
 
-        public async Task<string> BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
+        public string BtnFuelCardSaveClick(FuelCardDiscountsModel fueldis)
         {
             var response = new List<string>();
             try
@@ -433,7 +671,7 @@ namespace FBO.Services
             }
         }
 
-        public async Task<string> BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
+        public  string BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
         {
             string respose = "";
 
@@ -560,7 +798,299 @@ namespace FBO.Services
                 return "failed";
             }
         }
+        public string BtnLogoServicesSaveClick(FBOLogoServiceModel logoser)
+        {
+            string respose = "";
 
+            try
+            {
+
+                String ls = "";
+                int logoCount = 0;
+
+                if (logoser.chkLogoService01 == true)
+                {
+                    ls = ls + "1,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService02 == true)
+                {
+                    ls = ls + "2,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService03 == true)
+                {
+                    ls = ls + "3,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService04 == true)
+                {
+                    ls = ls + "4,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService05 == true)
+                {
+                    ls = ls + "5,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService06 == true)
+                {
+                    ls = ls + "6,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService11 == true)
+                {
+                    ls = ls + "11,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService13 == true)
+                {
+                    ls = ls + "13,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService14 == true)
+                {
+                    ls = ls + "14,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService15 == true)
+                {
+                    ls = ls + "15,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService16 == true)
+                {
+                    ls = ls + "16,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService17 == true)
+                {
+                    ls = ls + "17,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService18 == true)
+                {
+                    ls = ls + "18,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService19 == true)
+                {
+                    ls = ls + "19,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService20 == true)
+                {
+                    ls = ls + "20,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService21 == true)
+                {
+                    ls = ls + "21,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService22 == true)
+                {
+                    ls = ls + "22,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService26 == true)
+                {
+                    ls = ls + "26,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService30 == true)
+                {
+                    ls = ls + "30,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService31 == true)
+                {
+                    ls = ls + "31,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService32 == true)
+                {
+                    ls = ls + "32,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService33 == true)
+                {
+                    ls = ls + "33,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService34 == true)
+                {
+                    ls = ls + "34,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService35 == true)
+                {
+                    ls = ls + "35,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService36 == true)
+                {
+                    ls = ls + "36,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService37 == true)
+                {
+                    ls = ls + "37,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService38 == true)
+                {
+                    ls = ls + "38,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService39 == true)
+                {
+                    ls = ls + "39,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService40 == true)
+                {
+                    ls = ls + "40,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService42 == true)
+                {
+                    ls = ls + "42,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService45 == true)
+                {
+                    ls = ls + "45,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService46 == true)
+                {
+                    ls = ls + "46,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService47 == true)
+                {
+                    ls = ls + "47,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService54 == true)
+                {
+                    ls = ls + "54,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService56 == true)
+                {
+                    ls = ls + "56,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService60 == true)
+                {
+                    ls = ls + "60,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService63 == true)
+                {
+                    ls = ls + "63,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService72 == true)
+                {
+                    ls = ls + "72,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService73 == true)
+                {
+                    ls = ls + "73,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService74 == true)
+                {
+                    ls = ls + "74,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService75 == true)
+                {
+                    ls = ls + "75,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService76 == true)
+                {
+                    ls = ls + "76,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService77 == true)
+                {
+                    ls = ls + "77,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService78 == true)
+                {
+                    ls = ls + "78,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService79 == true)
+                {
+                    ls = ls + "79,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService80 == true)
+                {
+                    ls = ls + "80,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService81 == true)
+                {
+                    ls = ls + "81,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService82 == true)
+                {
+                    ls = ls + "82,";
+                    logoCount = logoCount + 1;
+                }
+
+                if (logoser.chkLogoService83 == true)
+                {
+                    ls = ls + "83,";
+                    logoCount = logoCount + 1;
+                }
+
+                String strlogoCount = logoCount.ToString();
+
+                if (ls.Length > 1)
+                {
+                    ls = ls.Substring(0, ls.LastIndexOf(","));
+                }
+
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", logoser.companyID);
+                dynamicParameters.Add("service", ls);
+
+                _dapper.Execute("FBOManagement_UpdateLogoService", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+
+
+            }
+            catch
+            {
+                return "failed";
+            }
+        }
         protected async Task<bool> CheckUpgradeEligibleAsync(string companyID)
         {
             bool isUpgradeEligible = false;
