@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Dapper;
 using GlobalAir.Data;
 using Microsoft.AspNetCore.Http;
+using System.Dynamic;
 
 namespace FBO.Services
 {
@@ -181,7 +182,7 @@ namespace FBO.Services
                 return response;
             }
         }
-        
+
         public async Task<ServiceResponseViewModel> GetResponseForFuelPrice(HttpRequest request, string companyID, string fuel)
         {
             try
@@ -203,7 +204,7 @@ namespace FBO.Services
                         else
                         {
                             response.data.FBO = res;
-                     
+
                             response.isRedirect = false;
                         }
                     }
@@ -276,6 +277,61 @@ namespace FBO.Services
                 return response;
             }
         }
+
+
+
+
+        public async Task<ServiceResponseViewModel> GetResponseForFboInformation(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
+
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+                        
+                        FBOResult res = await _generalService.GetFBO(companyID);
+                        var locations = await _generalService.GetLocations();
+                        services_Accepted_GetCreditCards_Result cardinfo = await _generalService.GetCreditCardInfo(companyID);
+
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                            response.data.fboCreditCards = cardinfo;
+                            response.data.locations = locations;
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
         public string PostBasicServicesUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
             string response = "";
@@ -283,7 +339,64 @@ namespace FBO.Services
             {
                 if (updatebasic.companyID != null && updatebasic.companyID != "")
                 {
-                    response =  _generalService.SaveButtonBasicService(updatebasic);
+                    response = _generalService.SaveButtonBasicService(updatebasic);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
+        public async Task <string> PostFboInfoUpdate(FBOInfoUpdateModel updateinfo,HttpRequest request)
+        {
+            string response = "";
+            try
+            {
+                if (updateinfo.companyID != null && updateinfo.companyID != "")
+                {
+                    UserViewModel userData = _utility.CheckLogin(request);
+                    response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
+                    response = _generalService.SaveButtonUpdateFboInfo(updateinfo,userData.userFirstname);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
+        //public string SaveFboLogo(IFormFile logofile, string companyID, string logo)
+        //{
+        //    string response = "";
+        //    try
+        //    {
+        //        if (companyID != null && companyID != "")
+        //        {
+        //            response = _generalService.UploadFboLogoBtn(logofile, companyID,logo);
+        //        }
+        //        return response;
+        //    }
+        //    catch
+        //    {
+        //        return response;
+        //    }
+
+
+        //}
+        public string DeleteFboLogo(string companyID, string logo)
+        {
+            string response = "";
+            try
+            {
+                if (companyID != null && companyID != "")
+                {
+               
+                    response = _generalService.DeleteLogo(companyID, logo);
                 }
                 return response;
             }
@@ -301,7 +414,7 @@ namespace FBO.Services
             {
                 if (updateextended.companyID != null && updateextended.companyID != "")
                 {
-                    response =  _generalService.SaveButtonExtendedService(updateextended);
+                    response = _generalService.SaveButtonExtendedService(updateextended);
                 }
                 return response;
             }
@@ -312,14 +425,14 @@ namespace FBO.Services
 
 
         }
-        public  string PostFuelCardUpdate(FuelCardDiscountsModel fuel)
+        public string PostFuelCardUpdate(FuelCardDiscountsModel fuel)
         {
             string response = "";
             try
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response =  _generalService.BtnFuelCardSaveClick(fuel);
+                    response = _generalService.BtnFuelCardSaveClick(fuel);
                 }
                 return response;
             }
@@ -332,12 +445,12 @@ namespace FBO.Services
         }
         public string PostFuelPriceUpdate(FuelPriceUpdateModel fuel)
         {
-            string response ="" ;
+            string response = "";
             try
             {
                 if (fuel.companyID != null && fuel.companyID != "")
                 {
-                    response =  _generalService.BtnFuelPriceSaveClick(fuel);
+                    response = _generalService.BtnFuelPriceSaveClick(fuel);
                 }
                 return response;
             }
@@ -355,7 +468,7 @@ namespace FBO.Services
             {
                 if (logo.companyID != null && logo.companyID != "")
                 {
-                    response =  _generalService.BtnLogoServicesSaveClick(logo);
+                    response = _generalService.BtnLogoServicesSaveClick(logo);
                 }
                 return response;
             }

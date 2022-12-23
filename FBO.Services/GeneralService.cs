@@ -2,12 +2,14 @@
 using FBO.Dapper;
 using FBO.ViewModels;
 using GlobalAir.Data;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -103,7 +105,7 @@ namespace FBO.Services
                 fbo_LogoServices = fbo.logoservices;
                 String l = "logos," + fbo_LogoServices + ",";
 
-          var logos = Logo(logo, l);
+                var logos = Logo(logo, l);
                 return logos;
             }
             catch (Exception ex)
@@ -111,6 +113,60 @@ namespace FBO.Services
                 return null;
             }
         }
+        public async Task<services_Accepted_GetCreditCards_Result> GetCreditCardInfo(string companyID)
+        {
+            services_Accepted_GetCreditCards_Result logo = new services_Accepted_GetCreditCards_Result();
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                var cardInfo = await Task.FromResult(_dapper.Get<services_Accepted_GetCreditCards_Result>("services_Accepted_GetCreditCards", dynamicParameters, commandType: CommandType.StoredProcedure));
+
+
+                return cardInfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<List<uspGetAllLocations_Result>> GetLocations()
+        {
+
+
+            try
+            {
+
+                List<uspGetAllLocations_Result> cardInfo = await Task.FromResult(_dapper.GetAll<uspGetAllLocations_Result>("Web.uspGetAllLocations", null, commandType: CommandType.StoredProcedure));
+
+
+                return cardInfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public string DeleteLogo(String companyID, String logo)
+        {
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("fboCompID", companyID);
+                dynamicParameters.Add("fboLogo", logo);
+                _dapper.Execute("Services_FBO_DeleteLogo", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+        }
+
 
         public FBOLogoServiceModel Logo(FBOLogoServiceModel logo, string l)
         {
@@ -442,7 +498,7 @@ namespace FBO.Services
 
             }
         }
-        public  string SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
+        public string SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
         {
             int companyID = 0;
             companyID = Convert.ToInt32(basic.companyID);
@@ -466,7 +522,128 @@ namespace FBO.Services
 
 
         }
-        public  string SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
+        public string SaveButtonUpdateFboInfo(FBOInfoUpdateModel info, string user)
+        {
+            int companyID = 0;
+            companyID = Convert.ToInt32(info.companyID);
+            try
+            {
+                string userName = user;
+                int cc_mastercard = 0;
+                int cc_visa = 0;
+                int cc_discover = 0;
+                int cc_amex = 0;
+                String ManagerName = info.ManagerName != null ? info.ManagerName.Trim() : "";
+                String Address1 = info.Address1 != null ? info.Address1.Trim() : "";
+                String Address2 = info.Address2 != null ? info.Address2.Trim() : "";
+                String City = info.City != null ? info.City.Trim() : "";
+                int stateid;
+                int.TryParse(info.stateid, out stateid);
+                String Zipcode = info.Zipcode != null ? info.Zipcode.Trim() : "";
+                String Phone = info.Phone != null ? info.Phone.Trim() : "";
+                String Fax = info.Fax != null ? info.Fax.Trim() : "";
+                String Arinc = info.Arinc != null ? info.Arinc.Trim() : "";
+                String Unicom = info.Unicom != null ? info.Unicom.Trim() : "";
+                String FAARepair = info.FAARepair != null ? info.FAARepair.Trim() : "";
+                String Email = info.Email != null ? info.Email.Trim() : "";
+                String URL = info.URL != null ? info.URL.Trim() : "";
+                String OpHours = info.OpHours != null ? info.OpHours.Trim() : "";
+                String RampDescription = info.RampDescription != null ? info.RampDescription.Trim() : "";
+                String ComDescription = info.ComDescription != null ? info.ComDescription.Trim() : "";
+                String strRampFee = info.strRampFee != null ? info.strRampFee.Trim() : "";
+                int rampFee = strRampFee != null ? (strRampFee == "Yes" ? 1 : 0) : 0;
+
+                ManagerName = ManagerName.Replace("\"", "");
+                Address1 = Address1.Replace("\"", "");
+                Address2 = Address2.Replace("\"", "");
+                City = City.Replace("\"", "");
+                FAARepair = FAARepair.Replace("\"", "");
+                OpHours = OpHours.Replace("\"", "");
+                if (string.IsNullOrEmpty(info.username))
+                {
+                    userName = "*UNKNOWN";
+                }
+                else
+                {
+                    userName = user;
+                }
+                if (info.cc_mastercard == true)
+                {
+                    cc_mastercard = 1;
+                }
+                else
+                {
+                    cc_mastercard = 0;
+                }
+
+                if (info.cc_visa == true)
+                {
+                    cc_visa = 1;
+                }
+                else
+                {
+                    cc_visa = 0;
+                }
+
+                if (info.cc_discover == true)
+                {
+                    cc_discover = 1;
+                }
+                else
+                {
+                    cc_discover = 0;
+                }
+
+                if (info.cc_amex == true)
+                {
+                    cc_amex = 1;
+                }
+                else
+                {
+                    cc_amex = 0;
+                }
+                DynamicParameters dynamicParameters = new DynamicParameters();
+
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("manager", ManagerName);
+                dynamicParameters.Add("Addr1", Address1);
+                dynamicParameters.Add("Addr2", Address2);
+                dynamicParameters.Add("City", City);
+                dynamicParameters.Add("StateId", stateid);
+                dynamicParameters.Add("Zip", Zipcode);
+                dynamicParameters.Add("Phone", Phone);
+                dynamicParameters.Add("Fax", Fax);
+                dynamicParameters.Add("Arinc", Arinc);
+                dynamicParameters.Add("Unicom", Unicom);
+                dynamicParameters.Add("faarepair", FAARepair);
+                dynamicParameters.Add("Email", Email);
+                dynamicParameters.Add("URL", URL);
+                dynamicParameters.Add("ophours", OpHours);
+                dynamicParameters.Add("rampfee", rampFee);
+                dynamicParameters.Add("rampdesc", RampDescription);
+                dynamicParameters.Add("Description", ComDescription);
+                dynamicParameters.Add("UserName", userName);
+                dynamicParameters.Add("CompanyID", info.companyID);
+                _dapper.Execute("Web.FBOManagement_UpdateCompanyInfo", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                DynamicParameters dynamicParametersForcard = new DynamicParameters();
+                dynamicParametersForcard.Add("CompanyID", companyID);
+                dynamicParametersForcard.Add("IsMastercard", cc_mastercard);
+                dynamicParametersForcard.Add("IsVisa", cc_visa);
+                dynamicParametersForcard.Add("IsDiscover", cc_discover);
+                dynamicParametersForcard.Add("IsAMEX", cc_amex);
+                dynamicParametersForcard.Add("UserName", userName);
+                _dapper.Execute("dbo.services_Accepted_SaveCreditCards", dynamicParametersForcard, commandType: CommandType.StoredProcedure);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+
+        }
+        public string SaveButtonExtendedService(FBOManagement_UpdateExtendedServices_Result extended)
         {
             int companyID = 0;
             companyID = Convert.ToInt32(extended.companyID);
@@ -518,7 +695,166 @@ namespace FBO.Services
 
             }
         }
+        public bool ThumbnailCallback()
+        {
+            return false;
+        }
+        public async Task<string> UploadFboLogoBtn(IFormFile myFile, string companyID)
+        {
 
+
+            string ARCPath = ConfigurationManager.AppSettings["FBOCompLogosFolder"];
+            String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+
+
+            int uploadedWidth = 0;
+            int uploadedHeight = 0;
+            int resizedWidth = 175;
+            int resizedHeight = 0;
+
+            String strTest = "";
+
+            String logoFilename = "";
+
+            if (myFile != null && companyID != "")
+            {
+
+                logoFilename = companyID;
+                logoFilename = logoFilename.Replace("%7B", "");
+                logoFilename = logoFilename.Replace("%2D", "-");
+                logoFilename = logoFilename.Replace("%7D", "");
+
+
+                if (logoFilename.Length > 8)
+                {
+                    logoFilename = logoFilename.Substring(0, 8);
+                }
+                logoFilename = logoFilename + ".jpg";
+
+                long nFileLen = myFile.Length;
+                if (nFileLen == 0)
+                {
+                    return "The file you tried to upload was empty or could not be read. Please try again.";
+                }
+                else
+                {
+                    if (System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpg" && System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpeg")
+                    {
+                        return "The file must have an extension of .jpg or .jpeg. Please try again.";
+                    }
+                    else
+                    {
+
+                        //byte[] myData = new Byte[nFileLen];
+                        //myFile.CopyToAsync(myData);
+                        var myData = await GetBytes(myFile);
+
+                        String sFilename = "";
+
+                        //sFilename = System.IO.Path.GetFileName(myFile.FileName);
+                        sFilename = logoFilename;
+
+                        int file_append = 0;
+
+                        while (System.IO.File.Exists(ARCPath + sFilename))
+                        {
+                            file_append++;
+                            sFilename = System.IO.Path.GetFileNameWithoutExtension(logoFilename) +
+                                        file_append.ToString() + ".jpg";
+                        }
+                        using (System.IO.FileStream newFile = new System.IO.FileStream(ARCPath + sFilename, System.IO.FileMode.Create))
+                        {
+                            newFile.Write(myData, 0, myData.Length);
+                            newFile.Flush();
+
+                            newFile.Close();
+                        }
+
+                        System.Drawing.Image.GetThumbnailImageAbort myCallBack = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
+                        Bitmap myBitmap;
+                        try
+                        {
+                            myBitmap = new Bitmap(ARCPath + sFilename);
+                            try
+                            {
+
+                                uploadedWidth = myBitmap.Width;
+                                uploadedHeight = myBitmap.Height;
+
+                                if (uploadedWidth > 175 && uploadedHeight > 0)
+                                {
+                                    resizedHeight = (int)(((double)resizedWidth / (double)uploadedWidth) * (double)uploadedHeight);
+                                    if (resizedHeight < 1)
+                                    {
+                                        resizedHeight = uploadedHeight;
+                                    }
+                                    System.Drawing.Image myThumbnail = myBitmap.GetThumbnailImage(resizedWidth, resizedHeight, myCallBack, IntPtr.Zero);
+
+                                    int resize_append = 0;
+
+                                    while (System.IO.File.Exists(ARCPath + sFilename))
+                                    {
+                                        resize_append++;
+                                        sFilename = System.IO.Path.GetFileNameWithoutExtension(sFilename) +
+                                                    resize_append.ToString() + ".jpg";
+                                    }
+                                    myThumbnail.Save(ARCPath + sFilename);
+                                }
+
+
+                                // copy the FBO logo to the /sm folder
+                                try
+                                {
+                                    String arc_filepath = ARCPath + sFilename;
+                                    String sm_filepath = ARCPath + @"\sm\" + sFilename;
+
+                                    System.IO.File.Copy(arc_filepath, sm_filepath, true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    return "failed";
+                                }
+                                if (companyID != "" && sFilename != "")
+                                {
+                                    try
+                                    {
+                                        DynamicParameters dynamicParameters = new DynamicParameters();
+                                        dynamicParameters.Add("fboCompID", companyID);
+                                        dynamicParameters.Add("fboLogo", sFilename);
+                                        _dapper.Execute("Services_FBO_UploadLogo", dynamicParameters, commandType: CommandType.StoredProcedure);
+                                        return "Success";
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        return "failed";
+
+                                    }
+                                }
+                            }
+                            finally
+                            {
+                                myBitmap.Dispose();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return "failed";
+                            //System.IO.File.Delete(ARCPath + sFilename);
+                        }
+                        return "Success";
+                    }
+                return "Success";
+                }
+
+            }
+            return "Success";
+        }
+        public static async Task<byte[]> GetBytes( IFormFile formFile)
+        {
+            await using var memoryStream = new MemoryStream();
+            await formFile.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
+        }
         public async Task<FuelCardDiscountsModel> GetFuelCards(string companyID)
         {
             FuelCardDiscountsModel fueldis = new FuelCardDiscountsModel();
@@ -671,7 +1007,7 @@ namespace FBO.Services
             }
         }
 
-        public  string BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
+        public string BtnFuelPriceSaveClick(FuelPriceUpdateModel fueldis)
         {
             string respose = "";
 
@@ -1109,6 +1445,38 @@ namespace FBO.Services
             return isUpgradeEligible;
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //public async Task<RatingStats> getRatingStatsAsync(int fboID)
         //{
         //    #region local variables declaration

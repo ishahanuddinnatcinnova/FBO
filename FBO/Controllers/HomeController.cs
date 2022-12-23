@@ -2,7 +2,6 @@
 using FBO.Services;
 using FBO.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 
 namespace FBO.Controllers
@@ -98,11 +97,25 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
+        [Route("information.aspx")]
+        public async Task<IActionResult> FboInformation(string companyID, string fuel)
+        {
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForFboInformation(this.Request, companyID, fuel);
+            if (response.isRedirect)
 
+
+            {
+                return Redirect(response.redirectURL);
+            }
+            else
+            {
+                return View(response.data);
+            }
+        }
         [HttpPost]
         public  IActionResult BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
-
+            
             string response =  _fboMainService.PostBasicServicesUpdate(updatebasic);
             if(response== "Success")
             {
@@ -114,6 +127,7 @@ namespace FBO.Controllers
             }
             return RedirectToAction("BasicAndExtended", new {companyID = updatebasic.companyID });
         }
+
         [HttpPost]
         public  IActionResult ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
         {
@@ -175,6 +189,38 @@ namespace FBO.Controllers
                 TempData["success"] = "false";
             }
             return RedirectToAction("LogoServices", new { companyID = logo.companyID });
+        }
+        [HttpPost]
+        public async Task<IActionResult> FboInformationUpdate(FBOInfoUpdateModel updatebasic)
+        {
+
+            string response = await _fboMainService.PostFboInfoUpdate(updatebasic,this.Request);
+            if (response == "Success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("FboInformation", new { companyID = updatebasic.companyID });
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteFboLogo(string companyID, string logo)
+        {
+
+            string response = _fboMainService.DeleteFboLogo(companyID,logo);
+            if (response == "Success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("BasicAndExtended", new {/* companyID = updatebasic.companyID*/ });
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

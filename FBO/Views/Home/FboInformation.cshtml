@@ -1,0 +1,428 @@
+﻿@model FBO.ViewModels.ResponseDataViewModel
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+<style>
+    #featuredPromo {
+        border-radius: 10px;
+    }
+
+    #fuelPrices {
+        border-radius: 10px;
+        color: white;
+        padding: 20px
+    }
+
+        #fuelPrices .nav {
+            background-color: rgb(238, 238, 238);
+            color: black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+            #fuelPrices .nav li {
+                padding-bottom: 9px;
+                padding-top: 9px;
+                font-weight: 600;
+            }
+
+            #fuelPrices .nav .active {
+                background-color: white;
+                font-weight: 700;
+                border-radius: 10px;
+                padding: 8px;
+                color: rgb(168, 211, 43)
+            }
+
+        #fuelPrices a {
+            color: white
+        }
+
+        #fuelPrices .nav li a {
+            color: gray;
+        }
+
+    .tab-content {
+        padding-top: 30px
+    }
+
+        .tab-content table {
+            color: white;
+        }
+
+            .tab-content table td {
+                padding: 0rem;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                padding-left: 0.5rem;
+            }
+
+            .tab-content table .heading {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+    #region {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+        #region a {
+            color: rgb(71, 130, 211);
+        }
+
+    .middleBox {
+        background-color: rgb(245, 245, 245);
+        padding: 10px;
+        border-radius: 10px
+    }
+
+        .middleBox span {
+            color: rgb(150, 150, 150)
+        }
+
+        .middleBox h4,
+        p {
+            color: rgb(100, 100, 100)
+        }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        border: none;
+        position: relative;
+        margin-bottom: 30px;
+        box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    }
+
+    .l-bg-cherry {
+        background: linear-gradient(to right, #000000, #0000009e) !important;
+        color: #fff;
+    }
+
+    .l-bg-blue-dark {
+        background: linear-gradient(to right, #373b44, #4286f4) !important;
+        color: #fff;
+    }
+
+    .l-bg-green-dark {
+        background: linear-gradient(to right, #97cb00, #97cb0085) !important;
+        color: #fff;
+    }
+
+    .l-bg-orange-dark {
+        background: linear-gradient(to right, #a86008, #ffba56) !important;
+        color: #fff;
+    }
+
+    .card .card-statistic-3 .card-icon-large .fas,
+    .card .card-statistic-3 .card-icon-large .far,
+    .card .card-statistic-3 .card-icon-large .fab,
+    .card .card-statistic-3 .card-icon-large .fal {
+        font-size: 110px;
+    }
+
+    .card .card-statistic-3 .card-icon {
+        text-align: center;
+        line-height: 50px;
+        margin-left: 15px;
+        color: #000;
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        opacity: 0.1;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    .l-bg-green {
+        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+        color: #fff;
+    }
+
+    .l-bg-orange {
+        background: linear-gradient(to right, #f9900e, #ffba56) !important;
+        color: #fff;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    #navbarsExample2 a {
+        color: rgb(233, 233, 233);
+        border-bottom: rgb(233, 233, 233) 2px solid;
+    }
+
+        #navbarsExample2 a:hover {
+            color: #97cb00;
+            border-bottom: #97cb00 2px solid;
+        }
+
+    label {
+        font-weight: 600;
+    }
+
+    .section-title {
+        position: relative;
+        text-transform: uppercase;
+        margin-bottom: 1.875rem;
+    }
+
+        .section-title::before {
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            content: "";
+            height: 2px;
+            width: 5rem;
+            background-color: #97cb00;
+        }
+</style>
+<div class="row ms-2 mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="airport%20weather%20&%20fbo%20fuel%20prices%20_%20globalair.com.html"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">FBO Information</span><meta itemprop="position" content="3"></a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <partial name="_SubMenuItems" model="@Model.FBO" />
+        <div class="col-md-9 col-12">
+
+            <div class="row ms-1">
+                <div class="card float-right">
+                    <div class="row mt-4">
+                        @using (Html.BeginForm("FboInformationUpdate", "Home", FormMethod.Post, new { name = "logoser", id = "logoser", enctype = "multipart/form-data" }))
+                        {
+
+                            <h2 class="section-title display-6">
+                                FBO Information
+                            </h2>
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    Basic Info
+                                </span>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="mb-3 col-6">
+                                    <label for="ManagerName" class="form-label">Manager</label>
+                                    <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
+
+                                    <input type="text" class="form-control" id="ManagerName" name="ManagerName" aria-describedby="Manager Name" value="@Model.FBO.FBO.manager">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Address1" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="Address1" name="Address1"  value="@Model.FBO.FBO.Address1">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Address2" class="form-label">Address 2</label>
+                                    <input type="text" class="form-control" id="Address2" name="Address2" value="@Model.FBO.FBO.Address2">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="City" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="City" name="City" value="@Model.FBO.FBO.City">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="stateid" class="form-label">State</label>
+                                    <select name="stateid" class="form-select" aria-label="Default select example" id='stateid'>
+                                        @foreach (var item in Model.locations)
+                                        {
+                                            <option value="@item.Aircraft_LocationId" selected">@item.LocName</option>
+                                            
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Zipcode" class="form-label" >Zip</label>
+                                    <input type="text" class="form-control" id="Zipcode" name="Zipcode" value="@Model.FBO.FBO.Zip">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Phone" class="form-label">Telephone</label>
+                                    <input type="text" class="form-control" id="Phone" name="Phone"  value="@Model.FBO.FBO.Phone">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Fax" class="form-label">Fax</label>
+                                    <input type="text" class="form-control" id="Fax" name="Fax" value="@Model.FBO.FBO.Fax">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Arinc" class="form-label">Arinc</label>
+                                    <input type="text" class="form-control" id="Arinc" name="Arinc" value="@Model.FBO.FBO.Arinc">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Unicom" class="form-label">Unicom</label>
+                                    <input type="text" class="form-control" id="Unicom" name="Unicom" value="@Model.FBO.FBO.Unicom">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="FAARepair" class="form-label">FAA Repair Code</label>
+                                    <input type="text" class="form-control" id="FAARepair" name="FAARepair" aria-describedby="emailHelp" value="@Model.FBO.FBO.FAARepairCode">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="Email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="Email" name="Email" value="@Model.FBO.FBO.Email">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="URL" class="form-label">URL</label>
+                                    <input type="text" class="form-control" id="URL" name="URL" value="@Model.FBO.FBO.URL">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="exampleInputtext1" class="form-label">Airport</label>
+                                    <a href="#" class="text-decoration-none">
+                                        <input type="text" class="form-control" name="Address1" readonly id="exampleInputtext1" value="@Model.FBO.FBO.APTCode" style="cursor: pointer">
+                                    </a>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="OpHours" class="form-label">Operating Hours</label>
+                                    <input type="text" class="form-control" name="OpHours" id="OpHours"  value="@Model.FBO.FBO.OperatingHours">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="strRampFee" class="form-label">Ramp Fee</label>
+                                    @*<input type="text" class="form-control" name="strRampFee" id="strRampFee" value="@Model.FBO.FBO.RampFee">*@
+                                    <select class="form-select" aria-label="Ramp Fee" id="strRampFee" name="strRampFee">
+                                        <option  >RampFee is added?</option>
+                                        <option value="@Model.FBO.FBO.RampFee" selected="@(Model.FBO.FBO.RampFee =="Yes"?"selected":"")">Yes</option>
+                                        <option value="@Model.FBO.FBO.RampFee" >No</option>
+                                       
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="RampDescription" class="form-label">Explain Ramp Fee</label>
+                                    <textarea class="form-control" id="RampDescription" name="RampDescription" rows="3" >@Model.FBO.FBO.rampfeedescription</textarea>
+
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="ComDescription" class="form-label">FBO Description</label>
+                                    <textarea class="form-control" name="ComDescription" id="ComDescription" rows="3" >@Model.FBO.FBO.Description</textarea>
+                                </div>
+
+                            </div>
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    Credit Cards Accepted
+                                </span>
+                            </div>
+                            <div class="row mt-5 mb-5">
+                                <div class="col-6 col-md-3">
+                                    <div class="form-check form-switch">
+
+                                        
+
+                                            @Html.CheckBox("cc_mastercard", Model.fboCreditCards.mastercard==1 ?true:false, new { @class="form-check-input" })
+                                       
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Mastercard</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="form-check form-switch">
+
+                                        @Html.CheckBox("cc_visa", Model.fboCreditCards.visa==1 ?true:false, new { @class="form-check-input" })
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Visa</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="form-check form-switch">
+
+                                        @Html.CheckBox("cc_amex", Model.fboCreditCards.amex==1 ?true:false, new { @class="form-check-input" })
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">American Express</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="form-check form-switch">
+
+                                        @Html.CheckBox("cc_discover", Model.fboCreditCards.discover==1 ?true:false, new { @class="form-check-input" })
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Discover</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Photos
+                                </span>
+                            </div>
+                            <div class="row p-3">
+                                <span class="alert alert-info" style="font-size: 20px">
+                                    <a href="#">Click here</a> to view and manage your FBO Photos
+                                </span>
+                            </div>
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Logo
+                                </span>
+                            </div>
+                            <div class="row p-3 mb-3">
+                                <div class="col-12 col-md-4 text-center mb-2">
+                                    <img src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo">
+                                    <br><br>
+                                    
+
+                                    <a href="#" class="btn btn-danger rounded">Delete Logo</a>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <p>
+                                        To change your FBO's logo, click the Browse button,
+                                        select a new file (in .jpg or .jpeg format), then click the Upload
+                                        button.
+                                    </p>
+                                    <p>
+                                        The maximum width for your logo is 175 pixels. If you upload
+                                        an image larger than 175 pixels wide, it will be re-sized automatically.
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="logo">Upload</label>
+                                        <input type="file" class="form-control" id="logo" name="logo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Manager's Photo
+                                </span>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col-12 col-md-4 text-center mb-2">
+                                    <img src="https://www.globalair.com/fbo/noimage.gif">
+                                    <br><br>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <p>
+                                        To add your FBO's manager's photo, click the Browse button,
+                                        select the file (in .jpg or .jpeg format), then click the Upload
+                                        button.
+                                    </p>
+                                    <p>
+                                        The maximum width for your FBO manager's photo is 100 pixels. If you upload
+                                        an image larger than 100 pixels wide, it will be re-sized automatically.
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="managerpic">Upload</label>
+                                        <input type="file" class="form-control" id="managerpic" name="managerpic">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-12 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

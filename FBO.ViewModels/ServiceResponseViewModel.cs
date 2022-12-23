@@ -23,9 +23,10 @@ namespace FBO.ViewModels
         public List<FBOManagement_GetFBOs_Result> FBOs { get; set; }
         public FBOResult FBO { get; set; }
         public FuelCardDiscountsModel fuelcards { get; set; }
-
+        public List<uspGetAllLocations_Result> locations { get; set; }
         public FBOManagement_UpdateBasicServices_Result basic = new FBOManagement_UpdateBasicServices_Result();
         public services_Accepted_GetCreditCards_Result fboCreditCards;
         public FBOLogoServiceModel fbologoser;
+
     }
 }
