@@ -2,6 +2,7 @@
 using FBO.Services;
 using FBO.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 
 namespace FBO.Controllers
@@ -144,7 +145,6 @@ namespace FBO.Controllers
             
             return RedirectToAction("BasicAndExtended", new {companyID = updateextended.companyID });
         }
-
         [HttpPost]
         public  IActionResult FuelCardUpdate(FuelCardDiscountsModel fuel)
         {
@@ -189,6 +189,11 @@ namespace FBO.Controllers
                 TempData["success"] = "false";
             }
             return RedirectToAction("LogoServices", new { companyID = logo.companyID });
+        }
+        public async Task<RatingStats> GetFBOStats (int companyID)
+        {
+            RatingStats stats = new RatingStats();
+            return stats;
         }
         [HttpPost]
         public async Task<IActionResult> FboInformationUpdate(FBOInfoUpdateModel updatebasic)

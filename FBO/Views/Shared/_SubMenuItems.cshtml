@@ -9,7 +9,7 @@
         </span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
         <div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
-            @if(Model.isUpgradeEligible)
+            @if (Model.FBO.FBOLevel != "Platinum")
             {
                 <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
             }
