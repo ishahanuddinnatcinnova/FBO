@@ -108,6 +108,7 @@ namespace FBO.Controllers
             {
                 return Redirect(response.redirectURL);
             }
+            
             else
             {
                 return View(response.data);
@@ -118,7 +119,7 @@ namespace FBO.Controllers
         {
             
             string response =  _fboMainService.PostBasicServicesUpdate(updatebasic);
-            if(response== "Success")
+            if(response== "success")
             {
                 TempData["success"] = "true";
             }
@@ -134,7 +135,7 @@ namespace FBO.Controllers
         {
 
             string response =  _fboMainService.PostExtendedServicesUpdate(updateextended);
-            if(response== "Success")
+            if(response== "success")
             {
                 TempData["success"] = "true";
             }
@@ -200,7 +201,7 @@ namespace FBO.Controllers
         {
 
             string response = await _fboMainService.PostFboInfoUpdate(updatebasic,this.Request);
-            if (response == "Success")
+            if (response == "success")
             {
                 TempData["success"] = "true";
             }
@@ -217,7 +218,7 @@ namespace FBO.Controllers
         {
 
             string response = _fboMainService.DeleteFboLogo(companyID,logo);
-            if (response == "Success")
+            if (response == "success")
             {
                 TempData["success"] = "true";
             }
@@ -225,7 +226,20 @@ namespace FBO.Controllers
             {
                 TempData["success"] = "false";
             }
-            return RedirectToAction("BasicAndExtended", new {/* companyID = updatebasic.companyID*/ });
+            return RedirectToAction("FboInformation", new { companyID = companyID });
+        }  public IActionResult DeleteManagerPic(string companyID, string managerpic)
+        {
+
+            string response = _fboMainService.DeleteManagerPic(companyID, managerpic);
+            if (response == "success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+            return RedirectToAction("FboInformation", new { companyID = companyID });
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

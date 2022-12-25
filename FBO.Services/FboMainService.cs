@@ -295,6 +295,7 @@ namespace FBO.Services
                         
                         FBOResult res = await _generalService.GetFBO(companyID);
                         var locations = await _generalService.GetLocations();
+                        var singleFbores = await _generalService.SingleFboRes(companyID);
                         services_Accepted_GetCreditCards_Result cardinfo = await _generalService.GetCreditCardInfo(companyID);
 
                         if (res.FBO.UserID.ToString() != userData.userID)
@@ -307,6 +308,7 @@ namespace FBO.Services
                             response.data.FBO = res;
                             response.data.fboCreditCards = cardinfo;
                             response.data.locations = locations;
+                            response.data.singleFBO = singleFbores;
                             response.isRedirect = false;
                         }
                     }
@@ -359,6 +361,7 @@ namespace FBO.Services
                 {
                     UserViewModel userData = _utility.CheckLogin(request);
                     response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
+                    response = await _generalService.UploadManagerPicBtn(updateinfo.managerpic, updateinfo.companyID);
                     response = _generalService.SaveButtonUpdateFboInfo(updateinfo,userData.userFirstname);
                 }
                 return response;
@@ -397,6 +400,25 @@ namespace FBO.Services
                 {
                
                     response = _generalService.DeleteLogo(companyID, logo);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
+        public string DeleteManagerPic(string companyID, string managerpic)
+        {
+            string response = "";
+            try
+            {
+                if (companyID != null && companyID != "")
+                {
+               
+                    response = _generalService.DeleteManagerPic(companyID, managerpic);
                 }
                 return response;
             }

@@ -88,7 +88,25 @@ namespace FBO.Services
                 return null;
             }
         }
+        public async Task<ARC_SingleFBO_Result> SingleFboRes(string companyID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("fboID", companyID);
+                var fbo = await Task.FromResult(_dapper.Get<ARC_SingleFBO_Result>("arc.ARC_SingleFBO", dynamicParameters, commandType: CommandType.StoredProcedure));
+                if (fbo.CompID != 0)
+                {
+                    return fbo;
 
+                }
+                return fbo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public async Task<FBOLogoServiceModel> GetLogoService(string companyID)
         {
             FBOLogoServiceModel logo = new FBOLogoServiceModel();
@@ -153,6 +171,23 @@ namespace FBO.Services
                 dynamicParameters.Add("fboCompID", companyID);
                 dynamicParameters.Add("fboLogo", logo);
                 _dapper.Execute("Services_FBO_DeleteLogo", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+        } public string DeleteManagerPic(String companyID, String ManagerPic)
+        {
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("ManagerPhoto", ManagerPic);
+                _dapper.Execute("Services_DeleteManagerPhoto", dynamicParameters, commandType: CommandType.StoredProcedure);
 
                 return "success";
             }
@@ -506,7 +541,7 @@ namespace FBO.Services
                 dynamicParameters.Add("IsRepairs", basic.checkboxRepairs ? 1 : 0);
                 dynamicParameters.Add("IsRentalCars", basic.checkboxRentalCars ? 1 : 0);
                 _dapper.Execute("FBOManagement_UpdateBasicServices", dynamicParameters, commandType: CommandType.StoredProcedure);
-                return "Success";
+                return "success";
             }
             catch (Exception ex)
             {
@@ -625,7 +660,7 @@ namespace FBO.Services
                 dynamicParametersForcard.Add("IsAMEX", cc_amex);
                 dynamicParametersForcard.Add("UserName", userName);
                 _dapper.Execute("dbo.services_Accepted_SaveCreditCards", dynamicParametersForcard, commandType: CommandType.StoredProcedure);
-                return "Success";
+                return "success";
             }
             catch (Exception ex)
             {
@@ -678,7 +713,7 @@ namespace FBO.Services
                 dynamicParameters.Add("IsBusinessCenter", extended.checkboxBusinessCenter ? 1 : 0);
                 dynamicParameters.Add("IsFitnessCenter", extended.checkboxFitnessCenter ? 1 : 0);
                 _dapper.Execute("FBOManagement_UpdateExtServices", dynamicParameters, commandType: CommandType.StoredProcedure);
-                return "Success";
+                return "success";
             }
             catch (Exception ex)
             {
@@ -694,7 +729,7 @@ namespace FBO.Services
         {
 
 
-            string ARCPath = ConfigurationManager.AppSettings["FBOCompLogosFolder"];
+            string ARCPath = "D:\\FBO\\FBO\\wwwroot\\images\\NewFolder\\";
             String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
 
 
@@ -793,18 +828,18 @@ namespace FBO.Services
                                 }
 
 
-                                // copy the FBO logo to the /sm folder
-                                try
-                                {
-                                    String arc_filepath = ARCPath + sFilename;
-                                    String sm_filepath = ARCPath + @"\sm\" + sFilename;
+                                //copy the FBO logo to the / sm folder
+                                //try
+                                //{
+                                //    String arc_filepath = ARCPath + sFilename;
+                                //    String sm_filepath = ARCPath + sFilename;
 
-                                    System.IO.File.Copy(arc_filepath, sm_filepath, true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    return "failed";
-                                }
+                                //    System.IO.File.Copy(arc_filepath, sm_filepath, true);
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    return "failed";
+                                //}
                                 if (companyID != "" && sFilename != "")
                                 {
                                     try
@@ -813,7 +848,7 @@ namespace FBO.Services
                                         dynamicParameters.Add("fboCompID", companyID);
                                         dynamicParameters.Add("fboLogo", sFilename);
                                         _dapper.Execute("Services_FBO_UploadLogo", dynamicParameters, commandType: CommandType.StoredProcedure);
-                                        return "Success";
+                                        return "success";
                                     }
                                     catch (Exception ex)
                                     {
@@ -832,15 +867,165 @@ namespace FBO.Services
                             return "failed";
                             //System.IO.File.Delete(ARCPath + sFilename);
                         }
-                        return "Success";
+                        return "success";
                     }
-                return "Success";
+                    return "success";
                 }
 
             }
-            return "Success";
+            return "No file found";
         }
-        public static async Task<byte[]> GetBytes( IFormFile formFile)
+        public async Task<string> UploadManagerPicBtn(IFormFile myFile, string companyID)
+        {
+
+
+            string ARCPath = "D:\\FBO\\FBO\\wwwroot\\images\\NewFolder1\\";
+            String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+
+
+            int uploadedWidth = 0;
+            int uploadedHeight = 0;
+            int resizedWidth = 100;
+            int resizedHeight = 0;
+
+            String strTest = "";
+
+            String logoFilename = "";
+
+            if (myFile != null && companyID != "")
+            {
+
+                logoFilename = companyID;
+                logoFilename = logoFilename.Replace("%7B", "");
+                logoFilename = logoFilename.Replace("%2D", "-");
+                logoFilename = logoFilename.Replace("%7D", "");
+
+
+                if (logoFilename.Length > 8)
+                {
+                    logoFilename = logoFilename.Substring(0, 8);
+                }
+                logoFilename = logoFilename + ".jpg";
+
+                long nFileLen = myFile.Length;
+                if (nFileLen == 0)
+                {
+                    return "The file you tried to upload was empty or could not be read. Please try again.";
+                }
+                else
+                {
+                    if (System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpg" && System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpeg")
+                    {
+                        return "The file must have an extension of .jpg or .jpeg. Please try again.";
+                    }
+                    else
+                    {
+
+                        //byte[] myData = new Byte[nFileLen];
+                        //myFile.CopyToAsync(myData);
+                        var myData = await GetBytes(myFile);
+
+                        String sFilename = "";
+
+                        //sFilename = System.IO.Path.GetFileName(myFile.FileName);
+                        sFilename = logoFilename;
+
+                        int file_append = 0;
+
+                        while (System.IO.File.Exists(ARCPath + sFilename))
+                        {
+                            file_append++;
+                            sFilename = System.IO.Path.GetFileNameWithoutExtension(logoFilename) +
+                                        file_append.ToString() + ".jpg";
+                        }
+                        using (System.IO.FileStream newFile = new System.IO.FileStream(ARCPath + sFilename, System.IO.FileMode.Create))
+                        {
+                            newFile.Write(myData, 0, myData.Length);
+                            newFile.Flush();
+
+                            newFile.Close();
+                        }
+
+                        System.Drawing.Image.GetThumbnailImageAbort myCallBack = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
+                        Bitmap myBitmap;
+                        try
+                        {
+                            myBitmap = new Bitmap(ARCPath + sFilename);
+                            try
+                            {
+
+                                uploadedWidth = myBitmap.Width;
+                                uploadedHeight = myBitmap.Height;
+
+                                if (uploadedWidth > 175 && uploadedHeight > 0)
+                                {
+                                    resizedHeight = (int)(((double)resizedWidth / (double)uploadedWidth) * (double)uploadedHeight);
+                                    if (resizedHeight < 1)
+                                    {
+                                        resizedHeight = uploadedHeight;
+                                    }
+                                    System.Drawing.Image myThumbnail = myBitmap.GetThumbnailImage(resizedWidth, resizedHeight, myCallBack, IntPtr.Zero);
+
+                                    int resize_append = 0;
+
+                                    while (System.IO.File.Exists(ARCPath + sFilename))
+                                    {
+                                        resize_append++;
+                                        sFilename = System.IO.Path.GetFileNameWithoutExtension(sFilename) +
+                                                    resize_append.ToString() + ".jpg";
+                                    }
+                                    myThumbnail.Save(ARCPath + sFilename);
+                                }
+
+
+                                //copy the FBO logo to the / sm folder
+                                //try
+                                //{
+                                //    String arc_filepath = ARCPath + sFilename;
+                                //    String sm_filepath = ARCPath + sFilename;
+
+                                //    System.IO.File.Copy(arc_filepath, sm_filepath, true);
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    return "failed";
+                                //}
+                                if (companyID != "" && sFilename != "")
+                                {
+                                    try
+                                    {
+                                        DynamicParameters dynamicParameters = new DynamicParameters();
+                                        dynamicParameters.Add("CompanyID", companyID);
+                                        dynamicParameters.Add("ManagerPhoto", sFilename);
+                                        _dapper.Execute("Services_SaveManagerPhoto", dynamicParameters, commandType: CommandType.StoredProcedure);
+                                        return "success";
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        return "failed";
+
+                                    }
+                                }
+                            }
+                            finally
+                            {
+                                myBitmap.Dispose();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return "failed";
+                            //System.IO.File.Delete(ARCPath + sFilename);
+                        }
+                        return "success";
+                    }
+                    return "success";
+                }
+
+            }
+            return "No file found";
+        }
+        public static async Task<byte[]> GetBytes(IFormFile formFile)
         {
             await using var memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);

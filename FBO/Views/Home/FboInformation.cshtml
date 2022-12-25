@@ -205,7 +205,22 @@
     <div class="row">
         <partial name="_SubMenuItems" model="@Model.FBO" />
         <div class="col-md-9 col-12">
-
+            @if (TempData["success"] != null && TempData["success"].ToString() == "true")
+            {
+                <div class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-success">Your changes have been updated successfully.</p>
+                    </div>
+                </div>
+            }
+            else if (TempData["success"] != null && TempData["success"].ToString() == "false")
+            {
+                <div class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                    </div>
+                </div>
+            }
             <div class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
@@ -224,12 +239,13 @@
                                 <div class="mb-3 col-6">
                                     <label for="ManagerName" class="form-label">Manager</label>
                                     <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
-
+                                    <input type="hidden" name="managerpic" value="@Model.singleFBO.ManagerPhoto">
+                                    <input type="hidden" name="logo" value="@Model.FBO.FBO.logo">
                                     <input type="text" class="form-control" id="ManagerName" name="ManagerName" aria-describedby="Manager Name" value="@Model.FBO.FBO.manager">
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Address1" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="Address1" name="Address1"  value="@Model.FBO.FBO.Address1">
+                                    <input type="text" class="form-control" id="Address1" name="Address1" value="@Model.FBO.FBO.Address1">
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Address2" class="form-label">Address 2</label>
@@ -244,19 +260,19 @@
                                     <select name="stateid" class="form-select" aria-label="Default select example" id='stateid'>
                                         @foreach (var item in Model.locations)
                                         {
-                                            <option value="@item.Aircraft_LocationId" selected">@item.LocName</option>
                                             
-                                        }
+                                            <option value="@item.Aircraft_LocationId" selected">@item.LocName</option>
 
+                                        }
                                     </select>
                                 </div>
                                 <div class="mb-3 col-6">
-                                    <label for="Zipcode" class="form-label" >Zip</label>
+                                    <label for="Zipcode" class="form-label">Zip</label>
                                     <input type="text" class="form-control" id="Zipcode" name="Zipcode" value="@Model.FBO.FBO.Zip">
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Phone" class="form-label">Telephone</label>
-                                    <input type="text" class="form-control" id="Phone" name="Phone"  value="@Model.FBO.FBO.Phone">
+                                    <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.FBO.FBO.Phone">
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Fax" class="form-label">Fax</label>
@@ -290,26 +306,26 @@
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="OpHours" class="form-label">Operating Hours</label>
-                                    <input type="text" class="form-control" name="OpHours" id="OpHours"  value="@Model.FBO.FBO.OperatingHours">
+                                    <input type="text" class="form-control" name="OpHours" id="OpHours" value="@Model.FBO.FBO.OperatingHours">
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="strRampFee" class="form-label">Ramp Fee</label>
                                     @*<input type="text" class="form-control" name="strRampFee" id="strRampFee" value="@Model.FBO.FBO.RampFee">*@
                                     <select class="form-select" aria-label="Ramp Fee" id="strRampFee" name="strRampFee">
-                                        <option  >RampFee is added?</option>
+                                        <option>RampFee is added?</option>
                                         <option value="@Model.FBO.FBO.RampFee" selected="@(Model.FBO.FBO.RampFee =="Yes"?"selected":"")">Yes</option>
-                                        <option value="@Model.FBO.FBO.RampFee" >No</option>
-                                       
+                                        <option value="@Model.FBO.FBO.RampFee">No</option>
+
                                     </select>
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="RampDescription" class="form-label">Explain Ramp Fee</label>
-                                    <textarea class="form-control" id="RampDescription" name="RampDescription" rows="3" >@Model.FBO.FBO.rampfeedescription</textarea>
+                                    <textarea class="form-control" id="RampDescription" name="RampDescription" rows="3">@Model.FBO.FBO.rampfeedescription</textarea>
 
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="ComDescription" class="form-label">FBO Description</label>
-                                    <textarea class="form-control" name="ComDescription" id="ComDescription" rows="3" >@Model.FBO.FBO.Description</textarea>
+                                    <textarea class="form-control" name="ComDescription" id="ComDescription" rows="3">@Model.FBO.FBO.Description</textarea>
                                 </div>
 
                             </div>
@@ -322,10 +338,10 @@
                                 <div class="col-6 col-md-3">
                                     <div class="form-check form-switch">
 
-                                        
 
-                                            @Html.CheckBox("cc_mastercard", Model.fboCreditCards.mastercard==1 ?true:false, new { @class="form-check-input" })
-                                       
+
+                                        @Html.CheckBox("cc_mastercard", Model.fboCreditCards.mastercard==1 ?true:false, new { @class="form-check-input" })
+
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Mastercard</label>
                                     </div>
                                 </div>
@@ -368,11 +384,11 @@
                             </div>
                             <div class="row p-3 mb-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo">
+                                    <img id="output" src="/images/NewFolder/@Model.FBO.FBO.logo" style="max-width: inherit;">
                                     <br><br>
-                                    
 
-                                    <a href="#" class="btn btn-danger rounded">Delete Logo</a>
+
+                                    <button type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo")" formmethod="post">Delete</button>
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <p>
@@ -385,8 +401,7 @@
                                         an image larger than 175 pixels wide, it will be re-sized automatically.
                                     </p>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="logo">Upload</label>
-                                        <input type="file" class="form-control" id="logo" name="logo">
+                                        <input type="file" class="form-control" name="logo" id="file" onchange="loadFile(event)">
                                     </div>
                                 </div>
                             </div>
@@ -397,8 +412,11 @@
                             </div>
                             <div class="row p-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img src="https://www.globalair.com/fbo/noimage.gif">
+                                    <img id="output1" src="/images/NewFolder/@Model.singleFBO.ManagerPhoto" style="max-width: inherit;">
                                     <br><br>
+
+                                    <button type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic")" formmethod="post">Delete</button>
+                                    @*<a href="#" class="btn btn-danger rounded">Delete Logo</a>*@
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <p>
@@ -412,12 +430,12 @@
                                     </p>
                                     <div class="input-group mb-3">
                                         <label class="input-group-text" for="managerpic">Upload</label>
-                                        <input type="file" class="form-control" id="managerpic" name="managerpic">
+                                        <input type="file" class="form-control" id="managerpic" name="managerpic" onchange="loadManagerImg(event)">
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3 col-12 text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button value="FboInformationUpdate" type="submit" class="btn btn-primary" formaction="@Url.Action("FboInformationUpdate")" formmethod="post">Submit</button>
                             </div>
                         }
                     </div>
@@ -426,3 +444,21 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+        var loadFile = function (event) {
+            debugger;
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+        var loadManagerImg = function (event) {
+            debugger;
+            var image = document.getElementById('output1');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        $(document).ready(() => {
+            $("#stateid option[value=@Model.FBO.FBO.LocId]").attr('selected', 'selected');
+        });
+    </script>
+}

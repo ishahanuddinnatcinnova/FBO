@@ -20,6 +20,7 @@ namespace FBO.ViewModels
 
     public class ResponseDataViewModel
     {
+        public ARC_SingleFBO_Result singleFBO;
         public List<FBOManagement_GetFBOs_Result> FBOs { get; set; }
         public FBOResult FBO { get; set; }
         public FuelCardDiscountsModel fuelcards { get; set; }

@@ -21,7 +21,7 @@ namespace FBO.ViewModels
 
         public string stateid { get; set; }
         public IFormFile logo { get; set; }
-        public string managerpic { get; set; }
+        public IFormFile managerpic { get; set; }
         public String Zipcode { get; set; }
         public String Phone { get; set; }
         public String Fax { get; set; }
