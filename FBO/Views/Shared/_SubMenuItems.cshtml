@@ -19,9 +19,10 @@
             <a href="/myflightdept/account.aspx" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                 My Flight Department Services
             </a>
-            <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+            <a href="/fbo/information.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                 FBO Information
             </a>
+           
             @if (Model.FBO.FBOLevel == "Platinum" || Model.FBO.FBOLevel == "Gold")
             {
                 <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">

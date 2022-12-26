@@ -110,7 +110,7 @@ namespace FBO.Controllers
             }
             
             else
-            {
+                {
                 return View(response.data);
             }
         }
