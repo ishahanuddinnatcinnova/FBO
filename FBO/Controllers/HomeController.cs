@@ -2,7 +2,6 @@
 using FBO.Services;
 using FBO.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 
 namespace FBO.Controllers
@@ -212,7 +211,6 @@ namespace FBO.Controllers
             return RedirectToAction("FboInformation", new { companyID = updatebasic.companyID });
         }
 
-
         [HttpPost]
         public IActionResult DeleteFboLogo(string companyID, string logo)
         {
@@ -241,6 +239,7 @@ namespace FBO.Controllers
             }
             return RedirectToAction("FboInformation", new { companyID = companyID });
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

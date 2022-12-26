@@ -62,7 +62,7 @@ namespace FBO.Services
             fboResultMainModel.averageprices = await GetFuelAverages(Convert.ToInt16(companyID));
             fboResultMainModel.averageFuelPrice = Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_JETA), 2) + Math.Round(Convert.ToDecimal(fboResultMainModel.averageprices.Average_100LL), 2);
             await GetDates(fboResultMainModel);
-            fboResultMainModel.fboStats = await GetFBOs_Totals(Convert.ToInt16(companyID), fboResultMainModel.startDate, fboResultMainModel.endDate);
+            fboResultMainModel.fboStats = await getFBOStats(Convert.ToInt16(companyID), fboResultMainModel.startDate, fboResultMainModel.endDate);
             fboResultMainModel.isUpgradeEligible = await CheckUpgradeEligibleAsync(companyID);
             fboResultMainModel.ratingStats = await getRatingStatsAsync(Convert.ToInt16(companyID));
 
@@ -496,7 +496,7 @@ namespace FBO.Services
             }
             return Task.FromResult(fbo);
         }
-        public async Task<FBOManagement_Stats_Result> GetFBOs_Totals(int CompanyID, String date_start, String date_end)
+        public async Task<FBOManagement_Stats_Result> getFBOStats(int CompanyID, String date_start, String date_end)
         {
             try
             {
@@ -504,9 +504,9 @@ namespace FBO.Services
                 dynamicParameters.Add("CompanyID", CompanyID);
                 dynamicParameters.Add("startdate", date_start);
                 dynamicParameters.Add("enddate", date_end);
-                var fbos = await Task.FromResult(_dapper.Get<FBOManagement_Stats_Result>("FBOManagement_Stats", dynamicParameters, commandType: CommandType.StoredProcedure));
+                var fboStats = await Task.FromResult(_dapper.Get<FBOManagement_Stats_Result>("FBOManagement_Stats", dynamicParameters, commandType: CommandType.StoredProcedure));
 
-                return fbos;
+                return fboStats;
             }
             catch (Exception ex)
             {
