@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
+using static System.Net.WebRequestMethods;
 
 namespace FBO.Services
 {
@@ -948,8 +949,8 @@ namespace FBO.Services
         {
 
 
-            string ARCPath = "\\\\globalweb-new\\resources.globalair.com\\wwwroot\\airport\\images\\managerphoto\\";
-            String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+            string ARCPath = "\\\\globalweb-new\\resources.globalair.com\\wwwroot\\airport\\images\\managerphotos\\";
+            String ARCURL = "https://resources.globalair.com/airport/images/managerphotos/";
 
 
             int uploadedWidth = 0;
