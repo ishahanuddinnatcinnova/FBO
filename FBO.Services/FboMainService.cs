@@ -279,8 +279,6 @@ namespace FBO.Services
         }
 
 
-
-
         public async Task<ServiceResponseViewModel> GetResponseForFboInformation(HttpRequest request, string companyID, string fuel)
         {
             try
@@ -292,7 +290,7 @@ namespace FBO.Services
                 {
                     if (companyID != null && companyID != "")
                     {
-                        
+
                         FBOResult res = await _generalService.GetFBO(companyID);
                         var locations = await _generalService.GetLocations();
                         var singleFbores = await _generalService.SingleFboRes(companyID);
@@ -309,6 +307,56 @@ namespace FBO.Services
                             response.data.fboCreditCards = cardinfo;
                             response.data.locations = locations;
                             response.data.singleFBO = singleFbores;
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
+
+        public async Task<ServiceResponseViewModel> GetResponseForCustomServices(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
+                //FBO
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+                        
+                        FBOResult res = await _generalService.GetFBO(companyID);
+                        var customSer = await _generalService.GetCustomServices(companyID);
+
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                            response.data.customServices = customSer;
                             response.isRedirect = false;
                         }
                     }
@@ -373,6 +421,31 @@ namespace FBO.Services
 
 
         }
+        public async Task<string> SaveUpdateCustomServices(FBOManagement_GetCustomServices_Result res)
+        {
+            string response = "";
+            try
+            {
+                if (res.CompanyID != null )
+                {
+                   if(res.serviceID !=0 && res.serviceID != null)
+                    {
+                        response =  _generalService.UpdateExistingCustomService(res.serviceID, res.customservice);
+                    }
+                   else
+                    {
+                        response = _generalService.SaveCustomService(res.CompanyID, res.customservice);
+                    }
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
         //public string SaveFboLogo(IFormFile logofile, string companyID, string logo)
         //{
         //    string response = "";
@@ -380,7 +453,7 @@ namespace FBO.Services
         //    {
         //        if (companyID != null && companyID != "")
         //        {
-        //            response = _generalService.UploadFboLogoBtn(logofile, companyID,logo);
+        //            response = _generalService.UploadFboLogoBtn(logofile, companyID, logo);
         //        }
         //        return response;
         //    }
@@ -419,6 +492,25 @@ namespace FBO.Services
                 {
                
                     response = _generalService.DeleteManagerPic(companyID, managerpic);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+
+
+        }
+        public string DeleteCustomService(int serviceID)
+        {
+            string response = "";
+            try
+            {
+                if (serviceID != null && serviceID !=0 )
+                {
+
+                    response = _generalService.DeleteCustomService(serviceID);
                 }
                 return response;
             }

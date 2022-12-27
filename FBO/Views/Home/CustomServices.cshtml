@@ -1,0 +1,326 @@
+﻿@model FBO.ViewModels.ResponseDataViewModel
+@*<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    #featuredPromo {
+        border-radius: 10px;
+    }
+
+    #fuelPrices {
+        border-radius: 10px;
+        color: white;
+        padding: 20px
+    }
+
+        #fuelPrices .nav {
+            background-color: rgb(238, 238, 238);
+            color: black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+            #fuelPrices .nav li {
+                padding-bottom: 9px;
+                padding-top: 9px;
+                font-weight: 600;
+            }
+
+            #fuelPrices .nav .active {
+                background-color: white;
+                font-weight: 700;
+                border-radius: 10px;
+                padding: 8px;
+                color: rgb(168, 211, 43)
+            }
+
+        #fuelPrices a {
+            color: white
+        }
+
+        #fuelPrices .nav li a {
+            color: gray;
+        }
+
+    .tab-content {
+        padding-top: 30px
+    }
+
+        .tab-content table {
+            color: white;
+        }
+
+            .tab-content table td {
+                padding: 0rem;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                padding-left: 0.5rem;
+            }
+
+            .tab-content table .heading {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+    #region {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+        #region a {
+            color: rgb(71, 130, 211);
+        }
+
+    .middleBox {
+        background-color: rgb(245, 245, 245);
+        padding: 10px;
+        border-radius: 10px
+    }
+
+        .middleBox span {
+            color: rgb(150, 150, 150)
+        }
+
+        .middleBox h4,
+        p {
+            color: rgb(100, 100, 100)
+        }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        border: none;
+        position: relative;
+        margin-bottom: 30px;
+        box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+    }
+
+    .l-bg-cherry {
+        background: linear-gradient(to right, #000000, #0000009e) !important;
+        color: #fff;
+    }
+
+    .l-bg-blue-dark {
+        background: linear-gradient(to right, #373b44, #4286f4) !important;
+        color: #fff;
+    }
+
+    .l-bg-green-dark {
+        background: linear-gradient(to right, #97cb00, #97cb0085) !important;
+        color: #fff;
+    }
+
+    .l-bg-orange-dark {
+        background: linear-gradient(to right, #a86008, #ffba56) !important;
+        color: #fff;
+    }
+
+    .card .card-statistic-3 .card-icon-large .fas,
+    .card .card-statistic-3 .card-icon-large .far,
+    .card .card-statistic-3 .card-icon-large .fab,
+    .card .card-statistic-3 .card-icon-large .fal {
+        font-size: 110px;
+    }
+
+    .card .card-statistic-3 .card-icon {
+        text-align: center;
+        line-height: 50px;
+        margin-left: 15px;
+        color: #000;
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        opacity: 0.1;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    .l-bg-green {
+        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+        color: #fff;
+    }
+
+    .l-bg-orange {
+        background: linear-gradient(to right, #f9900e, #ffba56) !important;
+        color: #fff;
+    }
+
+    .l-bg-cyan {
+        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+        color: #fff;
+    }
+
+    #navbarsExample2 a {
+        color: rgb(233, 233, 233);
+        border-bottom: rgb(233, 233, 233) 2px solid;
+    }
+
+        #navbarsExample2 a:hover {
+            color: #97cb00;
+            border-bottom: #97cb00 2px solid;
+        }
+
+    .section-title {
+        position: relative;
+        text-transform: uppercase;
+        margin-bottom: 1.875rem;
+        letter-spacing: .06em;
+    }
+
+        .section-title::before {
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            content: "";
+            height: 2px;
+            width: 3.75rem;
+            background-color: #4fd675;
+        }
+</style>
+<div class="row ms-2 mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <nav aria-label="breadcrumb">
+                <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="airport%20weather%20&%20fbo%20fuel%20prices%20_%20globalair.com.html"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Custom Services</span><meta itemprop="position" content="3"></a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1 property="name">Update Your Custom Services</h1>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
+            <div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
+                <span class="text-center mt-3" style="font-size: 1.1rem; color: white">
+                    <b>
+                        Add or Edit Services
+                    </b>
+                </span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                <div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
+                    <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Edit Account Information
+                    </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        My Flight Department Services
+                    </a> <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        FBO Information
+                    </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        FBO Photos
+                    </a> <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Update Fuel Prices
+                    </a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Ratings and Reviews
+                    </a> <a href="extented.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Extended & Basic Services
+                    </a> <a href="fuelcards.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Fuel Cards
+                    </a> <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Logo Services
+                    </a> <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                        Custom Services
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-12">
+            <div class="row ms-1" id="successMessage" style="display: none">
+                <div class="col">
+                    <p class="alert alert-success">Your changes have been updated successfully.</p>
+                </div>
+            </div>
+            <div class="row ms-1" id="errorMessage" style="display: none">
+                <div class="col">
+                    <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                </div>
+            </div>
+            <div class="row ">
+                @using (Html.BeginForm("SaveUpdateCustomServices", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Add/Update Custom Service:</label>
+                        <input type="text" class="form-control" name="customservice" id="text" aria-describedby="text" placeholder="Custom Service" value="">
+                        <input type="hidden" id="serviceID" aria-describedby="serviceID" name="serviceID" value="">
+                        <input type="hidden" id="companyID" aria-describedby="companyID" name="companyID" value="@Model.FBO.FBO.CompanyID">
+                        <button type="submit" class="btn btn-success  btn-success-custom">Save</button>
+                    </div>
+                }
+            </div><br>
+            <div class="row ">
+                <div>
+                    <ol class="list-group list-group-numbered">
+                        @foreach (var item in Model.customServices)
+                        {
+                            <li class="list-group-item">
+                                @item.customservice
+                                <button id="editService" value="@item.customservice" style="float: right;" type="button" class="editService btn btn-success-custom" data-id="@item.serviceID" data-name="@item.customservice">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                                    </svg>
+                                </button>
+                                <button id="deleteService" style="float: right;" type="submit" class="deleteService btn btn-danger" data-id="@item.serviceID">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                                    </svg>
+                                </button>
+                            </li>
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(".editService").click(function () {
+
+            $("#text").val($(this).attr("data-name"));
+            $("#serviceID").val($(this).attr("data-id"));
+        });
+
+        $(".deleteService").click(function () {
+            var listItem = $(this).parent();
+            $.ajax({
+                url: 'home/DeleteCustomService',
+                type: 'POST',
+                data: jQuery.param({ serviceID: $(this).attr("data-id") }),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (response) {
+                    if (response.status == "success") {
+                        listItem.remove();
+                        $('#successMessage').show();
+                        setTimeout(function () {
+                            $('#successMessage').hide();
+                        }, 4000);
+                    }
+                    else {
+                        $('#errorMessage').show();
+                        setTimeout(function () {
+                            $('#errorMessage').hide();
+                        }, 4000);
+                    }
+
+                },
+                error: function () {
+                    $('#errorMessage').show();
+                    setTimeout(function () {
+                        $('#errorMessage').hide();
+                    }, 4000);
+                }
+            });
+        });
+    </script>
+	}

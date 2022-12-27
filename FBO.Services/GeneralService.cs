@@ -88,6 +88,21 @@ namespace FBO.Services
                 return null;
             }
         }
+        public async Task<List<FBOManagement_GetCustomServices_Result>> GetCustomServices(string companyID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                var customer = await Task.FromResult(_dapper.GetAll<FBOManagement_GetCustomServices_Result>("FBOManagement_GetCustomServices", dynamicParameters, commandType: CommandType.StoredProcedure));
+
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public async Task<ARC_SingleFBO_Result> SingleFboRes(string companyID)
         {
             try
@@ -179,7 +194,8 @@ namespace FBO.Services
                 return "failed";
             }
 
-        } public string DeleteManagerPic(String companyID, String ManagerPic)
+        }
+        public string DeleteManagerPic(String companyID, String ManagerPic)
         {
 
             try
@@ -729,7 +745,7 @@ namespace FBO.Services
         {
 
 
-            string ARCPath = "D:\\FBO\\FBO\\wwwroot\\images\\NewFolder\\";
+            string ARCPath = "\\\\globalweb-new\\resources.globalair.com\\wwwroot\\airport\\images\\complogo\\";
             String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
 
 
@@ -875,11 +891,64 @@ namespace FBO.Services
             }
             return "No file found";
         }
+        public string UpdateExistingCustomService(int existingserviceID, String service)
+        {
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("serviceID", existingserviceID);
+                dynamicParameters.Add("service", service);
+                _dapper.Execute("FBOManagement_UpdateCustomService", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+
+        }   
+        public string SaveCustomService(int companyID, string newcustomservice)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                dynamicParameters.Add("service", newcustomservice);
+                _dapper.Execute("FBOManagement_InsertCustomService", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+        }
+        public string DeleteCustomService(int serviceID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("serviceID", serviceID);
+            
+                _dapper.Execute("FBOManagement_DeleteCustomService", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "failed";
+            }
+
+        }
         public async Task<string> UploadManagerPicBtn(IFormFile myFile, string companyID)
         {
 
 
-            string ARCPath = "D:\\FBO\\FBO\\wwwroot\\images\\NewFolder1\\";
+            string ARCPath = "\\\\globalweb-new\\resources.globalair.com\\wwwroot\\airport\\images\\managerphoto\\";
             String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
 
 

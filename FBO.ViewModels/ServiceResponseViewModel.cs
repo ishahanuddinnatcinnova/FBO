@@ -20,6 +20,7 @@ namespace FBO.ViewModels
 
     public class ResponseDataViewModel
     {
+        public List<FBOManagement_GetCustomServices_Result> customServices = new List<FBOManagement_GetCustomServices_Result>();
         public ARC_SingleFBO_Result singleFBO;
         public List<FBOManagement_GetFBOs_Result> FBOs { get; set; }
         public FBOResult FBO { get; set; }
