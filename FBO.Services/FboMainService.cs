@@ -182,7 +182,6 @@ namespace FBO.Services
                 return response;
             }
         }
-
         public async Task<ServiceResponseViewModel> GetResponseForFuelPrice(HttpRequest request, string companyID, string fuel)
         {
             try

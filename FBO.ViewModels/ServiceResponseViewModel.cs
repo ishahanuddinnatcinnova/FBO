@@ -13,8 +13,6 @@ namespace FBO.ViewModels
         public string redirectURL { get; set; }
 
         public ResponseDataViewModel data = new ResponseDataViewModel();
-        
-
 
     }
 
