@@ -202,7 +202,7 @@
                             </div>
                             <div class="row p-3 mb-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" style="max-width: inherit;">
+                                    <img id="output" src='@(!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? "https://resources.globalair.com/airport/images/managerphotos/@Model.FBO.FBO.logo" : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
                                     <br><br>
 
 
@@ -219,7 +219,7 @@
                                         an image larger than 175 pixels wide, it will be re-sized automatically.
                                     </p>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" name="logo" id="file" onchange="loadFile(event)">
+                                        <input type="file" class="form-control" accept="image/jpeg, image/jpg" name="logo" id="file" onchange="loadFile(event)">
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                             </div>
                             <div class="row p-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output1" src="https://resources.globalair.com/airport/images/managerphotos/@Model.singleFBO.ManagerPhoto" style="max-width: inherit;">
+                                    <img id="output1" src='@(!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? "https://resources.globalair.com/airport/images/managerphotos/@Model.singleFBO.ManagerPhoto" : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
                                     <br><br>
 
                                     <button type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic")" formmethod="post">Delete</button>
@@ -247,8 +247,8 @@
                                         an image larger than 100 pixels wide, it will be re-sized automatically.
                                     </p>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="managerpic">Upload</label>
-                                        <input type="file" class="form-control" id="managerpic" name="managerpic" onchange="loadManagerImg(event)">
+
+                                        <input type="file" class="form-control" id="managerpic" accept="image/jpeg, image/jpg" name="managerpic" onchange="loadManagerImg(event)">
                                     </div>
                                 </div>
                             </div>
