@@ -417,8 +417,6 @@ namespace FBO.Services
             {
                 return response;
             }
-
-
         }
         public async Task<string> SaveUpdateCustomServices(FBOManagement_GetCustomServices_Result res)
         {

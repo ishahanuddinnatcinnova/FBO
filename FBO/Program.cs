@@ -1,15 +1,15 @@
 using FBO.Dapper;
 using FBO.Services;
 using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Json;
-using System;
+
+var path = Directory.GetCurrentDirectory();
 var builder = WebApplication.CreateBuilder(args);
 Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File($"{path}\\Logs\\Log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<Dapperr, Dapperr>();

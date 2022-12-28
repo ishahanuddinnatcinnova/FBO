@@ -114,9 +114,9 @@
                             <h3>Your Statistics:</h3>
                         </div>
                         <div class="col-9 text-end">
-                            <b>Start Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
-                            <b>End Date:</b><input name="ctl00$Content$tbStartDate" type="date" id="Content_tbStartDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
-                            <a href="#" class="btn btn-success btn-success-custom">Search Stats</a>
+                            <b>Start Date:</b><input name="startDate" type="date" id="startDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
+                            <b>End Date:</b><input name="endDate" type="date" id="endDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
+                            <button id="search-stats" class="btn btn-success btn-success-custom">Search Stats</button>
                         </div>
                     </div>
                     <div class="row ms-1 mt-2">
@@ -303,6 +303,13 @@
                 </div>
             </div>
         </div>
+        @section Scripts{
+            <script>
+                $("#search-stats").click(function () {
+                    alert("The paragraph was clicked.");
+                });
+            </script>
+        }
     }
     else
     {

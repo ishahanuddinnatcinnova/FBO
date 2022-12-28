@@ -224,6 +224,14 @@ namespace FBO.Controllers
             else
             {
                 TempData["success"] = "false";
+                if (response != "failed")
+                {
+                    TempData["errorMesssage"] = response;
+                }
+                else
+                {
+                    TempData["errorMesssage"] = "Oops, your changes have not been saved successfully, please try again later.";
+                }
             }
 
             return RedirectToAction("FboInformation", new { companyID = updatebasic.companyID });
