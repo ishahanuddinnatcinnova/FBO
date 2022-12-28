@@ -3,6 +3,7 @@ using FBO.Dapper;
 using FBO.ViewModels;
 using GlobalAir.Data;
 using Microsoft.AspNetCore.Http;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -21,6 +22,8 @@ namespace FBO.Services
 {
     public class GeneralService
     {
+
+                
         private static Dapperr _dapper;
         public GeneralService(Dapperr dapper)
         {
@@ -745,9 +748,10 @@ namespace FBO.Services
         public async Task<string> UploadFboLogoBtn(IFormFile myFile, string companyID)
         {
 
-
+            Log.Information("Funtion Started");
             string ARCPath = "\\\\globalweb-new\\resources.globalair.com\\wwwroot\\airport\\images\\complogo\\";
-            String ARCURL = ConfigurationManager.AppSettings["FBOCompLogosURL"];
+            String ARCURL = "https://resources.globalair.com/airport/images/complogo/";
+
 
 
             int uploadedWidth = 0;
@@ -761,7 +765,7 @@ namespace FBO.Services
 
             if (myFile != null && companyID != "")
             {
-
+                Log.Information("myFile is not null and company ID is also not empty");
                 logoFilename = companyID;
                 logoFilename = logoFilename.Replace("%7B", "");
                 logoFilename = logoFilename.Replace("%2D", "-");
@@ -771,23 +775,27 @@ namespace FBO.Services
                 if (logoFilename.Length > 8)
                 {
                     logoFilename = logoFilename.Substring(0, 8);
+                    Log.Information("my file name is greater then 8");
+
                 }
                 logoFilename = logoFilename + ".jpg";
 
                 long nFileLen = myFile.Length;
                 if (nFileLen == 0)
                 {
-                    return "The file you tried to upload was empty or could not be read. Please try again.";
+                    return "failed";
+                    Log.Error("The file you tried to upload was empty or could not be read. Please try again.");
                 }
                 else
                 {
                     if (System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpg" && System.IO.Path.GetExtension(myFile.FileName).ToLower() != ".jpeg")
                     {
                         return "The file must have an extension of .jpg or .jpeg. Please try again.";
+                        Log.Error("The file must have an extension of .jpg or .jpeg. Please try again.");
                     }
                     else
                     {
-
+                        Log.Information("The file is of jpg and jpeg format");
                         //byte[] myData = new Byte[nFileLen];
                         //myFile.CopyToAsync(myData);
                         var myData = await GetBytes(myFile);
@@ -798,19 +806,36 @@ namespace FBO.Services
                         sFilename = logoFilename;
 
                         int file_append = 0;
+                        try
+                        {
 
                         while (System.IO.File.Exists(ARCPath + sFilename))
                         {
+                            Log.Information("File already exist add append ");
                             file_append++;
                             sFilename = System.IO.Path.GetFileNameWithoutExtension(logoFilename) +
                                         file_append.ToString() + ".jpg";
                         }
+                        }
+                        catch(Exception ex)
+                        {
+                            Log.Error(ex, "file append error");
+                        }
+                        try
+                        {
+
                         using (System.IO.FileStream newFile = new System.IO.FileStream(ARCPath + sFilename, System.IO.FileMode.Create))
                         {
-                            newFile.Write(myData, 0, myData.Length);
+                                Log.Information("Copy to New File");
+                                newFile.Write(myData, 0, myData.Length);
                             newFile.Flush();
 
                             newFile.Close();
+                        }
+                        }
+                        catch(IOException ex)
+                        {
+                            Log.Error(ex, "Copying of Bytes to New File Failed");
                         }
 
                         System.Drawing.Image.GetThumbnailImageAbort myCallBack = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
@@ -820,9 +845,12 @@ namespace FBO.Services
                             myBitmap = new Bitmap(ARCPath + sFilename);
                             try
                             {
+                                Log.Information("File Resize");
 
                                 uploadedWidth = myBitmap.Width;
                                 uploadedHeight = myBitmap.Height;
+                                try
+                                {
 
                                 if (uploadedWidth > 175 && uploadedHeight > 0)
                                 {
@@ -843,24 +871,32 @@ namespace FBO.Services
                                     }
                                     myThumbnail.Save(ARCPath + sFilename);
                                 }
-
+                                }
+                                catch(Exception ex)
+                                {
+                                    return "failed";
+                                    Log.Error(ex,"File Resize failed");
+                                }
 
                                 //copy the FBO logo to the / sm folder
-                                //try
-                                //{
-                                //    String arc_filepath = ARCPath + sFilename;
-                                //    String sm_filepath = ARCPath + sFilename;
+                                try
+                                {
+                                    Log.Information("copy the FBO logo to the / sm folder");
+                                    String arc_filepath = ARCPath + sFilename;
+                                    String sm_filepath = ARCPath + sFilename;
 
-                                //    System.IO.File.Copy(arc_filepath, sm_filepath, true);
-                                //}
-                                //catch (Exception ex)
-                                //{
-                                //    return "failed";
-                                //}
+                                    System.IO.File.Copy(arc_filepath, sm_filepath, true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Error(ex, "copy the FBO logo to the / sm folder Failed");
+                                    return "failed";
+                                }
                                 if (companyID != "" && sFilename != "")
                                 {
                                     try
                                     {
+                                        Log.Information("Adding File Name to FBO");
                                         DynamicParameters dynamicParameters = new DynamicParameters();
                                         dynamicParameters.Add("fboCompID", companyID);
                                         dynamicParameters.Add("fboLogo", sFilename);
@@ -870,10 +906,14 @@ namespace FBO.Services
                                     catch (Exception ex)
                                     {
                                         return "failed";
+                                        Log.Error(ex,"Adding File Name to FBO failed");
 
                                     }
+
                                 }
+                                return "success";
                             }
+
                             finally
                             {
                                 myBitmap.Dispose();
@@ -882,15 +922,20 @@ namespace FBO.Services
                         catch (Exception ex)
                         {
                             return "failed";
+                            Log.Error(ex, "File Resize, Upload Logo Name,Copy To SM Folder Failed ");
                             //System.IO.File.Delete(ARCPath + sFilename);
                         }
-                        return "success";
+                        
                     }
-                    return "success";
+                   
                 }
 
             }
-            return "No file found";
+            else
+            {
+            return "failed";
+                Log.Error("No file Found");
+            }
         }
         public string UpdateExistingCustomService(int existingserviceID, String service)
         {
@@ -908,7 +953,7 @@ namespace FBO.Services
             {
                 return "failed";
             }
-
+            
 
         }   
         public string SaveCustomService(int companyID, string newcustomservice)
@@ -1097,9 +1142,19 @@ namespace FBO.Services
         }
         public static async Task<byte[]> GetBytes(IFormFile formFile)
         {
+            Log.Information("GetBytes func called");
+            try
+            {
             await using var memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);
+                Log.Information("GetBytes func returned successfully");
             return memoryStream.ToArray();
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex,"GetBytes func error");
+                return null;
+            }
         }
         public async Task<FuelCardDiscountsModel> GetFuelCards(string companyID)
         {

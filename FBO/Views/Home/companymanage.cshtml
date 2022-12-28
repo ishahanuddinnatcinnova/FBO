@@ -2,158 +2,8 @@
 @{
     var singleFBO = Model.FBO != null ? true : false;
 }
-<style>
-    #featuredPromo {
-        border-radius: 10px;
-    }
 
-    #fuelPrices {
-        border-radius: 10px;
-        colo    r: white;
-        padding: 20px
-    }
-
-        #fuelPrices .nav {
-            background-color: rgb(238, 238, 238);
-            color: black;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-            #fuelPrices .nav li {
-                padding-bottom: 9px;
-                padding-top: 9px;
-                font-weight: 600;
-            }
-
-            #fuelPrices .nav .active {
-                background-color: white;
-                font-weight: 700;
-                border-radius: 10px;
-                padding: 8px;
-                color: rgb(168, 211, 43)
-            }
-
-        #fuelPrices a {
-            color: white
-        }
-
-        #fuelPrices .nav li a {
-            color: gray;
-        }
-
-    .tab-content {
-        padding-top: 30px
-    }
-
-        .tab-content table {
-            color: white;
-        }
-
-            .tab-content table td {
-                padding: 0rem;
-                padding-bottom: 10px;
-                padding-top: 10px;
-                padding-left: 0.5rem;
-            }
-
-            .tab-content table .heading {
-                font-size: 16px;
-                font-weight: 500;
-            }
-
-    #region {
-        background-color: white;
-        border-radius: 10px;
-        padding: 10px;
-    }
-
-        #region a {
-            color: rgb(71, 130, 211);
-        }
-
-    .card {
-        background-color: #fff;
-        border-radius: 10px;
-        border: none;
-        position: relative;
-        margin-bottom: 30px;
-        box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
-    }
-
-    .l-bg-cherry {
-        background: linear-gradient(to right, #000000, #0000009e) !important;
-        color: #fff;
-    }
-
-    .l-bg-blue-dark {
-        background: linear-gradient(to right, #373b44, #4286f4) !important;
-        color: #fff;
-    }
-
-    .l-bg-green-dark {
-        background: linear-gradient(to right, #97cb00, #97cb0085) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange-dark {
-        background: linear-gradient(to right, #a86008, #ffba56) !important;
-        color: #fff;
-    }
-
-    .card .card-statistic-3 .card-icon-large .fas,
-    .card .card-statistic-3 .card-icon-large .far,
-    .card .card-statistic-3 .card-icon-large .fab,
-    .card .card-statistic-3 .card-icon-large .fal {
-        font-size: 110px;
-    }
-
-    .card .card-statistic-3 .card-icon {
-        text-align: center;
-        line-height: 50px;
-        margin-left: 15px;
-        color: #000;
-        position: absolute;
-        right: 10px;
-        top: 20px;
-        opacity: 0.1;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
-
-    .l-bg-green {
-        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
-        color: #fff;
-    }
-
-    .l-bg-orange {
-        background: linear-gradient(to right, #f9900e, #ffba56) !important;
-        color: #fff;
-    }
-
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
-
-    .l-bg-light {
-        background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
-    }
-
-    #navbarsExample2 a {
-        color: rgb(233, 233, 233);
-        border-bottom: rgb(233, 233, 233) 2px solid;
-    }
-
-        #navbarsExample2 a:hover {
-            color: #97cb00;
-            border-bottom: #97cb00 2px solid;
-        }
-</style>
+<link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
 
 <div class="col">
 
@@ -177,7 +27,7 @@
                                 <div class="col-sm-5">
                                     @if (Model.FBO.FBO.FBOLevel != "Basic")
                                     {
-                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company" style="display: block; margin-left: auto; margin-right: auto;">
+                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company"style="max-width: inherit;" @*style="display: block; margin-left: auto; margin-right: auto;"*@>
                                     }
                                     <div class="card card-animation l-bg-green-dark mt-4">
                                         <div class="card-statistic-3 p-4">
