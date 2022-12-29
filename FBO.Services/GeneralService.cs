@@ -41,6 +41,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in (Get FBO's) function with user ID" + userID + " Exception is:", ex);
                 return null;
             }
         }
@@ -89,6 +90,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---Get FBO function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -104,6 +106,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetCustomServices function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -123,6 +126,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---SingleFboRes function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -143,6 +147,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetLogoService function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -161,6 +166,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetCreditCardInfo function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -178,6 +184,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetLocations function---with company ID" + " Exception is:", ex);
                 return null;
             }
         }
@@ -195,6 +202,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---DeleteLogo function---with company ID" + companyID + " Exception is:", ex);
                 return "failed";
             }
 
@@ -213,6 +221,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---DeleteManagerPic function---with company ID" + companyID + " Exception is:", ex);
                 return "failed";
             }
 
@@ -452,6 +461,7 @@ namespace FBO.Services
             }
             else
             {
+
                 return false;
             }
         }
@@ -469,6 +479,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in (CheckNewReviewsCount) function with company ID" + companyID + " Exception is:", ex);
                 return 0;
             }
         }
@@ -495,6 +506,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetFuelAverages Function---with company ID" + companyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -530,6 +542,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetFBOStats Function---with company ID" + CompanyID + " Exception is:", ex);
                 return null;
             }
         }
@@ -543,7 +556,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
-
+                Log.Error("Error in---UpdateLastUpdated Function---with company ID" + CompanyID + " Exception is:", ex);
             }
         }
         public string SaveButtonBasicService(FBOManagement_UpdateBasicServices_Result basic)
@@ -565,6 +578,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---SaveButtonBasicService Function---with company ID" + basic.companyID + " Exception is:", ex);
                 return "failed";
             }
         }
@@ -684,6 +698,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---SaveButtonUpdateFboInfo Function---with company ID" + companyID + " Exception is:", ex);
                 return "failed";
             }
 
@@ -737,6 +752,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---SaveButtonExtendedService Function---with company ID" + companyID + " Exception is:", ex);
                 return "failed";
 
             }
@@ -933,6 +949,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---UpdateExistingCustomService Function---with serviceID ID" + existingserviceID + " Exception is:", ex);
                 return "failed";
             }
         }
@@ -949,6 +966,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---SaveCustomService Function---with company ID" + companyID + " Exception is:", ex);
                 return "failed";
             }
 
@@ -966,6 +984,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---DeleteCustomService Function---with serviceID ID" + serviceID + " Exception is:", ex);
                 return "failed";
             }
 
@@ -998,12 +1017,14 @@ namespace FBO.Services
                 
                 if (nFileLen == 0)
                 {
+                    Log.Error("Error in---UploadManagerPicBtn Function---with companyID ID" + companyID + "Ex is The file you tried to upload was empty or could not be read. Please try again.");
                     return "The file you tried to upload was empty or could not be read. Please try again.";
                 }
                 else
                 {
                     if (Path.GetExtension(myFile.FileName).ToLower() != ".jpg" && Path.GetExtension(myFile.FileName).ToLower() != ".jpeg")
                     {
+                        Log.Error("Error in---UploadManagerPicBtn Function---with companyID ID" + companyID + "Ex is The file must have an extension of .jpg or .jpeg. Please try again.");
                         return "The file must have an extension of .jpg or .jpeg. Please try again.";
                     }
                     else
@@ -1072,6 +1093,7 @@ namespace FBO.Services
                                     }
                                     catch (Exception ex)
                                     {
+                                        Log.Error("Error in---UploadManagerPicBtn Function---with companyID ID" + companyID + "Ex is Services_SaveManagerPhoto failed");
                                         return "failed";
                                     }
                                 }
@@ -1084,6 +1106,7 @@ namespace FBO.Services
                         catch (Exception ex)
                         {
                             System.IO.File.Delete(ARCPath + sFilename);
+                            Log.Error("Error in---UploadManagerPicBtn Function---with companyID ID" + companyID + "Ex is Resize or append failed");
                             return "failed";
                         }
                         return "success";
@@ -1162,6 +1185,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---GetFuelCards Function---with companyID ID" + companyID + "Ex is "+ex);
                 return null;
             }
         }
@@ -1225,8 +1249,9 @@ namespace FBO.Services
                 }
                 return ("success");
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error("Error in---GetFuelCards Function---with companyID ID" + fueldis.companyID + "Ex is " + ex);
                 return "failed";
             }
         }
@@ -1241,6 +1266,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---ClearFuelCards Function---with companyID ID" + companyID + "Ex is " + ex);
                 return "failed";
             }
 
@@ -1257,6 +1283,7 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Error in---AddFuelCard Function---with companyID ID" + companyID + "Ex is " + ex);
                 return "failed";
             }
         }
@@ -1380,8 +1407,9 @@ namespace FBO.Services
                 _dapper.Execute("FBOManagement_UpdateFuelPrices", dynamicParameters, commandType: CommandType.StoredProcedure);
                 return "success";
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error("Error in---BtnFuelPriceSaveClick Function---with companyID ID" + fueldis.companyID + "Ex is " + ex);
                 return "failed";
             }
         }
@@ -1673,12 +1701,13 @@ namespace FBO.Services
 
 
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error("Error in---BtnLogoServicesSaveClick Function---with companyID ID" + logoser.companyID + "Ex is " + ex);
                 return "failed";
             }
         }
-        protected async Task<bool> CheckUpgradeEligibleAsync(string companyID)
+        public async Task<bool> CheckUpgradeEligibleAsync(string companyID)
         {
             bool isUpgradeEligible = false;
             try
@@ -1694,7 +1723,8 @@ namespace FBO.Services
             }
             catch (Exception ex)
             {
-                //lblTest.Text = "Error in FBOManagement_CheckUpgradeEligible: " + ex.Message.ToString();
+                Log.Error("Error in---GetFBOStats Function---with company ID" + companyID + " Exception is:", ex);
+                return false;
             }
             return isUpgradeEligible;
 
@@ -1749,10 +1779,16 @@ namespace FBO.Services
                 ratingStats.averageRating = (double)Math.Round(avgOverallRating, 1);
                 ratingStats.RatedBy = userTotal.ToString();
             }
+            try
+            {
 
             int reviewcount = await Task.FromResult(_dapper.Get<int>("select count(*) from reviews_of_ratings r inner join services_ratings s on r.ratingID = s.ratingsID where s.FBOID_FK = " + fboID, dynamicParameters, commandType: CommandType.Text));
             ratingStats.TotalReviews = reviewcount;
-
+            }
+            catch(Exception ex)
+            {
+                Log.Error("Error in---getRatingStatsAsync Function---with fbo ID" + fboID + " Exception is:", ex);
+            }
             return ratingStats;
         }
     }

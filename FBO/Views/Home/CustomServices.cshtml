@@ -32,6 +32,22 @@
                     <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
                 </div>
             </div>
+            @if (TempData["success"] != null && TempData["success"].ToString() == "true")
+            {
+                <div id="s" class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-success">Your changes have been saved successfully.</p>
+                    </div>
+                </div>
+            }
+            else if (TempData["success"] != null && TempData["success"].ToString() == "false")
+            {
+                <div id="f" class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-danger">@TempData["errorMesssage"]</p>
+                    </div>
+                </div>
+            }
             <div class="row ">
                 @using (Html.BeginForm("SaveUpdateCustomServices", "Home", FormMethod.Post))
                 {
@@ -40,7 +56,7 @@
                         <input type="text" class="form-control" name="customservice" id="text" aria-describedby="text" placeholder="Custom Service" value="">
                         <input type="hidden" id="serviceID" aria-describedby="serviceID" name="serviceID" value="">
                         <input type="hidden" id="companyID" aria-describedby="companyID" name="companyID" value="@Model.FBO.FBO.CompanyID">
-                        <button type="submit" class="btn btn-success  btn-success-custom">Save</button>
+                        <button id="SaveBtn" type="submit" class="btn btn-success  btn-success-custom">Save</button>
                     </div>
                 }
             </div><br>
@@ -79,6 +95,23 @@
             $("#serviceID").val($(this).attr("data-id"));
         });
 
+       
+            if( $('#s').show())
+                setTimeout(function () {
+                    $('#s').hide();
+                }, 4000);
+            
+            
+            else if ($('#f').show())
+            {
+                       
+               
+                setTimeout(function () {
+                    $('#f').hide();
+                }, 4000);
+          
+            }
+       
         $(".deleteService").click(function () {
             var listItem = $(this).parent();
             $.ajax({
