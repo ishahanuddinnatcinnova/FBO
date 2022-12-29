@@ -27,7 +27,7 @@
                                 <div class="col-sm-5">
                                     @if (Model.FBO.FBO.FBOLevel != "Basic")
                                     {
-                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company"style="max-width: inherit;" @*style="display: block; margin-left: auto; margin-right: auto;"*@>
+                                        <img class="d-block mt-3 mb-3" src="https://resources.globalair.com/airport/images/complogo/@Model.FBO.FBO.logo" alt="@Model.FBO.FBO.Company" style="max-width: inherit;" @*style="display: block; margin-left: auto; margin-right: auto;"*@>
                                     }
                                     <div class="card card-animation l-bg-green-dark mt-4">
                                         <div class="card-statistic-3 p-4">
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="row align-items-center mb-2 d-flex">
                                         <div class="col-8">
-                                            <h2 class="d-flex align-items-center mb-0">
+                                            <h2 id="apv" class="d-flex align-items-center mb-0">
                                                 @Model.FBO.fboStats.airport_pageviews
                                             </h2>
                                         </div>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="row align-items-center mb-2 d-flex">
                                         <div class="col-8">
-                                            <h2 class="d-flex align-items-center mb-0">
+                                            <h2 id="fpv" class="d-flex align-items-center mb-0" >
                                                 @Model.FBO.fboStats.fbo_pageviews
                                             </h2>
                                         </div>
@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="row align-items-center mb-2 d-flex">
                                         <div class="col-8">
-                                            <h2 class="d-flex align-items-center mb-0">
+                                            <h2 id="cct" class="d-flex align-items-center mb-0">
                                                 @Model.FBO.fboStats.fbo_inquiries
                                             </h2>
                                         </div>
@@ -303,13 +303,7 @@
                 </div>
             </div>
         </div>
-        @section Scripts{
-            <script>
-                $("#search-stats").click(function () {
-                    alert("The paragraph was clicked.");
-                });
-            </script>
-        }
+
     }
     else
     {
@@ -342,3 +336,34 @@
         </div>
     }
 </div>
+@section Scripts{
+    <script>
+        debugger;
+        $("#search-stats").click(function () {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            debugger
+            alert("The paragraph was clicked.");
+            $.ajax({
+                url: '/api/FBOHelperAPI/GetFBOStats',
+                type: 'GET',
+                data:{ companyID: '@Model.FBO.FBO.CompanyID', StartDate: startDate ,EndDate: endDate },
+                contentType: "application/json; charset=utf-8",
+                
+                success: function (response) {
+                    alert(response.fbo_pageviews);
+                    $('#fpv').html(response.fbo_pageviews);
+               $('#cct').html(response.fbo_inquiries);
+        
+                    $('#apv').html(response.airport_pageviews);
+                    console.log(response);
+                },
+                error: function (error) {
+                    alert(error);
+                    console.log(error);
+                                        }
+            });
+        });
+            
+    </script>
+    }

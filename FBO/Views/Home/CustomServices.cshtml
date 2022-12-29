@@ -115,7 +115,7 @@
         $(".deleteService").click(function () {
             var listItem = $(this).parent();
             $.ajax({
-                url: 'home/DeleteCustomService',
+                url: 'FBOHelper/DeleteCustomService',
                 type: 'POST',
                 data: jQuery.param({ serviceID: $(this).attr("data-id") }),
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

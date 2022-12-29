@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
 using GlobalAir.Data;
+using Newtonsoft.Json.Linq;
 
 namespace FBO.Controllers
 {
@@ -21,11 +22,11 @@ namespace FBO.Controllers
             _logger = logger;
             _generalService = generalService;
         }
-
-        public async Task<FBOManagement_Stats_Result> GetFBOStats(int companyID, string startDate, string endDate)
+        [Route("GetFBOStats")]
+        public async Task<FBOManagement_Stats_Result> GetFBOStats(string companyID,string StartDate,string EndDate)
         {
             FBOManagement_Stats_Result stats = new FBOManagement_Stats_Result();
-            stats = await _generalService.getFBOStats(Convert.ToInt16(companyID), startDate, endDate);
+            stats = await _generalService.getFBOStats(Convert.ToInt16(companyID), StartDate, EndDate);
             return stats;
         }
     }
