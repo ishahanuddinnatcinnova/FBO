@@ -130,158 +130,16 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        [HttpPost]
-        public IActionResult BasicServiceUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
-        {
+        
 
-            string response = _fboMainService.PostBasicServicesUpdate(updatebasic);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("BasicAndExtended", new { companyID = updatebasic.companyID });
-        }
 
-        [HttpPost]
-        public IActionResult ExtendedServiceUpdate(FBOManagement_UpdateExtendedServices_Result updateextended)
-        {
-
-            string response = _fboMainService.PostExtendedServicesUpdate(updateextended);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-
-            return RedirectToAction("BasicAndExtended", new { companyID = updateextended.companyID });
-        }
-        [HttpPost]
-        public IActionResult FuelCardUpdate(FuelCardDiscountsModel fuel)
-        {
-
-            string response = _fboMainService.PostFuelCardUpdate(fuel);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("FuelCards", new { companyID = fuel.companyID });
-        }
-        [HttpPost]
-        public IActionResult FuelPriceUpdate(FuelPriceUpdateModel fuel)
-        {
-
-            string response = _fboMainService.PostFuelPriceUpdate(fuel);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("Fuel", new { companyID = fuel.companyID });
-        }
-        [HttpPost]
-        public IActionResult LogoServiceUpdate(FBOLogoServiceModel logo)
-        {
-
-            string response = _fboMainService.PostLogoServicesUpdate(logo);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("LogoServices", new { companyID = logo.companyID });
-        }
+  
         public async Task<RatingStats> GetFBOStats(int companyID)
         {
             RatingStats stats = new RatingStats();
             return stats;
         }
-        [HttpPost]
-        public async Task<IActionResult> FboInformationUpdate(FBOInfoUpdateModel updatebasic)
-        {
 
-            string response = await _fboMainService.PostFboInfoUpdate(updatebasic, this.Request);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-                if (response != "failed")
-                {
-                    TempData["errorMesssage"] = response;
-                }
-                else
-                {
-                    TempData["errorMesssage"] = "Oops, your changes have not been saved successfully, please try again later.";
-                }
-            }
-
-            return RedirectToAction("FboInformation", new { companyID = updatebasic.companyID });
-        }
-        [HttpPost]
-        public async Task<IActionResult> SaveUpdateCustomServices(FBOManagement_GetCustomServices_Result res)
-        {
-
-            string response = await _fboMainService.SaveUpdateCustomServices(res);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("CustomServices", new { companyID = res.CompanyID });
-        }
-
-        [HttpPost]
-        public IActionResult DeleteFboLogo(string companyID, string logo)
-        {
-
-            string response = _fboMainService.DeleteFboLogo(companyID, logo);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("FboInformation", new { companyID = companyID });
-        }
-        [HttpPost]
-        public IActionResult DeleteManagerPic(string companyID, string managerpic)
-        {
-
-            string response = _fboMainService.DeleteManagerPic(companyID, managerpic);
-            if (response == "success")
-            {
-                TempData["success"] = "true";
-            }
-            else
-            {
-                TempData["success"] = "false";
-            }
-            return RedirectToAction("FboInformation", new { companyID = companyID });
-        }
         [HttpPost]
         public IActionResult DeleteCustomService(int serviceID)
         {
@@ -289,7 +147,7 @@ namespace FBO.Controllers
             string response = _fboMainService.DeleteCustomService(serviceID);
             if (response == "success")
             {
-                return Json(new { status = "success", statusCode =  200 });
+                return Json(new { status = "success", statusCode = 200 });
 
             }
             else
@@ -297,6 +155,7 @@ namespace FBO.Controllers
                 return Json(new { status = "fail", statusCode = 500 });
             }
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

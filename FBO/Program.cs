@@ -35,7 +35,10 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"); 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=FBOHelper}/{action=Index}/{id?}");
 
 app.Run();
 

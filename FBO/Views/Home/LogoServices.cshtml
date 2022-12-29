@@ -2,7 +2,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
 <style>
-  
+
 
     .inputCheckbox input {
         -webkit-appearance: none;
@@ -77,7 +77,7 @@
         box-shadow: 10px 10px 10px #888888;
     }
 
-   
+
 </style>
 <div class="row ms-2 mt-4">
     <div class="row">
@@ -102,24 +102,24 @@
         <div class="col-md-9 col-12">
             @if (TempData["success"] != null && TempData["success"].ToString() == "true")
             {
-                <div class="row ms-1">
+                <div id="s" class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-success">Your changes have been updated successfully.</p>
+                        <p class="alert alert-success">Your changes have been saved successfully.</p>
                     </div>
                 </div>
             }
             else if (TempData["success"] != null && TempData["success"].ToString() == "false")
             {
-                <div class="row ms-1">
+                <div id="f" class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                        <p class="alert alert-danger">Oops, your changes have not been saved successfully, please try again later.</p>
                     </div>
                 </div>
             }
             <div class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("LogoServiceUpdate", "Home", FormMethod.Post, new { name = "logoser", id = "logoser" }))
+                        @using (Html.BeginForm("LogoServiceUpdate", "FBOHelper", FormMethod.Post, new { name = "logoser", id = "logoser" }))
                         {
                             <h2 class="section-title display-6">
                                 Logo Services
@@ -642,6 +642,19 @@
 </div>
 @section Scripts{
     <script>
+        if ($('#s').show())
+            setTimeout(function () {
+                $('#s').hide();
+            }, 4000);
+
+
+        else if ($('#f').show()) {
+
+
+            setTimeout(function () {
+                $('#f').hide();
+            }, 4000);
+        }
         var max_limit = 10; // Max Limit
         $(document).ready(function () {
             var limit = 0;
@@ -669,16 +682,16 @@
                     limit=0;
             </text>
         }
-        $("#logoser").submit(function (e) {
-            if ($(":checkbox:checked").length > limit) {
-                e.preventDefault();
-                $('.toast').toast('show');
-                setTimeout(function () {
-                    $('.toast').toast('hide');
-                }, 4000);
-            }
-        });
-        $('.limit').text(limit);
+                $("#logoser").submit(function (e) {
+                    if ($(":checkbox:checked").length > limit) {
+                        e.preventDefault();
+                        $('.toast').toast('show');
+                        setTimeout(function () {
+                            $('.toast').toast('hide');
+                        }, 4000);
+                    }
+                });
+            $('.limit').text(limit);
             $("#logoser").submit(function (e) {
                 if ($(":checkbox:checked").length > limit) {
                     e.preventDefault();
@@ -696,3 +709,9 @@
 
     </script>
 }
+
+
+
+
+
+

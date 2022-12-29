@@ -77,17 +77,17 @@
         <div class="col-md-9 col-12">
             @if (TempData["success"] != null && TempData["success"].ToString() == "true")
             {
-                <div class="row ms-1">
+                <div id="s"class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-success">Your changes have been updated successfully.</p>
+                        <p class="alert alert-success">Your changes have been saved successfully.</p>
                     </div>
                 </div>
             }
             else if (TempData["success"] != null && TempData["success"].ToString() == "false")
             {
-                <div class="row ms-1">
+                <div id="f" class="row ms-1">
                     <div class="col">
-                        <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                        <p class="alert alert-danger">Oops, your changes have not been saved successfully, please try again later.</p>
                     </div>
                 </div>
             }
@@ -95,7 +95,7 @@
 
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("FuelCardUpdate", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("FuelCardUpdate", "FBOHelper", FormMethod.Post))
                         {
                             <h2 class="section-title display-6">
                                 Update Your Fuel Cards
@@ -226,3 +226,24 @@
     </div>
 </div>
 
+@section Scripts{
+    <script>
+
+
+
+
+        if ($('#s').show())
+            setTimeout(function () {
+                $('#s').hide();
+            }, 4000);
+
+
+        else if ($('#f').show()) {
+
+
+            setTimeout(function () {
+                $('#f').hide();
+            }, 4000);
+        }
+    </script>
+    }

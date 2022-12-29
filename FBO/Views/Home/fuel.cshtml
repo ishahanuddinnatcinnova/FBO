@@ -82,7 +82,7 @@
         <div class="col-md-9 col-12">
             @if (TempData["success"] != null && TempData["success"].ToString() == "true")
             {
-                <div class="row ms-1">
+                <div id="s"class="row ms-1">
                     <div class="col">
                         <p class="alert alert-success">Your changes have been saved successfully.</p>
                     </div>
@@ -90,7 +90,7 @@
             }
             else if (TempData["success"] != null && TempData["success"].ToString() == "false")
             {
-                <div class="row ms-1">
+                <div id="f" class="row ms-1">
                     <div class="col">
                         <p class="alert alert-danger">Oops, your changes have not been saved successfully, please try again later.</p>
                     </div>
@@ -99,7 +99,7 @@
             <div class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("FuelPriceUpdate", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("FuelPriceUpdate", "FBOHelper", FormMethod.Post))
                         {
                             <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
                                 <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
@@ -250,5 +250,25 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
 
+
+
+
+        if ($('#s').show())
+            setTimeout(function () {
+                $('#s').hide();
+            }, 4000);
+
+
+        else if ($('#f').show()) {
+
+
+            setTimeout(function () {
+                $('#f').hide();
+            }, 4000);
+        }
+    </script>
+    }
 

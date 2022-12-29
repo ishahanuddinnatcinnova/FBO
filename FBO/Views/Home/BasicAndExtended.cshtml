@@ -25,15 +25,15 @@
         <div class="col-md-9 col-12">
             @if (TempData["success"] != null && TempData["success"].ToString() == "true")
             {
-                <div class="row ms-1">
+                <div id="s"class="row ms-1">
                     <div class="col">
                         <p class="alert alert-success">Your changes have been saved successfully.</p>
-                        </div>
+                    </div>
                 </div>
             }
-            else if(TempData["success"] != null && TempData["success"].ToString() == "false")
+            else if (TempData["success"] != null && TempData["success"].ToString() == "false")
             {
-                <div class="row ms-1">
+                <div id="f" class="row ms-1">
                     <div class="col">
                         <p class="alert alert-danger">Oops, your changes have not been saved successfully, please try again later.</p>
                     </div>
@@ -42,7 +42,7 @@
             <div class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("BasicServiceUpdate", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("BasicServiceUpdate", "FBOHelper", FormMethod.Post))
                         {
                             <h2 class="section-title display-6">
                                 Basic Services
@@ -97,7 +97,7 @@
             <div class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
-                        @using (Html.BeginForm("ExtendedServiceUpdate", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("ExtendedServiceUpdate", "FBOHelper", FormMethod.Post))
                         {
                             <h2 class="section-title display-6">
                                 Extended Services
@@ -306,10 +306,31 @@
                             <div class="mb-3 col-12 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-}
-</div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+
+
+
+
+    if ($('#s').show())
+        setTimeout(function () {
+            $('#s').hide();
+        }, 4000);
+
+
+    else if ($('#f').show()) {
+
+
+        setTimeout(function () {
+            $('#f').hide();
+        }, 4000);
+    }
+    </script>
+    }
