@@ -130,8 +130,24 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
- 
- 
+        [Route("upgrade.aspx")]
+        public async Task<IActionResult> Upgrade(string companyID, string fuel)
+        {
+            //ServiceResponseViewModel response = await _fboMainService.GetResponseForCustomServices(this.Request, companyID, fuel);
+            //if (response.isRedirect)
+
+
+            //{
+            //    return Redirect(response.redirectURL);
+            //}
+
+            //else
+            //{
+            //    return View(response.data);
+            //}
+            return View();
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,462 @@
+﻿
+	<style>
+		#featuredPromo {
+			border-radius: 10px;
+		}
+
+		#fuelPrices {
+			border-radius: 10px;
+			color: white;
+			padding: 20px
+		}
+
+			#fuelPrices .nav {
+				background-color: rgb(238, 238, 238);
+				color: black;
+				border-radius: 10px;
+				display: flex;
+				justify-content: center;
+			}
+
+				#fuelPrices .nav li {
+					padding-bottom: 9px;
+					padding-top: 9px;
+					font-weight: 600;
+				}
+
+				#fuelPrices .nav .active {
+					background-color: white;
+					font-weight: 700;
+					border-radius: 10px;
+					padding: 8px;
+					color: rgb(168, 211, 43)
+				}
+
+			#fuelPrices a {
+				color: white
+			}
+
+			#fuelPrices .nav li a {
+				color: gray;
+			}
+
+		.tab-content {
+			padding-top: 30px
+		}
+
+			.tab-content table {
+				color: white;
+			}
+
+				.tab-content table td {
+					padding: 0rem;
+					padding-bottom: 10px;
+					padding-top: 10px;
+					padding-left: 0.5rem;
+				}
+
+				.tab-content table .heading {
+					font-size: 16px;
+					font-weight: 500;
+				}
+
+		#region {
+			background-color: white;
+			border-radius: 10px;
+			padding: 10px;
+		}
+
+			#region a {
+				color: rgb(71, 130, 211);
+			}
+
+		.middleBox {
+			background-color: rgb(245, 245, 245);
+			padding: 10px;
+			border-radius: 10px
+		}
+
+			.middleBox span {
+				color: rgb(150, 150, 150)
+			}
+
+			.middleBox h4,
+			p {
+				color: rgb(100, 100, 100)
+			}
+
+		.card {
+			background-color: #fff;
+			border-radius: 10px;
+			border: none;
+			position: relative;
+			margin-bottom: 30px;
+			box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+		}
+
+		.l-bg-cherry {
+			background: linear-gradient(to right, #000000, #0000009e) !important;
+			color: #fff;
+		}
+
+		.l-bg-blue-dark {
+			background: linear-gradient(to right, #373b44, #4286f4) !important;
+			color: #fff;
+		}
+
+		.l-bg-green-dark {
+			background: linear-gradient(to right, #97cb00, #97cb0085) !important;
+			color: #fff;
+		}
+
+		.l-bg-orange-dark {
+			background: linear-gradient(to right, #a86008, #ffba56) !important;
+			color: #fff;
+		}
+
+		.card .card-statistic-3 .card-icon-large .fas,
+		.card .card-statistic-3 .card-icon-large .far,
+		.card .card-statistic-3 .card-icon-large .fab,
+		.card .card-statistic-3 .card-icon-large .fal {
+			font-size: 110px;
+		}
+
+		.card .card-statistic-3 .card-icon {
+			text-align: center;
+			line-height: 50px;
+			margin-left: 15px;
+			color: #000;
+			position: absolute;
+			right: 10px;
+			top: 20px;
+			opacity: 0.1;
+		}
+
+		.l-bg-cyan {
+			background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+			color: #fff;
+		}
+
+		.l-bg-green {
+			background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+			color: #fff;
+		}
+
+		.l-bg-orange {
+			background: linear-gradient(to right, #f9900e, #ffba56) !important;
+			color: #fff;
+		}
+
+		.l-bg-cyan {
+			background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+			color: #fff;
+		}
+
+		.l-bg-light {
+			background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+		}
+
+		#navbarsExample2 a {
+			color: rgb(233, 233, 233);
+			border-bottom: rgb(233, 233, 233) 2px solid;
+		}
+
+			#navbarsExample2 a:hover {
+				color: #97cb00;
+				border-bottom: #97cb00 2px solid;
+			}
+
+		.section-title {
+			position: relative;
+			text-transform: uppercase;
+			margin-bottom: 1.875rem;
+		}
+
+			.section-title::before {
+				position: absolute;
+				left: 0;
+				bottom: -8px;
+				content: "";
+				height: 2px;
+				width: 5rem;
+				background-color: #97cb00;
+			}
+
+		.secPlat::before {
+			background-color: red;
+		}
+
+		.secgold::before {
+			background-color: gold;
+		}
+
+		.secsil::before {
+			background-color: silver;
+		}
+	</style>
+	<div class="row ms-2 mt-4">
+		<div class="row">
+			<div class="col-12">
+				<h1 property="name">Castle & Cooke Aviation (VNY)</h1>
+			</div>
+
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
+				<div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
+					<span class="text-center mt-3" style="font-size: 1.1rem; color: white">
+						<b>
+							Add or Edit Services
+						</b>
+					</span>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+					<div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
+						<a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Edit Account Information
+						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							My Flight Department Services
+						</a> <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							FBO Information
+						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							FBO Photos
+						</a> <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Update Fuel Prices
+						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Ratings and Reviews
+						</a> <a href="extented.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Extended & Basic Services
+						</a> <a href="fuelcards.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Fuel Cards
+						</a> <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Logo Services
+						</a> <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+							Custom Services
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-12">
+				<div class="row ms-1">
+				<div class="card float-right">
+
+					<h6>&nbsp;</h6>
+					<h4>
+						Exposing your FBO is GlobalAir.com's commitment and we are doing it!
+					</h4>
+					<p>
+						The Airport Resource Center has kept the price for marketing your FBO to less than half of our main competitor. GlobalAir.com brings in thousands of visitors from the aviation industry each day to see your airport and FBO. From single engine piston owners to Gulfstream G550 operators.
+
+					</p>
+					</div>
+				</div>
+				<div class="row ms-1">
+					<div class="card float-right">
+						<div id='platinum'>
+							<h3>&nbsp;</h3>
+							
+							<div class="row">
+
+								<div class="col-sm-9">
+
+									<h4 class=" section-title display-6 secPlat">
+										FBO Platinum
+									</h4>
+									<h5>Get Maximum Exposure for your FBO</h5>
+								</div>
+								<div class="col-sm-2" style="
+											width: fit-content;
+											float: right;
+										">
+									<div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #dc3545 0%, white 100%);">
+										<div class="card-statistic-3 p-4">
+											<div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
+											<div class="mb-0">
+												<h5 class="card-title mb-0">Per year Price:</h5>
+											</div>
+											<div class="row align-items-center mb-0 d-flex">
+												<div class="col-5">
+													<h2 class="d-flex align-items-center mb-0">
+														$800.00
+													</h2>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+									<span style=" background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px; font-size: x-large;" class="display-6">
+										Platinum Features:
+									</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+
+									<ol class="list-group list-group">
+										<li class="list-group-item">One turbine aircraft will pay for a complete year of exposure!</li>
+										<li class="list-group-item">Sponsorship of your home airport pages,Your FBO's logo at the top!</li>
+										<li class="list-group-item">Show off your facility with our new Unlimited Photo Flow Feature!</li>
+										<li class="list-group-item">Single Sponsorship on Max-Trax & ARC Mapping system</li>
+										<li class="list-group-item">List Over 30 Additional Services! </li>
+										<li class="list-group-item">Add up to 10 additional logo services!</li>
+										<li class="list-group-item">Add unlimited Fuel Card Logos!</li>
+										<li class="list-group-item">Add unlimited custom services!</li>
+										<li class="list-group-item">Fuel Brand Logos,co-brand with your fuel supplier</b>!</li>
+										<li class="list-group-item">Your FBO is the first FBO listed on the field.</li>
+										<li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 500 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
+									</ol>
+								</div>
+								<div class="col-sm-4">
+									
+								
+									<img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+							
+								</div>
+							</div>
+							<br>
+							<div class="mb-3 col-12 text-center">
+								<button type="submit" class="btn btn-success">Join Now</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row ms-1">
+					<div class="card float-right">
+						<div id='platinum'>
+							<h3>&nbsp;</h3>
+							
+							<div class="row">
+
+								<div class="col-sm-9">
+
+									<h4 class=" section-title display-6 secgold">
+										FBO Gold
+									</h4>
+									<h5>Get Great Exposure</h5>
+								</div>
+								<div class="col-sm-2" style="
+											width: fit-content;
+											float: right;
+										">
+									<div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #ffc107 0%, white 100%);">
+										<div class="card-statistic-3 p-4">
+											<div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
+											<div class="mb-0">
+												<h5 class="card-title mb-0">Per year Price:</h5>
+											</div>
+											<div class="row align-items-center mb-0 d-flex">
+												<div class="col-5">
+													<h2 class="d-flex align-items-center mb-0">
+														$500.00
+													</h2>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+									<span style=" background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px; font-size: x-large;" class="display-6">
+										Gold Features:
+									</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+
+									<ol class="list-group list-group">
+										<li class="list-group-item">For less than a lunch a month you get great exposure!</li>
+										<li class="list-group-item">Show off your facility with our new Unlimited Photo Flow Feature</li>
+										<li class="list-group-item">Display your company logo on the airport information page and your FBO information page!</li>
+										<li class="list-group-item">List Over 30 Additional Services!</li>
+										<li class="list-group-item">Add up to 6 additional logo services! </li>
+										<li class="list-group-item">Add unlimited Fuel Card Logos!</li>
+										<li class="list-group-item">Fuel Brand Logos - co-brand with your fuel supplier!</li>
+
+										<li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 250 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
+									</ol>
+								</div>
+								<div class="col-sm-4">
+								<img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+								</div>
+							</div>
+							<br>
+							<div class="mb-3 col-12 text-center">
+								<button type="submit" class="btn btn-success">Join Now</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row ms-1">
+					<div class="card float-right">
+						<div id='platinum'>
+							<h3>&nbsp;</h3>
+						
+							<div class="row">
+
+								<div class="col-sm-9">
+
+									<h4 class=" section-title display-6 secsil">
+										FBO Silver
+									</h4>
+									<h5>The Easy Budget</h5>
+								</div>
+								<div class="col-sm-2" style="
+											width: fit-content;
+											float: right;
+										">
+									<div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #adb5bd 0%, white 100%);">
+										<div class="card-statistic-3 p-4">
+											<div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
+											<div class="mb-0">
+												<h5 class="card-title mb-0">Per year Price:</h5>
+											</div>
+											<div class="row align-items-center mb-0 d-flex">
+												<div class="col-5">
+													<h2 class="d-flex align-items-center mb-0">
+														$200.00
+													</h2>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+									<span style=" background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px; font-size: x-large;" class="display-6">
+										Silver Features:
+									</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+
+									<ol class="list-group list-group">
+
+										<li class="list-group-item" >Display your company logo on the airport information page and your FBO information page</li>
+										<li class="list-group-item">List Over 10 Additional Services! </li>
+										<li class="list-group-item">Add up to 1 additional logo services!</li>
+										<li class="list-group-item">Add unlimited Fuel Card Logos!</li>
+										<li class="list-group-item">Add unlimited custom services!</li>
+										<li class="list-group-item">Fuel Brand Logos,co-brand with your fuel supplier</b>!</li>
+
+										<li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 150 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
+									</ol>
+								</div>
+								<div class="col-sm-4">
+								<img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+								</div>
+							</div>
+							<br>
+							<div class="mb-3 col-12 text-center">
+								<button type="submit" class="btn btn-success">Join Now</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
