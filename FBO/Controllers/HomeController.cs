@@ -130,31 +130,8 @@ namespace FBO.Controllers
                 return View(response.data);
             }
         }
-        
-
-
-  
-        public async Task<RatingStats> GetFBOStats(int companyID)
-        {
-            RatingStats stats = new RatingStats();
-            return stats;
-        }
-
-        [HttpPost]
-        public IActionResult DeleteCustomService(int serviceID)
-        {
-
-            string response = _fboMainService.DeleteCustomService(serviceID);
-            if (response == "success")
-            {
-                return Json(new { status = "success", statusCode = 200 });
-
-            }
-            else
-            {
-                return Json(new { status = "fail", statusCode = 500 });
-            }
-        }
+ 
+ 
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
