@@ -197,45 +197,13 @@
 	<div class="row ms-2 mt-4">
 		<div class="row">
 			<div class="col-12">
-				<h1 property="name">Castle & Cooke Aviation (VNY)</h1>
+			<h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
 			</div>
 
 		</div>
 		<hr>
 		<div class="row">
-			<div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
-				<div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
-					<span class="text-center mt-3" style="font-size: 1.1rem; color: white">
-						<b>
-							Add or Edit Services
-						</b>
-					</span>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-					<div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
-						<a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Edit Account Information
-						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							My Flight Department Services
-						</a> <a href="fbo information.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							FBO Information
-						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							FBO Photos
-						</a> <a href="fuel.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Update Fuel Prices
-						</a> <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Ratings and Reviews
-						</a> <a href="extented.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Extended & Basic Services
-						</a> <a href="fuelcards.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Fuel Cards
-						</a> <a href="logo.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Logo Services
-						</a> <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-							Custom Services
-						</a>
-					</div>
-				</div>
-			</div>
+		<partial name="_SubMenuItems" model="@Model.FBO" />
 			<div class="col-md-9 col-12">
 				<div class="row ms-1">
 				<div class="card float-right">
@@ -250,9 +218,9 @@
 					</p>
 					</div>
 				</div>
-				<div class="row ms-1">
+			<div class="row ms-1" id='platinum'>
 					<div class="card float-right">
-						<div id='platinum'>
+						<div >
 							<h3>&nbsp;</h3>
 							
 							<div class="row">
@@ -321,9 +289,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="row ms-1">
+			<div class="row ms-1" id='gold'>
 					<div class="card float-right">
-						<div id='platinum'>
+						<div >
 							<h3>&nbsp;</h3>
 							
 							<div class="row">
@@ -387,9 +355,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="row ms-1">
+			<div class="row ms-1" id='silver'>
 					<div class="card float-right">
-						<div id='platinum'>
+						<div >
 							<h3>&nbsp;</h3>
 						
 							<div class="row">
@@ -458,5 +426,44 @@
 
 		</div>
 	</div>
-
+	@section Scripts{
+    <script>
+		$(function () {
+			
+		
+		@if (Model.FBO.FBO.FBOLevel == "Platinum")
+		{
+			<text>
+				$('#platinum').hide();
+				$('#gold').hide();
+				$('#silver').hide();
+			</text>
+		}
+		else if (Model.FBO.FBO.FBOLevel == "Gold")
+		{
+			<text>
+				$('#platinum').show();
+				$('#gold').hide();
+				$('#silver').hide();
+			</text>
+		}
+		else if (Model.FBO.FBO.FBOLevel == "Silver")
+		{
+			<text>
+				$('#platinum').show();
+				$('#gold').show();
+				$('#silver').hide(); 
+			</text>
+		}
+		else if (Model.FBO.FBO.FBOLevel == "Basic")
+		{
+			<text>
+				$('#platinum').show();
+				$('#gold').show();
+				$('#silver').show();
+			</text>
+		}
+				});
+	</script>
+    }
 

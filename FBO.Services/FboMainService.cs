@@ -381,6 +381,56 @@ namespace FBO.Services
                 return response;
             }
         }
+
+        public async Task<ServiceResponseViewModel> GetResponseForUpgradePage(HttpRequest request, string companyID, string fuel)
+        {
+            try
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                UserViewModel userData = _utility.CheckLogin(request);
+                //FBO
+                if (userData.isUser)
+                {
+                    if (companyID != null && companyID != "")
+                    {
+
+                        FBOResult res = await _generalService.GetFBO(companyID);
+                    
+
+                        if (res.FBO.UserID.ToString() != userData.userID)
+                        {
+                            response.isRedirect = true;
+                            response.redirectURL = "/myflightdept/account.aspx";
+                        }
+                        else
+                        {
+                            response.data.FBO = res;
+                           
+                            response.isRedirect = false;
+                        }
+                    }
+                    else
+                    {
+                        response.isRedirect = true;
+                        response.redirectURL = "/myflightdept/account.aspx";
+                    }
+                }
+                else
+                {
+                    response.isRedirect = true;
+                    response.redirectURL = "/myflightdept/account.aspx";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ServiceResponseViewModel response = new ServiceResponseViewModel();
+                response.isRedirect = true;
+                response.redirectURL = "/myflightdept/account.aspx";
+                return response;
+            }
+        }
         public string PostBasicServicesUpdate(FBOManagement_UpdateBasicServices_Result updatebasic)
         {
             string response = "";

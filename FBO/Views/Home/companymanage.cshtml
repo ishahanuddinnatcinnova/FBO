@@ -75,232 +75,262 @@
                             </div>
                         </div>
                     </div>
-                    @if (Model.FBO.isUpgradeEligible)
+                    @if (@Model.FBO.fboIsApproved == "Yes")
                     {
-                        <div class="row text-center mb-3">
-                            <div class="col">
-                                <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="/images/FBOupgradeAd.gif" title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px;" /></a>
+
+                        @if (Model.FBO.isUpgradeEligible)
+                        {
+                            <div class="row text-center mb-3">
+                                <div class="col">
+                                    <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="/images/FBOupgradeAd.gif" title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px;" /></a>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card p-4">
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <h4 class="card-subtitle mb-2">
+                                                <b>Your fuel prices were last updated: </b>
+                                                @Model.FBO.FBO.LastUpdated
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="card-block">
+                                                @if (!Model.FBO.fboIsExpired)
+                                                {
+                                                    <a class="btn btn-lg btn-success btn-success-custom" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>Review your fuel prices here</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-danger" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>Your fuel prices are out of date<br /><b>Update here</b></a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ms-1 ">
+                            <div class="col-3">
+                                <h3>Your Statistics:</h3>
+                            </div>
+                            <div class="col-9 text-end">
+                                <b>Start Date:</b><input name="startDate" type="date" id="startDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
+                                <b>End Date:</b><input name="endDate" type="date" id="endDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
+                                <button id="search-stats" class="btn btn-success btn-success-custom">Search Stats</button>
+                            </div>
+                        </div>
+                        <div class="row ms-1 mt-2">
+                            <div class="col-xl-4 col-lg-4">
+                                <div class="card card-animation l-bg-light">
+                                    <div class="card-statistic-3 p-4">
+                                        <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">Airport Page <br>Views</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 id="apv" class="d-flex align-items-center mb-0">
+                                                    @Model.FBO.fboStats.airport_pageviews
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4">
+                                <div class="card card-animation l-bg-light">
+                                    <div class="card-statistic-3 p-4">
+                                        <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">FBO Page <br>Views</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 id="fpv" class="d-flex align-items-center mb-0">
+                                                    @Model.FBO.fboStats.fbo_pageviews
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4">
+                                <div class="card card-animation l-bg-light">
+                                    <div class="card-statistic-3 p-4">
+                                        <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
+                                        <div class="mb-4">
+                                            <h5 class="card-title mb-0">Contact Now <br>Clickthroughs</h5>
+                                        </div>
+                                        <div class="row align-items-center mb-2 d-flex">
+                                            <div class="col-8">
+                                                <h2 id="cct" class="d-flex align-items-center mb-0">
+                                                    @Model.FBO.fboStats.fbo_inquiries
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.FBO.FBO.FBOLevel != "Basic")
+                        {
+
+                        <div class="row ms-1">
+                            <div class="card float-right">
+                                <div class="row">
+                                    <div class="col-sm-5 p-3">
+                                        <div class="container mb-3 text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Aircraft Registration Lookup</a> </div>
+                                        <div class="container mb-3 text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Sell Your Aircraft</a> </div>
+                                        <div class="container text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Create a Press Release</a> </div>
+                                    </div>
+                                    <div class="col-sm-7 p-3">
+                                        <div class="row">
+                                            <h4>
+                                                <a href="#" class="text-decoration-none">
+                                                    @Model.FBO.averageprices.RegionName
+                                                    Average Fuel Prices:
+                                                </a>
+                                            </h4>
+                                            <div class="col-4">
+                                                <div class="card card-animation l-bg-light">
+                                                    <div class="card-statistic-3 p-4">
+                                                        <div class="mb-4">
+                                                            <h5 class="card-title mb-0">JetA</h5>
+                                                        </div>
+                                                        <div class="row align-items-center mb-2 d-flex">
+                                                            <div class="col-8">
+                                                                <h2 class="d-flex align-items-center mb-0">
+                                                                    $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_JETA), 2)
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card card-animation l-bg-light">
+                                                    <div class="card-statistic-3 p-4">
+                                                        <div class="mb-4">
+                                                            <h5 class="card-title mb-0">100LL</h5>
+                                                        </div>
+                                                        <div class="row align-items-center mb-2 d-flex">
+                                                            <div class="col-8">
+                                                                <h2 class="d-flex align-items-center mb-0">
+                                                                    $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_100LL), 2)
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="card card-animation l-bg-light">
+                                                    <div class="card-statistic-3 p-4">
+                                                        <div class="mb-4">
+                                                            <h5 class="card-title mb-0">SAF</h5>
+                                                        </div>
+                                                        <div class="row align-items-center mb-2 d-flex">
+                                                            <div class="col-8">
+                                                                <h2 class="d-flex align-items-center mb-0">
+                                                                    @if (Model.FBO.averageprices.Average_SAF > 0)
+                                                                    {
+                                                                        <span>$@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_SAF), 2)</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>N/A</span>
+                                                                    }
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                    <a href="#" class="text-decoration-none">
+                                        <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                            Ratings & Reviews
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 p-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="#" class="text-decoration-none text-black">
+                                                    <div class="card card-animation l-bg-light">
+                                                        <div class="card-statistic-3 p-4">
+                                                            <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
+                                                            <div class="mb-4">
+                                                                <h5 class="card-title mb-0">Ratings</h5>
+                                                            </div>
+                                                            <div class="row align-items-center mb-2 d-flex">
+                                                                <div class="col-8">
+                                                                    <h2 class="d-flex align-items-center mb-0">
+                                                                        @Model.FBO.ratingStats.averageRating/5
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="#" class="text-decoration-none text-black">
+
+                                                    <div class="card card-animation l-bg-light">
+                                                        <div class="card-statistic-3 p-4">
+                                                            <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
+                                                            <div class="mb-4">
+                                                                <h5 class="card-title mb-0">Reviews</h5>
+                                                            </div>
+                                                            <div class="row align-items-center mb-2 d-flex">
+                                                                <div class="col-8">
+                                                                    <h2 class="d-flex align-items-center mb-0">
+                                                                        @Model.FBO.ratingStats.TotalReviews
+                                                                    </h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    }
+
+                    @if (@Model.FBO.fboIsApproved == "No")
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card p-4">
+                                    <div class="row">
+
+
+                                        <div class="card-block">
+                                            Once your FBO is approved, You will be able to enter your fuel prices and update your services.
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     }
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card p-4">
-                                <div class="row">
-                                    <div class="col-sm-7">
-                                        <h4 class="card-subtitle mb-2">
-                                            <b>Your fuel prices were last updated: </b>
-                                            @Model.FBO.FBO.LastUpdated
-                                        </h4>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="card-block">
-                                            @if (!Model.FBO.fboIsExpired)
-                                            {
-                                                <a class="btn btn-lg btn-success btn-success-custom" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>Review your fuel prices here</a>
-                                            }
-                                            else
-                                            {
-                                                <a class="btn btn-danger" href='/fbo/fuel.aspx?companyid=@Model.FBO.FBO.CompanyID'>Your fuel prices are out of date<br /><b>Update here</b></a>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ms-1 ">
-                        <div class="col-3">
-                            <h3>Your Statistics:</h3>
-                        </div>
-                        <div class="col-9 text-end">
-                            <b>Start Date:</b><input name="startDate" type="date" id="startDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
-                            <b>End Date:</b><input name="endDate" type="date" id="endDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
-                            <button id="search-stats" class="btn btn-success btn-success-custom">Search Stats</button>
-                        </div>
-                    </div>
-                    <div class="row ms-1 mt-2">
-                        <div class="col-xl-4 col-lg-4">
-                            <div class="card card-animation l-bg-light">
-                                <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
-                                    <div class="mb-4">
-                                        <h5 class="card-title mb-0">Airport Page <br>Views</h5>
-                                    </div>
-                                    <div class="row align-items-center mb-2 d-flex">
-                                        <div class="col-8">
-                                            <h2 id="apv" class="d-flex align-items-center mb-0">
-                                                @Model.FBO.fboStats.airport_pageviews
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4">
-                            <div class="card card-animation l-bg-light">
-                                <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
-                                    <div class="mb-4">
-                                        <h5 class="card-title mb-0">FBO Page <br>Views</h5>
-                                    </div>
-                                    <div class="row align-items-center mb-2 d-flex">
-                                        <div class="col-8">
-                                            <h2 id="fpv" class="d-flex align-items-center mb-0" >
-                                                @Model.FBO.fboStats.fbo_pageviews
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4">
-                            <div class="card card-animation l-bg-light">
-                                <div class="card-statistic-3 p-4">
-                                    <div class="card-icon card-icon-large"><img src="/images/click.png" /></div>
-                                    <div class="mb-4">
-                                        <h5 class="card-title mb-0">Contact Now <br>Clickthroughs</h5>
-                                    </div>
-                                    <div class="row align-items-center mb-2 d-flex">
-                                        <div class="col-8">
-                                            <h2 id="cct" class="d-flex align-items-center mb-0">
-                                                @Model.FBO.fboStats.fbo_inquiries
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ms-1">
-                        <div class="card float-right">
-                            <div class="row">
-                                <div class="col-sm-5 p-3">
-                                    <div class="container mb-3 text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Aircraft Registration Lookup</a> </div>
-                                    <div class="container mb-3 text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Sell Your Aircraft</a> </div>
-                                    <div class="container text-center"> <a type="button" class="w-100 btn btn-success btn-success-custom rounded" href="#">Create a Press Release</a> </div>
-                                </div>
-                                <div class="col-sm-7 p-3">
-                                    <div class="row">
-                                        <h4>
-                                            <a href="#" class="text-decoration-none">
-                                                @Model.FBO.averageprices.RegionName
-                                                Average Fuel Prices:
-                                            </a>
-                                        </h4>
-                                        <div class="col-4">
-                                            <div class="card card-animation l-bg-light">
-                                                <div class="card-statistic-3 p-4">
-                                                    <div class="mb-4">
-                                                        <h5 class="card-title mb-0">JetA</h5>
-                                                    </div>
-                                                    <div class="row align-items-center mb-2 d-flex">
-                                                        <div class="col-8">
-                                                            <h2 class="d-flex align-items-center mb-0">
-                                                                $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_JETA), 2)
-                                                            </h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="card card-animation l-bg-light">
-                                                <div class="card-statistic-3 p-4">
-                                                    <div class="mb-4">
-                                                        <h5 class="card-title mb-0">100LL</h5>
-                                                    </div>
-                                                    <div class="row align-items-center mb-2 d-flex">
-                                                        <div class="col-8">
-                                                            <h2 class="d-flex align-items-center mb-0">
-                                                                $@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_100LL), 2)
-                                                            </h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="card card-animation l-bg-light">
-                                                <div class="card-statistic-3 p-4">
-                                                    <div class="mb-4">
-                                                        <h5 class="card-title mb-0">SAF</h5>
-                                                    </div>
-                                                    <div class="row align-items-center mb-2 d-flex">
-                                                        <div class="col-8">
-                                                            <h2 class="d-flex align-items-center mb-0">
-                                                                @if (Model.FBO.averageprices.Average_SAF > 0)
-                                                                {
-                                                                    <span>$@Math.Round(Convert.ToDecimal(Model.FBO.averageprices.Average_SAF), 2)</span>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <span>N/A</span>
-                                                                }
-                                                            </h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <a href="#" class="text-decoration-none">
-                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                        Ratings & Reviews
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 p-3">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a href="#" class="text-decoration-none text-black">
-                                                <div class="card card-animation l-bg-light">
-                                                    <div class="card-statistic-3 p-4">
-                                                        <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
-                                                        <div class="mb-4">
-                                                            <h5 class="card-title mb-0">Ratings</h5>
-                                                        </div>
-                                                        <div class="row align-items-center mb-2 d-flex">
-                                                            <div class="col-8">
-                                                                <h2 class="d-flex align-items-center mb-0">
-                                                                    @Model.FBO.ratingStats.averageRating/5
-                                                                </h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="#" class="text-decoration-none text-black">
 
-                                                <div class="card card-animation l-bg-light">
-                                                    <div class="card-statistic-3 p-4">
-                                                        <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
-                                                        <div class="mb-4">
-                                                            <h5 class="card-title mb-0">Reviews</h5>
-                                                        </div>
-                                                        <div class="row align-items-center mb-2 d-flex">
-                                                            <div class="col-8">
-                                                                <h2 class="d-flex align-items-center mb-0">
-                                                                    @Model.FBO.ratingStats.TotalReviews
-                                                                </h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
                 </div>
+
             </div>
         </div>
 
@@ -342,28 +372,28 @@
         $("#search-stats").click(function () {
             var startDate = $('#startDate').val();
             var endDate = $('#endDate').val();
-            debugger
-            alert("The paragraph was clicked.");
+
+
             $.ajax({
                 url: '/api/FBOHelperAPI/GetFBOStats',
                 type: 'GET',
-                data:{ companyID: '@Model.FBO.FBO.CompanyID', StartDate: startDate ,EndDate: endDate },
+                data: { companyID: '@Model.FBO.FBO.CompanyID', StartDate: startDate, EndDate: endDate },
                 contentType: "application/json; charset=utf-8",
-                
+
                 success: function (response) {
-                    alert(response.fbo_pageviews);
+
                     $('#fpv').html(response.fbo_pageviews);
-               $('#cct').html(response.fbo_inquiries);
-        
+                    $('#cct').html(response.fbo_inquiries);
+
                     $('#apv').html(response.airport_pageviews);
                     console.log(response);
                 },
                 error: function (error) {
-                    alert(error);
+
                     console.log(error);
-                                        }
+                }
             });
         });
-            
+
     </script>
     }

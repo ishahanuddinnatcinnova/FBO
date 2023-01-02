@@ -133,18 +133,18 @@ namespace FBO.Controllers
         [Route("upgrade.aspx")]
         public async Task<IActionResult> Upgrade(string companyID, string fuel)
         {
-            //ServiceResponseViewModel response = await _fboMainService.GetResponseForCustomServices(this.Request, companyID, fuel);
-            //if (response.isRedirect)
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID, fuel);
+            if (response.isRedirect)
 
 
-            //{
-            //    return Redirect(response.redirectURL);
-            //}
+            {
+                return Redirect(response.redirectURL);
+            }
 
-            //else
-            //{
-            //    return View(response.data);
-            //}
+            else
+            {
+                return View(response.data);
+            }
             return View();
         }
 
