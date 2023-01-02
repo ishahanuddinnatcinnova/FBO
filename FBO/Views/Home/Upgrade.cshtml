@@ -283,9 +283,19 @@
 								</div>
 							</div>
 							<br>
+						@if (Model.FBO.platinium_level_count == 0)
+						{
+
 							<div class="mb-3 col-12 text-center">
 								<button type="submit" class="btn btn-success">Join Now</button>
 							</div>
+						}
+						else if (Model.FBO.platinium_level_count > 0)
+						{ 
+							<div class="mb-3 col-12 text-center" style="color: red;">
+							Sorry, there is already a platinum FBO sponsor at your airport
+							</div>
+						}
 						</div>
 					</div>
 				</div>

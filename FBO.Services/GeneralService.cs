@@ -130,6 +130,24 @@ namespace FBO.Services
                 return null;
             }
         }
+        public async Task<int> PlatinumFBOCount(string companyID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add("CompanyID", companyID);
+                var fbo = await Task.FromResult(_dapper.Get<FBOManagement_CheckPlatinum_Result>("FBOManagement_CheckPlatinum", dynamicParameters, commandType: CommandType.StoredProcedure));
+              
+                    return fbo.total;
+
+               
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---PlatinumFBOCount function---with company ID" + companyID + " Exception is:", ex);
+                return -1;
+            }
+        }
         public async Task<FBOLogoServiceModel> GetLogoService(string companyID)
         {
             FBOLogoServiceModel logo = new FBOLogoServiceModel();

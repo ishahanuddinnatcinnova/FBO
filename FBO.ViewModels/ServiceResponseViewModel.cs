@@ -28,5 +28,6 @@ namespace FBO.ViewModels
         public services_Accepted_GetCreditCards_Result fboCreditCards;
         public FBOLogoServiceModel fbologoser;
 
+        
     }
 }

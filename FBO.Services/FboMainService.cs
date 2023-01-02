@@ -12,6 +12,7 @@ using Dapper;
 using GlobalAir.Data;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
+using Serilog;
 
 namespace FBO.Services
 {
@@ -108,8 +109,18 @@ namespace FBO.Services
                         }
                         else
                         {
-                            response.data.FBO = res;
-                            response.isRedirect = false;
+                            if (res.FBO.FBOLevel == "Basic")
+                            {
+                                response.isRedirect = true;
+                                response.redirectURL = "/fbo/companymanage.aspx";
+                            }
+                            else
+                            {
+                                response.data.FBO = res;
+                                response.isRedirect = false;
+                                
+                            }
+                        
                         }
                     }
                     else
@@ -155,9 +166,19 @@ namespace FBO.Services
                         }
                         else
                         {
-                            response.data.FBO = res;
-                            response.data.fuelcards = fuelcards;
-                            response.isRedirect = false;
+                            if (res.FBO.FBOLevel == "Basic")
+                            {
+                                response.isRedirect = true;
+                                response.redirectURL = "/fbo/companymanage.aspx";
+                            }
+                            else
+                            {
+                                response.data.FBO = res;
+                                response.data.fuelcards = fuelcards;
+                                response.isRedirect = false;
+
+                            }
+                            
                         }
                     }
                     else
@@ -249,9 +270,19 @@ namespace FBO.Services
                         }
                         else
                         {
+                            if (res.FBO.FBOLevel == "Basic")
+                            {
+                                response.isRedirect = true;
+                                response.redirectURL = "/fbo/companymanage.aspx";
+                            }
+                            else
+                            {
+                              
                             response.data.FBO = res;
                             response.data.fbologoser = logo;
                             response.isRedirect = false;
+
+                            }
                         }
                     }
                     else
@@ -354,9 +385,19 @@ namespace FBO.Services
                         }
                         else
                         {
+                            if (res.FBO.FBOLevel != "Platinum")
+                            {
+                                response.isRedirect = true;
+                                response.redirectURL="/fbo/companymanage.aspx";
+                            }
+                            else
+                            {
                             response.data.FBO = res;
                             response.data.customServices = customSer;
                             response.isRedirect = false;
+
+                            }
+                            
                         }
                     }
                     else
@@ -404,9 +445,20 @@ namespace FBO.Services
                         }
                         else
                         {
+                            if (res.FBO.FBOLevel == "Platinum")
+                            {
+                                response.isRedirect = true;
+                                response.redirectURL = "/fbo/companymanage.aspx";
+                            }
+                            else
+                            {
                             response.data.FBO = res;
-                           
+                            response.data.FBO.platinium_level_count =Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
                             response.isRedirect = false;
+                           
+
+                            }
+
                         }
                     }
                     else
