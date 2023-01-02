@@ -25,13 +25,15 @@ namespace FBO.Controllers
         _fboMainService = fboMainService;
 
         }
-    [Route("GetFBOStats")]
+        
+        [Route("GetFBOStats")]
         public async Task<FBOManagement_Stats_Result> GetFBOStats(string companyID,string StartDate,string EndDate)
         {
             FBOManagement_Stats_Result stats = new FBOManagement_Stats_Result();
             stats = await _generalService.getFBOStats(Convert.ToInt16(companyID), StartDate, EndDate);
             return stats;
         }
+
         [Route("DeleteCustomService")]
         public async Task<string> DeleteCustomService(string serviceID)
         {

@@ -202,7 +202,7 @@
                             </div>
                             <div class="row p-3 mb-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output" src='@(!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? "https://resources.globalair.com/airport/images/managerphotos/@Model.FBO.FBO.logo" : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
+                                    <img id="output" src='@(!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? "https://resources.globalair.com/airport/images/complogo/" + Model.FBO.FBO.logo : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
                                     <br><br>
 
 
@@ -230,7 +230,7 @@
                             </div>
                             <div class="row p-3">
                                 <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output1" src='@(!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? "https://resources.globalair.com/airport/images/managerphotos/@Model.singleFBO.ManagerPhoto" : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
+                                    <img id="output1" src='@(!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? "https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
                                     <br><br>
 
                                     <button type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
