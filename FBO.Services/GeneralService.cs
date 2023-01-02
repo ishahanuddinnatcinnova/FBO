@@ -497,6 +497,7 @@ namespace FBO.Services
                 {
                     fuelaverages.Average_JETA = fuelavg.Average_JETA;
                     fuelaverages.Average_100LL = fuelavg.Average_100LL;
+                    fuelaverages.Average_SAF = fuelavg.Average_SAF;
                     fuelaverages.FAARegionCode = fuelavg.FAARegionCode;
                     fuelaverages.RegionName = fuelavg.RegionName;
 
