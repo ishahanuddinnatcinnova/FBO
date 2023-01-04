@@ -206,7 +206,7 @@
                                     <br><br>
 
 
-                                    <button type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
+                                    <button id="deletebtn" type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <p>
@@ -233,7 +233,7 @@
                                     <img id="output1" src='@(!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? "https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")' style="max-width: inherit;">
                                     <br><br>
 
-                                    <button type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
+                                    <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
                                     @*<a href="#" class="btn btn-danger rounded">Delete Logo</a>*@
                                 </div>
                                 <div class="col-12 col-md-8">
@@ -277,6 +277,20 @@
 
         $(document).ready(() => {
             $("#stateid option[value=@Model.FBO.FBO.LocId]").attr('selected', 'selected');
+        @if (String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto))
+        {
+            <text>
+            
+            $("#deletebtn2").hide();
+            </text>
+        }
+        @if (String.IsNullOrEmpty(Model.FBO.FBO.logo))
+        {
+            <text>
+
+                    $("#deletebtn").hide();
+            </text>
+        }
         });
     </script>
 }
