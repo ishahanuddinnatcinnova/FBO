@@ -3,6 +3,7 @@ using FBO.Services;
 using FBO.ViewModels;
 using GlobalAir.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Diagnostics;
 
 namespace FBO.Controllers
@@ -131,24 +132,35 @@ namespace FBO.Controllers
             }
         }
         [Route("upgrade.aspx")]
-        public async Task<IActionResult> Upgrade(string companyID, string fuel)
+        public async Task<IActionResult> Upgrade(string companyID, string fuel, bool isbtn )
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID, fuel);
+            if(isbtn && !response.isRedirect)
+            {
+                //return RedirectToAction("Step",response.data);
+                return View("Step", response.data);
+            }
+            else
+            {
+
             if (response.isRedirect)
-
-
             {
                 return Redirect(response.redirectURL);
             }
 
             else
             {
-                return View(response.data);
+                   
+
+                    return View(response.data);
+                }
             }
-            return View();
         }
 
-
+        //public async Task<IActionResult> Step(ServiceResponseViewModel data)
+        //{
+        //    return View(data);
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

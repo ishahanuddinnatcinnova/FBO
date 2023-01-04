@@ -436,7 +436,8 @@ namespace FBO.Services
                     {
 
                         FBOResult res = await _generalService.GetFBO(companyID);
-                    
+                        var locations = await _generalService.GetLocations();
+
 
                         if (res.FBO.UserID.ToString() != userData.userID)
                         {
@@ -453,7 +454,9 @@ namespace FBO.Services
                             else
                             {
                             response.data.FBO = res;
-                            response.data.FBO.platinium_level_count =Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
+                                response.data.locations = locations;
+
+                                response.data.FBO.platinium_level_count =Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
                             response.isRedirect = false;
                            
 
@@ -512,6 +515,24 @@ namespace FBO.Services
                     response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
                     response = await _generalService.UploadManagerPicBtn(updateinfo.managerpic, updateinfo.companyID);
                     response = _generalService.SaveButtonUpdateFboInfo(updateinfo,userData.userFirstname);
+                }
+                return response;
+            }
+            catch
+            {
+                return response;
+            }
+        }
+        public async Task<string> PostFboUpgrade(FBOUpgradeModel updateinfo, HttpRequest request)
+        {
+            string response = "";
+            try
+            {
+                if (updateinfo.companyID != null && updateinfo.companyID != "")
+                {
+                    UserViewModel userData = _utility.CheckLogin(request);
+                   
+                    response = _generalService.BtnUpgradeFboSaveClick(updateinfo,Convert.ToInt32(userData.userID));
                 }
                 return response;
             }

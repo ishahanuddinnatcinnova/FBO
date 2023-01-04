@@ -118,7 +118,7 @@
             $.ajax({
                  url: '/api/FBOHelperAPI/DeleteCustomService',
                 type: 'GET',
-                data:{ serviceID: '5'},
+                data:{ serviceID: '$(this).attr("data-id")'},
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
                     console.log(response);

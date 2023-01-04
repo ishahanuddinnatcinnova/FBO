@@ -11,12 +11,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static Dapper.SqlMapper;
 using static System.Net.WebRequestMethods;
+using System.Security.Cryptography;
 
 namespace FBO.Services
 {
@@ -1809,6 +1811,193 @@ namespace FBO.Services
                 Log.Error("Error in---getRatingStatsAsync Function---with fbo ID" + fboID + " Exception is:", ex);
             }
             return ratingStats;
+        }
+
+        public string BtnUpgradeFboSaveClick(FBOUpgradeModel upgrade,int userID)
+        {
+            int errorCount = 0;
+
+            //if (upgrade.Email == "")
+            //{
+            //    errorCount = errorCount + 1;
+            //    lblEmailAddress.Text = "Please enter your email address";
+            //    lblEmailAddress.Visible = true;
+            //}
+
+            String u_address1 = upgrade.Address1.Trim();
+            String u_address2 = upgrade.Address2.Trim();
+            String u_city = upgrade.City.Trim();
+            String u_state = "";
+            String u_zip = upgrade.Zipcode.Trim();
+            String u_country = upgrade.state.Trim(); //TOBeDone
+            String u_phone = upgrade.Phone.Trim();
+            String u_fax = upgrade.Fax.Trim();
+            String u_email = upgrade.Email.Trim();
+
+            // CC Area
+            int cvv = -1;
+            if (!int.TryParse(upgrade.cvv, out cvv))
+            {
+                //lblCardSecurity.Text = "Error: You must enter a valid credit card security code (CVV) <br />";
+                //lblCardSecurity.Visible = true;
+                //pnlErrorMsg.Visible = true;
+                //Log TO be added
+                Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured with CVV");
+                return "failed";
+            }
+
+            //if (API.Billing.ValidateCreditExpiration(upgrade.cardexpmonth, upgrade.cardexpyear) == false)
+            //{
+            //    errorCount = errorCount + 1;
+            //    //lblCardExpMonth.Text = "Error: invalid expiration date <br />";
+            //    //lblCardExpMonth.Visible = true;
+            //    //pnlErrorMsg.Visible = true;
+            //    Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while validating card expiry");
+            //    return "failed";
+            //}
+
+            if (errorCount == 0)
+            {
+             
+
+                String u_billingname = upgrade.nameoncard.Trim();
+                String u_creditcardnumber = upgrade.cardnumber.Trim();
+                String u_expirationmonth = upgrade.cardexpmonth.Trim();
+                String u_expirationyear = upgrade.cardexpyear.Trim();
+                String u_securitycode = upgrade.cvv.Trim();
+
+                // Set Billing Price
+                decimal price = 0;
+                if (upgrade.upgradeto == "platinum") 
+                { price = 800; }
+                else if (upgrade.upgradeto == "gold") 
+                { price = 500; }
+                else if (upgrade.upgradeto =="silver")
+                { price = 200; }
+
+
+                // Charge the credit card using third-party software (at this time it's CardPointe.com)
+                //var ccResp = API.Billing.ChargeCreditCard(u_billingname, "", "", "", "", "", u_creditcardnumber, u_expirationmonth + u_expirationyear, cvv, price, "Upgrade FBO to " + upgrade_level);
+
+                //if (ccResp.StatusCode == API.CreditCardResponse.StatusCodes.Fail)
+                //{
+                //    //pnlForms.Visible = true;
+                //    //lblError.Visible = true;
+                //    //lblError.Text = "Error processing Credit Card: " + ccResp.ResponseText;
+                //    //pnlErrorMsg.Visible = true;
+                //    Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while ChargeCreditCard");
+                //    return "failed";
+                //}
+                else
+                {
+                    try
+                    {
+                        int upgradeID = Upgrade_SaveDetails(Convert.ToInt16(upgrade.companyID), userID, upgrade.upgradeto);
+                        Upgrade_SaveBilling(upgradeID, u_address1, u_address2, u_city, u_state, u_zip, u_country, u_phone, u_fax, u_email);
+                        Upgrade_SaveCreditCard(upgradeID, u_billingname, u_expirationmonth, u_expirationyear);
+                        Upgrade_FinishUpgrade(upgradeID);
+                        return "success";
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while Upgrade_SaveDetails");
+                        return "failed";
+                    }
+                }
+                return "success";
+            }
+            return "success";
+        }
+        public int Upgrade_SaveDetails(int u_companyid, int u_userid, String u_newfbolevel)
+        {
+            int upgradeID;
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                
+                dynamicParameters.Add("CompanyID", u_companyid);
+                dynamicParameters.Add("UserID", u_userid);
+                dynamicParameters.Add("NewFBOLevel", u_newfbolevel);
+                upgradeID= Convert.ToInt32(_dapper.Get<string>("FBOManagement_Upgrade_SaveDetails", dynamicParameters, commandType: CommandType.StoredProcedure));
+
+                return upgradeID;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---Upgrade_SaveDetails Function---with Com ID" + u_companyid + " Exception is:", ex);
+                return -1;
+            }
+        }
+        public void Upgrade_SaveCreditCard(int u_upgradeid, String u_billingname, String u_expirationmonth, String u_expirationyear)
+        {
+      
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                
+                dynamicParameters.Add("@UpgradeID", u_upgradeid);
+                dynamicParameters.Add("@BillingName", u_billingname);
+                dynamicParameters.Add("@ExpirationMonth", u_expirationmonth);
+                dynamicParameters.Add("@ExpirationYear", u_expirationyear);
+                _dapper.Execute("FBOManagement_Upgrade_SaveCreditCard", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+               
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---Upgrade_SaveCreditCard Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
+                
+            }
+        }
+
+        public void Upgrade_SaveBilling(int u_upgradeid, String u_address1, String u_address2, String u_city, String u_state, String u_zip, String u_country, String u_phone, String u_fax, String u_email)
+        {
+
+
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+
+           
+                dynamicParameters.Add("UpgradeID", u_upgradeid);
+                dynamicParameters.Add("Address1", u_address1);
+                dynamicParameters.Add("Address2", u_address2);
+                dynamicParameters.Add("City", u_city);
+                dynamicParameters.Add("State", u_state);
+                dynamicParameters.Add("Zip", u_zip);
+                dynamicParameters.Add("Country", u_country);
+                dynamicParameters.Add("Phone", u_phone);
+                dynamicParameters.Add("Fax", u_fax);
+                dynamicParameters.Add("Email", u_email);
+                _dapper.Execute("FBOManagement_Upgrade_SaveBilling", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---FBOManagement_Upgrade_SaveBilling Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
+
+            }
+        }
+        public void Upgrade_FinishUpgrade(int u_upgradeid)
+        {
+            // CALL THE STORED PROCEDURE TO COMPLETE THE UPGRADE STEPS...
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+
+
+                dynamicParameters.Add("UpgradeID", u_upgradeid);
+               _dapper.Execute("FBOManagement_Upgrade_FinishUpgrade", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---Upgrade_FinishUpgrade Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
+
+            }
         }
     }
 }

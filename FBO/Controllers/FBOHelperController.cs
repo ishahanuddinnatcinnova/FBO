@@ -158,7 +158,21 @@ namespace FBO.Controllers
             }
             return RedirectToAction("FboInformation","Home", new { companyID = companyID });
         }
+        public async Task<IActionResult> FboUpgrade(FBOUpgradeModel updatebasic)
+        {
 
+            string response = await _fboMainService.PostFboUpgrade(updatebasic, this.Request);
+            if (response == "success")
+            {
+                TempData["success"] = "true";
+            }
+            else
+            {
+                TempData["success"] = "false";
+            }
+
+            return RedirectToAction("FboInformation", "Home", new { companyID = updatebasic.companyID });
+        }
 
 
     }

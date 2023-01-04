@@ -7,6 +7,27 @@ using System.Threading.Tasks;
 
 namespace FBO.ViewModels
 {
+    public class FBOUpgradeModel
+    {
+        public String companyID { get; set; }
+        public String Address1 { get; set; }
+        public String Address2 { get; set; }
+        public String City { get; set; }
+        public string stateid { get; set; }
+        public string state { get; set; }
+        public String Zipcode { get; set; }
+        public String Phone { get; set; }
+        public String Fax { get; set; }
+        public String Email { get; set; }
+        public String nameoncard { get; set; }
+        public String cardnumber { get; set; }
+        public String cardexpmonth { get; set; }
+        public String cardexpyear { get; set; }
+        public String cvv { get; set; }
+        public string upgradeto { get; set; }
+
+
+    }
     public class FBOInfoUpdateModel
     {
         public String companyID { get; set; }
