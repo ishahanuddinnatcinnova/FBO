@@ -27,6 +27,7 @@ namespace FBO.ViewModels
         public FBOManagement_UpdateBasicServices_Result basic = new FBOManagement_UpdateBasicServices_Result();
         public services_Accepted_GetCreditCards_Result fboCreditCards;
         public FBOLogoServiceModel fbologoser;
+        public List<services_Photos> Photos { get; set; }
 
         
     }

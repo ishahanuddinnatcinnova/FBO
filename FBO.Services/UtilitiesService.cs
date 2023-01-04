@@ -62,6 +62,36 @@ namespace FBO.Services
             }
             return loginViewModel;
         }
+        public static string FormatARC_FBO(string fbo_id, string fbo_compname, string fbo_aptcode)
+        {
+            string text = "";
+            try
+            {
+                fbo_compname = fbo_compname.Trim();
+                fbo_compname = fbo_compname.Replace(" ", "-");
+                fbo_compname = fbo_compname.Replace("/", "-");
+                fbo_compname = fbo_compname.Replace("&", "and");
+                fbo_compname = fbo_compname.Replace(".", "");
+                fbo_compname = fbo_compname.Replace(",", "");
+                fbo_compname = fbo_compname.Replace("'", "");
+                fbo_compname = fbo_compname.Replace("*", "");
+                fbo_compname = fbo_compname.Replace(":", "-");
+                fbo_compname = fbo_compname.Replace("---", "-");
+                fbo_compname = fbo_compname.Replace("--", "-");
+                text = "/airport/fbo-at-";
+                text = text + fbo_aptcode + "-";
+                text += fbo_compname;
+                text = text + "-" + fbo_id;
+                text += ".aspx";
+                text = text.ToLower();
+                return text;
+            }
+            catch (Exception)
+            {
+                return text;
+            }
+        }
+
 
     }
 }

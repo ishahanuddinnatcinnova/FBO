@@ -41,6 +41,7 @@ namespace FBO.Controllers
             }
             else
             {
+                TempData["page"] = "companymanage";
                 return View(response.data);
             }
         }
@@ -56,6 +57,7 @@ namespace FBO.Controllers
             }
             else
             {
+                TempData["page"] = "basicandextended";
                 return View(response.data);
             }
         }
@@ -70,6 +72,7 @@ namespace FBO.Controllers
             }
             else
             {
+                TempData["page"] = "fuelcards";
                 return View(response.data);
             }
         }
@@ -83,6 +86,7 @@ namespace FBO.Controllers
             }
             else
             {
+                TempData["page"] = "fuel";
                 return View(response.data);
             }
         }
@@ -96,6 +100,7 @@ namespace FBO.Controllers
             }
             else
             {
+                TempData["page"] = "logoservices";
                 return View(response.data);
             }
         }
@@ -104,14 +109,12 @@ namespace FBO.Controllers
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFboInformation(this.Request, companyID, fuel);
             if (response.isRedirect)
-
-
             {
                 return Redirect(response.redirectURL);
             }
-
             else
             {
+                TempData["page"] = "fboinformation";
                 return View(response.data);
             }
         }
@@ -120,40 +123,31 @@ namespace FBO.Controllers
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForCustomServices(this.Request, companyID, fuel);
             if (response.isRedirect)
-
-
             {
                 return Redirect(response.redirectURL);
             }
-
             else
             {
+                TempData["page"] = "customservices";
                 return View(response.data);
             }
         }
         [Route("upgrade.aspx")]
-        public async Task<IActionResult> Upgrade(string companyID, string fuel, bool isbtn )
+        public async Task<IActionResult> Upgrade(string companyID, string fuel, string level, string step)
         {
             ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID, fuel);
-            if(isbtn && !response.isRedirect)
+            if (!response.isRedirect)
             {
-                //return RedirectToAction("Step",response.data);
-                return View("Step", response.data);
+                TempData["page"] = "upgrade";
+
+                if (!String.IsNullOrEmpty(level) && !String.IsNullOrEmpty(step))
+                    return View("Step", response.data);
+                else
+                    return View(response.data);
             }
             else
-            {
-
-            if (response.isRedirect)
             {
                 return Redirect(response.redirectURL);
-            }
-
-            else
-            {
-                   
-
-                    return View(response.data);
-                }
             }
         }
 

@@ -1,12 +1,11 @@
-﻿
-#featuredPromo {
+﻿#featuredPromo {
     border-radius: 10px;
 }
 
 #fuelPrices {
     border-radius: 10px;
     color: white;
-    padding: 20px
+    padding: 20px;
 }
 
     #fuelPrices .nav {
@@ -28,11 +27,11 @@
             font-weight: 700;
             border-radius: 10px;
             padding: 8px;
-            color: rgb(168, 211, 43)
+            color: rgb(168, 211, 43);
         }
 
     #fuelPrices a {
-        color: white
+        color: white;
     }
 
     #fuelPrices .nav li a {
@@ -40,7 +39,7 @@
     }
 
 .tab-content {
-    padding-top: 30px
+    padding-top: 30px;
 }
 
     .tab-content table {
@@ -72,16 +71,16 @@
 .middleBox {
     background-color: rgb(245, 245, 245);
     padding: 10px;
-    border-radius: 10px
+    border-radius: 10px;
 }
 
     .middleBox span {
-        color: rgb(150, 150, 150)
+        color: rgb(150, 150, 150);
     }
 
     .middleBox h4,
     p {
-        color: rgb(100, 100, 100)
+        color: rgb(100, 100, 100);
     }
 
 .card {
@@ -174,7 +173,7 @@ label {
 
 .container2 {
     height: 150px;
-    width: 30%;
+    width: 100%;
     background-color: #ffffff;
     box-shadow: 0 0 25px rgba(17, 1, 68, 0.08);
     border-radius: 8px;
@@ -203,7 +202,7 @@ label {
     position: relative;
     width: 100%;
     cursor: pointer;
-    border: none
+    border: none;
 }
 
     .inputCheckbox input:after {
@@ -234,8 +233,6 @@ label {
     cursor: pointer;
 }
 
-
-
 .section-title {
     position: relative;
     text-transform: uppercase;
@@ -251,109 +248,6 @@ label {
         width: 5rem;
         background-color: #97cb00;
     }
-
-
-
-.inputCheckbox input:after {
-    position: absolute;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 400;
-    content: "\f111";
-    font-size: 18px;
-    color: #478bfb;
-    right: 10px;
-    top: -5px;
-}
-
-.inputCheckbox input:checked:after {
-    font-weight: 900;
-    content: "\f058";
-    color: #478bfb;
-}
-
-.container2 img {
-    width: 80%;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-}
-
-@@media screen and (min-width: 950px) {
-    .wrapper2 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .container2 {
-        height: 250px;
-        width: 90%;
-    }
-
-    input[type="checkbox"]:after {
-        font-size: 22px;
-    }
-}
-
-.section-title {
-    position: relative;
-    text-transform: uppercase;
-    margin-bottom: 1.875rem;
-}
-
-    .section-title::before {
-        position: absolute;
-        left: 0;
-        bottom: -8px;
-        content: "";
-        height: 2px;
-        width: 5rem;
-        background-color: #97cb00;
-    }
-
-.container2:hover {
-    transform: scale(1.05);
-    box-shadow: 10px 10px 10px #888888;
-}
-.wrapper2 {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.container2 {
-    height: 160px;
-    width: 90%;
-}
-
-input[type="checkbox"]:after {
-    font-size: 22px;
-}
-
-}
-
-.section-title {
-    position: relative;
-    text-transform: uppercase;
-    margin-bottom: 1.875rem;
-}
-
-    .section-title::before {
-        position: absolute;
-        left: 0;
-        bottom: -8px;
-        content: "";
-        height: 2px;
-        width: 5rem;
-        background-color: #97cb00;
-    }
-
-.container2:hover {
-    transform: scale(1.05);
-    box-shadow: 10px 10px 10px #888888;
-}
 
 .toast {
     background: white;
@@ -363,44 +257,38 @@ input[type="checkbox"]:after {
     position: fixed;
     top: 20px;
     z-index: 1;
-    font-size: 1em
+    font-size: 1em;
 }
-
-
 
 .toast-content {
     padding: 15px;
 }
 
-
-
 .icon i {
     font-size: 35px;
 }
 
-
-
-
 .toast.success {
-    border: 2px solid #14A44D !important;
-    color: #14A44D;
+    border: 2px solid #14a44d !important;
+    color: #14a44d;
 }
-
-
 
 .toast.warning {
-    border: 2px solid #F9A02C !important;
-    color: #F9A02C;
+    border: 2px solid #f9a02c !important;
+    color: #f9a02c;
 }
 
-
-
 .toast.erro {
-    border: 2px solid #D90429 !important;
-    color: #D90429;
+    border: 2px solid #d90429 !important;
+    color: #d90429;
 }
 
 .limit {
     color: #007000;
-    font-weight: bold
+    font-weight: bold;
+}
+
+.active-page {
+    color: #97cb00 !important;
+    border-bottom: #97cb00 2px solid !important;
 }

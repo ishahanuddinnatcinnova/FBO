@@ -298,7 +298,11 @@
                         {
 
                             <div class="mb-3 col-12 text-center">
-                                <button id="JoinNow" type="submit" class="btn btn-success" data-name="Platinum">Join Now</button>
+                                @*Uncomment this for local*@
+                                <a href="/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=platinum" class="btn btn-success" data-name="Platinum">Join Now</a>
+
+                                @*Uncomment this for prod*@
+                                @*<a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=platinum" class="btn btn-success" data-name="Platinum">Join Now</a>*@
                             </div>
                         }
                         else if (Model.FBO.platinium_level_count > 0)
@@ -371,7 +375,7 @@
                         </div>
                         <br>
                         <div class="mb-3 col-12 text-center">
-                            <button id="JoinNow" type="submit" class="btn btn-success" data-name="Gold">Join Now</button>
+                            <a href="/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=gold" type="submit" class="btn btn-success" data-name="Gold">Join Now</a>
                         </div>
                     </div>
                 </div>
@@ -437,7 +441,7 @@
                         </div>
                         <br>
                         <div class="mb-3 col-12 text-center">
-                            <button id="JoinNow" type="submit" class="JoinNow btn btn-success" data-name="Gold">Join Now</button>
+                            <a href="/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=silver" type="submit" class="JoinNow btn btn-success" data-name="Silver">Join Now</a>
                         </div>
                     </div>
                 </div>
@@ -485,29 +489,6 @@
                 $('#silver').show();
             </text>
         }
-                                });
-        $("#JoinNow").click(function () {
-            debugger;
-            
-
-
-            $.ajax({
-                url: '@Url.Action("Upgrade","Home")',
-                type: 'GET',
-                data: { isbtn: "True", companyID: @Model.FBO.FBO.CompanyID},
-                contentType: "application/json; charset=utf-8",
-
-                success: function (response) {
-
-                  
-                },
-                error: function (error) {
-
-                    console.log(error);
-                }
-            });
-        });
-
     </script>
     }
 
