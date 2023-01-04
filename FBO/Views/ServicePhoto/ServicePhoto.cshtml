@@ -1,0 +1,154 @@
+﻿@model FBO.ViewModels.ServiceResponseViewModel
+@{
+    ViewBag.Title = "FBO Photo Upload";
+}
+<link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <style>
+        @@media (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+
+        .fa, .far, .fas {
+            font-family: "Font Awesome 5 Free" !important;
+        }
+    </style>
+}
+    <div class="row ms-2 mt-4">
+        <div class="row">
+            <div class="col-md-9">
+                <nav aria-label="breadcrumb">
+                    <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.data.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your FBO Photos<meta itemprop="position" content="3"></a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 property="name">@Model.data.FBO.companyName (@Model.data.FBO.FBO.APTCode)</h1>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+            <partial name="_SubMenuItems" model="@Model.data.FBO" />
+            <div class="col-md-9 col-12">
+                <div class="card float-right">
+                <div style="padding: 10px 20px 100px 20px;">
+                        <h2 class="section-title display-6">
+                           Manage Your FBO Photos
+                        </h2>
+                    <div>
+                        <p>Your current FBO photos are displayed below. To see how these photos look on GlobalAir.com, <a href="@ViewBag.FBOURL">click here</a> to view the photo slideshow on your FBO page.</p>
+                        <p>To upload additional photos, click the Browse button to select photos from your computer or drag and drop them directly from your desktop.</p>
+                        <p>If you want to delete any of the photos in your slideshow, click the Delete button below the corresponding photo.</p>
+                    </div>
+                    <div class="alert alert-danger">Uploading photos with large file sizes will increase the time it takes to load the photos on your FBO page.</div>
+
+                    <input id="input-1" name="input1[]" type="file" multiple class="file-loading">
+                    <div id="errorBlock" class="help-block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
+    <script>
+        var vtoken = '';
+        var initialPreviewConfig1 = [@foreach (var item in Model.data.Photos)
+        {
+            //Uncomment this one for debugging
+            //@Html.Raw("{ url: \"/ServicePhoto/Delete/" + item.PhotoID + "?appId=" + ViewBag.AppId + "&tokenId=" + ViewBag.Token + "\", key: " + item.PhotoID + ", caption: \"" + System.IO.Path.GetFileName(item.Photo) + "\"}")
+            
+            //Uncomment this one for prod
+            @Html.Raw("{ url: \"/fbo/ServicePhoto/Delete/" + item.PhotoID + "?appId=" + ViewBag.AppId + "&tokenId=" + ViewBag.Token + "\", key: " + item.PhotoID + ", caption: \"" + System.IO.Path.GetFileName(item.Photo) + "\"}")
+            if (item != Model.data.Photos[Model.data.Photos.Count - 1])
+            {
+                @Html.Raw(",\n")
+            }
+        }];
+        var initialPreview1 = [@foreach (var item in Model.data.Photos)
+        {
+            @Html.Raw("'" + item.Photo + "'")
+            if (item != Model.data.Photos[Model.data.Photos.Count - 1])
+            {
+                @Html.Raw(",\n")
+            }
+        }];
+
+        window.addEventListener('load', function () {
+            initializeImageControl("#input-1", initialPreview1, initialPreviewConfig1);
+        });
+
+        function initializeImageControl(objName, initialPreview, initialPreviewConfig) {
+            $(objName).fileinput({
+                //Uncomment this one for debugging
+                //uploadUrl: '/fbo/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
+                //Uncomment this one for prod
+                uploadUrl: '/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
+                uploadAsync: true,
+                showCancel: false,
+                showClose: false,
+                showUpload: false,
+                showRemove: false,
+                showBrowse: true,
+                showCaption: true,
+                maxFileSize: 4096,
+                msgUploadEmpty: 'Max size per image is 4MB. Please choose a smaller image.',
+                browseOnZoneClick: true,
+                fileActionSettings: {
+                    showDrag: false,
+                    removeIcon: '<i class="fas fa-trash-alt"></i>',
+                    uploadIcon: '<i class="fas fa-upload"></i>',
+                    uploadRetryIcon: '<i class="fas fa-redo-alt"></i>',
+                    downloadIcon: '<i class="fas fa-download"></i>',
+                    zoomIcon: '<i class="fas fa-search-plus"></i>',
+                    dragIcon: '<i class="fas fa-arrows-alt"></i>',
+                    indicatorNew: '<i class="fas fa-plus-circle text-warning"></i>',
+                    indicatorSuccess: '<i class="fas fa-check-circle text-success"></i>',
+                    indicatorError: '<i class="fas fa-exclamation-circle text-danger"></i>',
+                    indicatorLoading: '<i class="fas fa-hourglass text-muted"></i>'
+                },
+                layoutTemplates: {
+                    fileIcon: '<i class="fas fa-file kv-caption-icon"></i> '
+                },
+                previewZoomButtonIcons: {
+                    prev: '<i class="fas fa-caret-left fa-lg"></i>',
+                    next: '<i class="fas fa-caret-right fa-lg"></i>',
+                    toggleheader: '<i class="fas fa-fw fa-arrows-alt-v"></i>',
+                    fullscreen: '<i class="fas fa-fw fa-arrows-alt"></i>',
+                    borderless: '<i class="fas fa-fw fa-external-link-alt"></i>',
+                    close: ''
+                },
+                previewFileIcon: '<i class="fas fa-file"></i>',
+                browseIcon: '<i class="fas fa-folder-open"></i>',
+                removeIcon: '<i class="fas fa-trash-alt"></i>',
+                cancelIcon: '<i class="fas fa-ban"></i>',
+                pauseIcon: '<i class="fas fa-pause"></i>',
+                uploadIcon: '<i class="fas fa-upload"></i>',
+                msgValidationErrorIcon: '<i class="fas fa-exclamation-circle"></i> ',
+                initialPreviewAsData: true,
+                overwriteInitial: false,
+                allowedFileTypes: ['image'],
+                initialPreview: initialPreview,
+                initialPreviewConfig: initialPreviewConfig
+            })
+                .on("filebatchselected", function (event, files) {
+                    // trigger upload method immediately after files are selected
+                    $(objName).fileinput("upload");
+                })
+                .on("filedeleted", function (event, key, jqXHR, data) {
+
+                });
+        }
+    </script>
+    }

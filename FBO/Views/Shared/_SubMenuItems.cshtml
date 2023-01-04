@@ -13,7 +13,7 @@
             <div class="nav nav-pills navbar-right collapse navbar-collapse navbar-dark bg-dark" id="navbarsExample2">
                 @if (Model.FBO.FBOLevel != "Platinum")
                 {
-                    <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
+                    <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "upgrade" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
                 }
                 <a href="/register" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Edit Account Information
@@ -21,17 +21,17 @@
                 <a href="/myflightdept/account.aspx" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     My Flight Department Services
                 </a>
-                <a href="/fbo/information.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                <a href="/fbo/information.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fboinformation" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     FBO Information
                 </a>
 
                 @if (Model.FBO.FBOLevel == "Platinum" || Model.FBO.FBOLevel == "Gold")
                 {
-                    <a href="#" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    <a href="/fbo/servicephoto/index?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "servicephoto" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         FBO Photos
                     </a>
                 }
-                <a href="/fbo/fuel.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                <a href="/fbo/fuel.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fuel" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Update Fuel Prices
                 </a>
                 <a href="/airport/fboratings.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
@@ -39,19 +39,19 @@
                 </a>
                 @if (Model.FBO.FBOLevel != "Basic")
                 {
-                    <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "basicandextended" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         Extended & Basic Services
                     </a>
-                    <a href="/fbo/fuelcards.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    <a href="/fbo/fuelcards.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fuelcards" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         Fuel Cards
                     </a>
-                    <a href="/fbo/logoservices.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    <a href="/fbo/logoservices.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "logoservices" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         Logo Services
                     </a>
                 }
                 @if (Model.FBO.FBOLevel == "Platinum")
                 {
-                    <a href="CustomService.html" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    <a href="/fbo/custom.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "customservices" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         Custom Services
                     </a>
                 }

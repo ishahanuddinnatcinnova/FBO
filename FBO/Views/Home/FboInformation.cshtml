@@ -153,33 +153,26 @@
                                 </span>
                             </div>
                             <div class="row mt-5 mb-5">
-                                <div class="col-6 col-md-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-
-
-
                                         @Html.CheckBox("cc_mastercard", Model.fboCreditCards.mastercard==1 ?true:false, new { @class="form-check-input" })
-
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Mastercard</label>
                                     </div>
                                 </div>
-                                <div class="col-6 col-md-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-
                                         @Html.CheckBox("cc_visa", Model.fboCreditCards.visa==1 ?true:false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Visa</label>
                                     </div>
                                 </div>
-                                <div class="col-6 col-md-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-
                                         @Html.CheckBox("cc_amex", Model.fboCreditCards.amex==1 ?true:false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">American Express</label>
                                     </div>
                                 </div>
-                                <div class="col-6 col-md-3">
+                                <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-
                                         @Html.CheckBox("cc_discover", Model.fboCreditCards.discover==1 ?true:false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Discover</label>
                                     </div>
@@ -192,7 +185,7 @@
                             </div>
                             <div class="row p-3">
                                 <span class="alert alert-info" style="font-size: 20px">
-                                    <a href="#">Click here</a> to view and manage your FBO Photos
+                                    <a href="/fbo/servicephoto/index?companyid=@Model.FBO.FBO.CompanyID">Click here</a> to view and manage your FBO Photos
                                 </span>
                             </div>
                             <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
