@@ -11,21 +11,15 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using static Dapper.SqlMapper;
-using static System.Net.WebRequestMethods;
-using System.Security.Cryptography;
+using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace FBO.Services
 {
     public class GeneralService
     {
-
-
+        private static readonly HttpClient client = new HttpClient();
         private static Dapperr _dapper;
         public GeneralService(Dapperr dapper)
         {
@@ -1817,13 +1811,6 @@ namespace FBO.Services
         {
             int errorCount = 0;
 
-            //if (upgrade.Email == "")
-            //{
-            //    errorCount = errorCount + 1;
-            //    lblEmailAddress.Text = "Please enter your email address";
-            //    lblEmailAddress.Visible = true;
-            //}
-
             String u_address1 = upgrade.Address1.Trim();
             String u_address2 = upgrade.Address2.Trim();
             String u_city = upgrade.City.Trim();
@@ -1846,20 +1833,18 @@ namespace FBO.Services
                 return "failed";
             }
 
-            //if (API.Billing.ValidateCreditExpiration(upgrade.cardexpmonth, upgrade.cardexpyear) == false)
-            //{
-            //    errorCount = errorCount + 1;
-            //    //lblCardExpMonth.Text = "Error: invalid expiration date <br />";
-            //    //lblCardExpMonth.Visible = true;
-            //    //pnlErrorMsg.Visible = true;
-            //    Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while validating card expiry");
-            //    return "failed";
-            //}
+            if (BillingService.ValidateCreditExpiration(upgrade.cardexpmonth, upgrade.cardexpyear) == false)
+            {
+                errorCount = errorCount + 1;
+                //lblCardExpMonth.Text = "Error: invalid expiration date <br />";
+                //lblCardExpMonth.Visible = true;
+                //pnlErrorMsg.Visible = true;
+                Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while validating card expiry");
+                return "failed";
+            }
 
             if (errorCount == 0)
             {
-             
-
                 String u_billingname = upgrade.nameoncard.Trim();
                 String u_creditcardnumber = upgrade.cardnumber.Trim();
                 String u_expirationmonth = upgrade.cardexpmonth.Trim();
@@ -1876,18 +1861,19 @@ namespace FBO.Services
                 { price = 200; }
 
 
-                // Charge the credit card using third-party software (at this time it's CardPointe.com)
-                //var ccResp = API.Billing.ChargeCreditCard(u_billingname, "", "", "", "", "", u_creditcardnumber, u_expirationmonth + u_expirationyear, cvv, price, "Upgrade FBO to " + upgrade_level);
+               //Charge the credit card using third-party software(at this time it's CardPointe.com)
 
-                //if (ccResp.StatusCode == API.CreditCardResponse.StatusCodes.Fail)
-                //{
-                //    //pnlForms.Visible = true;
-                //    //lblError.Visible = true;
-                //    //lblError.Text = "Error processing Credit Card: " + ccResp.ResponseText;
-                //    //pnlErrorMsg.Visible = true;
-                //    Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while ChargeCreditCard");
-                //    return "failed";
-                //}
+               var ccResp = BillingService.ChargeCreditCard(u_billingname, "", "", "", "", "", u_creditcardnumber, u_expirationmonth + u_expirationyear, cvv, price, "Upgrade FBO to " + upgrade.upgradeto);
+
+                if (ccResp.StatusCode == CreditCardResponse.StatusCodes.Fail)
+                {
+                    //pnlForms.Visible = true;
+                    //lblError.Visible = true;
+                    //lblError.Text = "Error processing Credit Card: " + ccResp.ResponseText;
+                    //pnlErrorMsg.Visible = true;
+                    Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while ChargeCreditCard");
+                    return "failed";
+                }
                 else
                 {
                     try
@@ -1900,7 +1886,7 @@ namespace FBO.Services
                     }
                     catch (Exception ex)
                     {
-                        Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while Upgrade_SaveDetails");
+                        Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while Upgrade_SaveDetails. Exception: " + ex);
                         return "failed";
                     }
                 }
@@ -1930,8 +1916,6 @@ namespace FBO.Services
         }
         public void Upgrade_SaveCreditCard(int u_upgradeid, String u_billingname, String u_expirationmonth, String u_expirationyear)
         {
-      
-
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -1941,25 +1925,18 @@ namespace FBO.Services
                 dynamicParameters.Add("@ExpirationMonth", u_expirationmonth);
                 dynamicParameters.Add("@ExpirationYear", u_expirationyear);
                 _dapper.Execute("FBOManagement_Upgrade_SaveCreditCard", dynamicParameters, commandType: CommandType.StoredProcedure);
-
-               
             }
             catch (Exception ex)
             {
                 Log.Error("Error in---Upgrade_SaveCreditCard Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
-                
             }
         }
 
         public void Upgrade_SaveBilling(int u_upgradeid, String u_address1, String u_address2, String u_city, String u_state, String u_zip, String u_country, String u_phone, String u_fax, String u_email)
         {
-
-
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
-
-           
                 dynamicParameters.Add("UpgradeID", u_upgradeid);
                 dynamicParameters.Add("Address1", u_address1);
                 dynamicParameters.Add("Address2", u_address2);
@@ -1971,13 +1948,10 @@ namespace FBO.Services
                 dynamicParameters.Add("Fax", u_fax);
                 dynamicParameters.Add("Email", u_email);
                 _dapper.Execute("FBOManagement_Upgrade_SaveBilling", dynamicParameters, commandType: CommandType.StoredProcedure);
-
-
             }
             catch (Exception ex)
             {
                 Log.Error("Error in---FBOManagement_Upgrade_SaveBilling Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
-
             }
         }
         public void Upgrade_FinishUpgrade(int u_upgradeid)
@@ -1986,17 +1960,12 @@ namespace FBO.Services
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
-
-
                 dynamicParameters.Add("UpgradeID", u_upgradeid);
                _dapper.Execute("FBOManagement_Upgrade_FinishUpgrade", dynamicParameters, commandType: CommandType.StoredProcedure);
-
-
             }
             catch (Exception ex)
             {
                 Log.Error("Error in---Upgrade_FinishUpgrade Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
-
             }
         }
 
@@ -2005,17 +1974,12 @@ namespace FBO.Services
             try
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
-
-
                 dynamicParameters.Add("FBOId", fboID);
                 _dapper.Execute("dbo.spRecordFBOClickThrough", dynamicParameters, commandType: CommandType.StoredProcedure);
-
-
             }
             catch (Exception ex)
             {
                 Log.Error("Error in---RecordClickThrough Function---with fbo ID" + fboID + " Exception is:", ex);
-
             }
         }
     }

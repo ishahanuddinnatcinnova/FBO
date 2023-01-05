@@ -174,8 +174,5 @@ namespace FBO.Controllers
 
             return RedirectToAction("FboInformation", "Home", new { companyID = updatebasic.companyID });
         }
-
-        
-
     }
 }
