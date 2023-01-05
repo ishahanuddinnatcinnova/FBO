@@ -457,19 +457,19 @@ button, input, optgroup, select, textarea {
 @media all and (max-width: 767px) {
     h1,
     .h1 {
-        font-size: 2.35714286em;
+        font-size: 1.1em;
         line-height: 1.36363636em;
     }
 
     h2,
     .h2 {
-        font-size: 1.78571429em;
+        font-size: 1.0em;
         line-height: 1.5em;
     }
 
     h3,
     .h3 {
-        font-size: 1.35714286em;
+        font-size: 0.9em;
         line-height: 1.85714286em;
     }
 

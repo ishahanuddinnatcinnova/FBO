@@ -15,12 +15,7 @@
                 {
                     <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "upgrade" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
                 }
-                <a href="/register" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                    Edit Account Information
-                </a>
-                <a href="/myflightdept/account.aspx" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                    My Flight Department Services
-                </a>
+               
                 <a href="/fbo/information.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fboinformation" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     FBO Information
                 </a>
@@ -55,6 +50,12 @@
                         Custom Services
                     </a>
                 }
+                <a href="/register" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    Edit Account Information
+                </a>
+                <a href="/myflightdept/account.aspx" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    My Flight Department Services
+                </a>
             </div>
         }
         else
