@@ -713,5 +713,9 @@ namespace FBO.Services
 
 
         }
+        public void RecordClickThrough(int fboID)
+        {
+            _generalService.RecordClickThrough(fboID);
+        }
     }
 }

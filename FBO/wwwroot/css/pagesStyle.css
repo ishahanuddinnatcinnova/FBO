@@ -292,3 +292,7 @@ label {
     color: #97cb00 !important;
     border-bottom: #97cb00 2px solid !important;
 }
+.required:after {
+    content: " *";
+    color: red;
+}

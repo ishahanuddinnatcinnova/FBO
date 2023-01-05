@@ -1999,5 +1999,24 @@ namespace FBO.Services
 
             }
         }
+
+        public void RecordClickThrough(int fboID)
+        {
+            try
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
+
+
+                dynamicParameters.Add("FBOId", fboID);
+                _dapper.Execute("dbo.spRecordFBOClickThrough", dynamicParameters, commandType: CommandType.StoredProcedure);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in---RecordClickThrough Function---with fbo ID" + fboID + " Exception is:", ex);
+
+            }
+        }
     }
 }

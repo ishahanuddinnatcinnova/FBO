@@ -158,6 +158,7 @@ namespace FBO.Controllers
             }
             return RedirectToAction("FboInformation","Home", new { companyID = companyID });
         }
+        [HttpPost]
         public async Task<IActionResult> FboUpgrade(FBOUpgradeModel updatebasic)
         {
 
@@ -174,6 +175,10 @@ namespace FBO.Controllers
             return RedirectToAction("FboInformation", "Home", new { companyID = updatebasic.companyID });
         }
 
+        public void RecordClickThrough(int fboID)
+        {
+            _fboMainService.RecordClickThrough(fboID);
+        }
 
     }
 }
