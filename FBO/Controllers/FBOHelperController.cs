@@ -175,10 +175,7 @@ namespace FBO.Controllers
             return RedirectToAction("FboInformation", "Home", new { companyID = updatebasic.companyID });
         }
 
-        public void RecordClickThrough(int fboID)
-        {
-            _fboMainService.RecordClickThrough(fboID);
-        }
+        
 
     }
 }

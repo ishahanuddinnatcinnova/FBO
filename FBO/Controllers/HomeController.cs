@@ -150,7 +150,11 @@ namespace FBO.Controllers
                 return Redirect(response.redirectURL);
             }
         }
-
+        [Route("record_clickthrough.aspx")]
+        public  void RecordClickThrough(int fboID)
+        {
+            _fboMainService.RecordClickThrough(fboID);
+        }
         //public async Task<IActionResult> Step(ServiceResponseViewModel data)
         //{
         //    return View(data);
