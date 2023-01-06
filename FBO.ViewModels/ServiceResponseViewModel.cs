@@ -28,7 +28,7 @@ namespace FBO.ViewModels
         public services_Accepted_GetCreditCards_Result fboCreditCards;
         public FBOLogoServiceModel fbologoser;
         public List<services_Photos> Photos { get; set; }
-
+        public string level;
         
     }
 }

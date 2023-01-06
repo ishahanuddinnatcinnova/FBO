@@ -21,10 +21,40 @@
 
     </div>
     <hr>
+
     <div class="row">
         <partial name="_SubMenuItems" model="@Model.FBO" />
         <div class="col-md-9 col-12">
-            <div class="row ms-1">
+            <div class="row ms-1" id="success" style="display: none">
+                <div class="col">
+                    <p class="alert alert-success">
+                        Congratulations! You have successfully upgraded your FBO.<br />
+                        <a href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID">Click here to return to your FBO account</a>
+                    </p>
+
+                </div>
+            </div>
+            <div class="row ms-1" id="failedcvv" style="display: none">
+                <div class="col">
+                    <p class="alert alert-danger">Error: You must enter a valid credit card security code (CVV)</p>
+                </div>
+            </div>
+            <div class="row ms-1" id="faileddate" style="display: none">
+                <div class="col">
+                    <p class="alert alert-danger">Error: invalid expiration date</p>
+                </div>
+            </div>
+            <div class="row ms-1" id="failedcc" style="display: none">
+                <div class="col">
+                    <p class="alert alert-danger">Error processing Credit Card.please try again later</p>
+                </div>
+            </div>
+            <div class="row ms-1" id="failed" style="display: none">
+                <div class="col">
+                    <p class="alert alert-danger">Oops, your changes have not been updated successfully, please try again later.</p>
+                </div>
+            </div>
+            <div id="main" class="row ms-1">
                 <div class="card float-right">
                     <div class="row mt-4">
                         @using (Html.BeginForm("FboUpgrade", "FBOHelper", FormMethod.Post, new { name = "logoser", id = "logoser", enctype = "multipart/form-data" }))
@@ -33,7 +63,7 @@
                                 Upgrade Your FBO
                             </h2>
                             <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                <span style="font-size: xx-large;background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
                                     Credit Cards Information
                                 </span>
                             </div>
@@ -52,6 +82,9 @@
                                         Name on Card:
                                     </label>
                                     <input type="text" class="form-control" id="nameOnCard" name="nameoncard" required>
+                                    <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
+                                    <input type="hidden" name="upgradeto" value="@Model.level">
+
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="cardnum" class="form-label required">Card Number:</label>
@@ -73,7 +106,7 @@
 
                             </div>
                             <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                <span style="font-size: xx-large;background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
                                     Billing Information
                                 </span>
                             </div>
@@ -161,7 +194,44 @@
 @section Scripts{
     <script>
         $(function () {
-			$("#stateid option[value=@Model.FBO.FBO.LocId]").attr('selected', 'selected');
+            $("#stateid option[value=@Model.FBO.FBO.LocId]").attr('selected', 'selected');
         });
+        @if (TempData["failedcc"] != null && TempData["failedcc"].ToString() == "true")
+        {
+            <text>
+            
+                $('#failedcc').show();
+            </text>
+        }
+        else if (TempData["faileddate"] != null && TempData["faileddate"].ToString() == "true")
+        {
+            <text>
+
+                $('#faileddate').show();
+            </text>
+        }
+        else if (TempData["failedcvv"] != null && TempData["failedcvv"].ToString() == "true")
+        {
+            <text>
+
+                $('#failedcvv').show();
+            </text>
+        }
+        else if (TempData["failed"] != null && TempData["failed"].ToString() == "true")
+        {
+            <text>
+
+                $('#failed').show();
+            </text>
+        }
+        else if (TempData["success"] != null && TempData["success"].ToString() == "true")
+        {
+            <text>
+
+                $('#success').show();
+            $('#main').hide();
+
+            </text>
+        }
     </script>
     }

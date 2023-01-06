@@ -167,12 +167,24 @@ namespace FBO.Controllers
             {
                 TempData["success"] = "true";
             }
+            else if(response == "failedcc")
+            {
+                TempData["failedcc"] = "true";
+            }
+            else if(response=="failedcvv")
+            {
+                TempData["failedcvv"] = "true";
+
+            }
+            else if(response== "faileddate")
+            {
+                TempData["faileddate"] = "true";
+            }
             else
             {
-                TempData["success"] = "false";
+                TempData["success"]= "false";
             }
-
-            return RedirectToAction("FboInformation", "Home", new { companyID = updatebasic.companyID });
+            return RedirectToAction("Upgrade", "Home", new { companyID = updatebasic.companyID,level=updatebasic.upgradeto,step=2 });
         }
     }
 }

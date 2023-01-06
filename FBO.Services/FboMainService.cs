@@ -423,7 +423,7 @@ namespace FBO.Services
             }
         }
 
-        public async Task<ServiceResponseViewModel> GetResponseForUpgradePage(HttpRequest request, string companyID, string fuel)
+        public async Task<ServiceResponseViewModel> GetResponseForUpgradePage(HttpRequest request, string companyID)
         {
             try
             {

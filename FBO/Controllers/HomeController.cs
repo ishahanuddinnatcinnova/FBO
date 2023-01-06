@@ -133,11 +133,12 @@ namespace FBO.Controllers
             }
         }
         [Route("upgrade.aspx")]
-        public async Task<IActionResult> Upgrade(string companyID, string fuel, string level, string step)
+        public async Task<IActionResult> Upgrade(string companyID, string level, string step)
         {
-            ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID, fuel);
+            ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID);
             if (!response.isRedirect)
             {
+                response.data.level = level;
                 TempData["page"] = "upgrade";
 
                 if (!String.IsNullOrEmpty(level) && !String.IsNullOrEmpty(step))

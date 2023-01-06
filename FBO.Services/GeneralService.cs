@@ -1830,7 +1830,7 @@ namespace FBO.Services
                 //pnlErrorMsg.Visible = true;
                 //Log TO be added
                 Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured with CVV");
-                return "failed";
+                return "failedcvv";
             }
 
             if (BillingService.ValidateCreditExpiration(upgrade.cardexpmonth, upgrade.cardexpyear) == false)
@@ -1840,7 +1840,7 @@ namespace FBO.Services
                 //lblCardExpMonth.Visible = true;
                 //pnlErrorMsg.Visible = true;
                 Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while validating card expiry");
-                return "failed";
+                return "faileddate";
             }
 
             if (errorCount == 0)
@@ -1872,7 +1872,7 @@ namespace FBO.Services
                     //lblError.Text = "Error processing Credit Card: " + ccResp.ResponseText;
                     //pnlErrorMsg.Visible = true;
                     Log.Error("Error in---BtnUpgradeFboSaveClick Function---with company ID" + upgrade.companyID + "Error occured while ChargeCreditCard");
-                    return "failed";
+                    return "failedcc";
                 }
                 else
                 {
