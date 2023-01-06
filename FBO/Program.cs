@@ -18,6 +18,8 @@ IConfiguration configuration = new ConfigurationBuilder()
                             .Build();
 
 // Add services to the container.
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.Configure<AppSettings>(configuration).AddSingleton(sp => sp.GetRequiredService<IOptions<AppSettings>>().Value);
 builder.Services.AddScoped<Dapperr, Dapperr>();
