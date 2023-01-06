@@ -13,10 +13,13 @@ namespace FBO.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UtilitiesService _utility;
         private readonly FBOMainService _fboMainService;
+        private readonly IHttpContextAccessor _accessor;
 
-        public HomeController(ILogger<HomeController> logger, UtilitiesService utility, FBOMainService fboMainService)
+        public HomeController(ILogger<HomeController> logger, UtilitiesService utility, FBOMainService fboMainService, IHttpContextAccessor accessor)
         {
             _logger = logger;
+            _accessor = accessor;
+
             _utility = utility;
             _fboMainService = fboMainService;
         }
@@ -34,6 +37,7 @@ namespace FBO.Controllers
         [Route("companymanage.aspx")]
         public async Task<IActionResult> CompanyManage(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
             ServiceResponseViewModel response = await _fboMainService.GetResponse(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -49,6 +53,7 @@ namespace FBO.Controllers
         [Route("extended.aspx")]
         public async Task<IActionResult> BasicAndExtended(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
 
             ServiceResponseViewModel response = await _fboMainService.GetResponseForServices(this.Request, companyID, fuel);
             if (response.isRedirect)
@@ -65,6 +70,8 @@ namespace FBO.Controllers
         [Route("fuelcards.aspx")]
         public async Task<IActionResult> FuelCards(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelCardsSelected(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -79,6 +86,8 @@ namespace FBO.Controllers
         [Route("fuel.aspx")]
         public async Task<IActionResult> Fuel(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFuelPrice(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -93,6 +102,8 @@ namespace FBO.Controllers
         [Route("logoservices.aspx")]
         public async Task<IActionResult> LogoServices(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForLogoService(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -107,6 +118,8 @@ namespace FBO.Controllers
         [Route("information.aspx")]
         public async Task<IActionResult> FboInformation(string companyID, string fuel)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFboInformation(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -120,7 +133,10 @@ namespace FBO.Controllers
         }
         [Route("custom.aspx")]
         public async Task<IActionResult> CustomServices(string companyID, string fuel)
+
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForCustomServices(this.Request, companyID, fuel);
             if (response.isRedirect)
             {
@@ -135,6 +151,8 @@ namespace FBO.Controllers
         [Route("upgrade.aspx")]
         public async Task<IActionResult> Upgrade(string companyID, string level, string step)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             ServiceResponseViewModel response = await _fboMainService.GetResponseForUpgradePage(this.Request, companyID);
             if (!response.isRedirect)
             {
@@ -151,6 +169,7 @@ namespace FBO.Controllers
                 return Redirect(response.redirectURL);
             }
         }
+
         [Route("record_clickthrough.aspx")]
         public  void RecordClickThrough(int fboID)
         {
