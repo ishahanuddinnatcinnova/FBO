@@ -1811,15 +1811,15 @@ namespace FBO.Services
         {
             int errorCount = 0;
 
-            String u_address1 = upgrade.Address1.Trim();
-            String u_address2 = upgrade.Address2.Trim();
-            String u_city = upgrade.City.Trim();
+            String u_address1 = upgrade.Address1 !=null ? upgrade.Address1.Trim() :"";
+            String u_address2 =upgrade.Address2 !=null ? upgrade.Address2.Trim():"";
+            String u_city = upgrade.City !=null ? upgrade.City.Trim():"";
             String u_state = "";
-            String u_zip = upgrade.Zipcode.Trim();
-            String u_country = upgrade.state.Trim(); //TOBeDone
-            String u_phone = upgrade.Phone.Trim();
-            String u_fax = upgrade.Fax.Trim();
-            String u_email = upgrade.Email.Trim();
+            String u_zip =upgrade.Zipcode !=null ? upgrade.Zipcode.Trim():"";
+            String u_country = upgrade.state !=null ? upgrade.state.Trim():""; //TOBeDone
+            String u_phone =upgrade.Phone !=null ? upgrade.Phone.Trim():"";
+            String u_fax =upgrade.Fax !=null ? upgrade.Fax.Trim():"";
+            String u_email =upgrade.Email !=null ? upgrade.Email.Trim():"";
 
             // CC Area
             int cvv = -1;
