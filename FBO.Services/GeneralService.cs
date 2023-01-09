@@ -1968,7 +1968,16 @@ namespace FBO.Services
                 Log.Error("Error in---Upgrade_FinishUpgrade Function---with upgrade ID" + u_upgradeid + " Exception is:", ex);
             }
         }
-
+        public List<int> LoadExpirationYears()
+        {
+            List<int> ListItem=new List<int>();
+          
+            for (int year = DateTime.Today.Year; year < (DateTime.Today.Year + 10); year++)
+            {
+               ListItem.Add(year);
+            }
+            return ListItem;
+        }
         public void RecordClickThrough(int fboID)
         {
             try

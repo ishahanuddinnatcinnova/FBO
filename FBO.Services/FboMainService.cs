@@ -455,7 +455,7 @@ namespace FBO.Services
                             {
                             response.data.FBO = res;
                                 response.data.locations = locations;
-
+                                response.data.years = _generalService.LoadExpirationYears();
                                 response.data.FBO.platinium_level_count =Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
                             response.isRedirect = false;
                            
