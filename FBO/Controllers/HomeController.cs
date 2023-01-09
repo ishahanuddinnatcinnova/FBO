@@ -24,16 +24,10 @@ namespace FBO.Controllers
             _fboMainService = fboMainService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
+        
+        [Route("")]
         [Route("companymanage.aspx")]
         public async Task<IActionResult> CompanyManage(string companyID, string fuel)
         {
@@ -118,6 +112,7 @@ namespace FBO.Controllers
         [Route("information.aspx")]
         public async Task<IActionResult> FboInformation(string companyID, string fuel)
         {
+            
             ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
 
             ServiceResponseViewModel response = await _fboMainService.GetResponseForFboInformation(this.Request, companyID, fuel);
@@ -175,10 +170,7 @@ namespace FBO.Controllers
         {
             _fboMainService.RecordClickThrough(fboID);
         }
-        //public async Task<IActionResult> Step(ServiceResponseViewModel data)
-        //{
-        //    return View(data);
-        //}
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
