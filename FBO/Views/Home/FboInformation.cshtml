@@ -1,18 +1,14 @@
 ﻿@model FBO.ViewModels.ResponseDataViewModel
-
-
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Information</span><meta itemprop="position" content="3"></a></li>
+        </ol>
+    </nav>
+}
 <div class="row ms-2 mt-4">
-    <div class="row">
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Information</span><meta itemprop="position" content="3"></a></li>
-                </ol>
-            </nav>
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
             <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
@@ -44,7 +40,6 @@
                     <div class="row mt-4">
                         @using (Html.BeginForm("FboInformationUpdate", "FBOHelper", FormMethod.Post, new { name = "logoser", id = "logoser", enctype = "multipart/form-data" }))
                         {
-
                             <h2 class="section-title display-6">
                                 FBO Information
                             </h2>
@@ -57,8 +52,6 @@
                                 <div class="mb-3 col-6">
                                     <label for="ManagerName" class="form-label">Manager</label>
                                     <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
-                                  @*  <input type="hidden" name="managerpic" value="@(Model.singleFBO.ManagerPhoto !=null ?@Model.singleFBO.ManagerPhoto:"")">
-                                    <input type="hidden" name="logo" value="@Model.FBO.FBO.logo">*@
                                     <input type="text" class="form-control" id="ManagerName" name="ManagerName" aria-describedby="Manager Name" value="@Model.FBO.FBO.manager">
                                 </div>
                                 <div class="mb-3 col-6">
@@ -78,9 +71,7 @@
                                     <select name="stateid" class="form-select" aria-label="Default select example" id='stateid'>
                                         @foreach (var item in Model.locations)
                                         {
-                                            
                                             <option value="@item.Aircraft_LocationId" selected">@item.LocName</option>
-
                                         }
                                     </select>
                                 </div>
@@ -155,7 +146,7 @@
                             <div class="row mt-5 mb-5">
                                 <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-                                        @Html.CheckBox("cc_mastercard",(Model.fboCreditCards !=null ? (Model.fboCreditCards.mastercard==1 ?true:false):false), new { @class="form-check-input" })
+                                        @Html.CheckBox("cc_mastercard", Model.fboCreditCards != null ? (Model.fboCreditCards.mastercard==1 ?true:false) : false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Mastercard</label>
                                     </div>
                                 </div>
@@ -167,13 +158,13 @@
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-                                        @Html.CheckBox("cc_amex", (Model.fboCreditCards !=null ? (Model.fboCreditCards.amex==1 ?true:false):false), new { @class="form-check-input" })
+                                        @Html.CheckBox("cc_amex", Model.fboCreditCards != null ? (Model.fboCreditCards.amex==1 ?true:false) : false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">American Express</label>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="form-check form-switch">
-                                    @Html.CheckBox("cc_discover", (Model.fboCreditCards !=null ? (Model.fboCreditCards.discover==1 ?true:false):false), new { @class="form-check-input" })
+                                        @Html.CheckBox("cc_discover", Model.fboCreditCards != null ? (Model.fboCreditCards.discover==1 ?true:false) : false, new { @class="form-check-input" })
                                         <label class="form-check-label" for="flexSwitchCheckChecked">Discover</label>
                                     </div>
                                 </div>
@@ -197,9 +188,10 @@
                                 <div class="col-12 col-md-4 text-center mb-2">
                                     <img id="output" src='@( Model.FBO.FBO !=null  ?  (!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? ("https://resources.globalair.com/airport/images/complogo/" + Model.FBO.FBO.logo) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")  :  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
                                     <br><br>
-
-
-                                    <button id="deletebtn" type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
+                                    @if (!String.IsNullOrEmpty(Model.FBO.FBO.logo))
+                                    {
+                                        <button id="deletebtn" type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
+                                    }
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <p>
@@ -225,8 +217,10 @@
                                 <div class="col-12 col-md-4 text-center mb-2">
                                     <img id="output1" src='@(Model.singleFBO !=null  ?  (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? ("https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"):  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
                                     <br><br>
-
-                                    <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
+                                    @if (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto))
+                                    {
+                                        <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
+                                    }
                                     @*<a href="#" class="btn btn-danger rounded">Delete Logo</a>*@
                                 </div>
                                 <div class="col-12 col-md-8">
@@ -270,20 +264,6 @@
 
         $(document).ready(() => {
             $("#stateid option[value=@Model.FBO.FBO.LocId]").attr('selected', 'selected');
-        @if (Model.singleFBO ==null || String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto))
-        {
-            <text>
-            
-            $("#deletebtn2").hide();
-            </text>
-        }
-        @if (Model.FBO.FBO!=null &&String.IsNullOrEmpty(Model.FBO.FBO.logo))
-        {
-            <text>
-
-                    $("#deletebtn").hide();
-            </text>
-        }
         });
     </script>
 }

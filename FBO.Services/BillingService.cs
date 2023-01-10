@@ -33,6 +33,8 @@ namespace FBO.Services
 
         public static CreditCardResponse ChargeCreditCard(string name, string address, string city, string regionOrState, string country, string postal, string ccNumber, string ccExpiry, int cvv, decimal amount, string chargeDescription)
         {
+            Log.Error("ChargeCreditCard start");
+
             JObject jObject = new JObject();
             jObject.Add("merchid", (JToken)"496213696883");
             jObject.Add("account", (JToken)ccNumber);
@@ -61,6 +63,7 @@ namespace FBO.Services
             HttpResponseMessage result = client.PutAsync("https://fts.cardconnect.com:8443/cardconnect/rest/auth", content).Result;
             if (result.StatusCode == HttpStatusCode.OK)
             {
+                Log.Error("ChargeCreditCard result.StatusCode: " + result.StatusCode);
                 return new CreditCardResponse(result.Content.ReadAsStringAsync().Result);
             }
             Log.Error("Error calling CardPointe API: " + result.Content.ReadAsStringAsync().Result);

@@ -4,7 +4,18 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0N37V9FEB"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-K0N37V9FEB');</script>
-
+    <!-- End Google Tag -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5P9SKZZ');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/_includes/assets/icons/apple-touch-icon.png">
@@ -26,44 +37,44 @@
     @RenderSection("Meta", required: false)
     <link rel="dns-prefetch" href="https://www.facebook.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
-
     <link rel="dns-prefetch" href="https://stats.g.doubleclick.net">
     <link rel="dns-prefetch" href="https://www.google.com">
-    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-    <!--Putting below script at the end of body it will load after page window.load to improve Core Web Vitals-->
-    @*    <script defer>
-
-    var qcObj = [];
-    (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-    (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-    m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
-    ga('send', 'pageview');
-
-    window.uetq = window.uetq || [];
-    window.uetq.push('event', 'INQUIRY', {});
-    </script>*@
-    @*DT-240*@
-    @*<script defer>!function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');</script>*@
-
-    @*<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "17467723" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>*@
-    <script>
-        window.googletag = window.googletag || { cmd: [] };
-        googletag.cmd.push(function () {
-            googletag.defineSlot('/13428562/NEW-970x90-Ad-Banner-May-2021', [970, 90], 'div-gpt-ad-1621626637196-0').addService(googletag.pubads());
-            googletag.defineSlot('/13428562/2022-300x600-Ad', [300, 600], 'div-gpt-ad-1639781780829-0').addService(googletag.pubads());
-            googletag.defineSlot('/13428562/2022-300x250-Ad-1', [300, 250], 'div-gpt-ad-1639781263825-0').addService(googletag.pubads());
-            googletag.defineSlot('/13428562/**2022-300x250-Ad-2', [300, 250], 'div-gpt-ad-1639781353563-0').addService(googletag.pubads());
-            googletag.defineSlot('/13428562/2022-300x250-Ad-3', [300, 250], 'div-gpt-ad-1639781431621-0').addService(googletag.pubads());
-            googletag.defineSlot('/13428562/**2022-728x90-Ad-1', [728, 90], 'div-gpt-ad-1639781873906-0').addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.pubads().collapseEmptyDivs(true);
-            googletag.enableServices();
-        });
-    </script>
+    @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
+    {
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+            window.googletag = window.googletag || { cmd: [] };
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/13428562/NEW-970x90-Ad-Banner-May-2021', [970, 90], 'div-gpt-ad-1621626637196-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x600-Ad', [300, 600], 'div-gpt-ad-1639781780829-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Ad-1', [300, 250], 'div-gpt-ad-1639781263825-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/**2022-300x250-Ad-2', [300, 250], 'div-gpt-ad-1639781353563-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Ad-3', [300, 250], 'div-gpt-ad-1639781431621-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/**2022-728x90-Ad-1', [728, 90], 'div-gpt-ad-1639781873906-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs(true);
+                googletag.enableServices();
+            });
+        </script>
+    }
+    else
+    {
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+            window.googletag = window.googletag || { cmd: [] };
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/13428562/**2022-320x50-Mobile-Ad-1', [320, 50], 'div-gpt-ad-1639782560527-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Ad-1', [300, 250], 'div-gpt-ad-1639781263825-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/**2022-300x250-Ad-2', [300, 250], 'div-gpt-ad-1639781353563-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Ad-3', [300, 250], 'div-gpt-ad-1639781431621-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/**2022-300x250-Ad-4', [300, 250], 'div-gpt-ad-1639781510957-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Ad-5', [300, 250], 'div-gpt-ad-1639781626633-0').addService(googletag.pubads());
+                googletag.defineSlot('/13428562/2022-300x250-Mobile-Floating-Ad-Unit', [300, 250], 'div-gpt-ad-1641850667091-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.pubads().collapseEmptyDivs(true);
+                googletag.enableServices();
+        </script>
+    }
     <script>
         var qcObj = [];
         (function (i, s, o, g, r, a, m) {
@@ -79,13 +90,7 @@
         window.uetq = window.uetq || [];
         window.uetq.push('event', 'INQUIRY', {});
     </script>
-    <script>!function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');</script>
-
-    <noscript>
-        <img height="1" width="1" src="https://www.facebook.com/tr?id=128491507700639&ev=PageView&noscript=1" />
-    </noscript>
-
-    <script defer type="application/ld+json">
+    <script type="application/ld+json">
          { "@@context": "https://schema.org",
         "@@type": "Organization",
         "name": "GlobalAir.com",
@@ -119,165 +124,11 @@
         "https://www.youtube.com/user/Airplanesforsale"
          ]}
     </script>
-    @*<script type="application/ld+json">
-    {
-    "@@context": "https://schema.org",
-    "@@type": "WebPage",
-    "name": "@ViewBag.Title",
-    "url": "https://www.globalair.com",
-    "description": "@ViewBag.Title"
-    }
-    </script>*@
-    <script async defer type="application/ld+json">
-                {
-            "@@context": "http://schema.org",
-            "@@graph": [
-                {
-                    "@@type": "WPHeader",
-                    "potentialAction": [
-                        {
-                            "@@type": "Action",
-                            "name": "POST YOUR ARTICLE",
-                            "target": "https://www.globalair.com/articles/edit"
-                        },
-                        {
-                            "@@type": "Action",
-                            "name": "Register",
-                            "target": "https://www.globalair.com/register"
-                        }
-                    ]
-                },
-                {
-                    "@@type": "WPFooter",
-                    "copyrightYear": "2022",
-                    "description": "GlobalAir.com. All rights reserved.",
-                    "copyrightHolder": {
-                        "@@type": "Organization",
-                        "name": "GlobalAir.com"
-                    }
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Home",
-                    "url": "https://www.globalair.com",
-                    "description": "Home",
-                    "position": 1
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Aircraft For Sale",
-                    "url": "https://www.globalair.com/aircraft-for-sale",
-                    "description": "Aircraft For Sale",
-                    "position": 2
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Aviation Directory",
-                    "url": "https://www.globalair.com/directories/",
-                    "description": "Aviation Directory",
-                    "position": 3
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Airport Search",
-                    "url": "https://www.globalair.com/airport/default.aspx",
-                    "description": "Airport Search",
-                    "position": 4
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Aviation News",
-                    "url": "https://www.globalair.com/articles",
-                    "description": "General and Corporate Aviation Headline News, Press and Insights",
-                    "position": 6
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Amphibian",
-                    "url": "https://www.globalair.com/aircraft-for-sale/amphibian",
-                    "description": "Amphibian For Sale",
-                    "position": 6
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Commercial",
-                    "url": "https://www.globalair.com/aircraft-for-sale/commercial",
-                    "description": "Commercial For Sale",
-                    "position": 7
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Experimental/Kits",
-                    "url": "https://www.globalair.com/aircraft-for-sale/experimental-kit",
-                    "description": "Experimental/Kits For Sale",
-                    "position": 8
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Helicopter",
-                    "url": "https://www.globalair.com/aircraft-for-sale/helicopters",
-                    "description": "Helicopter For Sale",
-                    "position": 9
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Jets",
-                    "url": "https://www.globalair.com/aircraft-for-sale/private-jet",
-                    "description": "Jets For Sale",
-                    "position": 10
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Single Engine Turbine",
-                    "url": "https://www.globalair.com/aircraft-for-sale/single-engine-turbine",
-                    "description": "Single Engine Turbine For Sale",
-                    "position": 11
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Singles",
-                    "url": "https://www.globalair.com/aircraft-for-sale/single-engine-piston",
-                    "description": "Singles For Sale",
-                    "position": 12
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Twin Pistons",
-                    "url": "https://www.globalair.com/aircraft-for-sale/twin-engine-piston",
-                    "description": "Twin Pistons For Sale",
-                    "position": 13
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Twin Turbines",
-                    "url": "https://www.globalair.com/aircraft-for-sale/twin-engine-turbine",
-                    "description": "Twin Turbines For Sale",
-                    "position": 14
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Vintage",
-                    "url": "https://www.globalair.com/aircraft-for-sale/vintage",
-                    "description": "Vintage For Sale",
-                    "position": 15
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Warbirds",
-                    "url": "https://www.globalair.com/aircraft-for-sale/warbird",
-                    "description": "Warbirds For Sale",
-                    "position": 16
-                },
-                {
-                    "@@type": "SiteNavigationElement",
-                    "name": "Light Sport",
-                    "url": "https://www.globalair.com/aircraft-for-sale/light-sport",
-                    "description": "Light Sport For Sale",
-                    "position": 17
-                }
-            ]
-        }
-    </script>
+    <script>    !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');</script>
+
+    <noscript>
+        <img height="1" width="1" src="https://www.facebook.com/tr?id=128491507700639&ev=PageView&noscript=1" />
+    </noscript>
     @*@Styles.RenderFormat(@"<link rel=""stylesheet"" rel=""preload"" as=""style"" href=""{0}"" />", "~/styles/pages")*@
     @RenderSection("Styles", required: false)
     @*<link href="~/css/all.min.css" rel="stylesheet" />*@
@@ -329,6 +180,14 @@
 
         #airportTable_filter {
             margin-bottom: 5px
+        }
+
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            display: none;
+            z-index: 3
         }
     </style>
 
@@ -407,7 +266,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         @{
-                <partial name="_MenuItems" />
+            <partial name="_MenuItems" />
         }
     </nav>
     @if (IsSectionDefined("BreadCrumb"))
@@ -417,24 +276,12 @@
                 @Html.Raw(@ViewBag.BreadCrumb)
                 @RenderSection("Breadcrumb", required: false)
             </div>
-            @if (TempData["page"] != null && TempData["page"].ToString() != "fboratings")
-            {
-                <div class="col-md-3">
-                    <div class="col-md-12 text-center text-md-end" style="height: 45px">
-                        <a href="javascript:socialIconClick('facebook')" title="FaceBook"><img src="~/icons/facebook.png" alt="FaceBook" width="64" height="64" style="width: 32px; height: 32px;" /></a>
-                        <a href="javascript:socialIconClick('twitter')" title="Twitter"><img src="~/icons/twitter.png" alt="Twitter" width="64" height="64" style="width: 32px; height: 32px;" /></a>
-                        <a href="javascript:socialIconClick('pinterest')" title="Pinterest"><img src="~/icons/pinterest.png" alt="Pinterest" width="32" height="32" style="width: 32px; height: 32px;" /></a>
-                        <a href="javascript:socialIconClick('linkedin')" title="Linkedin"><img src="~/icons/linkedin.png" alt="Linkedin" width="32" height="32" style="width: 32px; height: 32px;" /></a>
-                        @*<a href="#" title="Email"><img src="~/icons/email.png" alt="" width="48" height="48" /></a>*@
-                    </div>
-                </div>
-            }
         </div>
     }
     @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
     {
         <div class="col mb-4" style="height: 60px; text-align: center">
-            <div id='div-gpt-ad-1639782560527-0' style='min-width: 320px; min-height: 50px;'>
+            <div id='div-gpt-ad-1639781263825-0' style='min-width: 320px; min-height: 50px;'>
             </div>
 
         </div>
@@ -453,6 +300,13 @@
         }
         <div class="row mr-2" style="width: 100%">
             <div class="col">
+
+                <!-- Back to top button -->
+                <button type="button"
+                        class="btn btn-success btn-success-custom rounded"
+                        id="btn-back-to-top">
+                    <img src="images/top.png" width="50">
+                </button>
                 @RenderBody()
             </div>
             @if (ViewBag.HideAds != true)
@@ -474,28 +328,17 @@
                             //        <img src="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Get&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1" width="300" height="250" border="0" style="max-width:100%; height:auto;" alt="" />
                             //    </a>
                             //</div>
-                            var keywords = "";
-                            if (TempData["banmanKeywords"] != null && TempData["banmanKeywords"].ToString() != "")
-                            {
-                                keywords = "&keywords=" + TempData["banmanKeywords"];
+                            <!-- /13428562/**2022-300x600-Ad-Airport -->
+                            <div id='div-gpt-ad-1639781780829-0' style='min-width: 300px; height: 600px;'>
+                            </div>
 
-                                    <div style="min-width: 300px; height: 300px; margin-bottom: 20px; margin-top: 20px">
-                                        <a href="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Click&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1@(keywords)" aria-label="GlobalAir Airport Resources" target="_blank" rel="noreferrer">
-                                            <img src="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Get&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1@(keywords)" width="300" height="300" border="0" style="max-width:100%;" alt="" />
-                                        </a>
-                                    </div>
-                            }
-                                <!-- /13428562/**2022-300x600-Ad-Airport -->
-                                <div id='div-gpt-ad-1639784881215-0' style='min-width: 300px; height: 600px;'>
-                                </div>
+                            <!-- /13428562/**2022-300x250-Ad-1-Airport -->
+                            <div id='div-gpt-ad-1639781263825-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
+                            </div>
 
-                                <!-- /13428562/**2022-300x250-Ad-1-Airport -->
-                                <div id='div-gpt-ad-1639785013347-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
-                                </div>
-
-                                <!-- /13428562/**2022-300x250-Ad-2-Airport -->
-                                <div id='div-gpt-ad-1639785057183-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
-                                </div>
+                            <!-- /13428562/**2022-300x250-Ad-2-Airport -->
+                            <div id='div-gpt-ad-1639781353563-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
+                            </div>
                         }
                         <div class="mb-4"></div>
                     </div>
@@ -781,7 +624,7 @@
                     });
             </text>
         }
-                    }, 3000);
+                                    }, 3000);
         });
 
     </script>
@@ -871,6 +714,31 @@
                 }
             });
         });
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
     </script>
 
 </body>

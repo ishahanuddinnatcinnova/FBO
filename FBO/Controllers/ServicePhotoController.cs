@@ -20,19 +20,23 @@ namespace FBO.Controllers
         private static GeneralService _generalService;
         private readonly AppSettings _appSettings;
         private readonly ServicePhotoService _servicePhotoService;
-        public ServicePhotoController(Dapperr dapper, GeneralService generalService, UtilitiesService utilities, AppSettings appSettings, ServicePhotoService servicePhotoService)
+        private readonly IHttpContextAccessor _accessor;
+        public ServicePhotoController(Dapperr dapper, GeneralService generalService, UtilitiesService utilities, AppSettings appSettings, ServicePhotoService servicePhotoService, IHttpContextAccessor accessor)
         {
             _dapper = dapper;
             _utility = utilities;
             _generalService = generalService;
             _appSettings = appSettings;
             _servicePhotoService = servicePhotoService;
+            _accessor = accessor;
         }
         // GET: ImageManagement/5
         [Route("ServicePhoto/index")]
 
         public async Task<ActionResult> Index(int companyId)
         {
+            ViewBag.IsMobile = RequestExtensions.IsMobileBrowser(_accessor);
+
             TempData["page"] = "servicephoto";
 
             var cookie = Request.Cookies["GlobalAir"];

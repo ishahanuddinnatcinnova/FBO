@@ -1,16 +1,14 @@
 ﻿@model FBO.ViewModels.ResponseDataViewModel
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Upgrade Your FBO</span><meta itemprop="position" content="3"></a></li>
+        </ol>
+    </nav>
+}
 <div class="row ms-2 mt-4">
-    <div class="row">
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Upgrade Your FBO</span><meta itemprop="position" content="3"></a></li>
-                </ol>
-            </nav>
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
             <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
@@ -51,9 +49,8 @@
 											width: fit-content;
 											float: right;
 										">
-                                <div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #dc3545 0%, white 100%);">
+                                <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
                                         <div class="mb-0">
                                             <h5 class="card-title mb-0">Per year Price:</h5>
                                         </div>
@@ -136,9 +133,8 @@
 											width: fit-content;
 											float: right;
 										">
-                                <div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #ffc107 0%, white 100%);">
+                                <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
                                         <div class="mb-0">
                                             <h5 class="card-title mb-0">Per year Price:</h5>
                                         </div>
@@ -206,9 +202,8 @@
 											width: fit-content;
 											float: right;
 										">
-                                <div class="card card-animation l-bg-light" style="background-image: linear-gradient(to top, #adb5bd 0%, white 100%);">
+                                <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="card-icon card-icon-medium"><img src="dollar.png" /></div>
                                         <div class="mb-0">
                                             <h5 class="card-title mb-0">Per year Price:</h5>
                                         </div>

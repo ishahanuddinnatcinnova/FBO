@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="row ms-2 mt-4">
+        <div class="row ms-2 mt-2">
             <hr>
             <div class="row">
                 <partial name="_SubMenuItems" model="@Model.FBO" />
@@ -34,11 +34,22 @@
                     }
                     @if (Model.FBO.isUpgradeEligible)
                     {
-                        <div class="row text-center mb-3 ms-1">
-                            <div class="col">
-                                <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="https://resources.globalair.com/images/fbo/fbo-upgrade.jpg " title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px; width: 100%; border-radius: 10px" /></a>
+                        @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+                        {
+                            <div class="row text-center mb-3 ms-1">
+                                <div class="col">
+                                    <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="https://resources.globalair.com/images/fbo/fbo-upgrade-mobile.png " title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px; width: 100%; border-radius: 10px" /></a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="row text-center mb-3 ms-1">
+                                <div class="col">
+                                    <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID.ToString() "><img src="https://resources.globalair.com/images/fbo/fbo-upgrade.jpg " title="Click to upgrade your FBO on GlobalAir.com" alt="Click to upgrade your FBO on GlobalAir.com" style="border:0px; width: 100%; border-radius: 10px" /></a>
+                                </div>
+                            </div>
+                        }
                     }
                     <div class="row ms-1">
                         <div class="card float-right">
@@ -65,7 +76,7 @@
                                         <table class="table table-borderless">
                                             <tr>
                                                 <th>Telephone</th>
-                                                <td>@Model.FBO.FBO.Phone</td>
+                                                <td><a class="text-decoration-none" href="tel:@Model.FBO.FBO.Phone">@Model.FBO.FBO.Phone</a></td>
                                             </tr>
                                             <tr>
                                                 <th>Email</th>
@@ -200,7 +211,7 @@
                                     <div class="row">
                                         <h4>
                                             <a href="#" class="text-decoration-none">
-                                                @Model.FBO.averageprices.RegionName
+                                                NBAA @Model.FBO.averageprices.RegionName
                                                 Average Fuel Prices:
                                             </a>
                                         </h4>
@@ -263,7 +274,7 @@
                                 </div>
                             </div>
                             <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <a href="#" class="text-decoration-none">
+                                <a href="/airport/fboratings.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none">
                                     <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
                                         Ratings & Reviews
                                     </span>
@@ -273,7 +284,7 @@
                                 <div class="col-sm-12 p-3">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
-                                            <a href="#" class="text-decoration-none text-black">
+                                            <a href="/airport/fboratings.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none text-black">
                                                 <div class="card card-animation l-bg-light">
                                                     <div class="card-statistic-3 p-4">
                                                         <div class="card-icon card-icon-large"><img src="/images/star.png" /></div>
@@ -292,7 +303,7 @@
                                             </a>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <a href="#" class="text-decoration-none text-black">
+                                            <a href="/airport/fboratings.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none text-black">
 
                                                 <div class="card card-animation l-bg-light">
                                                     <div class="card-statistic-3 p-4">
@@ -326,7 +337,10 @@
                 var endDate = $('#endDate').val();
 
                 $.ajax({
-                    url: '/api/FBOHelperAPI/GetFBOStats',
+                    //For prod
+                    url: '/fbo/api/FBOHelperAPI/GetFBOStats',
+                    //For local
+                    //url: '/api/FBOHelperAPI/GetFBOStats',
                     type: 'GET',
                     data: { companyID: '@Model.FBO.FBO.CompanyID', StartDate: startDate, EndDate: endDate },
                     contentType: "application/json; charset=utf-8",

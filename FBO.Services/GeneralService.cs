@@ -113,11 +113,11 @@ namespace FBO.Services
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add("fboID", companyID);
                 var fbo = await Task.FromResult(_dapper.Get<ARC_SingleFBO_Result>("arc.ARC_SingleFBO", dynamicParameters, commandType: CommandType.StoredProcedure));
-               
+                if (fbo != null && fbo.CompID != 0)
+                {
                     return fbo;
-
-                
-              
+                }
+                return null;
             }
             catch (Exception ex)
             {

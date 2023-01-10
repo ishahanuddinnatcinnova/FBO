@@ -19,17 +19,15 @@
         }
     </style>
 }
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.data.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your FBO Photos<meta itemprop="position" content="3"></a></li>
+        </ol>
+    </nav>
+}
     <div class="row ms-2 mt-4">
-        <div class="row">
-            <div class="col-md-9">
-                <nav aria-label="breadcrumb">
-                    <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.data.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
-                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your FBO Photos<meta itemprop="position" content="3"></a></li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
         <div class="row">
             <div class="col-12">
                 <h1 property="name">@Model.data.FBO.companyName (@Model.data.FBO.FBO.APTCode)</h1>
@@ -41,19 +39,19 @@
             <partial name="_SubMenuItems" model="@Model.data.FBO" />
             <div class="col-md-9 col-12">
                 <div class="card float-right">
-                <div style="padding: 10px 20px 100px 20px;">
+                    <div style="padding: 10px 20px 100px 20px;">
                         <h2 class="section-title display-6">
-                           Manage Your FBO Photos
+                            Manage Your FBO Photos
                         </h2>
-                    <div>
-                        <p>Your current FBO photos are displayed below. To see how these photos look on GlobalAir.com, <a href="@ViewBag.FBOURL">click here</a> to view the photo slideshow on your FBO page.</p>
-                        <p>To upload additional photos, click the Browse button to select photos from your computer or drag and drop them directly from your desktop.</p>
-                        <p>If you want to delete any of the photos in your slideshow, click the Delete button below the corresponding photo.</p>
-                    </div>
-                    <div class="alert alert-danger">Uploading photos with large file sizes will increase the time it takes to load the photos on your FBO page.</div>
+                        <div>
+                            <p>Your current FBO photos are displayed below. To see how these photos look on GlobalAir.com, <a href="@ViewBag.FBOURL">click here</a> to view the photo slideshow on your FBO page.</p>
+                            <p>To upload additional photos, click the Browse button to select photos from your computer or drag and drop them directly from your desktop.</p>
+                            <p>If you want to delete any of the photos in your slideshow, click the Delete button below the corresponding photo.</p>
+                        </div>
+                        <div class="alert alert-danger">Uploading photos with large file sizes will increase the time it takes to load the photos on your FBO page.</div>
 
-                    <input id="input-1" name="input1[]" type="file" multiple class="file-loading">
-                    <div id="errorBlock" class="help-block"></div>
+                        <input id="input-1" name="input1[]" type="file" multiple class="file-loading">
+                        <div id="errorBlock" class="help-block"></div>
                     </div>
                 </div>
             </div>
@@ -68,7 +66,7 @@
         {
             //Uncomment this one for debugging
             //@Html.Raw("{ url: \"/ServicePhoto/Delete/" + item.PhotoID + "?appId=" + ViewBag.AppId + "&tokenId=" + ViewBag.Token + "\", key: " + item.PhotoID + ", caption: \"" + System.IO.Path.GetFileName(item.Photo) + "\"}")
-            
+
             //Uncomment this one for prod
             @Html.Raw("{ url: \"/fbo/ServicePhoto/Delete/" + item.PhotoID + "?appId=" + ViewBag.AppId + "&tokenId=" + ViewBag.Token + "\", key: " + item.PhotoID + ", caption: \"" + System.IO.Path.GetFileName(item.Photo) + "\"}")
             if (item != Model.data.Photos[Model.data.Photos.Count - 1])
@@ -92,9 +90,9 @@
         function initializeImageControl(objName, initialPreview, initialPreviewConfig) {
             $(objName).fileinput({
                 //Uncomment this one for debugging
-                //uploadUrl: '/fbo/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
+                //uploadUrl: '/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
                 //Uncomment this one for prod
-                uploadUrl: '/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
+                uploadUrl: '/fbo/ServicePhoto/Create?companyId=' + @ViewBag.CompanyId + '&appId=@(ViewBag.AppId)&tokenId=@(ViewBag.Token)',
                 uploadAsync: true,
                 showCancel: false,
                 showClose: false,

@@ -3,8 +3,6 @@
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
 
 <style>
-   
-   
     .inputCheckbox input:checked:after {
         font-weight: 900;
         content: "\f058";
@@ -54,17 +52,15 @@
         box-shadow: 10px 10px 10px #888888;
     }
 </style>
+@section Breadcrumb {
+    <nav aria-label="breadcrumb">
+        <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Fuel Cards</span><meta itemprop="position" content="3"></a></li>
+        </ol>
+    </nav>
+}
 <div class="row ms-2 mt-4">
-    <div class="row">
-        <div class="col-md-9">
-            <nav aria-label="breadcrumb">
-                <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.FBO.FBO.CompanyID"><span itemprop="name">FBO Management<meta itemprop="position" content="1"></a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active text-capitalize" aria-current="page"><a style="pointer-events: none; cursor: default; color: #6c757d;text-decoration:none" href="#" itemprop="item"><span itemprop="name">Update Your Fuel Cards<meta itemprop="position" content="3"></a></li>
-                </ol>
-            </nav>
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
             <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
