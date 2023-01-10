@@ -138,6 +138,10 @@
     @*<link href="~/css/social-share-kit.css" rel="stylesheet" />*@
     <link href="~/css/style.css" rel="stylesheet" media="all" />
     <style>
+         #mobileBanner {
+          
+            overflow: visible;
+        }
         .footer a {
             text-decoration: none
         }
@@ -346,23 +350,17 @@
             }
         </div>
     </div>
-    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+    @if (ViewBag.IsMobile == true)
     {
         <div id="mobileBanner" class="fixed-bottom">
-            <div id="closebtnAd" class="text-center pr-2 pl-2 pb-1" data-toggler="show" onclick="closeGoogleAd();" data-target=".fixed-bottom" aria-label="Close" style="background-color:silver; width:80px; display:none; cursor:pointer;">CLOSE</div>
-            <div class="row w-100 p-1">
+            <div id="bannerSlider" onclick="ToggleAdBanner();" style="border-radius: 10px 10px 0px 0px;background:lightgrey;width:12%;text-align:center;opacity:0.8;display:none">
+                <img id="bannerImg" width="18" height="18" style="vertical-align:sub" src="/images/angle-down.png">
+            </div>
+            @*<div id="closebtnAd" class="" data-toggler="show" onclick="closeGoogleAd();" data-target=".fixed-bottom" aria-label="Close" style="background-color:silver; width:60px; display:none; cursor:pointer;text-align:center">CLOSE</div>*@
+            <div id="ad_banner" style="border-top: 1px solid #cac6c6;" class="row">
                 <div class="col-md-12">
                     <div id="top-ad">
-                        @*<script async defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->*@
-                        <!-- Adsense April 2021 Responsive Ad Test -->
-                        <!--<ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-3886098321648948"
-                        data-ad-slot="3784789388"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>-->
-                        <!-- /13428562/2022-300x250-Mobile-Floating-Ad-Unit -->
-                        <div id='div-gpt-ad-1641850667091-0' style='min-width: 300px; min-height: 250px; display:none'>
+                        <div id='div-gpt-ad-1641850667091-0'>
                         </div>
                     </div>
                 </div>
@@ -537,6 +535,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript">
+
+        @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+        {
+            <text>
+                            const myInterval = setInterval(mobileBannerCheck, 1500);
+
+            //setTimeout(function () { clearInterval(myInterval); }, 2000);
+
+            function mobileBannerCheck() {
+                console.log($('#mobileBanner').height());
+                if ($('#mobileBanner').height() > 150) {
+                    $('#bannerSlider').show();
+                    clearInterval(myInterval);
+                    console.log("clearInterval");
+                }
+                else {
+                    $('#bannerSlider').hide();
+                }
+            }
+            </text>
+        }
         var jCookies = null;
         $(function () {
             if (jCookies == null) {
@@ -665,7 +684,21 @@
         function closeGoogleAd() {
             $("#mobileBanner").hide();
         }
+        function ToggleAdBanner() {
+            try {
+                $("#mobileBanner").slideUp();
 
+                if ($("#bannerImg").attr('src').indexOf("up") >= 0) {
+                    $("#bannerImg").attr('src', '/images/angle-down.png');
+                }
+                else {
+                    $("#bannerImg").attr('src', '/images/angle-up.png');
+                }
+            }
+            catch {
+                console.log("mobile ad_banner error");
+            }
+        }
         window.onclick = function (e) {
             document.querySelectorAll('.dropdown-menu.show').forEach((item) => {
                 if (event.target.nextElementSibling !== item)
