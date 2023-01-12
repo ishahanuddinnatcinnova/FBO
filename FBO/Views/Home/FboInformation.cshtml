@@ -52,6 +52,8 @@
                                 <div class="mb-3 col-6">
                                     <label for="ManagerName" class="form-label">Manager</label>
                                     <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
+                                    <input type="hidden" name="logo" value="@(Model.FBO !=null ?        Model.FBO.FBO.logo:"")">
+                                <input type="hidden" name="managerpic" value="@(Model.singleFBO !=null ? Model.singleFBO.ManagerPhoto:"")">
                                     <input type="text" class="form-control" id="ManagerName" name="ManagerName" aria-describedby="Manager Name" value="@Model.FBO.FBO.manager">
                                 </div>
                                 <div class="mb-3 col-6">
@@ -217,7 +219,7 @@
                                 <div class="col-12 col-md-4 text-center mb-2">
                                     <img id="output1" src='@(Model.singleFBO !=null  ?  (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? ("https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"):  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
                                     <br><br>
-                                    @if (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto))
+                                    @if (Model.singleFBO!=null && !String.IsNullOrEmpty( Model.singleFBO.ManagerPhoto))
                                     {
                                         <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
                                     }
