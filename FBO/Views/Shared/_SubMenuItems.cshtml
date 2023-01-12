@@ -39,9 +39,9 @@
                     Update Fuel Prices
                 </a>
                 <a href="/airport/fboratings.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                    Ratings and Reviews @if (Model.ratingStats.TotalReviews > 0)
+                    Ratings and Reviews @if (Model.newReviews > 0)
                     {
-                        <span class="notify-badge">1</span>
+                        <span class="notify-badge">@Model.newReviews</span>
                     }
                 </a>
                 @if (Model.FBO.FBOLevel != "Basic")
