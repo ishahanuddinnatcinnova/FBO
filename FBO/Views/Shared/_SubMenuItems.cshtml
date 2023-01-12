@@ -38,6 +38,7 @@
                 <a href="/fbo/fuel.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fuel" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Update Fuel Prices
                 </a>
+
                 <a href="/airport/fboratings.aspx?companyid=@Model.FBO.CompanyID" class="list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     Ratings and Reviews @if (Model.newReviews > 0)
                     {
