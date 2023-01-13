@@ -171,76 +171,79 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                    FBO Photos
-                                </span>
-                            </div>
-                            <div class="row p-3">
-                                <span class="alert alert-info" style="font-size: 20px">
-                                    <a href="/fbo/servicephoto/index?companyid=@Model.FBO.FBO.CompanyID">Click here</a> to view and manage your FBO Photos
-                                </span>
-                            </div>
-                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                    FBO Logo
-                                </span>
-                            </div>
-                            <div class="row p-3 mb-3">
-                                <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output" src='@( Model.FBO.FBO !=null  ?  (!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? ("https://resources.globalair.com/airport/images/complogo/" + Model.FBO.FBO.logo) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")  :  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
-                                    <br><br>
-                                    @if (!String.IsNullOrEmpty(Model.FBO.FBO.logo))
-                                    {
-                                        <button id="deletebtn" type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
-                                    }
+                            @if (Model.FBO.FBO.FBOLevel != "Basic")
+                            {
+                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                        FBO Photos
+                                    </span>
                                 </div>
-                                <div class="col-12 col-md-8">
-                                    <p>
-                                        To change your FBO's logo, click the Browse button,
-                                        select a new file (in .jpg or .jpeg format), then click the Upload
-                                        button.
-                                    </p>
-                                    <p>
-                                        The maximum width for your logo is 175 pixels. If you upload
-                                        an image larger than 175 pixels wide, it will be re-sized automatically.
-                                    </p>
-                                    <div class="input-group mb-3">
-                                        <input type="file" class="form-control" accept="image/jpeg, image/jpg" name="logo" id="file" onchange="loadFile(event)">
+                                <div class="row p-3">
+                                    <span class="alert alert-info" style="font-size: 20px">
+                                        <a href="/fbo/servicephoto/index?companyid=@Model.FBO.FBO.CompanyID">Click here</a> to view and manage your FBO Photos
+                                    </span>
+                                </div>
+                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                        FBO Logo
+                                    </span>
+                                </div>
+                                <div class="row p-3 mb-3">
+                                    <div class="col-12 col-md-4 text-center mb-2">
+                                        <img id="output" src='@( Model.FBO.FBO !=null  ?  (!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? ("https://resources.globalair.com/airport/images/complogo/" + Model.FBO.FBO.logo) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")  :  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
+                                        <br><br>
+                                        @if (!String.IsNullOrEmpty(Model.FBO.FBO.logo))
+                                        {
+                                            <button id="deletebtn" type="submit" value="DeleteFboLogo" class="btn btn-danger rounded" formaction="@Url.Action("DeleteFboLogo","FBOHelper")" formmethod="post">Delete</button>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p>
+                                            To change your FBO's logo, click the Browse button,
+                                            select a new file (in .jpg or .jpeg format), then click the Upload
+                                            button.
+                                        </p>
+                                        <p>
+                                            The maximum width for your logo is 175 pixels. If you upload
+                                            an image larger than 175 pixels wide, it will be re-sized automatically.
+                                        </p>
+                                        <div class="input-group mb-3">
+                                            <input type="file" class="form-control" accept="image/jpeg, image/jpg" name="logo" id="file" onchange="loadFile(event)">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                    FBO Manager's Photo
-                                </span>
-                            </div>
-                            <div class="row p-3">
-                                <div class="col-12 col-md-4 text-center mb-2">
-                                    <img id="output1" src='@(Model.singleFBO !=null  ?  (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? ("https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"):  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
-                                    <br><br>
-                                    @if (Model.singleFBO!=null && !String.IsNullOrEmpty( Model.singleFBO.ManagerPhoto))
-                                    {
-                                        <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
-                                    }
-                                    @*<a href="#" class="btn btn-danger rounded">Delete Logo</a>*@
+                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                        FBO Manager's Photo
+                                    </span>
                                 </div>
-                                <div class="col-12 col-md-8">
-                                    <p>
-                                        To add your FBO's manager's photo, click the Browse button,
-                                        select the file (in .jpg or .jpeg format), then click the Upload
-                                        button.
-                                    </p>
-                                    <p>
-                                        The maximum width for your FBO manager's photo is 100 pixels. If you upload
-                                        an image larger than 100 pixels wide, it will be re-sized automatically.
-                                    </p>
-                                    <div class="input-group mb-3">
+                                <div class="row p-3">
+                                    <div class="col-12 col-md-4 text-center mb-2">
+                                        <img id="output1" src='@(Model.singleFBO !=null  ?  (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? ("https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"):  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
+                                        <br><br>
+                                        @if (Model.singleFBO != null && !String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto))
+                                        {
+                                            <button id="deletebtn2" type="submit" value="DeleteManagerPic" class="btn btn-danger rounded" formaction="@Url.Action("DeleteManagerPic","FBOHelper")" formmethod="post">Delete</button>
+                                        }
+                                        @*<a href="#" class="btn btn-danger rounded">Delete Logo</a>*@
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p>
+                                            To add your FBO's manager's photo, click the Browse button,
+                                            select the file (in .jpg or .jpeg format), then click the Upload
+                                            button.
+                                        </p>
+                                        <p>
+                                            The maximum width for your FBO manager's photo is 100 pixels. If you upload
+                                            an image larger than 100 pixels wide, it will be re-sized automatically.
+                                        </p>
+                                        <div class="input-group mb-3">
 
-                                        <input type="file" class="form-control" id="managerpic" accept="image/jpeg, image/jpg" name="managerpic" onchange="loadManagerImg(event)">
+                                            <input type="file" class="form-control" id="managerpic" accept="image/jpeg, image/jpg" name="managerpic" onchange="loadManagerImg(event)">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                             <div class="mb-3 col-12 text-center">
                                 <button value="FboInformationUpdate" type="submit" class="btn btn-primary" formaction="@Url.Action("FboInformationUpdate","FBOHelper")" formmethod="post">Submit</button>
                             </div>
