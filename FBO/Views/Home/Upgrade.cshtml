@@ -1,5 +1,12 @@
 ﻿@model FBO.ViewModels.ResponseDataViewModel
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
+<style>
+    @@media (max-width: 600px){
+        .price {
+            font-size: 1.5em;
+        }
+    }
+</style>
 @section Breadcrumb {
     <nav aria-label="breadcrumb">
         <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
@@ -38,25 +45,22 @@
 
                         <div class="row">
 
-                            <div class="col-sm-9">
+                            <div class="col-12 col-md-9">
 
                                 <h4 class=" section-title display-6 secPlat">
                                     FBO Platinum
                                 </h4>
                                 <h5>Get Maximum Exposure for your FBO</h5>
                             </div>
-                            <div class="col-sm-2" style="
-											width: fit-content;
-											float: right;
-										">
+                            <div class="col-12 col-md-3">
                                 <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="mb-0">
-                                            <h5 class="card-title mb-0">Per year Price:</h5>
-                                        </div>
                                         <div class="row align-items-center mb-0 d-flex">
-                                            <div class="col-5">
-                                                <h2 class="d-flex align-items-center mb-0">
+                                            <div class="col-7 col-md-12">
+                                                    <h5 class="card-title mb-0">Per year Price:</h5>
+                                            </div>
+                                                <div class="col-5 col-md-12">
+                                                <h2 class="d-flex align-items-center mb-0 price">
                                                     $800.00
                                                 </h2>
                                             </div>
@@ -87,10 +91,10 @@
                                     <li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 500 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
                                 </ol>
                             </div>
-                            <div class="col-sm-4">
+                                <div class="col-sm-4" style="align-self: center;">
 
 
-                                <img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+                                <img src='images/platinum-fboadvertise2.png' alt="" style="max-width: -webkit-fill-available;">
 
                             </div>
                         </div>
@@ -129,18 +133,16 @@
                                 </h4>
                                 <h5>Get Great Exposure</h5>
                             </div>
-                            <div class="col-sm-2" style="
-											width: fit-content;
-											float: right;
-										">
+                            <div class="col-12 col-md-3">
                                 <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="mb-0">
-                                            <h5 class="card-title mb-0">Per year Price:</h5>
-                                        </div>
+                                        
                                         <div class="row align-items-center mb-0 d-flex">
-                                            <div class="col-5">
-                                                <h2 class="d-flex align-items-center mb-0">
+                                            <div class="col-7 col-md-12">
+                                                <h5 class="card-title mb-0">Per year Price:</h5>
+                                            </div>
+                                            <div class="col-5 col-md-12">
+                                                <h2 class="d-flex align-items-center mb-0 price">
                                                     $500.00
                                                 </h2>
                                             </div>
@@ -169,8 +171,8 @@
                                     <li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 250 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
                                 </ol>
                             </div>
-                            <div class="col-sm-4">
-                                <img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+                            <div class="col-sm-4" style="align-self: center;">
+                                <img src='images/gold-fboadvertise.png' alt="" style="max-width: -webkit-fill-available; ">
                             </div>
                         </div>
                         <br>
@@ -198,18 +200,16 @@
                                 </h4>
                                 <h5>The Easy Budget</h5>
                             </div>
-                            <div class="col-sm-2" style="
-											width: fit-content;
-											float: right;
-										">
+                            <div class="col-12 col-md-3">
                                 <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        <div class="mb-0">
-                                            <h5 class="card-title mb-0">Per year Price:</h5>
-                                        </div>
+                                        
                                         <div class="row align-items-center mb-0 d-flex">
-                                            <div class="col-5">
-                                                <h2 class="d-flex align-items-center mb-0">
+                                            <div class="col-7 col-md-12">
+                                                <h5 class="card-title mb-0">Per year Price:</h5>
+                                            </div>
+                                            <div class="col-5 col-md-12">
+                                                <h2 class="d-flex align-items-center mb-0 price">
                                                     $200.00
                                                 </h2>
                                             </div>
@@ -238,8 +238,8 @@
                                     <li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 150 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
                                 </ol>
                             </div>
-                            <div class="col-sm-4">
-                                <img src='images/platinum-fboadvertise.jpg' alt="" style="max-width: -webkit-fill-available;">
+                            <div class="col-sm-4" style="align-self: center;">
+                                <img src='images/silver-fboadvertise.png' alt="" style="max-width: -webkit-fill-available;">
                             </div>
                         </div>
                         <br>
