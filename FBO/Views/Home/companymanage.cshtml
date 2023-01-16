@@ -11,9 +11,16 @@
     {
         <div class="row ms-2 mt-4">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-9">
                     <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
                 </div>
+                @if (Model.fbocount > 1)
+                {
+
+                    <div class="col-12 col-md-3">
+                        <a href="/fbo/companymanage.aspx" class="btn btn-success btn-success-custom float-md-end">List of all FBOs</a>
+                    </div>
+                }
             </div>
         </div>
         <div class="row ms-2 mt-2">
@@ -21,7 +28,7 @@
             <div class="row">
                 <partial name="_SubMenuItems" model="@Model.FBO" />
                 <div class="col-md-9 col-12">
-                    @if (@Model.FBO.fboIsApproved != "Yes")
+                    @if (Model.FBO.fboIsApproved != "Yes")
                     {
                         <div class="row ms-1">
                             <div class="col-12">
@@ -326,6 +333,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

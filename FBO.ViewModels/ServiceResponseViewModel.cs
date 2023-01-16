@@ -30,6 +30,6 @@ namespace FBO.ViewModels
         public List<services_Photos> Photos { get; set; }
         public List<int> years;
         public string level;
-        
+        public int fbocount;
     }
 }

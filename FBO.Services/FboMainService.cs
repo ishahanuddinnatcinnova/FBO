@@ -8,7 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
+using FBO.Dapper;
 using GlobalAir.Data;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
@@ -32,10 +32,12 @@ namespace FBO.Services
         {
             try
             {
+
                 ServiceResponseViewModel response = new ServiceResponseViewModel();
                 UserViewModel userData = _utility.CheckLogin(request);
                 if (userData.isUser)
                 {
+                List<FBOManagement_GetFBOs_Result> fbocount = await _generalService.GetFBOs(userData.userID);
                     if (companyID != null && companyID != "")
                     {
                         FBOResult res = await _generalService.GetFBO(companyID);
@@ -48,6 +50,7 @@ namespace FBO.Services
                         else
                         {
                             response.data.FBO = res;
+                response.data.fbocount = fbocount.Count;
                             response.isRedirect = false;
                         }
                     }
@@ -55,7 +58,7 @@ namespace FBO.Services
                     {
                         List<FBOManagement_GetFBOs_Result> fbos = await _generalService.GetFBOs(userData.userID);
                         response.data.FBOs = fbos;
-
+                        response.data.fbocount = fbos.Count;
                         if (fbos.Count > 1)
                         {
                             response.isRedirect = false;
@@ -324,6 +327,7 @@ namespace FBO.Services
                         FBOResult res = await _generalService.GetFBO(companyID);
                         var locations = await _generalService.GetLocations();
                         var singleFbores = await _generalService.SingleFboRes(companyID);
+
                         services_Accepted_GetCreditCards_Result cardinfo = await _generalService.GetCreditCardInfo(companyID);
 
                         if (res.FBO.UserID.ToString() != userData.userID)
