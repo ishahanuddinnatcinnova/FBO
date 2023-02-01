@@ -138,10 +138,10 @@
     @*<link href="~/css/social-share-kit.css" rel="stylesheet" />*@
     <link href="~/css/style.css" rel="stylesheet" media="all" />
     <style>
-         #mobileBanner {
-          
+        #mobileBanner {
             overflow: visible;
         }
+
         .footer a {
             text-decoration: none
         }
@@ -244,6 +244,12 @@
                     *@
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="cookie-notification" class="fixed-bottom" style="z-index:2000; display:none;">
+        <div class="row w-100 p-1">
+            <div class="col-md-9 m-auto">We use cookies to help you get the best experience when using our website. By continuing to use this website, you are agreeing to our Cookie Policy.</div>
+            <div class="col-md-3 justify-content-end"><a href="#" id="cookie-notification-btn" class="btn btn-success float-right">Confirm</a></div>
         </div>
     </div>
     @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
@@ -539,7 +545,7 @@
         @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
         {
             <text>
-                            const myInterval = setInterval(mobileBannerCheck, 1500);
+                                    const myInterval = setInterval(mobileBannerCheck, 1500);
 
             //setTimeout(function () { clearInterval(myInterval); }, 2000);
 
@@ -556,7 +562,7 @@
             }
             </text>
         }
-        var jCookies = null;
+            var jCookies = null;
         $(function () {
             if (jCookies == null) {
                 jCookies = Cookies.noConflict();
@@ -643,9 +649,20 @@
                     });
             </text>
         }
-                                    }, 3000);
+                                        }, 3000);
         });
 
+        // Cookie notification banner
+        var $cookieBanner = $('#cookie-notification');
+        if (readCookie('cookie-notification') == null) {
+            $cookieBanner.css('display', 'flex');
+        }
+
+        $cookieBanner.find('#cookie-notification-btn').on('click', function (e) {
+            e.preventDefault();
+            $cookieBanner.hide();
+            createCookie('cookie-notification', 'true', 365);
+        });
     </script>
     <script async defer type="text/javascript">
 
