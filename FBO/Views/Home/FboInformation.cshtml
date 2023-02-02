@@ -8,17 +8,17 @@
         </ol>
     </nav>
 }
-<div class="row ms-2 mt-4">
-    <div class="row">
-        <div class="col-12">
-            <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
-        </div>
+    <div class="row ms-2 mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 property="name">@Model.FBO.companyName (@Model.FBO.FBO.APTCode)</h1>
+            </div>
 
-    </div>
-    <hr>
-    <div class="row">
-        <partial name="_SubMenuItems" model="@Model.FBO" />
-        <div class="col-md-9 col-12">
+        </div>
+        <hr>
+        <div class="row">
+            <partial name="_SubMenuItems" model="@Model.FBO" />
+            <div class="col-md-9 col-12">
             @if (TempData["success"] != null && TempData["success"].ToString() == "true")
             {
                 <div id="s" class="row ms-1">
@@ -53,7 +53,7 @@
                                     <label for="ManagerName" class="form-label">Manager</label>
                                     <input type="hidden" name="companyID" value="@Model.FBO.FBO.CompanyID">
                                     <input type="hidden" name="logo" value="@(Model.FBO !=null ?        Model.FBO.FBO.logo:"")">
-                                <input type="hidden" name="managerpic" value="@(Model.singleFBO !=null ? Model.singleFBO.ManagerPhoto:"")">
+                                    <input type="hidden" name="managerpic" value="@(Model.singleFBO !=null ? Model.singleFBO.ManagerPhoto:"")">
                                     <input type="text" class="form-control" id="ManagerName" name="ManagerName" aria-describedby="Manager Name" value="@Model.FBO.FBO.manager">
                                 </div>
                                 <div class="mb-3 col-6">
@@ -171,23 +171,36 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (Model.FBO.FBO.FBOLevel != "Basic" || Model.FBO.FBO.FBOLevel != "Silver" )
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Photos
+                                </span>
+                            </div>
+
+                            @if (Model.FBO.FBO.FBOLevel != "Basic" && Model.FBO.FBO.FBOLevel != "Silver")
                             {
-                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                        FBO Photos
-                                    </span>
-                                </div>
                                 <div class="row p-3">
                                     <span class="alert alert-info" style="font-size: 20px">
                                         <a href="/fbo/servicephoto/index?companyid=@Model.FBO.FBO.CompanyID">Click here</a> to view and manage your FBO Photos
                                     </span>
                                 </div>
-                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                        FBO Logo
+                            }
+                            else
+                            {
+                                <div class="row p-3">
+                                    <span class="alert alert-info" style="font-size: 20px">
+                                        <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none">Upgrade your FBO to upload FBO photos</a>
                                     </span>
                                 </div>
+                            }
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Logo
+                                </span>
+                            </div>
+
+                            @if (Model.FBO.FBO.FBOLevel != "Basic" && Model.FBO.FBO.FBOLevel != "Silver")
+                            {
                                 <div class="row p-3 mb-3">
                                     <div class="col-12 col-md-4 text-center mb-2">
                                         <img id="output" src='@( Model.FBO.FBO !=null  ?  (!String.IsNullOrEmpty(Model.FBO.FBO.logo) ? ("https://resources.globalair.com/airport/images/complogo/" + Model.FBO.FBO.logo) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop")  :  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
@@ -212,11 +225,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
-                                    <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
-                                        FBO Manager's Photo
+                            }
+                            else
+                            {
+                                <div class="row p-3">
+                                    <span class="alert alert-info" style="font-size: 20px">
+                                        <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none">Upgrade your FBO to upload FBO logo</a>
                                     </span>
                                 </div>
+
+                            }
+                            <div style="height: 20px;border-bottom: 1px solid black;text-align: center;margin-bottom: 30px;">
+                                <span style="background-color: white;padding: -27px;padding-left: 10px;padding-right: 10px;top: -10px;position: relative;" class="display-6">
+                                    FBO Manager's Photo
+                                </span>
+                            </div>
+
+                            @if (Model.FBO.FBO.FBOLevel != "Basic" && Model.FBO.FBO.FBOLevel != "Silver")
+                            {
                                 <div class="row p-3">
                                     <div class="col-12 col-md-4 text-center mb-2">
                                         <img id="output1" src='@(Model.singleFBO !=null  ?  (!String.IsNullOrEmpty(Model.singleFBO.ManagerPhoto) ? ("https://resources.globalair.com/airport/images/managerphotos/" + Model.singleFBO.ManagerPhoto) : "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"):  "https://resources.globalair.com/images/no-image.png?w=150&h=150&mode=crop"     )' style="max-width: inherit;">
@@ -244,6 +270,14 @@
                                     </div>
                                 </div>
                             }
+                            else
+                            {
+                                <div class="row p-3">
+                                    <span class="alert alert-info" style="font-size: 20px">
+                                        <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID" class="text-decoration-none">Upgrade your FBO to upload manager's photo</a>
+                                    </span>
+                                </div>
+                            }
                             <div class="mb-3 col-12 text-center">
                                 <button value="FboInformationUpdate" type="submit" class="btn btn-primary" formaction="@Url.Action("FboInformationUpdate","FBOHelper")" formmethod="post">Submit</button>
                             </div>
@@ -257,12 +291,12 @@
 @section Scripts{
     <script>
         var loadFile = function (event) {
-         
+
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
         var loadManagerImg = function (event) {
-       
+
             var image = document.getElementById('output1');
             image.src = URL.createObjectURL(event.target.files[0]);
         };

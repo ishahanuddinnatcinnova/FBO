@@ -1,10 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@model GlobalAir.Data.ARC_SingleFBO_Result
+@{
+    Layout = null;
+    ViewBag.HideAds = true;
+    ViewBag.Title = "Verify Fuel Prices for FBO";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0N37V9FEB"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-K0N37V9FEB');</script>
-    <!-- End Google Tag -->
+    <!-- End Google tag (gtag.js) -->
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -17,83 +23,158 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5P9SKZZ');</script>
     <!-- End Google Tag Manager -->
     <meta charset="utf-8">
+    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/_includes/assets/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/_includes/assets/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/_includes/assets/icons/favicon-16x16.png">
     <link rel="mask-icon" href="/_includes/assets/icons/safari-pinned-tab.svg" color="#76B530">
     <link rel="shortcut icon" href="/_includes/assets/icons/favicon.ico">
-    <link rel="shortlink" href="https://www.globalair.com" />
+    <link rel="shortlink" href="https://www.globalair.com">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/_includes/assets/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-itunes-app" content="app-id=1165831804">
 
-    @*<title>@(ViewBag.Title != null ? @ViewBag.Title : "Airport Resource Center | GlobalAir.com")</title>*@
-    @if (ViewBag.canonical != null)
-    {
-        <link href="@ViewBag.canonical.ToLower()" rel="canonical">
-    }
-    @RenderSection("Meta", required: false)
-    <link rel="dns-prefetch" href="https://www.facebook.com">
-    <link rel="dns-prefetch" href="https://connect.facebook.net">
+
     <link rel="dns-prefetch" href="https://stats.g.doubleclick.net">
     <link rel="dns-prefetch" href="https://www.google.com">
-    <script type="application/ld+json">
-         { "@@context": "https://schema.org",
-        "@@type": "Organization",
-        "name": "GlobalAir.com",
-        "legalName": "Global Aviation Navigator, Inc",
-        "foundingDate": "1995",
-        "url": "https://www.globalair.com",
-        "logo": "https://www.globalair.com/images/galogo1.png",
-        "address": {
-        "@@type": "PostalAddress",
-        "streetAddress": "2700 Moran Ave.",
-        "addressLocality": "Bowman Field Airport",
-        "addressRegion": "Louisville",
-        "postalCode": "KY 40205",
-        "addressCountry": "USA"
-        },
-        "contactPoint": {
-        "@@type": "ContactPoint",
-        "contactType": "Technical Support",
-        "telephone": "[502-456-3934]",
-        "email": "webmaster@globalair.com"
-        },
-        "sameAs": [
-        "https://www.facebook.com/GlobalAir",
-        "https://twitter.com/globalair",
-        "https://www.linkedin.com/company/globalair.com",
-        "https://www.pinterest.com/Globalair",
-        "http://aircraft-listings.com/aircraftseller",
-        "https://twitter.com/aircraftseller",
-        "https://twitter.com/FBOfuel",
-        "https://www.instagram.com/globalaircom/",
-        "https://www.youtube.com/user/Airplanesforsale"
-         ]}
+
+
+    <script>
+        var qcObj = [];
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
+        ga('send', 'pageview');
+
+        window.uetq = window.uetq || [];
+        window.uetq.push('event', 'INQUIRY', {});
     </script>
+    @*DT-240*@
     <script>!function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');</script>
 
-    <noscript>
-        <img height="1" width="1" src="https://www.facebook.com/tr?id=128491507700639&ev=PageView&noscript=1" />
-    </noscript>
-    @*@Styles.RenderFormat(@"<link rel=""stylesheet"" rel=""preload"" as=""style"" href=""{0}"" />", "~/styles/pages")*@
-    @RenderSection("Styles", required: false)
-    @*<link href="~/css/all.min.css" rel="stylesheet" />*@
+    @*<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "17467723" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>*@
+
+    @if (ViewBag.Schema == null)
+    {
+        <script type="application/ld+json">
+             { "@@context": "https://schema.org",
+            "@@type": "Organization",
+            "name": "GlobalAir.com",
+            "legalName": "Global Aviation Navigator, Inc",
+            "foundingDate": "1995",
+            "url": "https://www.globalair.com",
+            "logo": "https://www.globalair.com/images/galogo1.png",
+            "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "2700 Moran Ave.",
+            "addressLocality": "Bowman Field Airport",
+            "addressRegion": "Louisville",
+            "postalCode": "KY 40205",
+            "addressCountry": "USA"
+            },
+            "contactPoint": {
+            "@@type": "ContactPoint",
+            "contactType": "Technical Support",
+            "telephone": "[502-456-3934]",
+            "email": "webmaster@globalair.com"
+            },
+            "sameAs": [
+            "https://www.facebook.com/GlobalAir",
+            "https://twitter.com/globalair",
+            "https://www.linkedin.com/company/globalair.com",
+            "https://www.pinterest.com/Globalair",
+            "http://aircraft-listings.com/aircraftseller",
+            "https://twitter.com/aircraftseller",
+            "https://twitter.com/FBOfuel",
+            "https://www.instagram.com/globalaircom/",
+            "https://www.youtube.com/user/Airplanesforsale"
+             ]}
+        </script>
+    }
     <link href="~/css/bootstrap.custom.css" rel="stylesheet" media="all" />
-    @*<link href="~/css/css-loader.css" rel="stylesheet" />*@
-    @*<link href="~/css/fas.css" rel="stylesheet" />*@
-    @*<link href="~/css/social-share-kit.css" rel="stylesheet" />*@
     <link href="~/css/style.css" rel="stylesheet" media="all" />
+
+    @*<link defer href="~/Content/all.min.css" rel="stylesheet" />*@
     <style>
-         #mobileBanner {
-          
+        .fbo--subtitle {
+            background-color: #3c74ab;
+            font-weight: bold;
+            color: white;
+            border-bottom: 2px #2B557E solid;
+        }
+
+        .fbo--btn {
+            border: none;
+            color: #fefefe;
+            background-color: #77c147;
+            font-weight: 700;
+            padding: 0.6rem 1rem;
+            -webkit-border-radius: 0.5rem;
+            -moz-border-radius: 0.5rem;
+            -ms-border-radius: 0.5rem;
+            border-radius: 0.5rem;
+            width: 300px;
+            display: inline-block;
+        }
+
+            .fbo--btn.btn-danger {
+                background-color: #F92222;
+            }
+
+        .p-1 {
+            padding: 1rem;
+        }
+
+        .mt-3 {
+            margin-top: 3rem;
+        }
+
+        #mobileBanner {
+            /*width: 80%;*/
+            /*border-radius: 25px;*/
+            /*border: 2px solid Black;
+                        padding: 15px 15px 15px 15px;
+                        margin: 20px 20px 20px 20px;*/
+            /*background: #A4D3EE;*/
             overflow: visible;
         }
 
-        .footer a {
-            text-decoration: none
+        #bannerSlider {
+            /*background: red;*/
+            color: white;
+        }
+
+        .c_h3 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .si-gray {
+            background-color: white;
+        }
+
+        .social-icon-sm {
+            margin: 0 10px 0 0;
+        }
+
+        @@media (max-width: 767px) {
+            .mr-2 {
+                margin-right: 0 !important;
+            }
+
+            #wDiv {
+                flex-grow: 0.95;
+                padding-right: 0 !important;
+            }
         }
 
         .dropdown {
@@ -130,18 +211,6 @@
 
         .show1 {
             display: block;
-        }
-
-        #airportTable_filter {
-            margin-bottom: 5px
-        }
-
-        #btn-back-to-top {
-            position: fixed;
-            bottom: 50px;
-            right: 20px;
-            display: none;
-            z-index: 3
         }
     </style>
 
@@ -196,12 +265,6 @@
             </div>
         </div>
     </div>
-    <div id="cookie-notification" class="fixed-bottom" style="z-index:2000; display:none;">
-        <div class="row w-100 p-1">
-            <div class="col-md-9 m-auto px-4">We use cookies to help you get the best experience when using our website. By continuing to use this website, you are agreeing to our Cookie Policy.</div>
-            <div class="col-md-3 m-auto justify-content-end"><a href="#" id="cookie-notification-btn" class="btn btn-success float-right" style="float:right;">Confirm</a></div>
-        </div>
-    </div>
     @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
     {
         <div class="top-bar topbarbck d-none d-lg-block">
@@ -226,100 +289,80 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         @{
-            <partial name="_MenuItems" />
+            Html.RenderPartial("_MenuItems");
         }
     </nav>
-    @if (IsSectionDefined("BreadCrumb"))
-    {
-        <div class="row ms-2 mt-2" style="width: 99%">
-            <div class="col-md-9">
-                @Html.Raw(@ViewBag.BreadCrumb)
-                @RenderSection("Breadcrumb", required: false)
-            </div>
-        </div>
-    }
-    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
-    {
-        <div class="col" style="height: 60px; text-align: center">
-            <div id='div-gpt-ad-1639782560527-0' style='min-width: 320px; min-height: 50px;'>
-            </div>
-        </div>
-    }
 
-    <div class="">
-        @if (IsSectionDefined("PageTitle"))
-        {
-            <div class="page-titles title-light">
-                @RenderSection("PageTitle", required: false)
-            </div>
-        }
-        else
-        {
-            <div class=""></div>
-        }
-        <div class="row mr-2" style="width: 100%">
-            <div class="col">
-                <!-- Back to top button -->
-                <button type="button" class="btn btn-success btn-success-custom rounded btn-sm" id="btn-back-to-top" style="width: 50px; display: block; height: 50px;">
-                    <img src="https://resources.globalair.com/images/top.png" width="30">
-                </button>
-                @RenderBody()
-            </div>
-            @if (ViewBag.HideAds != true)
-            {
-                @if (TempData["sidebar"] == null || (TempData["sidebar"] != null && TempData["sidebar"] != "Nosidebar"))
-                {
-                    <div class="col mb-4 ml-4 pr-0 pl-0 d-none d-xl-block" style="flex: 0 0 300px; width: 300px">
-                        @RenderSection("SideBar", required: false)
-                        <div class="mb-4"></div>
-                        @{
-                            //<div id='div-gpt-ad-1639786075089-0' style='min-width: 300px; min-height: 250px; margin-top: 20px'>
-                            //    <script>
-                            //        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1639786075089-0'); });
-                            //    </script>
-                            //</div>
+    <div class="container mb-3">
+       
+            <div class="mb-3"></div>
+        <div class="row">
+            <div class="col mb-4">
+                <div style="max-width: 700px;
+        margin: auto;">
+                    <div class="text-center mb-2">
+                        <br /><br />
+                        <b>Thank you for verifying your fuel prices!</b><br /><br />
 
-                            //<div style="min-width: 300px; min-height: 250px; margin-bottom: 20px; margin-top: 20px">
-                            //    <a href="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Click&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1" aria-label="GlobalAir Articles" target="_blank" rel="noreferrer">
-                            //        <img src="https://www.globalair.com/banmanpro/ad.aspx?ZoneID=34&Task=Get&Mode=HTML&SiteID=1&SubscriberID=1&PageID=1" width="300" height="250" border="0" style="max-width:100%; height:auto;" alt="" />
-                            //    </a>
-                            //</div>
-                            <!-- /13428562/2022-300x600-Ad -->
-                            <div id='div-gpt-ad-1639786033852-0' style='min-width: 300px; height: 600px;'>
-                            </div>
-
-                            <!-- /13428562/2022-300x250-Ad-1 -->
-                            <div id='div-gpt-ad-1639786075089-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
-                            </div>
-
-                            <!-- /13428562/2022-300x250-Ad-2 -->
-                            <div id='div-gpt-ad-1639786162444-0' style='min-width: 300px; height: 250px; margin-top: 20px'>
-                            </div>
-                        }
-                        <div class="mb-4"></div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-    @if (ViewBag.IsMobile == true)
-    {
-        <div id="mobileBanner" class="fixed-bottom">
-            <div id="bannerSlider" onclick="ToggleAdBanner();" style="border-radius: 10px 10px 0px 0px;background:lightgrey;width:12%;text-align:center;opacity:0.8;display:none">
-                <img id="bannerImg" width="18" height="18" style="vertical-align:sub" src="/images/angle-down.png">
-            </div>
-            @*<div id="closebtnAd" class="" data-toggler="show" onclick="closeGoogleAd();" data-target=".fixed-bottom" aria-label="Close" style="background-color:silver; width:60px; display:none; cursor:pointer;text-align:center">CLOSE</div>*@
-            <div id="ad_banner" style="border-top: 1px solid #cac6c6;" class="row">
-                <div class="col-md-12">
-                    <div id="top-ad">
-                        <div id='div-gpt-ad-1641850667091-0'>
+                        <div align="center" class="fbo--subtitle p-1 mt-3">
+                            <b>Your current fuel prices on GlobalAir.com:</b>
                         </div>
+                        <table cellspacing="1" style="border: 1px solid #000000;width: 100%;">
+                            <tr>
+                                <td class="subtitle"></td>
+                                <td class="subtitle" align="center">JETA</td>
+                                @if (Model.fuelJETAPRIST.GetValueOrDefault(0) > 0 || Model.fuelSSJETAPRIST.GetValueOrDefault(0) > 0)
+                                {
+                                    <td class="subtitle" align="center">JETA w/ Add</td>
+                                }
+                                <td class="subtitle" align="center">100LL</td>
+                                @if (Model.fuelUL94.GetValueOrDefault(0) > 0 || Model.fuelSSUL94.GetValueOrDefault(0) > 0)
+                                {
+                                    <td class="subtitle" align="center">UL94</td>
+                                }
+                                <td class="subtitle" align="center">MOGAS</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><b>Full Service:</b></td>
+                                <td align="center">@Model.fuelJETA.GetValueOrDefault(0).ToString("#.##")</td>
+                                @if (Model.fuelJETAPRIST.GetValueOrDefault(0) > 0 || Model.fuelSSJETAPRIST.GetValueOrDefault(0) > 0)
+                                {
+                                    <td align="center">@Model.fuelJETAPRIST.GetValueOrDefault(0).ToString("#.##")</td>
+                                }
+                                <td align="center">@Model.fuel100LL.GetValueOrDefault(0).ToString("#.##")</td>
+                                @if (Model.fuelUL94.GetValueOrDefault(0) > 0 || Model.fuelSSUL94.GetValueOrDefault(0) > 0)
+                                {
+                                    <td align="center">@Model.fuelUL94.GetValueOrDefault(0).ToString("#.##")</td>
+                                }
+                                <td align="center">@Model.fuelMOGAS.GetValueOrDefault(0).ToString("#.##")</td>
+                            </tr>
+                            <tr>
+                                <td align="right" bgcolor="#99ccff"><b>Self-Serve:</b></td>
+                                <td align="center" bgcolor="#99ccff">@Model.fuelSSJETA.GetValueOrDefault(0).ToString("#.##")</td>
+                                @if (Model.fuelJETAPRIST.GetValueOrDefault(0) > 0 || Model.fuelSSJETAPRIST.GetValueOrDefault(0) > 0)
+                                {
+                                    <td align="center" bgcolor="#99ccff">@Model.fuelSSJETAPRIST.GetValueOrDefault(0).ToString("#.##")</td>
+                                }
+                                <td align="center" bgcolor="#99ccff">@Model.fuelSS100LL.GetValueOrDefault(0).ToString("#.##")</td>
+                                @if (Model.fuelUL94.GetValueOrDefault(0) > 0 || Model.fuelSSUL94.GetValueOrDefault(0) > 0)
+                                {
+                                    <td align="center" bgcolor="#99ccff">@Model.fuelSSUL94.GetValueOrDefault(0).ToString("#.##")</td>
+                                }
+                                <td align="center" bgcolor="#99ccff">@Model.fuelSSMOGAS.GetValueOrDefault(0).ToString("#.##")</td>
+                            </tr>
+                        </table>
+                        <div>Your fuel prices were last updated: @Model.FuelUpdatedOn</div>
+
+                        <br /><br />
+                        If you need to change your fuel prices you can do so here:
+                        <a class="btn btn-danger d-block mt-1" href="/fbo/fuel.aspx?companyid=@Model.CompID">Update My Fuel Prices</a>
+                        <br /><br />
                     </div>
                 </div>
             </div>
         </div>
-    }
-
+    </div>
+    
     <footer class="footer footer-dark pt30 pb-2">
         <div class="p-4">
             <div class="row">
@@ -406,7 +449,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginModalCenterTitle">GlobalAir Login</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -415,19 +459,19 @@
                             <div id="SigninError"></div>
                             <form id="frmSignIn" name="frmSignIn" method="post">
                                 <input type="hidden" id="logonaction" name="logonaction" value="in">
-                                <div class="mb-3">
-                                    <a href="/forgot.aspx" class="float-end text-info text-decoration-none">Forgot?</a>
-                                    <label class="form-label" for="email">Username</label>
+                                <div class="form-group">
+                                    <a href="/forgot.aspx" class="float-right text-info">Forgot?</a>
+                                    <label for="email">Username</label>
                                     <input type="text" class="form-control ele150" name="tbUsername" id="tbUsername" placeholder="Username" maxlength="50">
                                 </div>
-                                <div class="mb-3">
-                                    <a href="/forgot.aspx" class="float-end text-info text-decoration-none">Reset</a>
-                                    <label class="form-label" for="pass">Password</label>
+                                <div class="form-group">
+                                    <a href="/forgot.aspx" class="float-right text-info">Reset</a>
+                                    <label for="pass">Password</label>
                                     <input type="password" name="tbPassword" id="tbPassword" placeholder="Password" class="form-control ele150" maxlength="50">
-                                    <input type="hidden" id="hiddenURL" value="/Articles">
+                                    <input type="hidden" id="hiddenURL" value="/articles">
                                 </div>
                                 <div class="clearfix">
-                                    <button type="submit" class="btn btn-primary btn-primary-custom float-right" name="IB_MyFlightDepartmentSubmit" id="IB_MyFlightDepartmentSubmit">Sign In</button>
+                                    <button type="submit" class="btn btn-primary float-right" name="IB_MyFlightDepartmentSubmit" id="IB_MyFlightDepartmentSubmit">Sign In</button>
                                 </div>
                             </form>
                         </div>
@@ -438,7 +482,7 @@
             </div>
         </div>
     </div>
-    @*    <div class="ssk-sticky ssk-left ssk-center ssk-lg">
+    @*<div class="ssk-sticky ssk-left ssk-center ssk-lg">
     <a href="javascript:socialIconClick('facebook')" title="FaceBook" class="ssk ssk-facebook"></a>
     <a href="javascript:socialIconClick('twitter')" title="Twitter" class="ssk ssk-twitter"></a>
     <a href="javascript:socialIconClick('pinterest')" title="Pinterest" class="ssk ssk-pinterest"></a>
@@ -472,42 +516,19 @@
             </div>
         </div>
     </div>
-    @*<script type="text/javascript" async defer src="~/js/all.min.js"></script>*@
+    @*<script defer src="https://use.fontawesome.com/0bf45687c8.js"></script>*@
+    @*<script defer src="~/scripts/all.min.js"></script>*@
+    @*@Scripts.Render("~/scripts/pages")*@
     <script src="~/js/jquery-3.5.1.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript" async defer src="~/js/appUi-custom.js"></script>
     <script type="text/javascript" async defer src="~/js/jquery.validate.min.js"></script>
     <script type="text/javascript" async defer src="~/js/lazysizes.min.js"></script>
-
-
-    @await RenderSectionAsync("Scripts", required: false)
-
     <img height="1" width="1" alt="FaceBook Tracking" src="https://www.facebook.com/tr?id=128491507700639&ev=PageView&noscript=1" />
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript">
-
-        @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
-        {
-            <text>
-                            const myInterval = setInterval(mobileBannerCheck, 1500);
-
-            //setTimeout(function () { clearInterval(myInterval); }, 2000);
-
-            function mobileBannerCheck() {
-                console.log($('#mobileBanner').height());
-                if ($('#mobileBanner').height() > 150) {
-                    $('#bannerSlider').show();
-                    clearInterval(myInterval);
-                    console.log("clearInterval");
-                }
-                else {
-                    $('#bannerSlider').hide();
-                }
-            }
-            </text>
-        }
         var jCookies = null;
         $(function () {
             if (jCookies == null) {
@@ -520,7 +541,7 @@
                 jCookies.remove(name, { path: '/' });
             }
         }
-        window.addEventListener('load', function () {
+       window.addEventListener('load', function () {
             setTimeout(function () {
                 !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');
                 var qcObj = [];
@@ -544,24 +565,12 @@
                         window.googletag = window.googletag || { cmd: [] };
                     googletag.cmd.push(function () {
                         googletag.defineSlot('/13428562/2022-Aircraft-for-Sale-Ad-Units', [970, 90], 'div-gpt-ad-1621626637196-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-300x600-Ad-Aircraft-Sale', [300, 600], 'div-gpt-ad-1639786033852-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-300x250-Ad-1-Aircraft-Sale', [300, 250], 'div-gpt-ad-1639786075089-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/2022-300x250-Ad-2-Aircraft-Sale', [300, 250], 'div-gpt-ad-1639786162444-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-1-Aircraft-Sale', [728, 90], 'div-gpt-ad-1639786402291-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-2-Aircraft-Sale', [728, 90], 'div-gpt-ad-1639786437769-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-3-Aircraft-Sale', [728, 90], 'div-gpt-ad-1639786475721-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-4-Aircraft-Sale', [728, 90], 'div-gpt-ad-1639786539561-0').addService(googletag.pubads());
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-5-Aircraft-Sale', [728, 90], 'div-gpt-ad-1639786626208-0').addService(googletag.pubads()); googletag.pubads().enableSingleRequest();
-                        googletag.defineSlot('/13428562/**2022-728x90-Ad-1', [728, 90], 'div-gpt-ad-1639781873906-0').addService(googletag.pubads());
                         googletag.pubads().enableSingleRequest();
                         googletag.pubads().collapseEmptyDivs(true);
                         googletag.enableServices();
                     });
                     
                     googletag.cmd.push(function () { googletag.display('div-gpt-ad-1621626637196-0'); });
-                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639786033852-0'); });
-                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639786075089-0'); });
-                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639786162444-0'); });
             </text>
         }
         else
@@ -593,34 +602,58 @@
                     });
             </text>
         }
-                                    }, 3000);
+                                                    }, 3000);
         });
 
-    
     </script>
-    <script async defer type="text/javascript">
+</body>
+</html>
 
-        function QuickContact(button) {
+<script type="text/javascript">
 
-            $(".modal-title").html($(button).data("title"));
-            var btnData = $(button).data("adid") + "|" + $(button).data("brokerid") + "|" + $(button).data("businessphone") + "|" + $(button).data("cellphone") + "|";
-            btnData += $(button).data("contactname") + "|" + $(button).data("rn") + "|" + $(button).data("sn") + "|" + $(button).data("title") + "|";
-            btnData += $(button).data("receivetextmessages") + "|True|" + $(button).data("inquirysrc") + "|" + $(button).data("yrmoddes") + "|" + $(button).data("ismobile") + "|" + $(button).data("country") + "|" + $(button).data("debug");
-            $("#divQc").load("/aircraft-for-sale/quick-contact-iframe?addetail=" + encodeURIComponent(btnData)
-            );
-        }
+    function QuickContact(button) {
 
-        function CloseQuickContact() {
-            if ($('#QuickContact').hasClass('show')) {
-                $("#QuickContact").removeClass("show");
-                var iframes = document.querySelectorAll('iframe');
-                for (var i = 0; i < iframes.length; i++) {
-                    iframes[i].parentNode.removeChild(iframes[i]);
-                }
+        $(".modal-title").html($(button).data("title"));
+        var btnData = $(button).data("adid") + "|" + $(button).data("brokerid") + "|" + $(button).data("businessphone") + "|" + $(button).data("cellphone") + "|";
+        btnData += $(button).data("contactname") + "|" + $(button).data("rn") + "|" + $(button).data("sn") + "|" + $(button).data("title") + "|";
+        btnData += $(button).data("receivetextmessages") + "|True|" + $(button).data("inquirysrc") + "|" + $(button).data("yrmoddes") + "|" + $(button).data("ismobile") + "|" + $(button).data("country") + "|" + $(button).data("debug");
+        $("#divQc").load("/aircraft-for-sale/quick-contact-iframe?addetail=" + encodeURIComponent(btnData)
+        );
+    }
+
+    function CloseQuickContact() {
+        if ($('#QuickContact').hasClass('show')) {
+            $("#QuickContact").removeClass("show");
+            var iframes = document.querySelectorAll('iframe');
+            for (var i = 0; i < iframes.length; i++) {
+                iframes[i].parentNode.removeChild(iframes[i]);
             }
         }
-    </script>
-    <script async defer type="text/javascript">
+    }
+</script>
+<script type="text/javascript">
+
+    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+    {
+        <text>
+                                const myInterval = setInterval(mobileBannerCheck, 1500);
+
+        //setTimeout(function () { clearInterval(myInterval); }, 2000);
+
+        function mobileBannerCheck() {
+            //console.log($('#mobileBanner').height());
+            if ($('#mobileBanner').height() > 150) {
+                $('#bannerSlider').show();
+                clearInterval(myInterval);
+                //console.log("clearInterval");
+            }
+            else {
+                $('#bannerSlider').hide();
+            }
+        }
+        </text>
+    }
+
         //(function () {
         //    var css = document.createElement('link');
         //    css.href = 'https://use.fontawesome.com/releases/v5.7.2/css/all.css';
@@ -631,99 +664,65 @@
 
         function showGoogleAds() {
 
-        }
-        function closeGoogleAd() {
-            $("#mobileBanner").hide();
-        }
-        function ToggleAdBanner() {
-            try {
-                $("#mobileBanner").slideUp();
+    @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
+    {
+        <text>
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1621626637196-0'); });
+        </text>
+    }
+    @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
+    {
+        <text>
+                    //$("#closebtnAd").show();
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639782560527-0'); });
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1641850667091-0'); });
+                //(adsbygoogle = window.adsbygoogle || []).push({});
 
-                if ($("#bannerImg").attr('src').indexOf("up") >= 0) {
-                    $("#bannerImg").attr('src', '/images/angle-down.png');
-                }
-                else {
-                    $("#bannerImg").attr('src', '/images/angle-up.png');
-                }
-            }
-            catch {
-                console.log("mobile ad_banner error");
-            }
+        </text>
+    }
         }
-        window.onclick = function (e) {
-            document.querySelectorAll('.dropdown-menu.show').forEach((item) => {
-                if (event.target.nextElementSibling !== item)
-                    item.classList.remove('show');
-            });
+    function closeGoogleAd() {
+        $("#mobileBanner").hide();
+    }
 
-            if (!event.target.matches('.dropbtn')) {
-                //alert();
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show1')) {
-                        openDropdown.classList.remove('show1');
-                    }
-                }
+    function ToggleAdBanner() {
+        try {
+            $("#mobileBanner").slideUp();
+
+            if ($("#bannerImg").attr('src').indexOf("up") >= 0) {
+                $("#bannerImg").attr('src', '/images/angle-down.png');
+            }
+            else {
+                $("#bannerImg").attr('src', '/images/angle-up.png');
             }
         }
-    </script>
-    <script>
-
-        function header_menuFunction() {
-            document.getElementById("headerDropdown").classList.toggle("show1");
+        catch {
+            console.log("mobile ad_banner error");
         }
-    </script>
-    <script>
-        window.addEventListener('load', function () {
-            jQuery('input[type=radio][name=searchType]').change(function () {
-                if (this.value == 'airport') {
-                    $('#search-input').attr("placeholder", "Enter Airport ID, Name, City, State or Zip Code");
-                }
-                else if (this.value == 'fuel') {
-                    $('#search-input').attr("placeholder", "Enter Airport ID");
-                }
-            });
+    }
 
-            jQuery("#submitForm").click(function () {
-                if ($('#search-input').val() == "") {
-                    $('#queryCheck').show();
-                    setTimeout(function () {
-                        $('#queryCheck').hide()
-                    }, 3000);
-                }
-                else {
-                    $('#searchForm').submit();
-                }
-            });
+    window.onclick = function (e) {
+        document.querySelectorAll('.dropdown-menu.show').forEach((item) => {
+            if (event.target.nextElementSibling !== item)
+                item.classList.remove('show');
         });
-        //Get the button
-        let mybutton = document.getElementById("btn-back-to-top");
 
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-            scrollFunction();
-        };
-
-        function scrollFunction() {
-            if (
-                document.body.scrollTop > 20 ||
-                document.documentElement.scrollTop > 20
-            ) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
+        if (!event.target.matches('.dropbtn')) {
+            //alert();
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show1')) {
+                    openDropdown.classList.remove('show1');
+                }
             }
         }
-        // When the user clicks on the button, scroll to the top of the document
-        mybutton.addEventListener("click", backToTop);
+    }
+</script>
+<script>
 
-        function backToTop() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-
-</body>
-</html>
+    function header_menuFunction() {
+        document.getElementById("headerDropdown").classList.toggle("show1");
+    }
+</script>

@@ -19,7 +19,7 @@
         }
     </style>
 }
-@section Breadcrumb {
+    @section Breadcrumb {
     <nav aria-label="breadcrumb">
         <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="/fbo/companymanage.aspx?companyid=@Model.data.FBO.FBO.CompanyID"><span itemprop="name">FBO Management</span><meta itemprop="position" content="1"></a></li>
@@ -38,27 +38,43 @@
         <div class="row">
             <partial name="_SubMenuItems" model="@Model.data.FBO" />
             <div class="col-md-9 col-12">
-                <div class="card float-right">
-                    <div style="padding: 10px 20px 100px 20px;">
-                        <h2 class="section-title display-6">
-                            Manage Your FBO Photos
-                        </h2>
-                        <div>
-                            <p>Your current FBO photos are displayed below. To see how these photos look on GlobalAir.com, <a href="@ViewBag.FBOURL">click here</a> to view the photo slideshow on your FBO page.</p>
-                            <p>To upload additional photos, click the Browse button to select photos from your computer or drag and drop them directly from your desktop.</p>
-                            <p>If you want to delete any of the photos in your slideshow, click the Delete button below the corresponding photo.</p>
-                        </div>
-                        <div class="alert alert-danger">Uploading photos with large file sizes will increase the time it takes to load the photos on your FBO page.</div>
-
-                        <input id="input-1" name="input1[]" type="file" multiple class="file-loading">
-                        <div id="errorBlock" class="help-block"></div>
+            @if (TempData["success"] != null && TempData["success"].ToString() == "true")
+            {
+                <div id="s" class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-success">Your changes have been saved successfully.</p>
                     </div>
+                </div>
+            }
+            else if (TempData["success"] != null && TempData["success"].ToString() == "false")
+            {
+                <div id="f" class="row ms-1">
+                    <div class="col">
+                        <p class="alert alert-danger">@TempData["errorMesssage"]</p>
+                    </div>
+                </div>
+            }
+            <div class="card float-right">
+                <div style="padding: 10px 20px 100px 20px;">
+                    <h2 class="section-title display-6">
+                        Manage Your FBO Photos
+                    </h2>
+                    <div>
+                        <p>Your current FBO photos are displayed below. To see how these photos look on GlobalAir.com, <a href="@ViewBag.FBOURL">click here</a> to view the photo slideshow on your FBO page.</p>
+                        <p>To upload additional photos, click the Browse button to select photos from your computer or drag and drop them directly from your desktop.</p>
+                        <p>If you want to delete any of the photos in your slideshow, click the Delete button below the corresponding photo.</p>
+                    </div>
+                    <div class="alert alert-danger">Uploading photos with large file sizes will increase the time it takes to load the photos on your FBO page.</div>
+
+                    <input id="input-1" name="input1[]" type="file" multiple class="file-loading">
+                    <div id="errorBlock" class="help-block"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    @section Scripts {
+@section Scripts {
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
     <script>
         var vtoken = '';
@@ -140,6 +156,12 @@
                 initialPreview: initialPreview,
                 initialPreviewConfig: initialPreviewConfig
             })
+                .on('fileuploaded', function (event, previewId, index, fileId) {
+        @{
+            TempData["success"] = "true";
+        }
+                        location.reload();
+                })
                 .on("filebatchselected", function (event, files) {
                     // trigger upload method immediately after files are selected
                     $(objName).fileinput("upload");

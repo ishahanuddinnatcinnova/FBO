@@ -166,11 +166,27 @@ namespace FBO.Controllers
         }
 
         [Route("record_clickthrough.aspx")]
-        public  void RecordClickThrough(int fboID)
+        public IActionResult RecordClickThrough(int fboID)
         {
             _fboMainService.RecordClickThrough(fboID);
+            return Redirect(Request.Headers["Referer"].ToString());
         }
-       
+        
+        [Route("verifyfuelprices")]
+        public ActionResult VerifyFuelPrices(int companyID)
+        {
+            // Set Login ViewBag variables
+            _utility.GetUserTracking(ViewBag, this.Request, "VerifyFuelPrices", "FBO", "VerifyFuelPrices", "0", 0);
+
+            // Verify fuel prices
+            using globalairDBOProcs globalairDBOProcs = new globalairDBOProcs();
+            globalairDBOProcs.FBOManagement_LastUpdated(companyID);
+
+            // Get the FBO details
+            using globalairARC globalairARC = new globalairARC();
+            var model = globalairARC.ARC_SingleFBO(companyID).FirstOrDefault();
+            return View(model);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

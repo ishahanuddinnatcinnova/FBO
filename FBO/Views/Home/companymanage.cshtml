@@ -4,7 +4,8 @@
 }
 
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
-
+@section Breadcrumb {
+}
 <div class="col">
 
     @if (singleFBO)
@@ -123,6 +124,7 @@
                                         <div class="col-sm-7">
                                             <h4 class="card-subtitle mb-2">
                                                 <b>Your fuel prices were last updated: </b>
+                                                <br>
                                                 @Model.FBO.FBO.LastUpdated
                                             </h4>
                                         </div>
@@ -148,9 +150,17 @@
                             <h3>Your Statistics:</h3>
                         </div>
                         <div class="col-9 text-end">
-                            <b>Start Date:</b><input name="startDate" type="date" id="startDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
-                            <b>End Date:</b><input name="endDate" type="date" id="endDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
-                            <button id="search-stats" class="btn btn-success btn-success-custom">Search Stats</button>
+                            <div class="row">
+                                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                                    <b>Start Date:</b><input name="startDate" type="date" id="startDate" value="@Convert.ToDateTime(Model.FBO.startDate).ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                                    <b>End Date:</b><input name="endDate" type="date" id="endDate" value="@Convert.ToDateTime(Model.FBO.endDate).ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <button id="search-stats" class="btn btn-success btn-success-custom">Search Stats</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row ms-1 mt-2">
