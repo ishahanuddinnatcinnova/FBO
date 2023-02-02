@@ -16,7 +16,7 @@ namespace FBO.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly GeneralService _generalService;
-             private readonly FBOMainService _fboMainService;
+        private readonly FBOMainService _fboMainService;
 
         public FBOHelperAPI(ILogger<HomeController> logger, UtilitiesService utility, GeneralService generalService, FBOMainService fboMainService)
         {

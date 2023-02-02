@@ -47,9 +47,9 @@ namespace FBO.Controllers
                 return Redirect("/myflightdept/account.aspx");
 
             FBOResult res = await _generalService.GetFBO(companyId.ToString());
-            if(res.FBO.FBOLevel == "Basic" || res.FBO.FBOLevel == "Silver")
-                {
-                return Redirect("/myflightdept/account.aspx");
+            if (res.FBO.FBOLevel == "Basic" || res.FBO.FBOLevel == "Silver")
+            {
+                return Redirect("/fbo/companymanage.aspx");
             }
             // Create token for API calls
             var token = Token.Generate("", "");

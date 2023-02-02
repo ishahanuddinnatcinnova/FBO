@@ -9,7 +9,7 @@ namespace FBO.Dapper
 {
     public class Dapperr
     {
-        private string Connectionstring = "Data Source=GlobalSql01;Initial Catalog=globalair_staging2;Uid=db_gan;Pwd=gan911brook;";
+        private string Connectionstring = "Data Source=GlobalSql01;Initial Catalog=globalair;Uid=db_gan;Pwd=gan911brook;";
 
         public void Dispose()
         {

@@ -91,6 +91,27 @@ namespace FBO.Services
                 return text;
             }
         }
+        public void GetUserTracking(dynamic ViewBag, HttpRequest curr, string webpage, string controllerName, string actionname, string clickthroughtrackingid, int mobileclientcheck)
+        {
+            UserViewModel mu = CheckLogin(curr);  // returns 0 if no GlobalAir cookie with user id is making HttpContext.Current.Request
+            //GAMvcHelpers.UserTracking ut = GAMvcHelpers.PageViewTracking.TrackPageView(curr, mu.UserId.ToString(), webpage, controllerName, actionname, "", "", null, "", clickthroughtrackingid, mobileclientcheck);
+
+            if (mu != null && mu.userID != "" && Convert.ToInt32(mu.userID) > 0)
+            {
+                ViewBag.LoginAction = "Logout";
+                ViewBag.Welcome = mu.userFirstname;
+                ViewBag.UserID = mu.userID;
+                ViewBag.FBOID = mu.companyID;
+            }
+            else
+            {
+                ViewBag.LoginAction = "Login";
+                ViewBag.Welcome = "";
+                ViewBag.UserID = 0;
+                ViewBag.A4SUserID = 0;
+                ViewBag.FBOID = 0;
+            }
+        }
 
 
     }
