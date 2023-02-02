@@ -248,8 +248,8 @@
     </div>
     <div id="cookie-notification" class="fixed-bottom" style="z-index:2000; display:none;">
         <div class="row w-100 p-1">
-            <div class="col-md-9 m-auto">We use cookies to help you get the best experience when using our website. By continuing to use this website, you are agreeing to our Cookie Policy.</div>
-            <div class="col-md-3 justify-content-end"><a href="#" id="cookie-notification-btn" class="btn btn-success float-right">Confirm</a></div>
+            <div class="col-md-9 m-auto px-4">We use cookies to help you get the best experience when using our website. By continuing to use this website, you are agreeing to our Cookie Policy.</div>
+            <div class="col-md-3 m-auto justify-content-end"><a href="#" id="cookie-notification-btn" class="btn btn-success float-right" style="float:right;">Confirm</a></div>
         </div>
     </div>
     @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
@@ -652,17 +652,7 @@
                                         }, 3000);
         });
 
-        // Cookie notification banner
-        var $cookieBanner = $('#cookie-notification');
-        if (readCookie('cookie-notification') == null) {
-            $cookieBanner.css('display', 'flex');
-        }
-
-        $cookieBanner.find('#cookie-notification-btn').on('click', function (e) {
-            e.preventDefault();
-            $cookieBanner.hide();
-            createCookie('cookie-notification', 'true', 365);
-        });
+    
     </script>
     <script async defer type="text/javascript">
 
