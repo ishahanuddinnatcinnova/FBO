@@ -37,7 +37,7 @@ namespace FBO.Services
                 UserViewModel userData = _utility.CheckLogin(request);
                 if (userData.isUser)
                 {
-                List<FBOManagement_GetFBOs_Result> fbocount = await _generalService.GetFBOs(userData.userID);
+                    List<FBOManagement_GetFBOs_Result> fbocount = await _generalService.GetFBOs(userData.userID);
                     if (companyID != null && companyID != "")
                     {
                         FBOResult res = await _generalService.GetFBO(companyID);
@@ -50,7 +50,7 @@ namespace FBO.Services
                         else
                         {
                             response.data.FBO = res;
-                response.data.fbocount = fbocount.Count;
+                            response.data.fbocount = fbocount.Count;
                             response.isRedirect = false;
                         }
                     }
@@ -112,18 +112,12 @@ namespace FBO.Services
                         }
                         else
                         {
-                            if (res.FBO.FBOLevel == "Basic")
-                            {
-                                response.isRedirect = true;
-                                response.redirectURL = "/fbo/companymanage.aspx";
-                            }
-                            else
-                            {
-                                response.data.FBO = res;
-                                response.isRedirect = false;
-                                
-                            }
-                        
+
+                            response.data.FBO = res;
+                            response.isRedirect = false;
+
+
+
                         }
                     }
                     else
@@ -181,7 +175,7 @@ namespace FBO.Services
                                 response.isRedirect = false;
 
                             }
-                            
+
                         }
                     }
                     else
@@ -280,10 +274,10 @@ namespace FBO.Services
                             }
                             else
                             {
-                              
-                            response.data.FBO = res;
-                            response.data.fbologoser = logo;
-                            response.isRedirect = false;
+
+                                response.data.FBO = res;
+                                response.data.fbologoser = logo;
+                                response.isRedirect = false;
 
                             }
                         }
@@ -378,7 +372,7 @@ namespace FBO.Services
                 {
                     if (companyID != null && companyID != "")
                     {
-                        
+
                         FBOResult res = await _generalService.GetFBO(companyID);
                         var customSer = await _generalService.GetCustomServices(companyID);
 
@@ -392,16 +386,16 @@ namespace FBO.Services
                             if (res.FBO.FBOLevel != "Platinum")
                             {
                                 response.isRedirect = true;
-                                response.redirectURL="/fbo/companymanage.aspx";
+                                response.redirectURL = "/fbo/companymanage.aspx";
                             }
                             else
                             {
-                            response.data.FBO = res;
-                            response.data.customServices = customSer;
-                            response.isRedirect = false;
+                                response.data.FBO = res;
+                                response.data.customServices = customSer;
+                                response.isRedirect = false;
 
                             }
-                            
+
                         }
                     }
                     else
@@ -457,12 +451,12 @@ namespace FBO.Services
                             }
                             else
                             {
-                            response.data.FBO = res;
+                                response.data.FBO = res;
                                 response.data.locations = locations;
                                 response.data.years = _generalService.LoadExpirationYears();
-                                response.data.FBO.platinium_level_count =Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
-                            response.isRedirect = false;
-                           
+                                response.data.FBO.platinium_level_count = Convert.ToInt16(await _generalService.PlatinumFBOCount(companyID));
+                                response.isRedirect = false;
+
 
                             }
 
@@ -508,7 +502,7 @@ namespace FBO.Services
 
 
         }
-        public async Task <string> PostFboInfoUpdate(FBOInfoUpdateModel updateinfo,HttpRequest request)
+        public async Task<string> PostFboInfoUpdate(FBOInfoUpdateModel updateinfo, HttpRequest request)
         {
             string response = "";
             try
@@ -518,7 +512,7 @@ namespace FBO.Services
                     UserViewModel userData = _utility.CheckLogin(request);
                     response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
                     response = await _generalService.UploadManagerPicBtn(updateinfo.managerpic, updateinfo.companyID);
-                    response = _generalService.SaveButtonUpdateFboInfo(updateinfo,userData.userFirstname);
+                    response = _generalService.SaveButtonUpdateFboInfo(updateinfo, userData.userFirstname);
                 }
                 return response;
             }
@@ -535,8 +529,8 @@ namespace FBO.Services
                 if (updateinfo.companyID != null && updateinfo.companyID != "")
                 {
                     UserViewModel userData = _utility.CheckLogin(request);
-                   
-                    response = _generalService.BtnUpgradeFboSaveClick(updateinfo,Convert.ToInt32(userData.userID));
+
+                    response = _generalService.BtnUpgradeFboSaveClick(updateinfo, Convert.ToInt32(userData.userID));
                 }
                 return response;
             }
@@ -550,13 +544,13 @@ namespace FBO.Services
             string response = "";
             try
             {
-                if (res.CompanyID != null )
+                if (res.CompanyID != null)
                 {
-                   if(res.serviceID !=0 && res.serviceID != null)
+                    if (res.serviceID != 0 && res.serviceID != null)
                     {
-                        response =  _generalService.UpdateExistingCustomService(res.serviceID, res.customservice);
+                        response = _generalService.UpdateExistingCustomService(res.serviceID, res.customservice);
                     }
-                   else
+                    else
                     {
                         response = _generalService.SaveCustomService(res.CompanyID, res.customservice);
                     }
@@ -595,7 +589,7 @@ namespace FBO.Services
             {
                 if (companyID != null && companyID != "")
                 {
-               
+
                     response = _generalService.DeleteLogo(companyID, logo);
                 }
                 return response;
@@ -614,7 +608,7 @@ namespace FBO.Services
             {
                 if (companyID != null && companyID != "")
                 {
-               
+
                     response = _generalService.DeleteManagerPic(companyID, managerpic);
                 }
                 return response;
@@ -631,7 +625,7 @@ namespace FBO.Services
             string response = "";
             try
             {
-                if (serviceID != null && serviceID !=0 )
+                if (serviceID != null && serviceID != 0)
                 {
 
                     response = _generalService.DeleteCustomService(serviceID);

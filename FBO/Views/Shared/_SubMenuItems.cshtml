@@ -45,11 +45,14 @@
                         <span class="notify-badge">@Model.newReviews</span>
                     }
                 </a>
+                    <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "basicandextended" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    @if (Model.FBO.FBOLevel != "Basic")
+                    {
+                        <span>Extended &</span>
+                    }Basic Services
+                </a>
                 @if (Model.FBO.FBOLevel != "Basic")
                 {
-                    <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "basicandextended" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                        Extended & Basic Services
-                    </a>
                     <a href="/fbo/fuelcards.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fuelcards" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                         Fuel Cards
                     </a>
