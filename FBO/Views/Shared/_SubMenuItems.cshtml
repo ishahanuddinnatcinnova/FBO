@@ -1,13 +1,13 @@
 ﻿@model FBO.ViewModels.FBOResult
 <style>
 
-    .notify-badge{
-            background: #3c74ab;
-            text-align: center;
-            border-radius: 30px 30px 30px 30px;
-            color: white;
-            padding: 5px 10px;
-        }
+    .notify-badge {
+        background: #3c74ab;
+        text-align: center;
+        border-radius: 30px 30px 30px 30px;
+        color: white;
+        padding: 5px 10px;
+    }
 </style>
 <div class="col-md-3 col-12 bg-dark navbar-dark card" style="height: fit-content">
     <div class="navbar-expand-sm navbar-expand-md list-group list-group-flush mb-4">
@@ -24,7 +24,7 @@
                 {
                     <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "upgrade" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">More Exposure for Your FBO</a>
                 }
-               
+
                 <a href="/fbo/information.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "fboinformation" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
                     FBO Information
                 </a>
@@ -45,11 +45,16 @@
                         <span class="notify-badge">@Model.newReviews</span>
                     }
                 </a>
-                    <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "basicandextended" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
-                    @if (Model.FBO.FBOLevel != "Basic")
+                <a href="/fbo/extended.aspx?companyid=@Model.FBO.CompanyID" class="@(TempData["page"] != null && TempData["page"].ToString() == "basicandextended" ? "active-page" : "") list-group-item list-group-item-action list-item-custom bg-dark p-3">
+                    @if (Model.FBO.FBOLevel == "Basic")
                     {
-                        <span>Extended &</span>
-                    }Basic Services
+                        <span>Basic Services</span>
+                    }
+                    else
+                    {
+                        
+                    <span>Extended & Basic Services</span>
+                    }
                 </a>
                 @if (Model.FBO.FBOLevel != "Basic")
                 {
