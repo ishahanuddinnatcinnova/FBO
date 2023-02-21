@@ -624,8 +624,7 @@ namespace FBO.Services
                 String OpHours = info.OpHours != null ? info.OpHours.Trim() : "";
                 String RampDescription = info.RampDescription != null ? info.RampDescription.Trim() : "";
                 String ComDescription = info.ComDescription != null ? info.ComDescription.Trim() : "";
-                String strRampFee = info.strRampFee != null ? info.strRampFee.Trim() : "";
-                int rampFee = strRampFee != null ? (strRampFee == "Yes" ? 1 : 0) : 0;
+                int rampFee = Convert.ToInt16(info.strRampFee);
 
                 ManagerName = ManagerName.Replace("\"", "");
                 Address1 = Address1.Replace("\"", "");
