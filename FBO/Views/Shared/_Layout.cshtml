@@ -304,7 +304,7 @@
     </div>
     @if (ViewBag.IsMobile == true)
     {
-        <div id="mobileBanner" class="fixed-bottom">
+        <div id="mobileBanner" class="fixed-bottom" style="display:none;">
             <div id="bannerSlider" onclick="ToggleAdBanner();" style="border-radius: 10px 10px 0px 0px;background:lightgrey;width:12%;text-align:center;opacity:0.8;display:none">
                 <img id="bannerImg" width="18" height="18" style="vertical-align:sub" src="/images/angle-down.png">
             </div>
@@ -583,19 +583,33 @@
                         googletag.cmd.push(function () { googletag.display('div-gpt-ad-1641850667091-0'); });
                         googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639782560527-0'); });
 
-                        setTimeout(function () {
-                            var mobileBannerDiv = document.getElementById("mobileBanner");
-                            var frame = mobileBannerDiv.getElementsByTagName("iframe");
-                            if (frame[0]) {
-                                $("#closebtnAd").show();
-                            }
-                        }, 2000);
+                        //setTimeout(function () {
+                        //    var mobileBannerDiv = document.getElementById("mobileBanner");
+                        //    var frame = mobileBannerDiv.getElementsByTagName("iframe");
+                        //    if (frame[0]) {
+                        //        $("#closebtnAd").show();
+                        //    }
+                        //}, 2000);
                     });
             </text>
         }
                                     }, 3000);
         });
+        var hasInteracted = false;
 
+        $(document).one('touchstart click  scroll', function () {
+
+            if (!hasInteracted) {
+                setTimeout(function () {
+                    var mobileBannerDiv = jQuery("#mobileBanner");
+                    $("#mobileBanner").slideDown();
+
+                    mobileBannerDiv.css('display', 'block');
+                    setTimeout(function () { ToggleAdBanner() }, 13000);
+                }, 5000);
+                hasInteracted = true;
+            }
+        });
     
     </script>
     <script async defer type="text/javascript">
