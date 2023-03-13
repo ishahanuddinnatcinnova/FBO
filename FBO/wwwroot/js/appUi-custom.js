@@ -23,10 +23,10 @@ function readCookie(name) {
     //        return value;
     //}
     //else {
-        name += '=';
-        for (var ca = document.cookie.split(/;\s*/), i = ca.length - 1; i >= 0; i--)
-            if (!ca[i].indexOf(name))
-                return ca[i].replace(name, '');
+    name += '=';
+    for (var ca = document.cookie.split(/;\s*/), i = ca.length - 1; i >= 0; i--)
+        if (!ca[i].indexOf(name))
+            return ca[i].replace(name, '');
     //}
 
     return null;
@@ -85,7 +85,9 @@ function eraseCookie(name) {
 // Cookie notification banner
 var jQuerycookieBanner = jQuery('#cookie-notification');
 if (readCookie('cookie-notification') == null) {
-    jQuerycookieBanner.css('display', 'flex');
+    $(document).one('touchstart click  scroll', function () {
+        jQuerycookieBanner.css('display', 'flex');
+    });
 }
 jQuerycookieBanner.find('#cookie-notification-btn').on('click', function (e) {
     e.preventDefault();
