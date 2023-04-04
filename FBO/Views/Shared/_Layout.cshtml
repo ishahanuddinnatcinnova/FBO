@@ -16,6 +16,16 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-5P9SKZZ');</script>
     <!-- End Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1061712478"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-1061712478');
+    </script>
+    <!-- End Google tag (gtag.js) -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="180x180" href="/_includes/assets/icons/apple-touch-icon.png">
@@ -32,7 +42,7 @@
     @*<title>@(ViewBag.Title != null ? @ViewBag.Title : "Airport Resource Center | GlobalAir.com")</title>*@
     @if (ViewBag.canonical != null)
     {
-        <link href="@ViewBag.canonical.ToLower()" rel="canonical">
+    <link href="@ViewBag.canonical.ToLower()" rel="canonical">
     }
     @RenderSection("Meta", required: false)
     <link rel="dns-prefetch" href="https://www.facebook.com">
@@ -87,8 +97,7 @@
     @*<link href="~/css/social-share-kit.css" rel="stylesheet" />*@
     <link href="~/css/style.css" rel="stylesheet" media="all" />
     <style>
-         #mobileBanner {
-          
+        #mobileBanner {
             overflow: visible;
         }
 
