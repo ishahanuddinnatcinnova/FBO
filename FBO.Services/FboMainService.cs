@@ -505,14 +505,34 @@ namespace FBO.Services
         public async Task<string> PostFboInfoUpdate(FBOInfoUpdateModel updateinfo, HttpRequest request)
         {
             string response = "";
+            string extensionmanager = "";
+            string extensionlogo = "";
+            if (updateinfo.logo != null ) {
+            IFormFile uploadedFile = updateinfo.logo;
+            string fileName = uploadedFile.FileName;
+             extensionlogo = Path.GetExtension(fileName);
+            }
+           else if (updateinfo.managerpic != null)
+            {
+                IFormFile uploadedFilemanager = updateinfo.managerpic;
+                string fileNamemanager = uploadedFilemanager.FileName;
+                 extensionmanager = Path.GetExtension(fileNamemanager);
+            }
             try
             {
                 if (updateinfo.companyID != null && updateinfo.companyID != "")
                 {
-                    UserViewModel userData = _utility.CheckLogin(request);
-                    response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
-                    response = await _generalService.UploadManagerPicBtn(updateinfo.managerpic, updateinfo.companyID);
-                    response = _generalService.SaveButtonUpdateFboInfo(updateinfo, userData.userFirstname);
+                    if (extensionlogo == ".jpg" || extensionlogo == ".jpeg" || extensionmanager == ".jpg" || extensionmanager == ".jpeg")
+                    {
+                        UserViewModel userData = _utility.CheckLogin(request);
+                        response = await _generalService.UploadFboLogoBtn(updateinfo.logo, updateinfo.companyID);
+                        response = await _generalService.UploadManagerPicBtn(updateinfo.managerpic, updateinfo.companyID);
+                        response = _generalService.SaveButtonUpdateFboInfo(updateinfo, userData.userFirstname);
+                    }
+                    else
+                    {
+                        response = "The file must have an extension of .jpg or .jpeg. Please try again.";
+                    }
                 }
                 return response;
             }

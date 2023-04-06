@@ -108,6 +108,8 @@ namespace FBO.Controllers
             else
             {
                 TempData["success"] = "false";
+                TempData["errorMesssage"] = response;
+
             }
 
             return RedirectToAction("FboInformation","Home", new { companyID = updatebasic.companyID });
