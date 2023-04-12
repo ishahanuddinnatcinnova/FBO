@@ -1,10 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0N37V9FEB"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-K0N37V9FEB');</script>
-    <!-- End Google Tag -->
+   
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -49,6 +46,20 @@
     <link rel="dns-prefetch" href="https://connect.facebook.net">
     <link rel="dns-prefetch" href="https://stats.g.doubleclick.net">
     <link rel="dns-prefetch" href="https://www.google.com">
+    <script>
+        var qcObj = [];
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
+        ga('send', 'pageview');
+
+        window.uetq = window.uetq || [];
+        window.uetq.push('event', 'INQUIRY', {});
+    </script>
     <script type="application/ld+json">
          { "@@context": "https://schema.org",
         "@@type": "Organization",
@@ -538,18 +549,7 @@
         window.addEventListener('load', function () {
             setTimeout(function () {
                 !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');
-                var qcObj = [];
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.defer = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-                ga('create', 'UA-204701-2', { cookieFlags: 'max-age=7200;secure;samesite=none' });
-                ga('send', 'pageview');
-
-                window.uetq = window.uetq || [];
-                window.uetq.push('event', 'INQUIRY', {});
+               
                 var tag = document.createElement("script");
                 tag.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
                 document.getElementsByTagName("head")[0].appendChild(tag);
@@ -679,7 +679,7 @@
                 console.log("mobile ad_banner error");
             }
         }
-        window.onclick = function (e) {
+        window.onclick = function (event) {
             document.querySelectorAll('.dropdown-menu.show').forEach((item) => {
                 if (event.target.nextElementSibling !== item)
                     item.classList.remove('show');
