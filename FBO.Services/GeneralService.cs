@@ -457,6 +457,16 @@ namespace FBO.Services
             {
                 logo.chkLogoService83 = true;
             }
+
+            if (l.IndexOf(",84,") > 0)
+            {
+                logo.chkLogoService84 = true;
+            }
+
+            if (l.IndexOf(",85,") > 0)
+            {
+                logo.chkLogoService85 = true;
+            }
             return logo;
         }
 
@@ -1694,6 +1704,16 @@ namespace FBO.Services
                 if (logoser.chkLogoService83 == true)
                 {
                     ls = ls + "83,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService84 == true)
+                {
+                    ls = ls + "84,";
+                    logoCount = logoCount + 1;
+                }
+                if (logoser.chkLogoService85 == true)
+                {
+                    ls = ls + "85,";
                     logoCount = logoCount + 1;
                 }
 
