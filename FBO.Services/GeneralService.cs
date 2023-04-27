@@ -467,6 +467,10 @@ namespace FBO.Services
             {
                 logo.chkLogoService85 = true;
             }
+            if (l.IndexOf(",86,") > 0)
+            {
+                logo.chkLogoService85 = true;
+            }
             return logo;
         }
 
@@ -1626,9 +1630,9 @@ namespace FBO.Services
                     logoCount = logoCount + 1;
                 }
 
-                if (logoser.chkLogoService60 == true)
+                if (logoser.chkLogoService86 == true)
                 {
-                    ls = ls + "60,";
+                    ls = ls + "86,"; //previously 60 Logo changed
                     logoCount = logoCount + 1;
                 }
                 if (logoser.chkLogoService63 == true)

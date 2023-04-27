@@ -116,5 +116,7 @@ namespace FBO.ViewModels
         public bool chkLogoService83 { get; set; }
         public bool chkLogoService84 { get; set; }
         public bool chkLogoService85 { get; set; }
+        public bool chkLogoService86 { get; set; }
+
     }
 }
