@@ -469,7 +469,7 @@ namespace FBO.Services
             }
             if (l.IndexOf(",86,") > 0)
             {
-                logo.chkLogoService85 = true;
+                logo.chkLogoService86 = true;
             }
             return logo;
         }
