@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-   
+
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -39,7 +39,7 @@
     @*<title>@(ViewBag.Title != null ? @ViewBag.Title : "Airport Resource Center | GlobalAir.com")</title>*@
     @if (ViewBag.canonical != null)
     {
-    <link href="@ViewBag.canonical.ToLower()" rel="canonical">
+        <link href="@ViewBag.canonical.ToLower()" rel="canonical">
     }
     @RenderSection("Meta", required: false)
     <link rel="dns-prefetch" href="https://www.facebook.com">
@@ -167,7 +167,7 @@
 
 </head>
 <body vocab="https://schema.org/" typeof="WebPage">
-       <!-- Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5P9SKZZ"
                 height="0" width="0" style="display: none; visibility: hidden"></iframe>
@@ -245,7 +245,11 @@
         </div>
     }
     <nav class="navbar pb-0 pt-0 pl-2 navbar-expand-lg navbar-light" style="background: #97cb00; min-height: 40px; width:100%">
-        <div class="d-lg-none" style="color:rgba(0, 0, 0, 0.7);font-size:1.2em;font-weight:700;">GlobalAir.com</div>
+        <div class="d-lg-none w-50" style="color:rgba(0, 0, 0, 0.7);font-size:1.2em;font-weight:700;">
+            <a href="https://www.globalair.com" style="color:black">
+                <img src="https://resources.globalair.com/images/globalair-mobile-bluebackground-large.jpg?w=400&h=100&mode=crop" alt="GlobalAir" width="100" height="20" style="width: 100%; position: relative; left: -8px; height: auto" />
+            </a>
+        </div>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggler="show"
                 data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -346,7 +350,7 @@
         </div>
     }
 
-   <footer class="footer bg-primary text-white pt30 pb-2">
+    <footer class="footer bg-primary text-white pt30 pb-2">
         <div class="p-4">
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-3">
@@ -516,7 +520,7 @@
         @if (ViewBag.IsMobile != null && ViewBag.IsMobile)
         {
             <text>
-                            const myInterval = setInterval(mobileBannerCheck, 1500);
+                                        const myInterval = setInterval(mobileBannerCheck, 1500);
 
             //setTimeout(function () { clearInterval(myInterval); }, 2000);
 
@@ -533,7 +537,7 @@
             }
             </text>
         }
-        var jCookies = null;
+                var jCookies = null;
         $(function () {
             if (jCookies == null) {
                 jCookies = Cookies.noConflict();
@@ -548,7 +552,7 @@
         window.addEventListener('load', function () {
             setTimeout(function () {
                 !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');
-               
+
                 var tag = document.createElement("script");
                 tag.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
                 document.getElementsByTagName("head")[0].appendChild(tag);
@@ -571,7 +575,7 @@
                         googletag.pubads().collapseEmptyDivs(true);
                         googletag.enableServices();
                     });
-                    
+
                     googletag.cmd.push(function () { googletag.display('div-gpt-ad-1621626637196-0'); });
                     googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639786033852-0'); });
                     googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639786075089-0'); });
@@ -593,7 +597,7 @@
                         googletag.pubads().enableSingleRequest();
                         googletag.pubads().collapseEmptyDivs(true);
                         googletag.enableServices();
-                        
+
                         googletag.cmd.push(function () { googletag.display('div-gpt-ad-1641850667091-0'); });
                         googletag.cmd.push(function () { googletag.display('div-gpt-ad-1639782560527-0'); });
 
@@ -607,7 +611,7 @@
                     });
             </text>
         }
-                                    }, 3000);
+                                            }, 3000);
         });
         var hasInteracted = false;
 
@@ -624,7 +628,7 @@
                 hasInteracted = true;
             }
         });
-    
+
     </script>
     <script async defer type="text/javascript">
 
