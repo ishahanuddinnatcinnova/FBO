@@ -1,7 +1,7 @@
 ﻿@model FBO.ViewModels.ResponseDataViewModel
 <link href="~/css/pagesStyle.css" rel="stylesheet" media="all" />
 <style>
-    @@media (max-width: 600px){
+    @@media (max-width: 600px) {
         .price {
             font-size: 1.5em;
         }
@@ -57,9 +57,9 @@
                                     <div class="card-statistic-3 p-4">
                                         <div class="row align-items-center mb-0 d-flex">
                                             <div class="col-7 col-md-12">
-                                                    <h5 class="card-title mb-0">Per year Price:</h5>
+                                                <h5 class="card-title mb-0">Per year Price:</h5>
                                             </div>
-                                                <div class="col-5 col-md-12">
+                                            <div class="col-5 col-md-12">
                                                 <h2 class="d-flex align-items-center mb-0 price">
                                                     $800.00
                                                 </h2>
@@ -91,10 +91,10 @@
                                     <li class="list-group-item">Max-Trax - Fuel Route Mapping System: Plan up to 500 fuel efficient trips -<b style="color: Red;">FREE</b>!</li>
                                 </ol>
                             </div>
-                                <div class="col-sm-4" style="align-self: center;">
+                            <div class="col-sm-4" style="align-self: center;">
 
 
-                                <img src='images/platinum-fboadvertise2.png' alt="" style="max-width: -webkit-fill-available;">
+                                <img src='images/platinum-fboadvertise2.png' alt="" style="max-width: 100%;">
 
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <div class="col-12 col-md-3">
                                 <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        
+
                                         <div class="row align-items-center mb-0 d-flex">
                                             <div class="col-7 col-md-12">
                                                 <h5 class="card-title mb-0">Per year Price:</h5>
@@ -172,14 +172,14 @@
                                 </ol>
                             </div>
                             <div class="col-sm-4" style="align-self: center;">
-                                <img src='images/gold-fboadvertise.png' alt="" style="max-width: -webkit-fill-available; ">
+                                <img src='images/gold-fboadvertise.png' alt="" style="max-width: 100%; ">
                             </div>
                         </div>
                         <br>
                         <div class="mb-3 col-12 text-center">
                             @*Uncomment this for local*@
                             @*<a href="/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=gold" type="submit" class="btn btn-success" data-name="Gold">Join Now</a>*@
-                            
+
                             @*Uncomment this for local*@
                             <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=gold" type="submit" class="btn btn-success" data-name="Gold">Join Now</a>
                         </div>
@@ -203,7 +203,7 @@
                             <div class="col-12 col-md-3">
                                 <div class="card card-animation l-bg-cherry">
                                     <div class="card-statistic-3 p-4">
-                                        
+
                                         <div class="row align-items-center mb-0 d-flex">
                                             <div class="col-7 col-md-12">
                                                 <h5 class="card-title mb-0">Per year Price:</h5>
@@ -239,14 +239,14 @@
                                 </ol>
                             </div>
                             <div class="col-sm-4" style="align-self: center;">
-                                <img src='images/silver-fboadvertise.png' alt="" style="max-width: -webkit-fill-available;">
+                                <img src='images/silver-fboadvertise.png' alt="" style="max-width: 100%;">
                             </div>
                         </div>
                         <br>
                         <div class="mb-3 col-12 text-center">
                             @*Uncomment this for local*@
                             @*<a href="/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=silver" type="submit" class="JoinNow btn btn-success" data-name="Silver">Join Now</a>*@
-                            
+
                             @*Uncomment this for prod*@
                             <a href="/fbo/upgrade.aspx?companyid=@Model.FBO.FBO.CompanyID&step=2&level=silver" type="submit" class="JoinNow btn btn-success" data-name="Silver">Join Now</a>
                         </div>
@@ -261,7 +261,7 @@
 @section Scripts{
     <script>
         $(function () {
-            
+
 
         @if (Model.FBO.FBO.FBOLevel == "Platinum")
         {
@@ -295,7 +295,7 @@
                 $('#silver').show();
             </text>
         }
-        });
+                });
     </script>
     }
 

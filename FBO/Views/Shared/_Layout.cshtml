@@ -550,12 +550,12 @@
             }
         }
         window.addEventListener('load', function () {
+            var tag = document.createElement("script");
+            tag.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+            document.getElementsByTagName("head")[0].appendChild(tag);
             setTimeout(function () {
                 !function (s, a, e, v, n, t, z) { if (s.saq) return; n = s.saq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!s._saq) s._saq = n; n.push = n; n.loaded = !0; n.version = '1.0'; n.queue = []; t = a.createElement(e); t.async = !0; t.src = v; z = a.getElementsByTagName(e)[0]; z.parentNode.insertBefore(t, z) }(window, document, 'script', 'https://tags.srv.stackadapt.com/events.js'); saq('ts', 'v4G3HQM4EtRAWYZBlku_QA');
 
-                var tag = document.createElement("script");
-                tag.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-                document.getElementsByTagName("head")[0].appendChild(tag);
         @if (ViewBag.IsMobile == false || ViewBag.IsMobile == null)
         {
             <text>
